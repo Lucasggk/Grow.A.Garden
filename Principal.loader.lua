@@ -23,13 +23,14 @@ local loja = Window:AddTab({
 
 local section = loja:AddSection("Seeds (select by rarity)")
 
-local Dropdown = loja:AddDropdown("a", {
-    Title = "auto buy seeds",
-    Values = values,
+
+local Dropdown = loja:AddDropdown("SeedRaritySelector", {
+    Title = "Auto buy seeds",
+    Values = {"Commun", "Uncommun", "Rare", "Legendary", "Mythical", "Divine", "Prismatic"},
     Multi = true,
-    Default = values
+    Default = {"Commun", "Uncommun", "Rare", "Legendary", "Mythical", "Divine", "Prismatic"}
 })
 
 Dropdown:OnChanged(function(value)
-    print(value)
+    frutas = value
 end)
