@@ -25,7 +25,7 @@ local section = loja:AddSection("Seeds (select by rarity)")
 
 local Dropdown = loja:AddDropdown("", {
     Title = "auto buy seeds",
-    Values = {},
+    Values = {"Commun", "Uncommun", "Rare", "Legendery", "Mythical", "Divine", "Prismatic"},
     Multi = true,
     Default = Values
 })
