@@ -7,7 +7,7 @@ local Fluent = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoa
 
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden",
-    SubTitle = "Made by Lucas".. version,
+    SubTitle = "Made by Lucas",
     TabWidth = 160,
     Size = UDim2.fromOffset(500, 350),
     Acrylic = false,
@@ -16,7 +16,7 @@ local Window = Fluent:CreateWindow({
     IsDraggable = true
 })
 
-local loja = Window:addtab({
+local loja = Window:AddTab({
   Title = "Auto buy",
   Icon = "home"
  })
