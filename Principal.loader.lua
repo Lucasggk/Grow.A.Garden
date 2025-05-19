@@ -16,3 +16,20 @@ local Window = Fluent:CreateWindow({
     IsDraggable = true
 })
 
+local loja = Window:addtab({
+  Title = "Auto buy",
+  Icon = "home"
+ })
+
+local section = loja:AddSection("Seeds (select by rarity)")
+
+local Dropdown = loja:AddDropdown("", {
+    Title = "auto buy seeds",
+    Values = {},
+    Multi = true,
+    Default = Values
+})
+
+Dropdown:OnChanged(function(value)
+ print(value) 
+end)
