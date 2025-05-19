@@ -23,7 +23,7 @@ local loja = Window:AddTab({
 
 local section = loja:AddSection("Seeds (select by rarity)")
 
-local Dropdown = loja:AddDropdown("", {
+local Dropdown = loja:AddDropdown("a", {
     Title = "auto buy seeds",
     Values = values,
     Multi = true,
