@@ -24,14 +24,23 @@ local loja = Window:AddTab({
 local section = loja:AddSection("Seeds (select by rarity)")
 
 
-local Dropdown = loja:AddDropdown("SeedRaritySelector", {
-    Title = "Auto buy seeds",
-    Values = {"Commun", "Uncommun", "Rare", "Legendary", "Mythical", "Divine", "Prismatic"},
+local GearDropdown = loja:AddDropdown("GearMultiSelector", {
+    Title = "Select Gears to Buy",
+    Values = gear,
     Multi = true,
-    Default = {"Commun", "Uncommun", "Rare", "Legendary", "Mythical", "Divine", "Prismatic"}
+    Default = {gear[1], gear[2]}
 })
 
-Dropdown:OnChanged(function(value)
-    frutas = value
-    print(frutas)
-end)
+loja:AddToggle("AutoBuyInstant", {
+    Title = "Instant Buy Selected",
+    Description = "Buys selected gears as fast as possible",
+    Default = false,
+    Callback = function(Value)
+        while Value do
+            for _, selected in pairs(GearDropdown.Value) do
+                game:GetService("ReplicatedStorage").GameEvents.BuyGearStock:FireServer(selected)
+            end
+            task.wait(0.1) 
+        end
+    end
+})
