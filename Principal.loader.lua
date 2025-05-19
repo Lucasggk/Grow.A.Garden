@@ -33,4 +33,5 @@ local Dropdown = loja:AddDropdown("SeedRaritySelector", {
 
 Dropdown:OnChanged(function(value)
     frutas = value
+    print(frutas)
 end)
