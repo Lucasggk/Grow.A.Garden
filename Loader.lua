@@ -1,8 +1,8 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Plant = ReplicatedStorage.GameEvents.Plant_RE
 local fruta = G().fru
-local x = G().x
-local y = G().y
+local x = getgenv().x
+local y = getgenv().y
 
 local corner1 = x
 local corner2 = y
