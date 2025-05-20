@@ -1,46 +1,54 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/df0359e8a230912f5cf76c6d7edc9cab743fe9dc/Loja.lua"))()
-local values = {"Commun", "Uncommun", "Rare", "Legendery", "Mythical", "Divine", "Prismatic"}
-repeat task.wait() until game:IsLoaded()
-repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
- 
-local Fluent = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))() 
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
+local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
+local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
 
-local Window = Fluent:CreateWindow({
-    Title = "Grow a Garden",
-    SubTitle = "Made by Lucas",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(500, 350),
-    Acrylic = false,
-    Theme = "Dark",
-    Center = true,
-    IsDraggable = true
-})
+local seeds = {
+    "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango",
+    "Grape", "Mushroom", "Beanstalk", "Pepper", "Cacao"
+}
 
-local loja = Window:AddTab({
-  Title = "Auto buy",
-  Icon = "home"
- })
+local gears = {
+    "Watering Can",
+    "Basic Sprinkler",
+    "Advanced Sprinkler",
+    "Godly Sprinkler",
+    "Master Sprinkler",
+    "Lightning Rod"
+}
 
-local section = loja:AddSection("Seeds (select by rarity)")
+local moonItems = {
+    "Blood Owl",
+    "Blood Kiwi",
+    "Blood Hedgehog",
+    "Star Caller",
+    "Moon Melon",
+    "Blood Banana",
+    "Night Egg",
+    "Night Seed Pack",
+    "Mysterious Crate"
+}
 
-
-local GearDropdown = loja:AddDropdown("GearMultiSelector", {
-    Title = "Select Gears to Buy",
-    Values = gear,
-    Multi = true,
-    Default = {gear[1], gear[2]}
-})
-
-loja:AddToggle("AutoBuyInstant", {
-    Title = "Instant Buy Selected",
-    Description = "Buys selected gears as fast as possible",
-    Default = false,
-    Callback = function(Value)
-        while Value do
-            for _, selected in pairs(GearDropdown.Value) do
-                game:GetService("ReplicatedStorage").GameEvents.BuyGearStock:FireServer(selected)
-            end
-            task.wait(0.1) 
+local function comprarItens()
+    for i = 1, 50 do
+        for _, seed in ipairs(seeds) do
+            buySeed:FireServer(seed)
         end
+        for _, gear in ipairs(gears) do
+            buyGear:FireServer(gear)
+        end
+        for _, item in ipairs(moonItems) do
+            buyMoon:FireServer(item)
+        end
+        task.wait(0.1)
     end
-})
+end
+
+while true do
+    local minutos = os.date("*t").min
+    if minutos % 5 == 0 then
+        comprarItens()
+        repeat task.wait(1) until os.date("*t").min % 5 ~= 0
+    end
+    task.wait(1)
+end
