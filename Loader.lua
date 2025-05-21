@@ -1,20 +1,21 @@
+setclipboard([[
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Plant = ReplicatedStorage.GameEvents.Plant_RE
-local fruta = g().fruta
-local posi = g().posi
 
--- Mantém a altura (Y) e faz variação de 0.5 studs para os lados no eixo X
-local startPos = Vector3.new(posi.X - 0.5, posi.Y, posi.Z)
-local endPos = Vector3.new(posi.X + 0.5, posi.Y, posi.Z)
+local planta = "Carrot"
 
-local step = 0.0005
-local direction = (endPos - startPos).Unit
-local distance = (endPos - startPos).Magnitude
+local x = Vector3.new(34.14344024658203, 0.13552513718605042, -112.62083435058594) --inicio
+local y = Vector3.new(31.82763671875, 0.13552513718605042, -112.6816635131836) --fim
+
+local step = 0.001
+local direction = (y - x).Unit
+local distance = (y - x).Magnitude
 
 for i = 0, distance, step do
-    local pos = startPos + direction * i
-    Plant:FireServer(pos, fruta)
-    task.wait(0.0001)
+    local pos = x + direction * i
+    Plant:FireServer(pos, planta)
+    task.wait()
 end
 
-task.wait(0)
+task.wait(0.1)
+]])
