@@ -1,26 +1,17 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Plant = ReplicatedStorage.GameEvents.Plant_RE
-local fruta = G().fru
-local x = getgenv().x
-local y = getgenv().y
+local fruta = g().fruta
+local posi = g().posi
+local startPos = Vector3.new(posi)
+local endPos = Vector3.new(posi)
+local step = 0.001 -- distância mínima entre plantações (muito pequeno)
+local direction = (endPos - startPos).Unit
+local distance = (endPos - startPos).Magnitude
 
-local corner1 = x
-local corner2 = y
-
-local step = 0.2 -- distância mínima entre plantações
-local y = corner1.Y -- manter a altura constante
-
-local minX = math.min(corner1.X, corner2.X)
-local maxX = math.max(corner1.X, corner2.X)
-local minZ = math.min(corner1.Z, corner2.Z)
-local maxZ = math.max(corner1.Z, corner2.Z)
-
-for x = minX, maxX, step do
-    for z = minZ, maxZ, step do
-        local pos = Vector3.new(x, y, z)
-        Plant:FireServer(pos, fruta)
-        task.wait() -- sem delay pra plantar rápido
-    end
+for i = 0, distance, step do
+    local pos = startPos + direction * i
+    Plant:FireServer(pos, fruta)
+    task.wait(0.0001) -- sem delay pra plantar rápido
 end
 
-task.wait(0.1) -- 
+task.wait(0) -- mini delay final
