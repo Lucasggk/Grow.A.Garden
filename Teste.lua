@@ -1,14 +1,19 @@
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+repeat task.wait() until game:IsLoaded()
+repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
+ 
+local Fluent = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))() 
 
 local Window = Fluent:CreateWindow({
-    Title = "Grow a Garden",
-    SubTitle = "Made by Lucas",
-    Size = UDim2.fromOffset(500, 400),
+    Title = "Dead Rails",
+    SubTitle = "Feito por Lucas",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(500, 350),
     Acrylic = false,
-    Theme = "Dark"
+    Theme = "Dark",
+    Center = true,
+    IsDraggable = true
 })
 
-Window:Hide()
 
 local ToggleUI = Instance.new("ScreenGui")
 local ToggleButton = Instance.new("ImageButton")
