@@ -1,11 +1,10 @@
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
+
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
-
-
 
 local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
@@ -21,29 +20,28 @@ local Window = Fluent:CreateWindow({
 })
 
 -- Local Tabs --
-
 local loja = Window:AddTab({
-        Title = "loja",
-        Icon = "home"
-    })
+    Title = "loja",
+    Icon = "home"
+})
 
 -- Local Variáveis --
-
 local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
 local byallmoon = {"Blood Owl", "Blood Kiwi", "Blood Hedgehog", "Star Caller", "Moon Melon", "Blood Banana", "Night Egg", "Night Seed Pack", "Mysterious Crate"}
-
 local bygear = {"Watering Can", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler", "Harvest Tool"}
 
 local bsa = false
 local bsm = false
 local bsg = false
+
+local selectedSeeds = {}
+local selectedMoons = {}
 local selectedGears = {}
 
 -- Local functions --
-
 function byallseedfc()
     for i = 1, 50 do
-        for _, seed in ipairs(byallseed) do
+        for _, seed in ipairs(selectedSeeds) do
             buySeed:FireServer(seed)
         end
     end
@@ -51,7 +49,7 @@ end
 
 function byallmoonfc()
     for i = 1, 50 do
-        for _, moon in ipairs(byallmoon) do
+        for _, moon in ipairs(selectedMoons) do
             buyMoon:FireServer(moon)
         end
     end
@@ -67,6 +65,8 @@ end
 
 -- Local Script --
 
+local section = loja:AddSection("Seeds")
+
 loja:AddToggle("", {
     Title = "Buy all shop seed",
     Description = "Buy all shop seed",
@@ -75,6 +75,25 @@ loja:AddToggle("", {
         bsa = Value
     end
 })
+
+local dropdownSeed = loja:AddDropdown("DropdownSeed", {
+    Title = "Selecione seeds para comprar\n",
+    Description = "Selecione seeds para comprar\n",
+    Values = byallseed,
+    Multi = true,
+    Default = {},
+})
+
+dropdownSeed:OnChanged(function(Value)
+    selectedSeeds = {}
+    for v, state in pairs(Value) do
+        if state then
+            table.insert(selectedSeeds, v)
+        end
+    end
+end)
+
+local section = loja:AddSection("Moons")
 
 loja:AddToggle("", {
     Title = "Buy all shop moon",
@@ -85,6 +104,25 @@ loja:AddToggle("", {
     end
 })
 
+local dropdownMoon = loja:AddDropdown("DropdownMoon", {
+    Title = "Selecione itens da loja moon\n",
+    Description = "Selecione itens da loja moon\n",
+    Values = byallmoon,
+    Multi = true,
+    Default = {},
+})
+
+dropdownMoon:OnChanged(function(Value)
+    selectedMoons = {}
+    for v, state in pairs(Value) do
+        if state then
+            table.insert(selectedMoons, v)
+        end
+    end
+end)
+
+local section = loja:AddSection("Gears")
+
 loja:AddToggle("", {
     Title = "Buy shop gear",
     Description = "Buy shop gear",
@@ -94,19 +132,19 @@ loja:AddToggle("", {
     end
 })
 
-local Dropdown = loja:AddDropdown("MultiDropdown", {
-    Title = "Selecione gears para comprar",
-    Description = "Selecione gears para comprar",
+local dropdownGear = loja:AddDropdown("DropdownGear", {
+    Title = "Selecione gears para comprar\n",
+    Description = "Selecione gears para comprar\n",
     Values = bygear,
     Multi = true,
     Default = {},
 })
 
-Dropdown:OnChanged(function(Value)
+dropdownGear:OnChanged(function(Value)
     selectedGears = {}
-    for gear, state in pairs(Value) do
+    for v, state in pairs(Value) do
         if state then
-            table.insert(selectedGears, gear)
+            table.insert(selectedGears, v)
         end
     end
 end)
