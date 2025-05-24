@@ -89,7 +89,7 @@ end
 end
 ```
 
-# testes pata hub
+# testes para hub
 
 ```lua
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Teste.lua", true))()
