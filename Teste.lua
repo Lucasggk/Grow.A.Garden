@@ -14,7 +14,7 @@ local ToggleUI = Instance.new("ScreenGui")
 local ToggleButton = Instance.new("ImageButton")
 
 ToggleUI.Name = "FloatingToggleUI"
-ToggleUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ToggleUI.Parent = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
 
 ToggleButton.Name = "ToggleButton"
 ToggleButton.Size = UDim2.new(0, 50, 0, 50)
