@@ -35,9 +35,9 @@ local bsa = false
 -- Local functions --
 
 function byallseedfc()
-for i, 1, 50 do
-    for _, seed in ipairs(byallseed) do
-            buySeed:FireServer(byallseed)
+    for i = 1, 50 do
+        for _, seed in ipairs(byallseed) do
+            buySeed:FireServer(seed)
         end
     end
 end
