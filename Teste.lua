@@ -1,8 +1,8 @@
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Menu Flutuante",
-    SubTitle = "Clique no botão para abrir/fechar",
+    Title = "Grow a Garden",
+    SubTitle = "Made by Lucas",
     Size = UDim2.fromOffset(500, 400),
     Acrylic = true,
     Theme = "Dark"
