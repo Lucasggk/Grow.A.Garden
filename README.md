@@ -158,6 +158,9 @@ function byallgearfc()
 end
 
 -- Local Script --
+
+local section = loja:AddSection("Seeds")
+
 loja:AddToggle("", {
     Title = "Buy all shop seed",
     Description = "Buy all shop seed",
@@ -168,8 +171,8 @@ loja:AddToggle("", {
 })
 
 local dropdownSeed = loja:AddDropdown("DropdownSeed", {
-    Title = "Selecione seeds para comprar",
-    Description = "Selecione seeds para comprar",
+    Title = "Selecione seeds para comprar\n",
+    Description = "Selecione seeds para comprar\n",
     Values = byallseed,
     Multi = true,
     Default = {},
@@ -184,6 +187,8 @@ dropdownSeed:OnChanged(function(Value)
     end
 end)
 
+local section = loja:AddSection("Moons")
+
 loja:AddToggle("", {
     Title = "Buy all shop moon",
     Description = "Buy all shop moon",
@@ -194,8 +199,8 @@ loja:AddToggle("", {
 })
 
 local dropdownMoon = loja:AddDropdown("DropdownMoon", {
-    Title = "Selecione itens da loja moon",
-    Description = "Selecione itens da loja moon",
+    Title = "Selecione itens da loja moon\n",
+    Description = "Selecione itens da loja moon\n",
     Values = byallmoon,
     Multi = true,
     Default = {},
@@ -210,6 +215,8 @@ dropdownMoon:OnChanged(function(Value)
     end
 end)
 
+local section = loja:AddSection("Gears")
+
 loja:AddToggle("", {
     Title = "Buy shop gear",
     Description = "Buy shop gear",
@@ -220,8 +227,8 @@ loja:AddToggle("", {
 })
 
 local dropdownGear = loja:AddDropdown("DropdownGear", {
-    Title = "Selecione gears para comprar",
-    Description = "Selecione gears para comprar",
+    Title = "Selecione gears para comprar\n",
+    Description = "Selecione gears para comprar\n",
     Values = bygear,
     Multi = true,
     Default = {},
