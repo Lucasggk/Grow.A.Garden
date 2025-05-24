@@ -1,11 +1,6 @@
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 
-local Show_Button = false -- Shows the button for toggle fluent ui manually. If "false", works only on mobile, if "true", works everytime.
-local Button_Icon = "rbxassetid://94979807066345" -- Icon of the button for toggle fluent ui.
-local Button_Transparency = 1 -- Transparency of button background (check line #6365).
-
-
 local Fluent = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
 local Window = Fluent:CreateWindow({
@@ -19,4 +14,31 @@ local Window = Fluent:CreateWindow({
     IsDraggable = true
 })
 
+-- Local Tabs --
+
+local loja = Window:AddTab({
+        Title = "loja",
+        Icon = "home"
+    })
+
+-- Local Variáveis --
+
+local commun = {"Carrot", "Strawberry"}
+local uncommun = {"Blueberry", "Orange Tulip"}
+local rare = {"Tomato", "Corn", "Daffodil"}
+local legendery = {"Watermelon", "Pumpkin", "Apple", "Bamboo"}
+local mythical = {"Coconut", "Cactus", "Dragon Fruit", "Mango"}
+local divine = {"Grape", "Mushroom", "Pepper", "Cacao"}
+local prismatic = {"Beanstalk"}
+local gear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler", "Favorite Tool"}
+
+local dfb = {prismatic, divine, mythical, legendery}
+local byall = {prismatic, divine, mythical, legendery, rare, uncommun, commun}
+-- Local Script --
+
+loja:AddToggle("", {
+        Title = "Buy all shop seed"
+        Description = "Buy all shop seed"
+        Default = false
+        Callback = function(Value)
 
