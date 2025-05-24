@@ -3,8 +3,9 @@ repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
  
 local Fluent = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
-Show_Button = true
-Button_Icon = "rbxassetid://10734903544"
+local Show_Button = false -- Shows the button for toggle fluent ui manually. If "false", works only on mobile, if "true", works everytime.
+local Button_Icon = "rbxassetid://10734897102" -- Icon of the button for toggle fluent ui.
+local Button_Transparency = 1 -- Transparency of button background (check line #6365).
 
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden | ",
