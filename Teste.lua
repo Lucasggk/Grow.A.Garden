@@ -1,5 +1,11 @@
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
+local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
+local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
+
+
 
 local Fluent = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
@@ -23,22 +29,39 @@ local loja = Window:AddTab({
 
 -- Local Variáveis --
 
-local commun = {"Carrot", "Strawberry"}
-local uncommun = {"Blueberry", "Orange Tulip"}
-local rare = {"Tomato", "Corn", "Daffodil"}
-local legendery = {"Watermelon", "Pumpkin", "Apple", "Bamboo"}
-local mythical = {"Coconut", "Cactus", "Dragon Fruit", "Mango"}
-local divine = {"Grape", "Mushroom", "Pepper", "Cacao"}
-local prismatic = {"Beanstalk"}
-local gear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler", "Favorite Tool"}
+local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
+local bsa = false
 
-local dfb = {prismatic, divine, mythical, legendery}
-local byall = {prismatic, divine, mythical, legendery, rare, uncommun, commun}
+-- Local functions --
+
+function byallseedfc()
+for i, 1, 50 do
+    for _, seed in ipairs(byallseed) do
+            buySeed:FireServer(byallseed)
+        end
+    end
+end
+
 -- Local Script --
 
 loja:AddToggle("", {
-        Title = "Buy all shop seed"
-        Description = "Buy all shop seed"
-        Default = false
-        Callback = function(Value)
+    Title = "Buy all shop seed",
+    Description = "Buy all shop seed",
+    Default = false,
+    Callback = function(Value)
+        bsa = Value
+    end
+})
 
+task.spawn(function()
+    while true do
+        if bsa then
+            local minutos = os.date("*t").min
+            if minutos % 5 == 0 then
+                byallseedfc()
+                repeat task.wait(1) until os.date("*t").min % 5 ~= 0
+            end
+        end
+        task.wait(1)
+    end
+end)
