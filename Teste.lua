@@ -40,7 +40,7 @@ local selectedGears = {}
 
 -- Local functions --
 function byallseedfc()
-    for i = 1, 50 do
+    for i = 1, 25 do
         for _, seed in ipairs(selectedSeeds) do
             buySeed:FireServer(seed)
         end
@@ -48,7 +48,7 @@ function byallseedfc()
 end
 
 function byallmoonfc()
-    for i = 1, 50 do
+    for i = 1, 25 do
         for _, moon in ipairs(selectedMoons) do
             buyMoon:FireServer(moon)
         end
@@ -56,7 +56,7 @@ function byallmoonfc()
 end
 
 function byallgearfc()
-    for i = 1, 50 do
+    for i = 1, 25 do
         for _, gear in ipairs(selectedGears) do
             buyGear:FireServer(gear)
         end
@@ -162,7 +162,7 @@ task.spawn(function()
             if bsg then
                 byallgearfc()
             end
-            repeat task.wait(1) until os.date("*t").min % 5 ~= 0
+            repeat task.wait(1) until os.date("*t").min % 1 ~= 0
         end
         task.wait(1)
     end
