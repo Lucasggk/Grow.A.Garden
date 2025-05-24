@@ -30,7 +30,10 @@ local loja = Window:AddTab({
 -- Local Variáveis --
 
 local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
+local byallmoon = {"Blood Owl", "Blood Kiwi", "Blood Hedgehog", "Star Caller", "Moon Melon", "Blood Banana", "Night Egg", "Night Seed Pack", "Mysterious Crate"}
+
 local bsa = false
+local bsm = false
 
 -- Local functions --
 
@@ -38,6 +41,14 @@ function byallseedfc()
     for i = 1, 50 do
         for _, seed in ipairs(byallseed) do
             buySeed:FireServer(seed)
+        end
+    end
+end
+
+function byallmoonfc()
+    for i = 1, 50 do
+        for _, moon in ipairs(byallmoon) do
+            buySeed:FireServer(moon)
         end
     end
 end
@@ -59,6 +70,28 @@ task.spawn(function()
             local minutos = os.date("*t").min
             if minutos % 5 == 0 then
                 byallseedfc()
+                repeat task.wait(1) until os.date("*t").min % 5 ~= 0
+            end
+        end
+        task.wait(1)
+    end
+end)
+
+loja:AddToggle("", {
+    Title = "Buy all shop moon",
+    Description = "Buy all shop moon",
+    Default = false,
+    Callback = function(Value)
+        bsm = Value
+    end
+})
+
+task.spawn(function()
+    while true do
+        if bsm then
+            local minutos = os.date("*t").min
+            if minutos % 5 == 0 then
+                byallmoonfc()
                 repeat task.wait(1) until os.date("*t").min % 5 ~= 0
             end
         end
