@@ -32,11 +32,12 @@ local loja = Window:AddTab({
 local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
 local byallmoon = {"Blood Owl", "Blood Kiwi", "Blood Hedgehog", "Star Caller", "Moon Melon", "Blood Banana", "Night Egg", "Night Seed Pack", "Mysterious Crate"}
 
-local bygear = {}
+local bygear = {"Watering Can", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler", "Harvest Tool"}
 
 local bsa = false
 local bsm = false
-local bsg = false 
+local bsg = false
+
 -- Local functions --
 
 function byallseedfc()
@@ -50,7 +51,7 @@ end
 function byallmoonfc()
     for i = 1, 50 do
         for _, moon in ipairs(byallmoon) do
-            buySeed:FireServer(moon)
+            buyMoon:FireServer(moon)
         end
     end
 end
