@@ -4,7 +4,7 @@ repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 local Fluent = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
 Show_Button = true
-Button.Icon = "rbxassetid://10734903544"
+Button_Icon = "rbxassetid://10734903544"
 
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden | ",
