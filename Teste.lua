@@ -7,7 +7,7 @@ local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
 
 
 
-local Fluent = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
+local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden | ",
@@ -37,7 +37,7 @@ local bsa = false
 function byallseedfc()
     for i = 1, 50 do
         for _, seed in ipairs(byallseed) do
-            buySeed:FireServer(byallseed)
+            buySeed:FireServer(seed)
         end
     end
 end
