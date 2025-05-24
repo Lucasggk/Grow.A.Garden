@@ -37,6 +37,7 @@ local bygear = {"Watering Can", "Basic Sprinkler", "Advanced Sprinkler", "Godly 
 local bsa = false
 local bsm = false
 local bsg = false
+local selectedGears = {}
 
 -- Local functions --
 
@@ -52,6 +53,14 @@ function byallmoonfc()
     for i = 1, 50 do
         for _, moon in ipairs(byallmoon) do
             buyMoon:FireServer(moon)
+        end
+    end
+end
+
+function byallgearfc()
+    for i = 1, 50 do
+        for _, gear in ipairs(selectedGears) do
+            buyGear:FireServer(gear)
         end
     end
 end
@@ -76,6 +85,32 @@ loja:AddToggle("", {
     end
 })
 
+loja:AddToggle("", {
+    Title = "Buy shop gear",
+    Description = "Buy shop gear",
+    Default = false,
+    Callback = function(Value)
+        bsg = Value
+    end
+})
+
+local Dropdown = loja:AddDropdown("MultiDropdown", {
+    Title = "Selecione gears para comprar",
+    Description = "Selecione gears para comprar",
+    Values = bygear,
+    Multi = true,
+    Default = {},
+})
+
+Dropdown:OnChanged(function(Value)
+    selectedGears = {}
+    for gear, state in pairs(Value) do
+        if state then
+            table.insert(selectedGears, gear)
+        end
+    end
+end)
+
 task.spawn(function()
     while true do
         local minutos = os.date("*t").min
@@ -85,6 +120,9 @@ task.spawn(function()
             end
             if bsm then
                 byallmoonfc()
+            end
+            if bsg then
+                byallgearfc()
             end
             repeat task.wait(1) until os.date("*t").min % 5 ~= 0
         end
