@@ -64,19 +64,6 @@ loja:AddToggle("", {
     end
 })
 
-task.spawn(function()
-    while true do
-        if bsa then
-            local minutos = os.date("*t").min
-            if minutos % 5 == 0 then
-                byallseedfc()
-                repeat task.wait(1) until os.date("*t").min % 5 ~= 0
-            end
-        end
-        task.wait(1)
-    end
-end)
-
 loja:AddToggle("", {
     Title = "Buy all shop moon",
     Description = "Buy all shop moon",
@@ -88,12 +75,15 @@ loja:AddToggle("", {
 
 task.spawn(function()
     while true do
-        if bsm then
-            local minutos = os.date("*t").min
-            if minutos % 5 == 0 then
-                byallmoonfc()
-                repeat task.wait(1) until os.date("*t").min % 5 ~= 0
+        local minutos = os.date("*t").min
+        if minutos % 5 == 0 then
+            if bsa then
+                byallseedfc()
             end
+            if bsm then
+                byallmoonfc()
+            end
+            repeat task.wait(1) until os.date("*t").min % 5 ~= 0
         end
         task.wait(1)
     end
