@@ -4,7 +4,7 @@ local Window = Fluent:CreateWindow({
     Title = "Grow a Garden",
     SubTitle = "Made by Lucas",
     Size = UDim2.fromOffset(500, 400),
-    Acrylic = true,
+    Acrylic = false,
     Theme = "Dark"
 })
 
