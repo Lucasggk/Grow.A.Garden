@@ -266,7 +266,7 @@ plant:AddButton({
 
 --
 
-player:AddSlider("WalkSpeedSlider", {
+local walkSpeedSlider = player:AddSlider("WalkSpeedSlider", {
     Title = "WalkSpeed",
     Description = "Ajuste a velocidade de caminhada",
     Min = 20,
@@ -275,10 +275,8 @@ player:AddSlider("WalkSpeedSlider", {
     Rounding = 1,
     Callback = function(value)
         walkSpeed = value
-    end
-})
-Slider:OnChanged(function()
-    if player.Character and player.Character:FindFirstChild("Humanoid") then
+        if player.Character and player.Character:FindFirstChild("Humanoid") then
             player.Character.Humanoid.WalkSpeed = walkSpeed
         end
-end)
+    end
+})
