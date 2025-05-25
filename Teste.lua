@@ -42,6 +42,10 @@ local plant = Window:AddTab({
     Icon = "list"
 })
 
+local player = Window:AddTab({
+        Title = "Player",
+        Icon = "list"
+
 -- Local Variáveis --
 
 local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
@@ -53,7 +57,6 @@ local pseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "C
 local bsa = false
 local bsm = false
 local bsg = false
-local pla = false
 
 local selectedSeeds = {}
 local selectedMoons = {}
@@ -62,7 +65,6 @@ local selectedGears = {}
 local step = 0.001
 local x = Vector3.new(0, 0.13552513718605042, 0)
 local y = Vector3.new(0, 0.13552513718605042, 0)
-local dist = 0
 local plap = ""
 
 -- Local functions --
@@ -231,15 +233,6 @@ local plantDropdown = plant:AddDropdown("Dropdown", {
 
 plantDropdown:OnChanged(function(Value)
     plap = Value
-end)
-
-task.spawn(function()
-    while true do
-        if typeof(x) == "Vector3" and typeof(y) == "Vector3" then
-            dist = (x - y).Magnitude
-        end
-        task.wait(1)
-    end
 end)
 
 local Slider = plant:AddSlider("Slider", 
