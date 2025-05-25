@@ -196,7 +196,7 @@ plant:AddButton({
         Title = "Set local X",
         Description = "click para setar o inicio do auto plant\n",
         Callback = function()
-          local x = Vector3.new(hrp.Position.X, hrp.Position.Y, hrp.Position.Z)
+          x = Vector3.new(hrp.Position.X, hrp.Position.Y, hrp.Position.Z)
         end
     })
 
@@ -204,7 +204,7 @@ plant:AddButton({
         Title = "Set local Y",
         Description = "click para setar o fim do auto plant\n",
         Callback = function()
-          local y = Vector3.new(hrp.Position.X, hrp.Position.Y, hrp.Position.Z)
+          y = Vector3.new(hrp.Position.X, hrp.Position.Y, hrp.Position.Z)
         end
     })
 
@@ -217,6 +217,6 @@ local plantDropdown = plant:AddDropdown("Dropdown", {
 })
 
 plantDropdown:OnChanged(function(Value)
-    local plap = Value 
+    plap = Value 
 end)
 
