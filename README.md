@@ -99,11 +99,18 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
+local Plant = ReplicatedStorage.GameEvents.Plant_RE
 
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local hrp = character:WaitForChild("HumanoidRootPart")
+local humanoid = character:WaitForChild("Humanoid")
+
+player.CharacterAdded:Connect(function(char)
+    character = char
+    hrp = character:WaitForChild("HumanoidRootPart")
+end)
 
 local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
@@ -130,7 +137,12 @@ local plant = Window:AddTab({
     Icon = "list"
 })
 
+local player = Window:AddTab({
+        Title = "Player",
+        Icon = "list"
+    })
 -- Local Variáveis --
+
 local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
 local byallmoon = {"Blood Owl", "Blood Kiwi", "Blood Hedgehog", "Star Caller", "Moon Melon", "Blood Banana", "Night Egg", "Night Seed Pack", "Mysterious Crate"}
 local bygear = {"Watering Can", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler", "Harvest Tool"}
@@ -140,16 +152,20 @@ local pseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "C
 local bsa = false
 local bsm = false
 local bsg = false
-local pla = false
 
 local selectedSeeds = {}
 local selectedMoons = {}
 local selectedGears = {}
 
-local x = ""
-local y = ""
+local step = 0.001
+local x = Vector3.new(0, 0.13552513718605042, 0)
+local y = Vector3.new(0, 0.13552513718605042, 0)
 local plap = ""
+
+local walkSpeed = humanoid.WalkSpeed
+
 -- Local functions --
+
 function byallseedfc()
     for i = 1, 25 do
         for _, seed in ipairs(selectedSeeds) do
@@ -290,7 +306,8 @@ plant:AddButton({
         Title = "Set local X",
         Description = "click para setar o inicio do auto plant\n",
         Callback = function()
-          x = Vector3.new(hrp.Position.X, hrp.Position.Y, hrp.Position.Z)
+          x = Vector3.new(hrp.Position.X, 0.13552513718605042, hrp.Position.Z)
+          print(x)
         end
     })
 
@@ -298,7 +315,8 @@ plant:AddButton({
         Title = "Set local Y",
         Description = "click para setar o fim do auto plant\n",
         Callback = function()
-          y = Vector3.new(hrp.Position.X, hrp.Position.Y, hrp.Position.Z)
+          y = Vector3.new(hrp.Position.X, 0.13552513718605042, hrp.Position.Z)
+          print(y)
         end
     })
 
@@ -307,10 +325,53 @@ local plantDropdown = plant:AddDropdown("Dropdown", {
     Description = "Selecione a seed\n",
     Values = pseed,
     Multi = false,
-    Default = {},
+    Default = 1,
 })
 
 plantDropdown:OnChanged(function(Value)
-    plap = Value 
+    plap = Value
 end)
+
+local Slider = plant:AddSlider("Slider", 
+{
+    Title = "Distancia de uma seed para outra\n",
+    Description = "step seed\n",
+    Default = 0.001,
+    Min = 0.001,
+    Max = 0.1,
+    Rounding = 3,
+    Callback = function(Value)
+        step = Value
+    end
+})
+
+plant:AddButton({
+    Title = "click para plantar",
+    Description = "esteja com a seed na mão", 
+    Callback = function()
+        local direction = (y - x).Unit
+        local distance = (y - x).Magnitude
+        for i = 0, distance, step do
+            local pos = x + direction * i
+            Plant:FireServer(pos, plap)
+            task.wait()
+        end
+    end
+})
+
+--
+
+player:AddSlider("WalkSpeedSlider", {
+    Title = "WalkSpeed",
+    Description = "Ajuste a velocidade de caminhada",
+    Min = 20,
+    Max = 150,
+    Default = 20,
+    Rounding = 1,
+    Callback = function(value)
+        if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+        end
+    end
+})
 ```
