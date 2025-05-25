@@ -298,7 +298,7 @@ loja:AddButton({
         end
     })
 
-loja:AddToggle({
+loja:AddToggle("", {
         Title = "comprar todos pets afk",
         Description = "auto se explica",
         Default = false,
