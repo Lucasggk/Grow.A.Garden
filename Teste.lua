@@ -11,6 +11,11 @@ local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local hrp = character:WaitForChild("HumanoidRootPart")
 
+player.CharacterAdded:Connect(function(char)
+    character = char
+    hrp = character:WaitForChild("HumanoidRootPart")
+end)
+
 local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
 local Window = Fluent:CreateWindow({
@@ -37,6 +42,7 @@ local plant = Window:AddTab({
 })
 
 -- Local Variáveis --
+
 local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
 local byallmoon = {"Blood Owl", "Blood Kiwi", "Blood Hedgehog", "Star Caller", "Moon Melon", "Blood Banana", "Night Egg", "Night Seed Pack", "Mysterious Crate"}
 local bygear = {"Watering Can", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler", "Harvest Tool"}
@@ -55,7 +61,9 @@ local selectedGears = {}
 local x = ""
 local y = ""
 local plap = ""
+
 -- Local functions --
+
 function byallseedfc()
     for i = 1, 25 do
         for _, seed in ipairs(selectedSeeds) do
@@ -217,6 +225,9 @@ local plantDropdown = plant:AddDropdown("Dropdown", {
 })
 
 plantDropdown:OnChanged(function(Value)
-    plap = Value 
+    for v, _ in pairs(Value) do
+        plap = v
+        break
+    end
 end)
 
