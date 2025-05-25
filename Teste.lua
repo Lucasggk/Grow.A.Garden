@@ -5,6 +5,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
+local Plant = ReplicatedStorage.GameEvents.Plant_RE
 
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
@@ -58,6 +59,7 @@ local selectedSeeds = {}
 local selectedMoons = {}
 local selectedGears = {}
 
+local step = 0.0015
 local x = Vector3.new(0, 0.13552513718605042, 0)
 local y = Vector3.new(0, 0.13552513718605042, 0)
 local dist = 0
@@ -222,7 +224,7 @@ local plantDropdown = plant:AddDropdown("Dropdown", {
     Description = "Selecione a seed\n",
     Values = pseed,
     Multi = false,
-    Default = {},
+    Default = 1,
 })
 
 plantDropdown:OnChanged(function(Value)
@@ -241,3 +243,29 @@ task.spawn(function()
     end
 end)
 
+local Slider = plant:AddSlider("Slider", 
+{
+    Title = "Distancia de uma seed oara outra\n",
+    Description = "step seed\n",
+    Default = step
+    Min = 0.001,
+    Max = 0.2,
+    Rounding = 1,
+    Callback = function(Value)
+        step = value
+    end
+})
+
+plant:AddButton({
+        Title = "click para plantar",
+        Description = "esteja com a seed na mão", 
+        Callback = function()
+        
+local direction = (y - x).Unit
+local distance = (y - x).Magnitude
+for i = 0, distance, step do
+    local pos = x + direction * i
+    Plant:FireServer(pos, plant)
+    task.wait()
+end
+        end
