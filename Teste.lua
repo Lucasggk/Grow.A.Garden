@@ -11,6 +11,7 @@ local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local hrp = character:WaitForChild("HumanoidRootPart")
+local humanoid = character:WaitForChild("Humanoid")
 
 player.CharacterAdded:Connect(function(char)
     character = char
@@ -67,7 +68,7 @@ local x = Vector3.new(0, 0.13552513718605042, 0)
 local y = Vector3.new(0, 0.13552513718605042, 0)
 local plap = ""
 
-local walkSpeed = 20
+local walkSpeed = humanoid.WalkSpeed
 
 -- Local functions --
 
@@ -266,17 +267,16 @@ plant:AddButton({
 
 --
 
-local walkSpeedSlider = player:AddSlider("WalkSpeedSlider", {
+player:AddSlider("WalkSpeedSlider", {
     Title = "WalkSpeed",
     Description = "Ajuste a velocidade de caminhada",
     Min = 20,
     Max = 150,
-    Default = walkSpeed,
+    Default = 16,
     Rounding = 1,
     Callback = function(value)
-        walkSpeed = value
-        if player.Character and player.Character:FindFirstChild("Humanoid") then
-            player.Character.Humanoid.WalkSpeed = walkSpeed
+        if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
         end
     end
 })
