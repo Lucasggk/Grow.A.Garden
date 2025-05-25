@@ -126,7 +126,7 @@ end
 function buypetegg()
     for i = 1, 3 do
         for _, pet in ipairs(buypets) do 
-            BuyPets:FireServer(pet)
+            BuyPet:FireServer(pet)
             task.wait()
         end
     end
