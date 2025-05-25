@@ -9,8 +9,19 @@ local hrp = char:WaitForChild("HumanoidRootPart")
 
 
 
--- locais de local
+-- locais de listagem
 
 local nseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
 
+-- locais de locais 
+
+local farm = totring(hrp.Position)
+local pos = tostring(hrp.CFrame)
+
 -- locais de funções 
+
+function tp(localizacao)
+  hrp.CFrame = CFrame.new(localizacao)
+end
+
+--
