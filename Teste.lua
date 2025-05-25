@@ -4,6 +4,7 @@ repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
+local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
 local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
 local Plant = ReplicatedStorage.GameEvents.Plant_RE
 local Players = game:GetService("Players")
@@ -231,7 +232,7 @@ loja:AddToggle("", {
     end
 })
 
-local dropdownSeed = loja:AddDropdown("DropdownSeed", {
+local dropdownMoon2 = loja:AddDropdown("DropdownSeed", {
     Title = "Selecione seeds para comprar\n",
     Description = "Selecione seeds para comprar\n",
     Values = byallmoon2,
@@ -239,7 +240,7 @@ local dropdownSeed = loja:AddDropdown("DropdownSeed", {
     Default = {},
 })
 
-dropdownSeed:OnChanged(function(Value)
+dropdownMoon2:OnChanged(function(Value)
     selectedSeeds = {}
     for v, state in pairs(Value) do
         if state then
