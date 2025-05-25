@@ -133,16 +133,18 @@ end
 function tsf()
     svp()
     hrp.CFrame = CFrame.new(86.57965850830078, 2.999999761581421, 0.4267919063568115)
+    task.wait(0.25)
     sf()
-    task.wait(0.8)
+    task.wait(0.2)
     tpt(Pos)
 end
 
 function tsm()
     svp()
     hrp.CFrame = CFrame.new(-101.0422592163086, 4.400012493133545, -10.985257148742676)
+    task.wait(0.25)
     sm()
-    task.wait(0.5)
+    task.wait(0.2)
     tpt(Pos)
 end
 
