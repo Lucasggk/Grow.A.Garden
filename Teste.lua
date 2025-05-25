@@ -6,6 +6,11 @@ local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
 
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local hrp = character:WaitForChild("HumanoidRootPart")
+
 local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
 local Window = Fluent:CreateWindow({
@@ -26,8 +31,8 @@ local loja = Window:AddTab({
     Icon = "home"
 })
 
-local player = Window:AddTab({
-    Title = "player",
+local plant = Window:AddTab({
+    Title = "plant",
     Icon = "list"
 })
 
@@ -35,15 +40,21 @@ local player = Window:AddTab({
 local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
 local byallmoon = {"Blood Owl", "Blood Kiwi", "Blood Hedgehog", "Star Caller", "Moon Melon", "Blood Banana", "Night Egg", "Night Seed Pack", "Mysterious Crate"}
 local bygear = {"Watering Can", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler", "Harvest Tool"}
+local pseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk", "Moon Melon", "Blood Banana"}
+
 
 local bsa = false
 local bsm = false
 local bsg = false
+local pla = false
 
 local selectedSeeds = {}
 local selectedMoons = {}
 local selectedGears = {}
 
+local x = ""
+local y = ""
+local plap = ""
 -- Local functions --
 function byallseedfc()
     for i = 1, 25 do
@@ -181,4 +192,31 @@ end)
 
 -- 
 
+plant:AddButton({
+        Title = "Set local X",
+        Description = "click para setar o inicio do auto plant\n",
+        Callback = function()
+          local x = Vector3.new(hrp.Position.X, hrp.Position.Y, hrp.Position.Z)
+        end
+    })
+
+plant:AddButton({
+        Title = "Set local Y",
+        Description = "click para setar o fim do auto plant\n",
+        Callback = function()
+          local y = Vector3.new(hrp.Position.X, hrp.Position.Y, hrp.Position.Z)
+        end
+    })
+
+local plantDropdown = plant:AddDropdown("Dropdown", {
+    Title = "Selecione a seed\n",
+    Description = "Selecione a seed\n",
+    Values = pseed
+    Multi = false,
+    Default = {},
+})
+
+plantDropdown:OnChanged(function(Value)
+    local plap = Value 
+end)
 
