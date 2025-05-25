@@ -9,8 +9,8 @@ local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
 local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Grow a Garden | ",
-    SubTitle = "Made by Lucas",
+    Title = "Grow a Garden |",
+    SubTitle = "  Made by Lucas",
     TabWidth = 160,
     Size = UDim2.fromOffset(500, 350),
     Acrylic = false,
@@ -20,9 +20,15 @@ local Window = Fluent:CreateWindow({
 })
 
 -- Local Tabs --
+
 local loja = Window:AddTab({
     Title = "loja",
     Icon = "home"
+})
+
+local player = Window:AddTab({
+    Title = "player",
+    Icon = "list"
 })
 
 -- Local Variáveis --
@@ -172,3 +178,7 @@ task.spawn(function()
         task.wait(1)
     end
 end)
+
+-- 
+
+
