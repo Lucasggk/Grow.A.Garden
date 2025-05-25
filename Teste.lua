@@ -59,7 +59,7 @@ local selectedSeeds = {}
 local selectedMoons = {}
 local selectedGears = {}
 
-local step = 0.0015
+local step = 0.01
 local x = Vector3.new(0, 0.13552513718605042, 0)
 local y = Vector3.new(0, 0.13552513718605042, 0)
 local dist = 0
@@ -208,6 +208,7 @@ plant:AddButton({
         Description = "click para setar o inicio do auto plant\n",
         Callback = function()
           x = Vector3.new(hrp.Position.X, 0.13552513718605042, hrp.Position.Z)
+          print(x)
         end
     })
 
@@ -216,6 +217,7 @@ plant:AddButton({
         Description = "click para setar o fim do auto plant\n",
         Callback = function()
           y = Vector3.new(hrp.Position.X, 0.13552513718605042, hrp.Position.Z)
+          print(y)
         end
     })
 
@@ -245,9 +247,9 @@ local Slider = plant:AddSlider("Slider",
     Title = "Distancia de uma seed oara outra\n",
     Description = "step seed\n",
     Default = step,
-    Min = 0.001,
-    Max = 0.2,
-    Rounding = 1,
+    Min = 0.01,
+    Max = 0.1,
+    Rounding = 2,
     Callback = function(Value)
         step = value
     end
