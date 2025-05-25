@@ -4,8 +4,7 @@ repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
-local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
-local buymoon2 = :WaitForChild("GameEvents"):WaitForChild("BuyNightEventShopStock"):FireServer(unpack(args))
+local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
 local Plant = ReplicatedStorage.GameEvents.Plant_RE
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
@@ -56,8 +55,8 @@ local player = Window:AddTab({
 
 local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
 local byallmoon = {"Blood Owl", "Blood Kiwi", "Blood Hedgehog", "Star Caller", "Moon Melon", "Blood Banana", "Night Egg", "Night Seed Pack", "Mysterious Crate"}
+local byallmoon2 = {"Night Egg", "Night Seed Pack", "Twilight Crate", "Star Caller", "Moon Cat", "Celestiberry", "Moon Mango"}
 local bygear = {"Watering Can", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler", "Harvest Tool"}
-local byallmoon2 = {}
 local pseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk", "Moon Melon", "Blood Banana"}
 
 
@@ -107,6 +106,15 @@ function byallgearfc()
     for i = 1, 25 do
         for _, gear in ipairs(selectedGears) do
             buyGear:FireServer(gear)
+            task.wait()
+        end
+    end
+end
+
+function byallmoon2fc()
+    for i = 1, 25 do
+        for _, moon2 in ipairs(selectedMoons2) do
+            buymoon2:FireServer(moon2)
             task.wait()
         end
     end
@@ -184,10 +192,10 @@ dropdownSeed:OnChanged(function(Value)
     end
 end)
 
-local section = loja:AddSection("Moons")
+local section = loja:AddSection("Bloodlit moon shop")
 
 loja:AddToggle("", {
-    Title = "Buy all shop moon",
+    Title = "Buy all shop Bloodlit",
     Description = "Buy all shop moon",
     Default = false,
     Callback = function(Value)
@@ -208,6 +216,34 @@ dropdownMoon:OnChanged(function(Value)
     for v, state in pairs(Value) do
         if state then
             table.insert(selectedMoons, v)
+        end
+    end
+end)
+
+local section = loja:AddSection("Moonlit moon shop")
+
+loja:AddToggle("", {
+    Title = "Buy all shop moonlit",
+    Description = "Buy all shop seed",
+    Default = false,
+    Callback = function(Value)
+        bsm2 = Value
+    end
+})
+
+local dropdownSeed = loja:AddDropdown("DropdownSeed", {
+    Title = "Selecione seeds para comprar\n",
+    Description = "Selecione seeds para comprar\n",
+    Values = byallmoon2,
+    Multi = true,
+    Default = {},
+})
+
+dropdownSeed:OnChanged(function(Value)
+    selectedSeeds = {}
+    for v, state in pairs(Value) do
+        if state then
+            table.insert(selectedMoons2, v)
         end
     end
 end)
@@ -240,26 +276,7 @@ dropdownGear:OnChanged(function(Value)
     end
 end)
 
-task.spawn(function()
-    local lastMinute = -1
-    while true do
-        local minutos = os.date("*t").min
-        if minutos ~= lastMinute then
-            lastMinute = minutos
 
-            if bsa then
-                byallseedfc()
-            end
-            if bsm then
-                byallmoonfc()
-            end
-            if bsg then
-                byallgearfc()
-            end
-        end
-        task.wait(1)
-    end
-end)
 
 -- 
 
@@ -369,6 +386,34 @@ player:AddSlider("WalkSpeedSlider", {
         if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
             game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
         end
-    end
+     end      
 })
+
+--
+
+task.spawn(function()
+    local lastMinute = -1
+    while true do
+        local minutos = os.date("*t").min
+        if minutos ~= lastMinute then
+            lastMinute = minutos
+
+            if bsa then
+                byallseedfc()
+            end
+            if bsm then
+                byallmoonfc()
+            end
+            if bsg then
+                byallgearfc()
+            end
+            if bsm2 then
+                byallmoon2fc()
+            end
+        end
+        task.wait(1)
+    end
+end)
+
+
 
