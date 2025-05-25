@@ -104,7 +104,7 @@ local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoa
 
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden | ",
-    SubTitle = "    Made by Lucas",
+    SubTitle = "Made by Lucas",
     TabWidth = 160,
     Size = UDim2.fromOffset(500, 350),
     Acrylic = false,
@@ -134,25 +134,28 @@ local selectedGears = {}
 
 -- Local functions --
 function byallseedfc()
-    for i = 1, 50 do
+    for i = 1, 25 do
         for _, seed in ipairs(selectedSeeds) do
             buySeed:FireServer(seed)
+            task.wait()
         end
     end
 end
 
 function byallmoonfc()
-    for i = 1, 50 do
+    for i = 1, 25 do
         for _, moon in ipairs(selectedMoons) do
             buyMoon:FireServer(moon)
+            task.wait()
         end
     end
 end
 
 function byallgearfc()
-    for i = 1, 50 do
+    for i = 1, 25 do
         for _, gear in ipairs(selectedGears) do
             buyGear:FireServer(gear)
+            task.wait()
         end
     end
 end
@@ -244,9 +247,12 @@ dropdownGear:OnChanged(function(Value)
 end)
 
 task.spawn(function()
+    local lastMinute = -1
     while true do
         local minutos = os.date("*t").min
-        if minutos % 5 == 0 then
+        if minutos ~= lastMinute then
+            lastMinute = minutos
+
             if bsa then
                 byallseedfc()
             end
@@ -256,7 +262,6 @@ task.spawn(function()
             if bsg then
                 byallgearfc()
             end
-            repeat task.wait(1) until os.date("*t").min % 5 ~= 0
         end
         task.wait(1)
     end
