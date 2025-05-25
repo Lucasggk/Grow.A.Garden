@@ -109,6 +109,7 @@ end
 
 function svp()
     Pos = Vector3.new(hrp.Position.X, hrp.Position.Y, hrp.Position.Z)
+    pos = tostring(pos)
 end
 
 function tpt(pos)
@@ -288,7 +289,7 @@ sell:AddButton({
     Description = ".",
     Callback = function()
         svp()
-        setclipboard(tostring(Pos))
+        setclipboard(Pos)
     end
 })
 
