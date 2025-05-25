@@ -25,3 +25,5 @@ function tp(localizacao)
 end
 
 --
+
+setclipboard(farm, pos)
