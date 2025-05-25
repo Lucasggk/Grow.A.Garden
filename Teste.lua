@@ -228,10 +228,7 @@ local plantDropdown = plant:AddDropdown("Dropdown", {
 })
 
 plantDropdown:OnChanged(function(Value)
-    for v, _ in pairs(Value) do
-        plap = v
-        break
-    end
+    plap = Value
 end)
 
 task.spawn(function()
@@ -247,7 +244,7 @@ local Slider = plant:AddSlider("Slider",
 {
     Title = "Distancia de uma seed oara outra\n",
     Description = "step seed\n",
-    Default = step
+    Default = step,
     Min = 0.001,
     Max = 0.2,
     Rounding = 1,
