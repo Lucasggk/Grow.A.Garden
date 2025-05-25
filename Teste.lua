@@ -6,7 +6,8 @@ local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
 local Plant = ReplicatedStorage.GameEvents.Plant_RE
-
+local sellf = ReplicatedStorage:WaitForChild("GameEvents"):WaitForChild("Sell_Inventory"):FireServer()
+local sellm = ReplicatedStorage:WaitForChild("GameEvents"):WaitForChild("NightQuestRemoteEvent"):FireServer("SubmitAllPlants")
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
@@ -43,6 +44,11 @@ local plant = Window:AddTab({
     Icon = "list"
 })
 
+local sell = Window:AddTab({
+    Title = "sell",
+    Icon = "list"
+})
+
 local player = Window:AddTab({
         Title = "Player",
         Icon = "list"
@@ -67,6 +73,8 @@ local step = 0.001
 local x = Vector3.new(34.14344024658203, 0.13552513718605042, -112.62083435058594)
 local y = Vector3.new(31.82763671875, 0.13552513718605042, -112.6816635131836)
 local plap = ""
+
+Pos = Vector3.new(hrp.Position.X, hrp.Position.Y, hrp.Position.Z)
 
 local walkSpeed = humanoid.WalkSpeed
 
@@ -97,6 +105,14 @@ function byallgearfc()
             task.wait()
         end
     end
+end
+
+function svp()
+    Pos = Vector3.new(hrp.Position.X, hrp.Position.Y, hrp.Position.Z)
+end
+
+function tpt(pos)
+    hrp.CFrame = CFrame.new(pos)
 end
 
 -- Local Script --
@@ -267,6 +283,43 @@ plant:AddButton({
 
 --
 
+sell:AddButton({
+        Title = "copi pos"
+        Description= "."
+        Callback = function()
+            svp()
+            setclipboard(svp())
+        end
+    })
+
+
+sell:AddButton({
+        Title = "tp pos"
+        Description= "."
+        Callback = function()
+            tpt(pos)
+        end
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--
+
 player:AddSlider("WalkSpeedSlider", {
     Title = "WalkSpeed",
     Description = "Ajuste a velocidade de caminhada",
@@ -280,3 +333,4 @@ player:AddSlider("WalkSpeedSlider", {
         end
     end
 })
+
