@@ -58,8 +58,9 @@ local selectedSeeds = {}
 local selectedMoons = {}
 local selectedGears = {}
 
-local x = ""
-local y = ""
+local x = Vector3.new(0, 0.13552513718605042, 0)
+local y = Vector3.new(0, 0.13552513718605042, 0)
+local dist = 0
 local plap = ""
 
 -- Local functions --
@@ -228,6 +229,15 @@ plantDropdown:OnChanged(function(Value)
     for v, _ in pairs(Value) do
         plap = v
         break
+    end
+end)
+
+task.spawn(function()
+    while true do
+        if typeof(x) == "Vector3" and typeof(y) == "Vector3" then
+            dist = (x - y).Magnitude
+        end
+        task.wait(1)
     end
 end)
 
