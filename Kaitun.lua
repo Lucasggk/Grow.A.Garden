@@ -15,8 +15,8 @@ local nseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "C
 
 -- locais de locais 
 
-local farm = totring(hrp.Position)
-local pos = tostring(hrp.CFrame)
+local farm = hrp.Position
+local pos = hrp.CFrame
 
 -- locais de funções 
 
@@ -26,4 +26,4 @@ end
 
 --
 
-setclipboard(farm, pos)
+
