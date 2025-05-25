@@ -67,6 +67,8 @@ local x = Vector3.new(0, 0.13552513718605042, 0)
 local y = Vector3.new(0, 0.13552513718605042, 0)
 local plap = ""
 
+local walkSpeed = 20
+
 -- Local functions --
 
 function byallseedfc()
@@ -258,6 +260,23 @@ plant:AddButton({
             local pos = x + direction * i
             Plant:FireServer(pos, plap)
             task.wait()
+        end
+    end
+})
+
+--
+
+player:AddSlider("WalkSpeedSlider", {
+    Title = "WalkSpeed",
+    Description = "Ajuste a velocidade de caminhada",
+    Min = 20,
+    Max = 150,
+    Default = walkSpeed,
+    Rounding = 1,
+    Callback = function(value)
+        walkSpeed = value
+        if player.Character and player.Character:FindFirstChild("Humanoid") then
+            player.Character.Humanoid.WalkSpeed = walkSpeed
         end
     end
 })
