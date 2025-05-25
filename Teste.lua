@@ -211,7 +211,7 @@ plant:AddButton({
 local plantDropdown = plant:AddDropdown("Dropdown", {
     Title = "Selecione a seed\n",
     Description = "Selecione a seed\n",
-    Values = pseed
+    Values = pseed,
     Multi = false,
     Default = {},
 })
