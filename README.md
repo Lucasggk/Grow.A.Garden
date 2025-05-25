@@ -158,8 +158,9 @@ local selectedMoons = {}
 local selectedGears = {}
 
 local step = 0.001
-local x = Vector3.new(0, 0.13552513718605042, 0)
-local y = Vector3.new(0, 0.13552513718605042, 0)
+local x = Vector3.new(34.14344024658203, 0.13552513718605042, -112.62083435058594)
+local y = Vector3.new(31.82763671875, 0.13552513718605042, -112.6816635131836)
+
 local plap = ""
 
 local walkSpeed = humanoid.WalkSpeed
