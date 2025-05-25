@@ -5,6 +5,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
+local buymoon2 = :WaitForChild("GameEvents"):WaitForChild("BuyNightEventShopStock"):FireServer(unpack(args))
 local Plant = ReplicatedStorage.GameEvents.Plant_RE
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
@@ -56,16 +57,21 @@ local player = Window:AddTab({
 local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
 local byallmoon = {"Blood Owl", "Blood Kiwi", "Blood Hedgehog", "Star Caller", "Moon Melon", "Blood Banana", "Night Egg", "Night Seed Pack", "Mysterious Crate"}
 local bygear = {"Watering Can", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler", "Harvest Tool"}
+local byallmoon2 = {}
 local pseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk", "Moon Melon", "Blood Banana"}
+
 
 
 local bsa = false
 local bsm = false
+local bsm2 = false
 local bsg = false
 
 local selectedSeeds = {}
 local selectedMoons = {}
 local selectedGears = {}
+local selectedMoons2 = {}
+
 
 local step = 0.001
 local x = Vector3.new(34.14344024658203, 0.13552513718605042, -112.62083435058594)
