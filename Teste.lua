@@ -153,9 +153,12 @@ dropdownGear:OnChanged(function(Value)
 end)
 
 task.spawn(function()
+    local lastMinute = -1
     while true do
         local minutos = os.date("*t").min
-        if minutos % 5 == 0 then
+        if minutos ~= lastMinute then
+            lastMinute = minutos
+
             if bsa then
                 byallseedfc()
             end
@@ -165,7 +168,6 @@ task.spawn(function()
             if bsg then
                 byallgearfc()
             end
-            repeat task.wait(1) until os.date("*t").min % 1 ~= 0
         end
         task.wait(1)
     end
