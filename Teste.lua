@@ -284,22 +284,22 @@ plant:AddButton({
 --
 
 sell:AddButton({
-        Title = "copi pos",
-        Description= ".",
-        Callback = function()
-            svp()
-            setclipboard(svp())
-        end
-    })
+    Title = "copi pos",
+    Description = ".",
+    Callback = function()
+        svp()
+        setclipboard(tostring(Pos))
+    end
+})
 
 
 sell:AddButton({
-        Title = "tp pos",
-        Description= ".",
-        Callback = function()
-            tpt(pos)
-        end
-    })
+    Title = "tp pos",
+    Description = ".",
+    Callback = function()
+        tpt(Pos)
+    end
+})
 
 
 
