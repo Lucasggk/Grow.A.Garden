@@ -297,7 +297,16 @@ loja:AddButton({
             buypetegg()
         end
     })
-            
+
+loja:AddToggle({
+        Title = "comprar todos pets afk",
+        Description = "auto se explica",
+        Default = false,
+        Callback = function(value)
+         bsp = value   
+        end
+    })
+
 -- 
 
 plant:AddButton({
@@ -429,6 +438,9 @@ task.spawn(function()
             end
             if bsm2 then
                 byallmoon2fc()
+            end
+            if bsp then
+                buypetegg()
             end
         end
         task.wait(1)
