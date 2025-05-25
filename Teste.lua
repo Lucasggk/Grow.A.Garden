@@ -247,9 +247,9 @@ local Slider = plant:AddSlider("Slider",
     Title = "Distancia de uma seed oara outra\n",
     Description = "step seed\n",
     Default = step,
-    Min = 0.01,
+    Min = 0.001,
     Max = 0.1,
-    Rounding = 2,
+    Rounding = 3,
     Callback = function(Value)
         step = value
     end
