@@ -59,7 +59,7 @@ local selectedSeeds = {}
 local selectedMoons = {}
 local selectedGears = {}
 
-local step = 0.01
+local step = 0.001
 local x = Vector3.new(0, 0.13552513718605042, 0)
 local y = Vector3.new(0, 0.13552513718605042, 0)
 local dist = 0
