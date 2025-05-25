@@ -204,7 +204,7 @@ plant:AddButton({
         Title = "Set local X",
         Description = "click para setar o inicio do auto plant\n",
         Callback = function()
-          x = Vector3.new(hrp.Position.X, hrp.Position.Y, hrp.Position.Z)
+          x = Vector3.new(hrp.Position.X, 0.13552513718605042, hrp.Position.Z)
         end
     })
 
@@ -212,7 +212,7 @@ plant:AddButton({
         Title = "Set local Y",
         Description = "click para setar o fim do auto plant\n",
         Callback = function()
-          y = Vector3.new(hrp.Position.X, hrp.Position.Y, hrp.Position.Z)
+          y = Vector3.new(hrp.Position.X, 0.13552513718605042, hrp.Position.Z)
         end
     })
 
