@@ -72,7 +72,8 @@ local x = Vector3.new(34.14344024658203, 0.13552513718605042, -112.6208343505859
 local y = Vector3.new(31.82763671875, 0.13552513718605042, -112.6816635131836)
 local plap = ""
 
-Pos = Vector3.new(hrp.Position.X, hrp.Position.Y, hrp.Position.Z)
+local Pos = hrp.Position
+local pos = tostring(Pos)
 
 local walkSpeed = humanoid.WalkSpeed
 
@@ -105,13 +106,15 @@ function byallgearfc()
     end
 end
 
-function svp()
-    Pos = Vector3.new(hrp.Position.X, hrp.Position.Y, hrp.Position.Z)
-    pos = tostring(pos)
-end
-
-function tpt(pos)
-    hrp.CFrame = CFrame.new(pos)
+function tpt(v3)
+    if typeof(v3) == "Vector3" then
+        hrp.CFrame = CFrame.new(v3)
+    elseif typeof(v3) == "string" then
+        local x, y, z = string.match(v3, "Vector3%s*%(([^,]+),%s*([^,]+),%s*([^)]+)%)")
+        if x and y and z then
+            hrp.CFrame = CFrame.new(tonumber(x), tonumber(y), tonumber(z))
+        end
+    end
 end
 
 function sf()
@@ -123,19 +126,17 @@ function sm()
 end
 
 function tsf()
-    svp()
     hrp.CFrame = CFrame.new(86.57965850830078, 2.999999761581421, 0.4267919063568115)
     sf()
     task.wait(0.5)
-    tpt(pos)
+    tpt(Pos)
 end
 
 function tsm()
-    svp()
     hrp.CFrame = CFrame.new(-101.0422592163086, 4.400012493133545, -10.985257148742676)
     sm()
     task.wait(0.5)
-    tpt(pos)
+    tpt(Pos)
 end
 
 -- Local Script --
