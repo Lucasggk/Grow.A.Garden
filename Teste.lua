@@ -99,19 +99,6 @@ function byallgearfc()
     end
 end
 
-function Destplantui()
-    local player = game.Players.LocalPlayer
-    local gui = player:WaitForChild("PlayerGui")
-
-    for _, v in ipairs(gui:GetDescendants()) do
-        if v:IsA("TextLabel") or v:IsA("TextButton") or v:IsA("TextBox") then
-            if v.Text:lower():find("you are too far away!") then
-                v:Destroy()
-            end
-        end
-    end
-end
-
 -- Local Script --
 
 local section = loja:AddSection("Seeds")
@@ -273,7 +260,6 @@ plant:AddButton({
         for i = 0, distance, step do
             local pos = x + direction * i
             Plant:FireServer(pos, plap)
-            Destplantui()
             task.wait()
         end
     end
