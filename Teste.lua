@@ -106,6 +106,11 @@ function byallgearfc()
     end
 end
 
+function svp()
+    Pos = hrp.Position
+    pos = tostring(Pos)
+end
+
 function tpt(v3)
     if typeof(v3) == "Vector3" then
         hrp.CFrame = CFrame.new(v3)
@@ -126,6 +131,7 @@ function sm()
 end
 
 function tsf()
+    svp()
     hrp.CFrame = CFrame.new(86.57965850830078, 2.999999761581421, 0.4267919063568115)
     sf()
     task.wait(0.5)
@@ -133,6 +139,7 @@ function tsf()
 end
 
 function tsm()
+    svp()
     hrp.CFrame = CFrame.new(-101.0422592163086, 4.400012493133545, -10.985257148742676)
     sm()
     task.wait(0.5)
