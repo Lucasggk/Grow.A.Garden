@@ -134,7 +134,7 @@ function tsf()
     svp()
     hrp.CFrame = CFrame.new(86.57965850830078, 2.999999761581421, 0.4267919063568115)
     sf()
-    task.wait(0.5)
+    task.wait(0.8)
     tpt(Pos)
 end
 
