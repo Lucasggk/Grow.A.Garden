@@ -241,7 +241,7 @@ local dropdownMoon2 = loja:AddDropdown("DropdownSeed", {
 })
 
 dropdownMoon2:OnChanged(function(Value)
-    selectedSeeds = {}
+    selectedMoon2 = {}
     for v, state in pairs(Value) do
         if state then
             table.insert(selectedMoons2, v)
