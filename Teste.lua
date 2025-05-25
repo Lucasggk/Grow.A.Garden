@@ -275,8 +275,10 @@ player:AddSlider("WalkSpeedSlider", {
     Rounding = 1,
     Callback = function(value)
         walkSpeed = value
-        if player.Character and player.Character:FindFirstChild("Humanoid") then
-            player.Character.Humanoid.WalkSpeed = walkSpeed
-        end
     end
 })
+Slider:OnChanged(function()
+    if player.Character and player.Character:FindFirstChild("Humanoid") then
+            player.Character.Humanoid.WalkSpeed = walkSpeed
+        end
+end)
