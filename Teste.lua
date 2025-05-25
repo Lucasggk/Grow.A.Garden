@@ -112,8 +112,6 @@ function Destplantui()
     end
 end
 
-DestroyTooFarUI()
-
 -- Local Script --
 
 local section = loja:AddSection("Seeds")
