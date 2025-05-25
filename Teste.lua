@@ -272,7 +272,7 @@ player:AddSlider("WalkSpeedSlider", {
     Description = "Ajuste a velocidade de caminhada",
     Min = 20,
     Max = 150,
-    Default = 16,
+    Default = 20,
     Rounding = 1,
     Callback = function(value)
         if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
@@ -286,7 +286,7 @@ player:AddSlider("JumpPowerSlider", {
     Description = "Ajuste a força do pulo",
     Min = 10,
     Max = 200,
-    Default = 50,
+    Default = 10,
     Rounding = 1,
     Callback = function(value)
         if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
