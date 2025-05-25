@@ -6,8 +6,6 @@ local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
 local Plant = ReplicatedStorage.GameEvents.Plant_RE
-local sellf = ReplicatedStorage:WaitForChild("GameEvents"):WaitForChild("Sell_Inventory"):FireServer()
-local sellm = ReplicatedStorage:WaitForChild("GameEvents"):WaitForChild("NightQuestRemoteEvent"):FireServer("SubmitAllPlants")
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
@@ -114,6 +112,30 @@ end
 
 function tpt(pos)
     hrp.CFrame = CFrame.new(pos)
+end
+
+function sf()
+    ReplicatedStorage:WaitForChild("GameEvents"):WaitForChild("Sell_Inventory"):FireServer()
+end
+
+function sm()
+    ReplicatedStorage:WaitForChild("GameEvents"):WaitForChild("NightQuestRemoteEvent"):FireServer("SubmitAllPlants")
+end
+
+function tsf()
+    svp()
+    hrp.CFrame = CFrame.new(86.57965850830078, 2.999999761581421, 0.4267919063568115)
+    sf()
+    task.wait(0.5)
+    tpt(pos)
+end
+
+function tsm()
+    svp()
+    hrp.CFrame = CFrame.new(-101.0422592163086, 4.400012493133545, -10.985257148742676)
+    sm()
+    task.wait(0.5)
+    tpt(pos)
 end
 
 -- Local Script --
@@ -285,22 +307,21 @@ plant:AddButton({
 --
 
 sell:AddButton({
-    Title = "copi pos",
-    Description = ".",
+    Title = "Vender Colheitas",
+    Description = "vende para o seller",
     Callback = function()
-        svp()
-        setclipboard(Pos)
+        tsf()       
     end
 })
-
 
 sell:AddButton({
-    Title = "tp pos",
-    Description = ".",
+    Title = "Vender bloodlit/bloodmon",
+    Description = "vende para a coruja",
     Callback = function()
-        tpt(Pos)
+        tsm()       
     end
 })
+
 
 
 
