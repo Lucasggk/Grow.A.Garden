@@ -7,6 +7,7 @@ local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
 local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
 local Plant = ReplicatedStorage.GameEvents.Plant_RE
+local BuyPet = ReplicatedStorage.GameEvents.BuyPetEgg
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
@@ -66,12 +67,13 @@ local bsa = false
 local bsm = false
 local bsm2 = false
 local bsg = false
+local bsp = false 
 
 local selectedSeeds = {}
 local selectedMoons = {}
 local selectedGears = {}
 local selectedMoons2 = {}
-
+local buypets = {1, 2, 3}
 
 local step = 0.001
 local x = Vector3.new(34.14344024658203, 0.13552513718605042, -112.62083435058594)
@@ -116,6 +118,15 @@ function byallmoon2fc()
     for i = 1, 25 do
         for _, moon2 in ipairs(selectedMoons2) do
             buymoon2:FireServer(moon2)
+            task.wait()
+        end
+    end
+end
+
+function buypetegg()
+    for i = 1, 3 do
+        for _, pet in ipairs(buypets) do 
+            BuyPets:FireServer(pet)
             task.wait()
         end
     end
@@ -277,8 +288,16 @@ dropdownGear:OnChanged(function(Value)
     end
 end)
 
+local section = loja:AddSection("Pets buy")
 
-
+loja:AddButton({
+        Title = "comprar todos pets",
+        Description = "auto se explica",
+        Callback = function()
+            buypetegg()
+        end
+    })
+            
 -- 
 
 plant:AddButton({
