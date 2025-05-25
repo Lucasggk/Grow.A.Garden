@@ -280,17 +280,3 @@ player:AddSlider("WalkSpeedSlider", {
         end
     end
 })
-
-player:AddSlider("JumpPowerSlider", {
-    Title = "JumpPower",
-    Description = "Ajuste a força do pulo",
-    Min = 10,
-    Max = 200,
-    Default = 10,
-    Rounding = 1,
-    Callback = function(value)
-        if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
-            game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
-        end
-    end
-})
