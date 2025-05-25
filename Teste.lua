@@ -244,28 +244,27 @@ end)
 
 local Slider = plant:AddSlider("Slider", 
 {
-    Title = "Distancia de uma seed oara outra\n",
+    Title = "Distancia de uma seed para outra\n",
     Description = "step seed\n",
-    Default = step,
+    Default = 0.001,
     Min = 0.001,
     Max = 0.1,
     Rounding = 3,
     Callback = function(Value)
-        step = value
+        step = Value
     end
 })
 
 plant:AddButton({
-        Title = "click para plantar",
-        Description = "esteja com a seed na mão", 
-        Callback = function()
-        
-local direction = (y - x).Unit
-local distance = (y - x).Magnitude
-for i = 0, distance, step do
-    local pos = x + direction * i
-    Plant:FireServer(pos, plant)
-    task.wait()
-end
+    Title = "click para plantar",
+    Description = "esteja com a seed na mão", 
+    Callback = function()
+        local direction = (y - x).Unit
+        local distance = (y - x).Magnitude
+        for i = 0, distance, step do
+            local pos = x + direction * i
+            Plant:FireServer(pos, plap)
+            task.wait()
         end
-    })
+    end
+})
