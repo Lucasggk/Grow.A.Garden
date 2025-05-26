@@ -569,4 +569,4 @@ ui:AddButton({
         xac = 0 
         game:GetService("Players").LocalPlayer.PlayerGui.EventShop_UI = false 
     end
-})
+        })
