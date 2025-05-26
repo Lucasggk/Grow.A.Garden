@@ -14,6 +14,11 @@ local character = player.Character or player.CharacterAdded:Wait()
 local hrp = character:WaitForChild("HumanoidRootPart")
 local humanoid = character:WaitForChild("Humanoid")
 local scrollingFrame = game:GetService("Players").LocalPlayer.PlayerGui.ActivePetUI.Frame.Main.ScrollingFrame
+local feedsc = game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ActivePetService")
+
+
+
+
 
 
 player.CharacterAdded:Connect(function(char)
@@ -487,7 +492,7 @@ local pDropdown = pet:AddDropdown("Dropdown", {
     Description = "auto se explica\n",
     Values = PetsId,
     Multi = false,
-    Default = 0,
+    Default = ,
 })
 
 local pfeed
@@ -496,3 +501,11 @@ pDropdown:OnChanged(function(Value)
     pfeed = Value
     print(pfeed)
 end)
+
+pet:AddButton({
+        Title = "Alimentar pet selecionado\n",
+        Description = "Segure comida na mão!",
+        Callback = function()
+            feedsc:FireServer("Feed", pfeed)
+        end
+    })
