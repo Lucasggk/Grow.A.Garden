@@ -464,7 +464,6 @@ end)
 
 --
 
-
 function prefsh()
     PetsId = {}
     for _, child in ipairs(scrollingFrame:GetChildren()) do
@@ -472,40 +471,80 @@ function prefsh()
             table.insert(PetsId, child.Name)
         end
     end
+    print("Pets atualizados:")
     for _, id in ipairs(PetsId) do
         print(id)
     end
+    return PetsId
 end
 
-prefsh()
-
-pet:AddButton({
-        Title = "atualizar pet",
-        Description = "Atualiza pets",
-        Callback = function()
-            prefsh()
-        end
-    })
-
 local pDropdown = pet:AddDropdown("Dropdown", {
-    Title = "Escolha o pet para feed\n",
-    Description = "auto se explica\n",
-    Values = PetsId,
+    Title = "Escolha o pet para feed",
+    Description = "auto se explica",
+    Values = {},
     Multi = false,
     Default = nil,
+})
+
+local function updatePetDropdown()
+    local pets = prefsh()
+    pDropdown:SetValues(pets)
+    if #pets > 0 then
+        pDropdown:SetValue(pets[1])
+    end
+end
+
+pet:AddButton({
+    Title = "atualizar pet",
+    Description = "Atualiza pets",
+    Callback = function()
+        updatePetDropdown()
+    end
 })
 
 local pfeed
 
 pDropdown:OnChanged(function(Value)
     pfeed = Value
-    print(pfeed)
+    print("Pet selecionado:", pfeed)
 end)
 
-pet:AddButton({
-        Title = "Alimentar pet selecionado\n",
-        Description = "Segure comida na mão!",
-        Callback = function()
-            feedsc:FireServer("Feed", pfeed)
+updatePetDropdown()
+
+
+local autoFeed = false
+
+pet:AddToggle("AutoFeedToggle", {
+    Title = "Alimentação Automática",
+    Description = "Alimenta o pet selecionado automaticamente",
+    Default = false,
+    Callback = function(Value)
+        autoFeed = Value
+        if Value then
+            spawn(function()
+                while autoFeed do
+                    if pfeed then
+                        feedsc:FireServer("Feed", pfeed)
+                        print("Pet alimentado:", pfeed)
+                    else
+                        print("Nenhum pet selecionado para alimentar")
+                    end
+                    wait(1) 
+                end
+            end)
         end
-    })
+    end
+})
+
+pet:AddButton({
+    Title = "Alimentar pet selecionado",
+    Description = "Segure comida na mão!",
+    Callback = function()
+        if pfeed then
+            feedsc:FireServer("Feed", pfeed)
+            print("Pet alimentado:", pfeed)
+        else
+            print("Nenhum pet selecionado")
+        end
+    end
+})
