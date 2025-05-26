@@ -40,7 +40,7 @@ end
 local lastMinute = -1
 
 while true do
-    task.wait(0.5) 
+    task.wait(1) 
     local minute = os.date("*t").min
 
     if minute % 5 == 0 and minute ~= lastMinute then
@@ -48,6 +48,7 @@ while true do
         lastMinute = minute
     end
 end
+Buy()
 
 
 
