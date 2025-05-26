@@ -99,8 +99,9 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
+local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
 local Plant = ReplicatedStorage.GameEvents.Plant_RE
-
+local BuyPet = ReplicatedStorage.GameEvents.BuyPetEgg
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
@@ -137,6 +138,11 @@ local plant = Window:AddTab({
     Icon = "list"
 })
 
+local sell = Window:AddTab({
+    Title = "sell",
+    Icon = "list"
+})
+
 local player = Window:AddTab({
         Title = "Player",
         Icon = "list"
@@ -144,24 +150,32 @@ local player = Window:AddTab({
 -- Local Variáveis --
 
 local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
-local byallmoon = {"Blood Owl", "Blood Kiwi", "Blood Hedgehog", "Star Caller", "Moon Melon", "Blood Banana", "Night Egg", "Night Seed Pack", "Mysterious Crate"}
-local bygear = {"Watering Can", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler", "Harvest Tool"}
+local byallmoon = {"Mysterious Crate", "Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Star Caller", "Blood Hedgehog", "Blood Kiwi", "Blood Owl"}
+local byallmoon2 = {"Night Egg", "Night Seed Pack", "Twilight Crate", "Star Caller", "Moon Cat", "Celestiberry", "Moon Mango"}
+local bygear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler", "Favorite Tool", "Harvest Tool"}
 local pseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk", "Moon Melon", "Blood Banana"}
+
 
 
 local bsa = false
 local bsm = false
+local bsm2 = false
 local bsg = false
+local bsp = false 
 
 local selectedSeeds = {}
 local selectedMoons = {}
 local selectedGears = {}
+local selectedMoons2 = {}
+local buypets = {1, 2, 3}
 
 local step = 0.001
 local x = Vector3.new(34.14344024658203, 0.13552513718605042, -112.62083435058594)
 local y = Vector3.new(31.82763671875, 0.13552513718605042, -112.6816635131836)
-
 local plap = ""
+
+local Pos = hrp.Position
+local pos = tostring(Pos)
 
 local walkSpeed = humanoid.WalkSpeed
 
@@ -194,6 +208,66 @@ function byallgearfc()
     end
 end
 
+function byallmoon2fc()
+    for i = 1, 25 do
+        for _, moon2 in ipairs(selectedMoons2) do
+            buymoon2:FireServer(moon2)
+            task.wait()
+        end
+    end
+end
+
+function buypetegg()
+    for i = 1, 3 do
+        for _, pet in ipairs(buypets) do 
+            BuyPet:FireServer(pet)
+            task.wait()
+        end
+    end
+end
+
+function svp()
+    Pos = hrp.Position
+    pos = tostring(Pos)
+end
+
+function tpt(v3)
+    if typeof(v3) == "Vector3" then
+        hrp.CFrame = CFrame.new(v3)
+    elseif typeof(v3) == "string" then
+        local x, y, z = string.match(v3, "Vector3%s*%(([^,]+),%s*([^,]+),%s*([^)]+)%)")
+        if x and y and z then
+            hrp.CFrame = CFrame.new(tonumber(x), tonumber(y), tonumber(z))
+        end
+    end
+end
+
+function sf()
+    ReplicatedStorage:WaitForChild("GameEvents"):WaitForChild("Sell_Inventory"):FireServer()
+end
+
+function sm()
+    ReplicatedStorage:WaitForChild("GameEvents"):WaitForChild("NightQuestRemoteEvent"):FireServer("SubmitAllPlants")
+end
+
+function tsf()
+    svp()
+    hrp.CFrame = CFrame.new(86.57965850830078, 2.999999761581421, 0.4267919063568115)
+    task.wait(0.25)
+    sf()
+    task.wait(0.2)
+    tpt(Pos)
+end
+
+function tsm()
+    svp()
+    hrp.CFrame = CFrame.new(-101.0422592163086, 4.400012493133545, -10.985257148742676)
+    task.wait(0.25)
+    sm()
+    task.wait(0.2)
+    tpt(Pos)
+end
+
 -- Local Script --
 
 local section = loja:AddSection("Seeds")
@@ -224,10 +298,10 @@ dropdownSeed:OnChanged(function(Value)
     end
 end)
 
-local section = loja:AddSection("Moons")
+local section = loja:AddSection("Bloodlit moon shop")
 
 loja:AddToggle("", {
-    Title = "Buy all shop moon",
+    Title = "Buy all shop Bloodlit",
     Description = "Buy all shop moon",
     Default = false,
     Callback = function(Value)
@@ -248,6 +322,34 @@ dropdownMoon:OnChanged(function(Value)
     for v, state in pairs(Value) do
         if state then
             table.insert(selectedMoons, v)
+        end
+    end
+end)
+
+local section = loja:AddSection("Moonlit moon shop")
+
+loja:AddToggle("", {
+    Title = "Buy all shop moonlit",
+    Description = "Buy all shop seed",
+    Default = false,
+    Callback = function(Value)
+        bsm2 = Value
+    end
+})
+
+local dropdownMoon2 = loja:AddDropdown("DropdownSeed", {
+    Title = "Selecione seeds para comprar\n",
+    Description = "Selecione seeds para comprar\n",
+    Values = byallmoon2,
+    Multi = true,
+    Default = {},
+})
+
+dropdownMoon2:OnChanged(function(Value)
+    selectedMoons2 = {}
+    for v, state in pairs(Value) do
+        if state then
+            table.insert(selectedMoons2, v)
         end
     end
 end)
@@ -280,26 +382,24 @@ dropdownGear:OnChanged(function(Value)
     end
 end)
 
-task.spawn(function()
-    local lastMinute = -1
-    while true do
-        local minutos = os.date("*t").min
-        if minutos ~= lastMinute then
-            lastMinute = minutos
+local section = loja:AddSection("Pets buy")
 
-            if bsa then
-                byallseedfc()
-            end
-            if bsm then
-                byallmoonfc()
-            end
-            if bsg then
-                byallgearfc()
-            end
+loja:AddButton({
+        Title = "comprar todos pets",
+        Description = "auto se explica",
+        Callback = function()
+            buypetegg()
         end
-        task.wait(1)
-    end
-end)
+    })
+
+loja:AddToggle("", {
+        Title = "comprar todos pets afk",
+        Description = "auto se explica",
+        Default = false,
+        Callback = function(value)
+         bsp = value   
+        end
+    })
 
 -- 
 
@@ -362,6 +462,42 @@ plant:AddButton({
 
 --
 
+sell:AddButton({
+    Title = "Vender Colheitas",
+    Description = "vende para o seller",
+    Callback = function()
+        tsf()       
+    end
+})
+
+sell:AddButton({
+    Title = "Vender bloodlit/bloodmon",
+    Description = "vende para a coruja",
+    Callback = function()
+        tsm()       
+    end
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--
+
 player:AddSlider("WalkSpeedSlider", {
     Title = "WalkSpeed",
     Description = "Ajuste a velocidade de caminhada",
@@ -373,6 +509,38 @@ player:AddSlider("WalkSpeedSlider", {
         if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
             game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
         end
-    end
+     end      
 })
+
+--
+
+task.spawn(function()
+    local lastMinute = -1
+    while true do
+        local minutos = os.date("*t").min
+        if minutos ~= lastMinute then
+            lastMinute = minutos
+
+            if bsa then
+                byallseedfc()
+            end
+            if bsm then
+                byallmoonfc()
+            end
+            if bsg then
+                byallgearfc()
+            end
+            if bsm2 then
+                byallmoon2fc()
+            end
+            if bsp then
+                buypetegg()
+            end
+        end
+        task.wait(1)
+    end
+end)
+
+
+
 ```
