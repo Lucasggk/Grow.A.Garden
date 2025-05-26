@@ -37,7 +37,17 @@ function buy()
   end
 end
 
+local lastMinute = -1
 
+while true do
+    task.wait(0.5) 
+    local minute = os.date("*t").min
+
+    if minute % 5 == 0 and minute ~= lastMinute then
+        Buy()
+        lastMinute = minute
+    end
+end
 
 
 
