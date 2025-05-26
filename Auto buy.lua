@@ -3,52 +3,60 @@ local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
-local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
+local buyMoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
 local buyPet = ReplicatedStorage.GameEvents.BuyPetEgg
 
-local seed = {"Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
-local moon = { "Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Star Caller", "Blood Owl"}
-local moon2 = {"Night Egg", "Night Seed Pack", "Star Caller", "Celestiberry"}
-local gear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler"}
-local pet = {1, 2, 3}
+local seeds = {
+    "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango",
+    "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"
+}
 
-function Buy()
-  for i = 1, 50 do
-    for _, se in ipairs(seed) do
-      buySeed:FireServer(se)
-    end 
-    for _, ge in ipairs(gear) do
-      buyGear:FireServer(ge)
-    end 
-    for _, mo in ipairs(moon) do
-      buyMoon:FireServer(mo)
-    end 
-    for _, mo2 in ipairs(moon2) do
-      buyMoon2:FireServer(mo2)
-    end  
-    for _, pe in ipairs(pet) do 
-            buyPet:FireServer(pe)
+local gears = {
+    "Watering Can", "Trowel", "Recall Wrench",
+    "Basic Sprinkler", "Advanced Sprinkler",
+    "Godly Sprinkler", "Lightning Rod", "Master Sprinkler"
+}
+
+local moonItems = {
+    "Night Seed Pack", "Night Egg", "Blood Banana",
+    "Moon Melon", "Star Caller", "Blood Owl"
+}
+
+local moonItems2 = {
+    "Night Egg", "Night Seed Pack", "Star Caller", "Celestiberry"
+}
+
+local pets = {1, 2, 3}
+
+local function comprarTudo()
+    for i = 1, 50 do
+        for _, seed in ipairs(seeds) do
+            buySeed:FireServer(seed)
+        end
+        for _, gear in ipairs(gears) do
+            buyGear:FireServer(gear)
+        end
+        for _, moon in ipairs(moonItems) do
+            buyMoon:FireServer(moon)
+        end
+        for _, moon2 in ipairs(moonItems2) do
+            buyMoon2:FireServer(moon2)
+        end
+        for _, pet in ipairs(pets) do
+            buyPet:FireServer(pet)
+        end
+        task.wait(0.1)
     end
-    task.wait()
-  end
 end
-
-local lastMinute = -1
 
 while true do
-    task.wait(1) 
-    local minute = os.date("*t").min
-
-    if minute % 5 == 0 and minute ~= lastMinute then
-        Buy()
-        lastMinute = minute
+    local minutos = os.date("*t").min
+    if minutos % 5 == 0 then
+        comprarTudo()
+        repeat task.wait(1) until os.date("*t").min % 5 ~= 0
     end
+    task.wait(1)
 end
-Buy()
-
-
-
