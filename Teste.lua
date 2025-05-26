@@ -556,6 +556,11 @@ pet:AddButton({
 
 --
 
+
+
+-- Adiciona uma seção para organizar os botões
+ui:AddSection("Controle de UIs")
+
 ui:AddButton({
     Title = "BloodMoon Shop UI",
     Description = "Ativa/Desativa a loja BloodMoon",
@@ -570,16 +575,67 @@ ui:AddButton({
     end
 })
 
+-- Moonlit Shop UI
 ui:AddButton({
     Title = "Moonlit Shop UI",
     Description = "Ativa/Desativa a loja Moonlit",
     Callback = function()
-        local eventShop = game.Players.LocalPlayer.PlayerGui:FindFirstChild("EventShop_UI")
-        if eventShop then
-            eventShop.Enabled = not eventShop.Enabled  -- Inverte o estado atual
-            print("Moonlig Shop UI:", eventShop.Enabled and "Ativada" or "Desativada")
-        else
-            warn("EventShop_UI não encontrada!")
+        local ui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("NightEventShop_UI")
+        if ui then
+            ui.Enabled = not ui.Enabled
+            print("Moonlit Shop UI:", ui.Enabled and "Ativada" or "Desativada")
+        end
+    end
+})
+
+-- Quest Event UI
+ui:AddButton({
+    Title = "Event Quest UI",
+    Description = "Ativa/Desativa a UI de missões do evento",
+    Callback = function()
+        local ui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("NightQuest_UI")
+        if ui then
+            ui.Enabled = not ui.Enabled
+            print("Event Quest UI:", ui.Enabled and "Ativada" or "Desativada")
+        end
+    end
+})
+
+-- Cosmetic Shop UI
+ui:AddButton({
+    Title = "Cosmetic Shop UI",
+    Description = "Ativa/Desativa a loja de cosméticos",
+    Callback = function()
+        local ui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("CosmeticShop_UI")
+        if ui then
+            ui.Enabled = not ui.Enabled
+            print("Cosmetic Shop UI:", ui.Enabled and "Ativada" or "Desativada")
+        end
+    end
+})
+
+-- Gear Shop UI
+ui:AddButton({
+    Title = "Gear Shop UI",
+    Description = "Ativa/Desativa a loja de equipamentos",
+    Callback = function()
+        local ui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Gear_Shop")
+        if ui then
+            ui.Enabled = not ui.Enabled
+            print("Gear Shop UI:", ui.Enabled and "Ativada" or "Desativada")
+        end
+    end
+})
+
+-- Seed Shop UI
+ui:AddButton({
+    Title = "Seed Shop UI",
+    Description = "Ativa/Desativa a loja de sementes",
+    Callback = function()
+        local ui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Seed_Shop")
+        if ui then
+            ui.Enabled = not ui.Enabled
+            print("Seed Shop UI:", ui.Enabled and "Ativada" or "Desativada")
         end
     end
 })
