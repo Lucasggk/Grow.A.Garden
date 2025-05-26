@@ -515,8 +515,8 @@ updatePetDropdown()
 local autoFeed = false
 
 pet:AddToggle("AutoFeedToggle", {
-    Title = "Alimentação Automática",
-    Description = "Alimenta o pet selecionado automaticamente",
+    Title = "Alimentação Automática\n",
+    Description = "Alimenta o pet selecionado automaticamente\nPorem pegue a comida na mão!\n",
     Default = false,
     Callback = function(Value)
         autoFeed = Value
@@ -529,7 +529,7 @@ pet:AddToggle("AutoFeedToggle", {
                     else
                         print("Nenhum pet selecionado para alimentar")
                     end
-                    wait(1) 
+                    wait(0.3) 
                 end
             end)
         end
