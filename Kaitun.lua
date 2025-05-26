@@ -9,7 +9,6 @@ local hrp = char:WaitForChild("HumanoidRootPart")
 
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local coin = game:GetService("Players").LocalPlayer:WaitForChild("leaderstats"):WaitForChild("Sheckles").Value
-print(coin)
 
 -- locais de listagem
 
@@ -37,6 +36,19 @@ end
 
 function tpV3(x, y, z)
   hrp.CFrame = CFrame.new(Vector3.new(x, y, z))
+end
+
+function ct()
+  local coin = game:GetService("Players").LocalPlayer:WaitForChild("leaderstats"):WaitForChild("Sheckles").Value
+end
+
+function bseed()
+  for i = 1, 50 do
+    for _, seed in ipairs(nseed) do
+      buySeed:FireServer(seed)
+      task.wait()
+    end
+  end
 end
 
 -- local de verificação 
