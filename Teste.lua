@@ -184,19 +184,6 @@ function tsm()
     tpt(Pos)
 end
 
-function prefsh()
-
-
-for _, child in ipairs(scrollingFrame:GetChildren()) do
-    if child.Name ~= "PetTemplate" and child:FindFirstChild("PetStats") then
-        table.insert(PetsId, {child.Name})
-    end
-    end
-    for _, id in ipairs(PetsId) do
-    print(unpack(id))
-    end
-end
-
 -- Local Script --
 
 local section = loja:AddSection("Seeds")
@@ -473,8 +460,19 @@ end)
 --
 
 
-prefsh()
+function prefsh()
+    PetsId = {}
+    for _, child in ipairs(scrollingFrame:GetChildren()) do
+        if child.Name ~= "PetTemplate" and child:FindFirstChild("PetStats") then
+            table.insert(PetsId, child.Name)
+        end
+    end
+    for _, id in ipairs(PetsId) do
+        print(id)
+    end
+end
 
+prefsh()
 
 pet:AddButton({
         Title = "atualizar pet",
@@ -496,5 +494,5 @@ local pfeed
 
 pDropdown:OnChanged(function(Value)
     pfeed = Value
-        print(pfeed)
+    print(pfeed)
 end)
