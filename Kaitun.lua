@@ -8,6 +8,8 @@ local hrp = char:WaitForChild("HumanoidRootPart")
 -- locais do script game
 
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
+local coin = game:GetService("Players").LocalPlayer:WaitForChild("leaderstats"):WaitForChild("Sheckles").Value
+print(coin)
 
 -- locais de listagem
 
