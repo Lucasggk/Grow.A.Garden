@@ -9,7 +9,7 @@ local stock = {
     "Candy Blossom"            -- Divino
 }
 
-if game.PlaceId == 12688469563 then 
+if game.PlaceId == 126884695634066 then 
     while true do 
         for _, candy in ipairs(stock) do
             Candy:FireServer(candy)
@@ -17,5 +17,5 @@ if game.PlaceId == 12688469563 then
         task.wait(0.1)
     end
 else
-    print("jogo errado: " .. game.PlaceId .. " | jogo correto: 12688469563")
+    print("jogo errado: " .. game.PlaceId .. " | jogo correto: 126884695634066)
 end
