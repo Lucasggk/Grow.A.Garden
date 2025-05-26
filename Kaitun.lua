@@ -4,6 +4,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local player = game.Players.LocalPlayer
 local char = player.Character or player.CharacterAdded:Wait()
 local hrp = char:WaitForChild("HumanoidRootPart")
+local backpack = player:WaitForChild("Backpack")
 
 -- locais do script game
 
@@ -49,6 +50,24 @@ function bseed()
       task.wait()
     end
   end
+end
+
+function eq(name)
+    name = name:lower()
+    
+    for _, item in pairs(char:GetChildren()) do
+        if item:IsA("Tool") and item.Name:lower():find(name) then
+            char.Humanoid:EquipTool(item)
+            return
+        end
+    end
+    
+    for _, item in pairs(backpack:GetChildren()) do
+        if item:IsA("Tool") and item.Name:lower():find(name) then
+            char.Humanoid:EquipTool(item)
+            return
+        end
+    end
 end
 
 -- local de verificação 
