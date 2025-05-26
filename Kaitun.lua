@@ -18,9 +18,9 @@ local nseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "C
 local farm = hrp.Position
 local pos = hrp.CFrame
 
-local lote1
-local lote2
-local lote3
+local lote1 = {33.371002197265625, 2.999999761581421, -64.72699737548828}
+local lote2 = {-101.6290054321289, 3, -64.72621154785156}
+local lote3 = {-235.37002563476562, 2.999999761581421, -61.78000259399414}
 local lote4 = {34.629005432128906, 2.999999761581421, 36.78675842285156}
 local lote5 = {-100.3709945678711, 2.999999761581421, 36.793582916259766}
 local lote6
