@@ -556,17 +556,30 @@ pet:AddButton({
 
 --
 
-local xac = 0
 ui:AddButton({
-    Title = "BloodMoon shop ui",
-    Description = "Abre a loja blood",
+    Title = "BloodMoon Shop UI",
+    Description = "Ativa/Desativa a loja BloodMoon",
     Callback = function()
-            
-     if xac == 0 then 
-        xac = 1
-        game:GetService("Players").LocalPlayer.PlayerGui.EventShop_UI = true
-     elseif xac == 1 then 
-        xac = 0 
-        game:GetService("Players").LocalPlayer.PlayerGui.EventShop_UI = false 
+        local eventShop = game.Players.LocalPlayer.PlayerGui:FindFirstChild("EventShop_UI")
+        if eventShop then
+            eventShop.Enabled = not eventShop.Enabled  -- Inverte o estado atual
+            print("BloodMoon Shop UI:", eventShop.Enabled and "Ativada" or "Desativada")
+        else
+            warn("EventShop_UI não encontrada!")
+        end
     end
-        })
+})
+
+ui:AddButton({
+    Title = "Moonlit Shop UI",
+    Description = "Ativa/Desativa a loja Moonlit",
+    Callback = function()
+        local eventShop = game.Players.LocalPlayer.PlayerGui:FindFirstChild("EventShop_UI")
+        if eventShop then
+            eventShop.Enabled = not eventShop.Enabled  -- Inverte o estado atual
+            print("Moonlig Shop UI:", eventShop.Enabled and "Ativada" or "Desativada")
+        else
+            warn("EventShop_UI não encontrada!")
+        end
+    end
+})
