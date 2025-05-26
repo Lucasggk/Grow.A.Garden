@@ -13,6 +13,8 @@ local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local hrp = character:WaitForChild("HumanoidRootPart")
 local humanoid = character:WaitForChild("Humanoid")
+local scrollingFrame = game:GetService("Players").LocalPlayer.PlayerGui.ActivePetUI.Frame.Main.ScrollingFrame
+
 
 player.CharacterAdded:Connect(function(char)
     character = char
@@ -53,6 +55,12 @@ local player = Window:AddTab({
         Title = "Player",
         Icon = "list"
     })
+
+local pet = Window:AddTab({
+        Title = "pet",
+        Icon = "list"
+    })
+
 -- Local Variáveis --
 
 local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
@@ -84,6 +92,8 @@ local Pos = hrp.Position
 local pos = tostring(Pos)
 
 local walkSpeed = humanoid.WalkSpeed
+
+local PetsId = {}
 
 -- Local functions --
 
@@ -172,6 +182,19 @@ function tsm()
     sm()
     task.wait(0.2)
     tpt(Pos)
+end
+
+function prefsh()
+
+
+for _, child in ipairs(scrollingFrame:GetChildren()) do
+    if child.Name ~= "PetTemplate" and child:FindFirstChild("PetStats") then
+        table.insert(PetsId, {child.Name})
+    end
+    end
+    for _, id in ipairs(PetsId) do
+    print(unpack(id))
+    end
 end
 
 -- Local Script --
@@ -447,5 +470,31 @@ task.spawn(function()
     end
 end)
 
+--
 
 
+prefsh()
+
+
+pet:AddButton({
+        Title = "atualizar pet",
+        Description = "Atualiza pets",
+        Callback = function()
+            prefsh()
+        end
+    })
+
+local pDropdown = pet:AddDropdown("Dropdown", {
+    Title = "Escolha o pet para feed\n",
+    Description = "auto se explica\n",
+    Values = PetsId
+    Multi = false,
+    Default = 0,
+})
+
+local pfeed
+
+pDropdown:OnChanged(function(Value)
+    pfeed = Value
+        print(pfeed)
+end)
