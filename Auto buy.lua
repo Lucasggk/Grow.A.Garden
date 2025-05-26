@@ -16,7 +16,7 @@ local moon2 = {"Night Egg", "Night Seed Pack", "Star Caller", "Celestiberry"}
 local gear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler"}
 local pet = {1, 2, 3}
 
-function buy()
+function Buy()
   for i = 1, 50 do
     for _, se in ipairs(seed) do
       buySeed:FireServer(se)
