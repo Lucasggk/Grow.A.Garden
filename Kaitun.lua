@@ -10,11 +10,13 @@ local backpack = player:WaitForChild("Backpack")
 
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local coin = game:GetService("Players").LocalPlayer:WaitForChild("leaderstats"):WaitForChild("Sheckles").Value
+local Plant = ReplicatedStorage.GameEvents.Plant_RE
 
 -- locais de listagem
 
 local nseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
 local eseed = {"Carrot seed", "Strawberry seed", "Blueberry seed", "Orange Tulip seed", "Tomato seed", "Corn seed", "Daffodil seed", "Watermelon seed", "Pumpkin seed", "Apple seed", "Bamboo seed", "Coconut seed", "Cactus seed", "Dragon Fruit seed", "Mango seed", "Grape seed", "Mushroom seed", "Pepper seed", "Cacao seed", "Beanstalk seed"}
+
 -- locais de locais 
 
 local farm = hrp.Position
