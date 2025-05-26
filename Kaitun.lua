@@ -22,7 +22,7 @@ local lote1
 local lote2
 local lote3
 local lote4 = {34.629005432128906, 2.999999761581421, 36.78675842285156}
-local lote5
+local lote5 = {-100.3709945678711, 2.999999761581421, 36.793582916259766}
 local lote6
 
 local plant_lote
