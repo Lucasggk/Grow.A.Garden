@@ -492,7 +492,7 @@ local pDropdown = pet:AddDropdown("Dropdown", {
     Description = "auto se explica\n",
     Values = PetsId,
     Multi = false,
-    Default = ,
+    Default = nil,
 })
 
 local pfeed
