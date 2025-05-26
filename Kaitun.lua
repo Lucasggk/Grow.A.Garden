@@ -78,6 +78,7 @@ function plantseed()
       for _, eplants in ipairs(eseed) do
         local planta = plants
         eq(eplants)
+        task.wait(0.025)
         local randX = plan_lote.X + math.random(-250, 250) / 1000
         local randZ = plan_lote.Z + math.random(-250, 250) / 1000
         local pos = Vector3.new(randX, plan_lote.Y, randZ)
