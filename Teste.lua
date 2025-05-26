@@ -479,8 +479,8 @@ function prefsh()
 end
 
 local pDropdown = pet:AddDropdown("Dropdown", {
-    Title = "Escolha o pet para feed",
-    Description = "auto se explica",
+    Title = "Escolha o pet para feed\n",
+    Description = "auto se explica\n",
     Values = {},
     Multi = false,
     Default = nil,
