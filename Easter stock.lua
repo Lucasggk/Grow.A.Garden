@@ -1,6 +1,6 @@
 local Candy = game:GetService("ReplicatedStorage").GameEvents.BuyEasterStock
 
-stock = {
+local stock = {
     "Chocolate Carrot Seed",   -- Comum
     "Red Lollipop",            -- Incomum
     "Candy Sunflower",         -- Raro
@@ -10,12 +10,12 @@ stock = {
 }
 
 if game.PlaceId == 12688469563 then 
-while true do 
-    for _, candy in ipairs(stock) do
-     Candy:FireServer(candy)
-    end 
-    task.wait(0.1)
-  end
+    while true do 
+        for _, candy in ipairs(stock) do
+            Candy:FireServer(candy)
+        end 
+        task.wait(0.1)
+    end
 else
-  print("jogo errado: ".. game.PlaceId .."jogo correto: 12688469563")
+    print("jogo errado: " .. game.PlaceId .. " | jogo correto: 12688469563")
 end
