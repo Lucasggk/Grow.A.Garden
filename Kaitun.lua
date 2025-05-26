@@ -7,7 +7,7 @@ local hrp = char:WaitForChild("HumanoidRootPart")
 
 -- locais do script game
 
-
+local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 
 -- locais de listagem
 
@@ -35,4 +35,19 @@ end
 
 -- local de verificação 
 
-
+if farm == lote1 then
+  plan_lote = Vector3.new()
+elseif farm == lote2 then
+  plan_lote = Vector3.new()
+elseif farm == lote3 then
+  plan_lote = Vector3.new()
+elseif farm == lote4 then
+  plan_lote = Vector3.new()
+elseif farm == lote5 then
+  plan_lote = Vector3.new()
+elseif farm == lote6 then
+  plan_lote = Vector3.new()
+else
+  plan_lote = nil
+end
+  
