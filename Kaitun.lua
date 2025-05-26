@@ -23,31 +23,30 @@ local lote2 = {-101.6290054321289, 3, -64.72621154785156}
 local lote3 = {-235.37002563476562, 2.999999761581421, -61.78000259399414}
 local lote4 = {34.629005432128906, 2.999999761581421, 36.78675842285156}
 local lote5 = {-100.3709945678711, 2.999999761581421, 36.793582916259766}
-local lote6
 
 local plant_lote
 
 -- locais de funções 
 
-function tp(localizacao)
+function tpCF(localizacao)
   hrp.CFrame = CFrame.new(localizacao)
 end
 
 -- local de verificação 
 
 if farm == lote1 then
-  plan_lote = Vector3.new()
+  plan_lote = vector.create()
 elseif farm == lote2 then
-  plan_lote = Vector3.new()
+  plan_lote = vector.create()
 elseif farm == lote3 then
-  plan_lote = Vector3.new()
+  plan_lote = vector.create()
 elseif farm == lote4 then
-  plan_lote = Vector3.new()
+  plan_lote = vector.create()
 elseif farm == lote5 then
-  plan_lote = Vector3.new()
-elseif farm == lote6 then
-  plan_lote = Vector3.new()
+  plan_lote = vector.create()
 else
   plan_lote = nil
 end
-  
+
+
+
