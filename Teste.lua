@@ -556,17 +556,17 @@ pet:AddButton({
 
 --
 
-uiv = false
-
-local ui = false
-ui:AddToggle("", {
-        Title = "teste",
-        Default = false,
-        Description = "teste",
-        Callback = Function(value)
-            uiv = value
-            if ui then 
-            game:GetService("Players").LocalPlayer.PlayerGui.EventShop_UI.Enabled = ui
-            end
-        end
-    })
+local xac = 0
+ui:AddButton({
+    Title = "BloodMoon shop ui",
+    Description = "Abre a loja blood",
+    Callback = function()
+            
+     if xac == 0 then 
+        xac = 1
+        game:GetService("Players").LocalPlayer.PlayerGui.EventShop_UI = true
+     elseif xac == 1 then 
+        xac = 0 
+        game:GetService("Players").LocalPlayer.PlayerGui.EventShop_UI = false 
+    end
+})
