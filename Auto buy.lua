@@ -51,3 +51,15 @@ function buyall()
     
   end
 end
+
+task.spawn(function()
+	local ultimoMinuto = -1
+	while true do
+		local minuto = os.date("*t").min
+		if minuto % 5 == 0 and minuto ~= ultimoMinuto then
+			ultimoMinuto = minuto
+			buyall()
+		end
+		task.wait(1)
+	end
+end)
