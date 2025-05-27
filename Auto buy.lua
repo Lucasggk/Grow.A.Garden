@@ -36,9 +36,12 @@ function m()
 end
 
 function p() 
+for i = 1, 3 do
   for _, pt in ipairs(pet) do
     buyPet:FireServer(pt)
   end
+task.wait()
+end
 end
 
 function buyall()
