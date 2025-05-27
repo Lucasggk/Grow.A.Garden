@@ -31,71 +31,17 @@ task.wait(0.1)
 ## Auto buy
 
 ```lua
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
-local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
-local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
-local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
-local buyPet = ReplicatedStorage.GameEvents.BuyPetEgg
+g().seed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
 
-local seed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
-local gear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler"}
-local bloodlit = {"Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Blood Owl"}
-local moonlit = {"Night Egg", "Night Seed Pack", "Celestiberry"}
-local pet = {1, 2, 3}
+g().gear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler"}
 
-function s() 
-  for _, sd in ipairs(seed) do
-    buySeed:FireServer(sd)
-  end
-end
+g().bloodlit = {"Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Blood Owl"}
 
-function g() 
-  for _, gr in ipairs(gear) do
-    buyGear:FireServer(gr)
-  end
-end
+g().moonlit = {"Night Egg", "Night Seed Pack", "Celestiberry"}
 
-function b() 
-  for _, bl in ipairs(bloodlit) do
-    buyMoon:FireServer(bl)
-  end
-end
+g().buypet = true -- false/true
 
-function m() 
-  for _, ml in ipairs(moonlit) do
-    buyMoon2:FireServer(ml)
-  end
-end
-
-function p() 
-  for _, p in ipairs(pet) do
-    buyPet:FireServer(p)
-  end
-end
-
-function buyall()
-  for i = 1, 50 do
-    s()
-    g()
-    b()
-    m()
-    p()
-    
-  end
-end
-
-task.spawn(function()
-	local ultimoMinuto = -1
-	while true do
-		local minuto = os.date("*t").min
-		if minuto % 5 == 0 and minuto ~= ultimoMinuto then
-			ultimoMinuto = minuto
-			buyall()
-		end
-		task.wait(1)
-	end
-end)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Auto%20buy.lua"))()
 ``` 
 
 # testes para hub
