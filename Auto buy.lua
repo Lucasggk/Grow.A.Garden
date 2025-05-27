@@ -51,7 +51,7 @@ function buyall()
     b()
     m()
     p()
-    task.wait(0.1)
+    task.wait(0.05)
   end
 end
 
