@@ -5,56 +5,65 @@ local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
 local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
 local buyPet = ReplicatedStorage.GameEvents.BuyPetEgg
 
-local seed = g().seed
-local gear = g().gear
-local bloodlit = g().bloodlit
-local moonlit = g().moonlit
+function g()
+	return {
+		seed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"},
+		gear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler"},
+		bloodlit = {"Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Blood Owl"},
+		moonlit = {"Night Egg", "Night Seed Pack", "Celestiberry"},
+		buypet = true
+	}
+end
+
+local data = g()
+
+local seed = data.seed
+local gear = data.gear
+local bloodlit = data.bloodlit
+local moonlit = data.moonlit
 local pet = {0}
-if g().buypet then
-	local pet = {1, 2, 3}
+if data.buypet then
+	pet = {1, 2, 3}
 end
 
 function s() 
-  for _, sd in ipairs(seed) do
-    buySeed:FireServer(sd)
-  end
+	for _, sd in ipairs(seed) do
+		buySeed:FireServer(sd)
+	end
 end
 
-function g() 
-  for _, gr in ipairs(gear) do
-    buyGear:FireServer(gr)
-  end
+function gfunc() 
+	for _, gr in ipairs(gear) do
+		buyGear:FireServer(gr)
+	end
 end
 
 function b() 
-  for _, bl in ipairs(bloodlit) do
-    buyMoon:FireServer(bl)
-  end
+	for _, bl in ipairs(bloodlit) do
+		buyMoon:FireServer(bl)
+	end
 end
 
 function m() 
-  for _, ml in ipairs(moonlit) do
-    buyMoon2:FireServer(ml)
-  end
+	for _, ml in ipairs(moonlit) do
+		buymoon2:FireServer(ml)
+	end
 end
-
 
 function p() 
-  for _, p in ipairs(pet) do
-    buyPet:FireServer(p)
-  end
+	for _, p in ipairs(pet) do
+		buyPet:FireServer(p)
+	end
 end
 
-
 function buyall()
-  for i = 1, 50 do
-    s()
-    g()
-    b()
-    m()
-    p()
-    
-  end
+	for i = 1, 50 do
+		s()
+		gfunc()
+		b()
+		m()
+		p()
+	end
 end
 
 task.spawn(function()
