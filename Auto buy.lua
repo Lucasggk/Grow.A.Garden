@@ -2,7 +2,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
-local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
+local buyMoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
 local buyPet = ReplicatedStorage.GameEvents.BuyPetEgg
 
 local seed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
