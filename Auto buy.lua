@@ -37,7 +37,7 @@ end
 
 function p() 
   for _, pt in ipairs(pet) do
-    buyPet:FireServer(p)
+    buyPet:FireServer(pt)
   end
 end
 
