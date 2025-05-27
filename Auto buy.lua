@@ -9,7 +9,7 @@ local seed = g().seed
 local gear = g().gear
 local bloodlit = g().bloodlit
 local moonlit = g().moonlit
-local pet = {}
+local pet = {0}
 if g().buypet then
 	local pet = {1, 2, 3}
 end
