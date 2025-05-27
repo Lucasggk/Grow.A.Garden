@@ -36,7 +36,7 @@ function m()
 end
 
 function p() 
-  for _, p in ipairs(pet) do
+  for _, pt in ipairs(pet) do
     buyPet:FireServer(p)
   end
 end
@@ -48,7 +48,7 @@ function buyall()
     b()
     m()
     p()
-    
+    task.wait()
   end
 end
 
