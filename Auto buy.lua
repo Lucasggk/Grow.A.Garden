@@ -5,24 +5,12 @@ local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
 local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
 local buyPet = ReplicatedStorage.GameEvents.BuyPetEgg
 
-function g()
-	return {
-		seed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"},
-		gear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler"},
-		bloodlit = {"Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Blood Owl"},
-		moonlit = {"Night Egg", "Night Seed Pack", "Celestiberry"},
-		buypet = true
-	}
-end
-
-local data = g()
-
-local seed = data.seed
-local gear = data.gear
-local bloodlit = data.bloodlit
-local moonlit = data.moonlit
+local seed = g().seed
+local gear = g().gear
+local bloodlit = g().bloodlit
+local moonlit = g().moonlit
 local pet = {0}
-if data.buypet then
+if g().buypet then
 	pet = {1, 2, 3}
 end
 
@@ -32,7 +20,7 @@ function s()
 	end
 end
 
-function gfunc() 
+function g() 
 	for _, gr in ipairs(gear) do
 		buyGear:FireServer(gr)
 	end
@@ -46,7 +34,7 @@ end
 
 function m() 
 	for _, ml in ipairs(moonlit) do
-		buymoon2:FireServer(ml)
+		buyMoon2:FireServer(ml)
 	end
 end
 
@@ -59,7 +47,7 @@ end
 function buyall()
 	for i = 1, 50 do
 		s()
-		gfunc()
+		g()
 		b()
 		m()
 		p()
