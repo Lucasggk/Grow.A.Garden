@@ -11,7 +11,7 @@ local bloodlit = g().bloodlit
 local moonlit = g().moonlit
 local pet = {0}
 if g().buypet then
-	local pet = {1, 2, 3)
+	local pet = {1, 2, 3}
 end
 
 function s() 
