@@ -36,12 +36,12 @@ function m()
 end
 
 function p() 
-for i = 1, 3 do
-  for _, pt in ipairs(pet) do
-    buyPet:FireServer(pt)
+  for i = 1, 3 do
+    for _, pt in ipairs(pet) do
+      buyPet:FireServer(pt)
+    end
+    task.wait()
   end
-task.wait()
-end
 end
 
 function buyall()
@@ -50,8 +50,6 @@ function buyall()
     g()
     b()
     m()
-    p()
-    task.wait(0.05)
   end
 end
 
@@ -62,6 +60,12 @@ task.spawn(function()
 		if minuto % 5 == 0 and minuto ~= ultimoMinuto then
 			ultimoMinuto = minuto
 			buyall()
+			task.spawn(function()
+				for i = 1, 50 do
+					p()
+					task.wait(0.05)
+				end
+			end)
 		end
 		task.wait(1)
 	end
