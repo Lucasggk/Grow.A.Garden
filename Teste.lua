@@ -629,14 +629,11 @@ task.spawn(function()
             if bsm2 then
                 byallmoon2fc()
             end
-
             if bsp then
-                task.spawn(function()
-                    buypetegg()
-                    task.wait(1)
-                end)
+                buypetegg()
             end
         end
-        task.wait(0.1)
+        task.wait(1)
     end
 end)
+
