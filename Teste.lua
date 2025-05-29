@@ -440,35 +440,6 @@ player:AddSlider("WalkSpeedSlider", {
 
 --
 
-task.spawn(function()
-    local lastMinute = -1
-    while true do
-        local minutos = os.date("*t").min
-        if minutos ~= lastMinute then
-            lastMinute = minutos
-
-            if bsa then
-                byallseedfc()
-            end
-            if bsm then
-                byallmoonfc()
-            end
-            if bsg then
-                byallgearfc()
-            end
-            if bsm2 then
-                byallmoon2fc()
-            end
-            if bsp then
-                buypetegg()
-            end
-        end
-        task.wait(1)
-    end
-end)
-
---
-
 function prefsh()
     PetsId = {}
     for _, child in ipairs(scrollingFrame:GetChildren()) do
@@ -556,9 +527,6 @@ pet:AddButton({
 
 --
 
-
-
--- Adiciona uma seção para organizar os botões
 ui:AddSection("Controle de UIs")
 
 ui:AddButton({
@@ -575,7 +543,7 @@ ui:AddButton({
     end
 })
 
--- Moonlit Shop UI
+
 ui:AddButton({
     Title = "Moonlit Shop UI",
     Description = "Ativa/Desativa a loja Moonlit",
@@ -588,7 +556,7 @@ ui:AddButton({
     end
 })
 
--- Quest Event UI
+
 ui:AddButton({
     Title = "Event Quest UI",
     Description = "Ativa/Desativa a UI de missões do evento",
@@ -601,7 +569,7 @@ ui:AddButton({
     end
 })
 
--- Cosmetic Shop UI
+
 ui:AddButton({
     Title = "Cosmetic Shop UI",
     Description = "Ativa/Desativa a loja de cosméticos",
@@ -614,7 +582,7 @@ ui:AddButton({
     end
 })
 
--- Gear Shop UI
+
 ui:AddButton({
     Title = "Gear Shop UI",
     Description = "Ativa/Desativa a loja de equipamentos",
@@ -627,7 +595,7 @@ ui:AddButton({
     end
 })
 
--- Seed Shop UI
+
 ui:AddButton({
     Title = "Seed Shop UI",
     Description = "Ativa/Desativa a loja de sementes",
@@ -639,3 +607,36 @@ ui:AddButton({
         end
     end
 })
+
+--
+
+task.spawn(function()
+    local lastMinute = -1
+    while true do
+        local minutos = os.date("*t").min
+        if minutos ~= lastMinute then
+            lastMinute = minutos
+
+            if bsa then
+                byallseedfc()
+            end
+            if bsm then
+                byallmoonfc()
+            end
+            if bsg then
+                byallgearfc()
+            end
+            if bsm2 then
+                byallmoon2fc()
+            end
+
+            if bsp then
+                task.spawn(function()
+                    buypetegg()
+                    task.wait(1)
+                end)
+            end
+        end
+        task.wait(0.1)
+    end
+end)
