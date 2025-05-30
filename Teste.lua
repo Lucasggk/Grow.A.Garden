@@ -618,7 +618,7 @@ local nunbrep = 1
 local dupfarm = false
 local dupeThread = nil
 
-bug:AddInput("Input", {
+local Input = bug:AddInput("Input", {
     Title = "Repeat",
     Description = "Vezes de duplicação",
     Default = 1,
@@ -638,26 +638,29 @@ bug:AddToggle("DupeToggle", {
         dupfarm = state
 
         if dupfarm then
+            if dupeThread then
+                task.cancel(dupeThread)
+            end
             dupeThread = task.spawn(function()
-                while dupfarm do
-                    for i = 1, nunbrep do
-                        for _, player in pairs(game:GetService("Players"):GetPlayers()) do
-                            if player ~= game.Players.LocalPlayer then
-                                local Pet = player.Character and player.Character:FindFirstChildOfClass("Tool")
-                                if Pet and Pet:GetAttribute("ItemType") == "Pet" then
-                                    game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("SellPet_RE"):FireServer(Pet)
-                                end
+                for i = 1, nunbrep do
+                    for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+                        if player ~= game.Players.LocalPlayer then
+                            local Pet = player.Character and player.Character:FindFirstChildOfClass("Tool")
+                            if Pet and Pet:GetAttribute("ItemType") == "Pet" then
+                                game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("SellPet_RE"):FireServer(Pet)
                             end
                         end
                     end
-                    task.wait(0.01 + (nunbrep * 0.01))
                 end
+                task.wait(0.01 + (nunbrep * 0.01))
+                dupfarm = false
             end)
         else
             dupfarm = false
         end
     end
 })
+
 
 
 
