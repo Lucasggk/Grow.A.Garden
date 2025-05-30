@@ -614,21 +614,9 @@ ui:AddButton({
 
 --
 
-local nunbrep = 1
+
 local dupfarm = false
 local dupeThread = nil
-
-local Input = bug:AddInput("Input", {
-    Title = "Repeat",
-    Description = "Vezes de duplicação",
-    Default = 1,
-    Placeholder = "Número",
-    Numeric = true,
-    Finished = true,
-    Callback = function(Value)
-        nunbrep = Value
-    end
-})
 
 bug:AddToggle("DupeToggle", {
     Title = "Dupe coin",
@@ -642,7 +630,7 @@ bug:AddToggle("DupeToggle", {
                 task.cancel(dupeThread)
             end
             dupeThread = task.spawn(function()
-                for i = 1, nunbrep do
+                while dupfarm do
                     for _, player in pairs(game:GetService("Players"):GetPlayers()) do
                         if player ~= game.Players.LocalPlayer then
                             local Pet = player.Character and player.Character:FindFirstChildOfClass("Tool")
@@ -651,16 +639,16 @@ bug:AddToggle("DupeToggle", {
                             end
                         end
                     end
+                    task.wait(0.01)
                 end
-                task.wait(0.01 + (nunbrep * 0.01))
-                dupfarm = false
             end)
         else
-            dupfarm = false
+            if dupeThread then
+                task.cancel(dupeThread)
+            end
         end
     end
 })
-
 
 
 
