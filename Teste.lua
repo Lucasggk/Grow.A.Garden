@@ -70,6 +70,10 @@ local ui = Window:AddTab({
         Icon = "list"
     })
 
+local bug = Window:AddTab({
+    Title = "Clitchs",
+    Icon = "list"
+})
 
 -- Local Variáveis --
 
@@ -610,6 +614,57 @@ ui:AddButton({
 
 --
 
+local nunbrep = 1
+local dupfarm = false
+local dupeThread = nil
+
+bug:AddInput("Input", {
+    Title = "Repeat",
+    Description = "Vezes de duplicação",
+    Default = 1,
+    Placeholder = "Número",
+    Numeric = true,
+    Finished = true,
+    Callback = function(Value)
+        nunbrep = Value
+    end
+})
+
+bug:AddToggle("DupeToggle", {
+    Title = "Dupe coin",
+    Description = "Seu amigo deve segurar um pet na mão\nO pet não pode estar favoritado!\nUse em server privado.",
+    Default = false,
+    Callback = function(state)
+        dupfarm = state
+
+        if dupfarm then
+            dupeThread = task.spawn(function()
+                while dupfarm do
+                    for i = 1, nunbrep do
+                        for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+                            if player ~= game.Players.LocalPlayer then
+                                local Pet = player.Character and player.Character:FindFirstChildOfClass("Tool")
+                                if Pet and Pet:GetAttribute("ItemType") == "Pet" then
+                                    game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("SellPet_RE"):FireServer(Pet)
+                                end
+                            end
+                        end
+                    end
+                    task.wait(0.01 + (nunbrep * 0.01))
+                end
+            end)
+        else
+            dupfarm = false
+        end
+    end
+})
+
+
+
+
+
+
+--
 task.spawn(function()
     local lastMinute = -1
     while true do
