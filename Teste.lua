@@ -262,6 +262,8 @@ loja:AddToggle("", {
 
 --[[
 local section = loja:AddSection("EVENTOS")
+]]
+if nigbuy == true then
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
 local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
 local byallmoon = {"Mysterious Crate", "Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Star Caller", "Blood Hedgehog", "Blood Kiwi", "Blood Owl"}
@@ -344,7 +346,7 @@ dropdownMoon2:OnChanged(function(Value)
         end
     end
 end)
-]]
+end 
 
 -- 
 
