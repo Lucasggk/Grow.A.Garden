@@ -339,6 +339,7 @@ plant:AddButton({
         Callback = function()
           x = Vector3.new(hrp.Position.X, 0.13552513718605042, hrp.Position.Z)
           print(x)
+            
         end
     })
 
@@ -613,44 +614,6 @@ ui:AddButton({
 })
 
 --
-
-
-local dupfarm = false
-local dupeThread = nil
-
-local isAfterPatchDate = (os.date("*t").year > 2025) or (os.date("*t").year == 2025 and (os.date("*t").month > 5 or (os.date("*t").month == 5 and os.date("*t").day >= 30)))
-
-bug:AddToggle("DupeToggle", {
-    Title = isAfterPatchDate and "Dupe coin [Patched]" or "Dupe coin [Funciona]",
-    Description = "Seu amigo deve segurar um pet na mão\nO pet não pode estar favoritado!\nUse em server privado.",
-    Default = false,
-    Callback = function(state)
-        dupfarm = state
-
-        if dupfarm then
-            if dupeThread then
-                task.cancel(dupeThread)
-            end
-            dupeThread = task.spawn(function()
-                while dupfarm do
-                    for _, player in pairs(game:GetService("Players"):GetPlayers()) do
-                        if player ~= game.Players.LocalPlayer then
-                            local Pet = player.Character and player.Character:FindFirstChildOfClass("Tool")
-                            if Pet and Pet:GetAttribute("ItemType") == "Pet" then
-                                game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("SellPet_RE"):FireServer(Pet)
-                            end
-                        end
-                    end
-                    task.wait(0.01)
-                end
-            end)
-        else
-            if dupeThread then
-                task.cancel(dupeThread)
-            end
-        end
-    end
-})
 
 
 --
