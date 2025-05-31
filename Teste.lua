@@ -4,8 +4,6 @@ repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
-local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
-local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
 local Plant = ReplicatedStorage.GameEvents.Plant_RE
 local BuyPet = ReplicatedStorage.GameEvents.BuyPetEgg
 local Players = game:GetService("Players")
@@ -78,23 +76,17 @@ local bug = Window:AddTab({
 -- Local Variáveis --
 
 local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
-local byallmoon = {"Mysterious Crate", "Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Star Caller", "Blood Hedgehog", "Blood Kiwi", "Blood Owl"}
-local byallmoon2 = {"Night Egg", "Night Seed Pack", "Twilight Crate", "Star Caller", "Moon Cat", "Celestiberry", "Moon Mango"}
 local bygear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler", "Favorite Tool", "Harvest Tool"}
 local pseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk", "Moon Melon", "Blood Banana"}
 
 
 
 local bsa = false
-local bsm = false
-local bsm2 = false
 local bsg = false
 local bsp = false 
 
 local selectedSeeds = {}
-local selectedMoons = {}
 local selectedGears = {}
-local selectedMoons2 = {}
 local buypets = {1, 2, 3}
 
 local step = 0.001
