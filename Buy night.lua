@@ -6,3 +6,21 @@ local bsm = false
 local bsm2 = false
 local selectedMoons = {}
 local selectedMoons2 = {}
+
+function byallmoonfc()
+    for i = 1, 25 do
+        for _, moon in ipairs(selectedMoons) do
+            buyMoon:FireServer(moon)
+            task.wait()
+        end
+    end
+end
+
+function byallmoon2fc()
+    for i = 1, 25 do
+        for _, moon2 in ipairs(selectedMoons2) do
+            buymoon2:FireServer(moon2)
+            task.wait()
+        end
+    end
+end
