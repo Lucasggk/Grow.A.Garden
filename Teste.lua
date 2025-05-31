@@ -14,7 +14,18 @@ local humanoid = character:WaitForChild("Humanoid")
 local scrollingFrame = game:GetService("Players").LocalPlayer.PlayerGui.ActivePetUI.Frame.Main.ScrollingFrame
 local feedsc = game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ActivePetService")
 
+-- event local
 
+nigbuy = false
+if nigbuy == false then
+    function byallmoonfc()
+    end
+    function byallmoon2fc()
+    end
+    bsm = false
+    bsm2 = false
+end
+    
 
 
 
