@@ -24,3 +24,59 @@ function byallmoon2fc()
         end
     end
 end
+
+local section = loja:AddSection("Bloodlit moon shop")
+
+loja:AddToggle("", {
+    Title = "Buy all shop Bloodlit",
+    Description = "Buy all shop moon",
+    Default = false,
+    Callback = function(Value)
+        bsm = Value
+    end
+})
+
+local dropdownMoon = loja:AddDropdown("DropdownMoon", {
+    Title = "Selecione itens da loja moon\n",
+    Description = "Selecione itens da loja moon\n",
+    Values = byallmoon,
+    Multi = true,
+    Default = {},
+})
+
+dropdownMoon:OnChanged(function(Value)
+    selectedMoons = {}
+    for v, state in pairs(Value) do
+        if state then
+            table.insert(selectedMoons, v)
+        end
+    end
+end)
+
+local section = loja:AddSection("Moonlit moon shop")
+
+loja:AddToggle("", {
+    Title = "Buy all shop moonlit",
+    Description = "Buy all shop seed",
+    Default = false,
+    Callback = function(Value)
+        bsm2 = Value
+    end
+})
+
+local dropdownMoon2 = loja:AddDropdown("DropdownSeed", {
+    Title = "Selecione seeds para comprar\n",
+    Description = "Selecione seeds para comprar\n",
+    Values = byallmoon2,
+    Multi = true,
+    Default = {},
+})
+
+dropdownMoon2:OnChanged(function(Value)
+    selectedMoons2 = {}
+    for v, state in pairs(Value) do
+        if state then
+            table.insert(selectedMoons2, v)
+        end
+    end
+end)
