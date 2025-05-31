@@ -69,7 +69,7 @@ local ui = Window:AddTab({
     })
 
 local bug = Window:AddTab({
-    Title = "Clitchs",
+    Title = "Glitchs [Patched]",
     Icon = "list"
 })
 
@@ -112,28 +112,10 @@ function byallseedfc()
     end
 end
 
-function byallmoonfc()
-    for i = 1, 25 do
-        for _, moon in ipairs(selectedMoons) do
-            buyMoon:FireServer(moon)
-            task.wait()
-        end
-    end
-end
-
 function byallgearfc()
     for i = 1, 25 do
         for _, gear in ipairs(selectedGears) do
             buyGear:FireServer(gear)
-            task.wait()
-        end
-    end
-end
-
-function byallmoon2fc()
-    for i = 1, 25 do
-        for _, moon2 in ipairs(selectedMoons2) do
-            buymoon2:FireServer(moon2)
             task.wait()
         end
     end
