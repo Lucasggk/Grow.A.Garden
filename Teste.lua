@@ -214,6 +214,8 @@ dropdownSeed:OnChanged(function(Value)
 end)
 
 -- [[ aqui fica o loadstring do night shop ]] --
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Buy%20night.lua"))()
+
 
 local section = loja:AddSection("Gears")
 
