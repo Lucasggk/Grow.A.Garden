@@ -66,8 +66,8 @@ local ui = Window:AddTab({
         Icon = "list"
     })
 
-local bug = Window:AddTab({
-    Title = "Glitchs [Patched]",
+local event = Window:AddTab({
+    Title = "Eventos",
     Icon = "list"
 })
 
@@ -248,7 +248,6 @@ loja:AddToggle("", {
     })
 
 --[[
-local section = loja:AddSection("EVENTOS")
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
 local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
 local byallmoon = {"Mysterious Crate", "Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Star Caller", "Blood Hedgehog", "Blood Kiwi", "Blood Owl"}
@@ -276,9 +275,9 @@ function byallmoon2fc()
     end
 end
 
-local section = loja:AddSection("Bloodlit moon shop")
+local section = event:AddSection("Bloodlit moon shop")
 
-loja:AddToggle("", {
+event:AddToggle("", {
     Title = "Buy all shop Bloodlit",
     Description = "Buy all shop moon",
     Default = false,
@@ -287,7 +286,7 @@ loja:AddToggle("", {
     end
 })
 
-local dropdownMoon = loja:AddDropdown("DropdownMoon", {
+local dropdownMoon = event:AddDropdown("DropdownMoon", {
     Title = "Selecione itens da loja moon\n",
     Description = "Selecione itens da loja moon\n",
     Values = byallmoon,
@@ -304,9 +303,9 @@ dropdownMoon:OnChanged(function(Value)
     end
 end)
 
-local section = loja:AddSection("Moonlit moon shop")
+local section = event:AddSection("Moonlit moon shop")
 
-loja:AddToggle("", {
+event:AddToggle("", {
     Title = "Buy all shop moonlit",
     Description = "Buy all shop seed",
     Default = false,
@@ -315,7 +314,7 @@ loja:AddToggle("", {
     end
 })
 
-local dropdownMoon2 = loja:AddDropdown("DropdownSeed", {
+local dropdownMoon2 = event:AddDropdown("DropdownSeed", {
     Title = "Selecione seeds para comprar\n",
     Description = "Selecione seeds para comprar\n",
     Values = byallmoon2,
