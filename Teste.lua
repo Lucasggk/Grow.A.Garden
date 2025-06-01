@@ -696,7 +696,8 @@ event:AddToggle("", {
                         for _, item in ipairs(items) do
                             if not tmachine then break end
                             humanoid:EquipTool(item)
-                            ufav()
+                            ufav() 
+			    task.wait(0.1)
                             machineEvent:FireServer("MachineInteract")
 
                             repeat task.wait()
