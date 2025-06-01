@@ -651,7 +651,6 @@ event:AddToggle("", {
                 local backpack = player:WaitForChild("Backpack")
                 local character = player.Character or player.CharacterAdded:Wait()
                 local humanoid = character:WaitForChild("Humanoid")
-                local machineEvent = ReplicatedStorage.GameEvents.HoneyMachineService_RE
 
                 local function getWeight(itemName)
                     local weightStr = itemName:match("%[(%d+%.%d+)kg%]")
@@ -696,9 +695,9 @@ event:AddToggle("", {
                         for _, item in ipairs(items) do
                             if not tmachine then break end
                             humanoid:EquipTool(item)
-                            ufav() 
-			    task.wait(0.1)
-                            machineEvent:FireServer("MachineInteract")
+                            ufav()
+                            task.wait(0.1)
+                            game:GetService("ReplicatedStorage").GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
 
                             repeat task.wait()
                                 local equipped = character:FindFirstChildOfClass("Tool")
