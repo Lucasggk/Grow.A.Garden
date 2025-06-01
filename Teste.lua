@@ -16,19 +16,6 @@ local feedsc = game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):W
 
 -- event local
 
-nigbuy = false
-if nigbuy == false then
-    function byallmoonfc()
-    end
-    function byallmoon2fc()
-    end
-    bsm = false
-    bsm2 = false
-end
-    
-
-
-
 player.CharacterAdded:Connect(function(char)
     character = char
     hrp = character:WaitForChild("HumanoidRootPart")
@@ -262,8 +249,6 @@ loja:AddToggle("", {
 
 --[[
 local section = loja:AddSection("EVENTOS")
-]]
-if nigbuy == true then
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
 local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
 local byallmoon = {"Mysterious Crate", "Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Star Caller", "Blood Hedgehog", "Blood Kiwi", "Blood Owl"}
@@ -346,7 +331,7 @@ dropdownMoon2:OnChanged(function(Value)
         end
     end
 end)
-end 
+]]
 
 -- 
 
