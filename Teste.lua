@@ -616,9 +616,30 @@ dropdownMoon2:OnChanged(function(Value)
 end)
 ]]
 
---[[
+--
 
-]]
+function ufav()
+    local t = game:GetService("Players")
+	.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+	or game:GetService("Players")
+	.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+    if t and t.Name:lower():find("kg") then
+	t:SetAttribute("Favorite", false)
+    end
+end
+
+function yfav()
+    local t = game:GetService("Players")
+	.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+	or game:GetService("Players")
+	.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+    if t and t.Name:lower():find("kg") then
+	t:SetAttribute("Favorite", true)
+    end
+end
+
+--
+
 
 
 --
