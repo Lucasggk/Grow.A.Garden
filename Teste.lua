@@ -170,6 +170,22 @@ function tsm()
     tpt(Pos)
 end
 
+function ufav()
+    local t = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool")
+	or game:GetService("Players").LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+    if t and t.Name:lower():find("kg") then
+	t:SetAttribute("Favorite", false)
+    end
+end
+
+function yfav()
+    local t = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool")
+	or game:GetService("Players").LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+    if t and t.Name:lower():find("kg") then
+	t:SetAttribute("Favorite", true)
+    end
+end
+
 -- Local Script --
 
 local section = loja:AddSection("Seeds")
@@ -587,6 +603,7 @@ dropdownMoon:OnChanged(function(Value)
     end
 end)
 
+
 local section = event:AddSection("Moonlit moon shop")
 
 event:AddToggle("", {
@@ -618,29 +635,81 @@ end)
 
 --
 
-function ufav()
-    local t = game:GetService("Players")
-	.LocalPlayer.Character:FindFirstChildOfClass("Tool")
-	or game:GetService("Players")
-	.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
-    if t and t.Name:lower():find("kg") then
-	t:SetAttribute("Favorite", false)
+local tmachine = false
+
+event:AddToggle("", {
+    Title = "Auto trade event machine\n",
+    Description = "Equipa apenas itens Pollinated do menor para maior peso e interage com máquina",
+    Default = false,
+    Callback = function(val)
+        tmachine = val
+        if val then
+            spawn(function()
+                local Players = game:GetService("Players")
+                local ReplicatedStorage = game:GetService("ReplicatedStorage")
+                local player = Players.LocalPlayer
+                local backpack = player:WaitForChild("Backpack")
+                local character = player.Character or player.CharacterAdded:Wait()
+                local humanoid = character:WaitForChild("Humanoid")
+                local machineEvent = ReplicatedStorage.GameEvents.HoneyMachineService_RE
+
+                local function getWeight(itemName)
+                    local weightStr = itemName:match("%[(%d+%.%d+)kg%]")
+                    return weightStr and tonumber(weightStr) or math.huge
+                end
+
+                local function isPollinated(itemName)
+                    local mutationStr = itemName:match("%[(.-)%]")
+                    if mutationStr then
+                        for mutation in mutationStr:gmatch("[^,%s]+") do
+                            if mutation == "Pollinated" then
+                                return true
+                            end
+                        end
+                    end
+                    return false
+                end
+
+                local function getPollinatedItems()
+                    local items = {}
+                    local function addItemsFromContainer(container)
+                        for _, item in pairs(container:GetChildren()) do
+                            if item:IsA("Tool") and item.Name and isPollinated(item.Name) then
+                                table.insert(items, item)
+                            end
+                        end
+                    end
+                    addItemsFromContainer(backpack)
+                    addItemsFromContainer(character)
+                    return items
+                end
+
+                while tmachine do
+                    local items = getPollinatedItems()
+                    table.sort(items, function(a, b)
+                        return getWeight(a.Name) < getWeight(b.Name)
+                    end)
+
+                    if #items == 0 then
+                        task.wait(1)
+                    else
+                        for _, item in ipairs(items) do
+                            if not tmachine then break end
+                            humanoid:EquipTool(item)
+                            ufav()
+                            machineEvent:FireServer("MachineInteract")
+
+                            repeat task.wait()
+                                local equipped = character:FindFirstChildOfClass("Tool")
+                            until not equipped or equipped ~= item or not tmachine
+                        end
+                    end
+                    task.wait(0.5)
+                end
+            end)
+        end
     end
-end
-
-function yfav()
-    local t = game:GetService("Players")
-	.LocalPlayer.Character:FindFirstChildOfClass("Tool")
-	or game:GetService("Players")
-	.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
-    if t and t.Name:lower():find("kg") then
-	t:SetAttribute("Favorite", true)
-    end
-end
-
---
-
-
+})
 
 --
 
