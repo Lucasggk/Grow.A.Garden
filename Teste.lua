@@ -464,47 +464,6 @@ pet:AddButton({
 ui:AddSection("Controle de UIs")
 
 ui:AddButton({
-    Title = "BloodMoon Shop UI",
-    Description = "Ativa/Desativa a loja BloodMoon",
-    Callback = function()
-        local eventShop = game.Players.LocalPlayer.PlayerGui:FindFirstChild("EventShop_UI")
-        if eventShop then
-            eventShop.Enabled = not eventShop.Enabled  -- Inverte o estado atual
-            print("BloodMoon Shop UI:", eventShop.Enabled and "Ativada" or "Desativada")
-        else
-            warn("EventShop_UI não encontrada!")
-        end
-    end
-})
-
-
-ui:AddButton({
-    Title = "Moonlit Shop UI",
-    Description = "Ativa/Desativa a loja Moonlit",
-    Callback = function()
-        local ui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("NightEventShop_UI")
-        if ui then
-            ui.Enabled = not ui.Enabled
-            print("Moonlit Shop UI:", ui.Enabled and "Ativada" or "Desativada")
-        end
-    end
-})
-
-
-ui:AddButton({
-    Title = "Event Quest UI",
-    Description = "Ativa/Desativa a UI de missões do evento",
-    Callback = function()
-        local ui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("NightQuest_UI")
-        if ui then
-            ui.Enabled = not ui.Enabled
-            print("Event Quest UI:", ui.Enabled and "Ativada" or "Desativada")
-        end
-    end
-})
-
-
-ui:AddButton({
     Title = "Cosmetic Shop UI",
     Description = "Ativa/Desativa a loja de cosméticos",
     Callback = function()
@@ -628,11 +587,51 @@ dropdownMoon2:OnChanged(function(Value)
         end
     end
 end)
+
+ui:AddButton({
+    Title = "BloodMoon Shop UI",
+    Description = "Ativa/Desativa a loja BloodMoon",
+    Callback = function()
+        local eventShop = game.Players.LocalPlayer.PlayerGui:FindFirstChild("EventShop_UI")
+        if eventShop then
+            eventShop.Enabled = not eventShop.Enabled  -- Inverte o estado atual
+            print("BloodMoon Shop UI:", eventShop.Enabled and "Ativada" or "Desativada")
+        else
+            warn("EventShop_UI não encontrada!")
+        end
+    end
+})
+
+
+ui:AddButton({
+    Title = "Moonlit Shop UI",
+    Description = "Ativa/Desativa a loja Moonlit",
+    Callback = function()
+        local ui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("NightEventShop_UI")
+        if ui then
+            ui.Enabled = not ui.Enabled
+            print("Moonlit Shop UI:", ui.Enabled and "Ativada" or "Desativada")
+        end
+    end
+})
+
+
+ui:AddButton({
+    Title = "Event Quest UI",
+    Description = "Ativa/Desativa a UI de missões do evento",
+    Callback = function()
+        local ui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("NightQuest_UI")
+        if ui then
+            ui.Enabled = not ui.Enabled
+            print("Event Quest UI:", ui.Enabled and "Ativada" or "Desativada")
+        end
+    end
+})
+
 ]]
 
 --
 
-local tmachine = false
 local tmachine = false
 
 event:AddToggle("", {
