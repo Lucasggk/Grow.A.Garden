@@ -1,8 +1,17 @@
-script_version = 1.0
+local script_version = {
+    version = 1.0,
+    alpha = true
+}
 
-for i = 1, 5 do
-print("MADE BY LUCAS\nScript Version ".. script_version)
+if script_version.alpha == true then
+    script_version.alpha = "Alpha version"
+else
+    script_version.alpha = "Final version"
 end
+
+print("MADE BY LUCAS\nScript Version " .. script_version.version .. " - " .. script_version.alpha)
+
+local vful = script_version.version .." - ".. script_version.alpha
 
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
@@ -31,7 +40,7 @@ local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoa
 
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden |   ",
-    SubTitle = "  Made by Lucas | Version: ".. script_version,
+    SubTitle = "  Made by Lucas | Version: ".. vful,
     TabWidth = 160,
     Size = UDim2.fromOffset(500, 350),
     Acrylic = false,
