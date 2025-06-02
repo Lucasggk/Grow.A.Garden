@@ -1,3 +1,11 @@
+script_version = 1.0
+
+
+
+for i = 1, 5 do
+print("MADE BY LUCAS\nScript Version ".. script_version)
+end
+
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 
@@ -24,8 +32,8 @@ end)
 local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Grow a Garden |",
-    SubTitle = "  Made by Lucas",
+    Title = "Grow a Garden |   ",
+    SubTitle = "  Made by Lucas | Version: ".. script_version,
     TabWidth = 160,
     Size = UDim2.fromOffset(500, 350),
     Acrylic = false,
