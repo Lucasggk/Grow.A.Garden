@@ -171,18 +171,15 @@ function tsm()
 end
 
 function ufav()
-    local t = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool")
-	or game:GetService("Players").LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
-    if t and t.Name:lower():find("kg") then
-	t:SetAttribute("Favorite", false)
-    end
-end
+    local player = game:GetService("Players").LocalPlayer
+    local char = player.Character
+    local backpack = player.Backpack
 
-function yfav()
-    local t = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool")
-	or game:GetService("Players").LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
-    if t and t.Name:lower():find("kg") then
-	t:SetAttribute("Favorite", true)
+    local tool = char:FindFirstChildOfClass("Tool") or backpack:FindFirstChildOfClass("Tool")
+
+    if tool and tool:GetAttribute("Favorite") == true then
+
+        game:GetService("ReplicatedStorage").GameEvents.Favorite_Item:FireServer(tool)
     end
 end
 
