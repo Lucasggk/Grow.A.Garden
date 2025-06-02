@@ -1,7 +1,5 @@
 script_version = 1.0
 
-
-
 for i = 1, 5 do
 print("MADE BY LUCAS\nScript Version ".. script_version)
 end
