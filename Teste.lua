@@ -633,6 +633,7 @@ end)
 --
 
 local tmachine = false
+local tmachine = false
 
 event:AddToggle("", {
     Title = "Auto trade event machine\n",
@@ -697,11 +698,14 @@ event:AddToggle("", {
                             game:GetService("ReplicatedStorage").GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
 
                             local start = tick()
+                            local lastTrigger = start
+
                             repeat
-                                task.wait(1)
-                                -- A cada segundo, se tiver passado mais de 10s, chama o Remote novamente
-                                if tick() - start >= 10 and character:FindFirstChildOfClass("Tool") == item then
+                                task.wait(0.5)
+                                local now = tick()
+                                if now - lastTrigger >= 10 then
                                     game:GetService("ReplicatedStorage").GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                                    lastTrigger = now
                                 end
                             until not character:FindFirstChildOfClass("Tool") or character:FindFirstChildOfClass("Tool") ~= item or not tmachine
                         end
