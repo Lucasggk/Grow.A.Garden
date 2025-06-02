@@ -680,6 +680,13 @@ event:AddToggle("", {
                     return items
                 end
 
+                spawn(function()
+                    while tmachine do
+                        ReplicatedStorage.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                        task.wait(10)
+                    end
+                end)
+
                 while tmachine do
                     local items = getPollinatedItems()
                     table.sort(items, function(a, b)
