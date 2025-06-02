@@ -680,13 +680,6 @@ event:AddToggle("", {
                     return items
                 end
 
-                spawn(function()
-                    while tmachine do
-                        ReplicatedStorage.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
-                        task.wait(10)
-                    end
-                end)
-
                 while tmachine do
                     local items = getPollinatedItems()
                     table.sort(items, function(a, b)
@@ -703,9 +696,14 @@ event:AddToggle("", {
                             task.wait(0.1)
                             game:GetService("ReplicatedStorage").GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
 
-                            repeat task.wait()
-                                local equipped = character:FindFirstChildOfClass("Tool")
-                            until not equipped or equipped ~= item or not tmachine
+                            local start = tick()
+                            repeat
+                                task.wait(1)
+                                -- A cada segundo, se tiver passado mais de 10s, chama o Remote novamente
+                                if tick() - start >= 10 and character:FindFirstChildOfClass("Tool") == item then
+                                    game:GetService("ReplicatedStorage").GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                                end
+                            until not character:FindFirstChildOfClass("Tool") or character:FindFirstChildOfClass("Tool") ~= item or not tmachine
                         end
                     end
                     task.wait(0.5)
