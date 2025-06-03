@@ -712,11 +712,10 @@ event:AddToggle("", {
                 while tmachine do
                     local items = getPollinatedItems()
                     table.sort(items, function(a, b)
-                        if not a or not a.Name then return false end
-                        if not b or not b.Name then return true end
-                        local weightA = getWeight(a.Name)
-                        local weightB = getWeight(b.Name)
-                        return weightA < weightB
+                        if not a or not b then return false end
+                        if not a.Name then return false end
+                        if not b.Name then return true end
+                        return getWeight(a.Name) < getWeight(b.Name)
                     end)
                     
                     if #items == 0 then
@@ -724,11 +723,11 @@ event:AddToggle("", {
                     else
                         for _, item in ipairs(items) do
                             if not tmachine then break end
-                            if character and humanoid and item then
+                            if character and humanoid and item and item.Parent then
                                 humanoid:EquipTool(item)
                                 ufav()
                                 task.wait(0.1)
-                                game:GetService("ReplicatedStorage").GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                                ReplicatedStorage.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
 
                                 local start = tick()
                                 local lastTrigger = start
@@ -737,10 +736,10 @@ event:AddToggle("", {
                                     task.wait(0.5)
                                     local now = tick()
                                     if now - lastTrigger >= 10 then
-                                        game:GetService("ReplicatedStorage").GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                                        ReplicatedStorage.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
                                         lastTrigger = now
                                     end
-                                until not character or not character:FindFirstChildOfClass("Tool") or character:FindFirstChildOfClass("Tool") ~= item or not tmachine
+                                until not tmachine or not character or not character:FindFirstChildOfClass("Tool") or character:FindFirstChildOfClass("Tool") ~= item
                             end
                         end
                     end
