@@ -1,9 +1,15 @@
 local script_version = {
-    version = "1.99995",
+    version = "1.15",
     alpha = true
 }
 
-local vful = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Script%20version.lua"))(script_version)
+if script_version.alpha == true then
+    script_version.alpha = "Alpha version"
+else
+    script_version.alpha = "Release version"
+end
+print("MADE BY LUCAS\nScript Version " .. script_version.version .. " - " .. script_version.alpha)
+local vful = script_version.version .." - ".. script_version.alpha
 
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
@@ -646,7 +652,7 @@ ui:AddButton({
 
 
 
---[[
+
 local section = event:AddSection("Honey | bizze")
 
 local tmachine = false
@@ -667,11 +673,13 @@ event:AddToggle("", {
                 local humanoid = character:WaitForChild("Humanoid")
 
                 local function getWeight(itemName)
+                    if not itemName then return math.huge end
                     local weightStr = itemName:match("%[(%d+%.%d+)kg%]")
                     return weightStr and tonumber(weightStr) or math.huge
                 end
 
                 local function isPollinated(itemName)
+                    if not itemName then return false end
                     local mutationStr = itemName:match("%[(.-)%]")
                     if mutationStr then
                         for mutation in mutationStr:gmatch("[^,%s]+") do
@@ -686,43 +694,50 @@ event:AddToggle("", {
                 local function getPollinatedItems()
                     local items = {}
                     local function addItemsFromContainer(container)
-                        for _, item in pairs(container:GetChildren()) do
-                            if item:IsA("Tool") and item.Name and isPollinated(item.Name) then
-                                table.insert(items, item)
+                        if container then
+                            for _, item in pairs(container:GetChildren()) do
+                                if item:IsA("Tool") and item.Name and isPollinated(item.Name) then
+                                    table.insert(items, item)
+                                end
                             end
                         end
                     end
                     addItemsFromContainer(backpack)
-                    addItemsFromContainer(character)
+                    if character then
+                        addItemsFromContainer(character)
+                    end
                     return items
                 end
 
                 while tmachine do
-    local items = getPollinatedItems()
-    table.sort(items, function(a, b)
-        return getWeight(a and a.Name or "") <= getWeight(b and b.Name or "")
-    end)
+                    local items = getPollinatedItems()
+                    table.sort(items, function(a, b)
+                        return getWeight(a.Name) < getWeight(b.Name)
+                    end)
+                    
                     if #items == 0 then
                         task.wait(1)
                     else
                         for _, item in ipairs(items) do
                             if not tmachine then break end
-                            humanoid:EquipTool(item)
-                            ufav()
-                            task.wait(0.1)
-                            game:GetService("ReplicatedStorage").GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                            if character and humanoid and item then
+                                humanoid:EquipTool(item)
+                                ufav()
+                                task.wait(0.1)
+                                game:GetService("ReplicatedStorage").GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
 
-                            local start = tick()
-                            local lastTrigger = start
+                                local start = tick()
+                                local lastTrigger = start
 
-                            repeat
-                                task.wait(0.5)
-                                local now = tick()
-                                if now - lastTrigger >= 10 then
-                                    game:GetService("ReplicatedStorage").GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
-                                    lastTrigger = now
-                                end
-                            until not character:FindFirstChildOfClass("Tool") or character:FindFirstChildOfClass("Tool") ~= item or not tmachine
+                                repeat
+                                    task.wait(0.5)
+                                    local now = tick()
+                                    if now - lastTrigger >= 10 then
+                                        game:GetService("ReplicatedStorage").GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                                        lastTrigger = now
+                                    end
+                                until not character or not character:FindFirstChildOfClass("Tool") or character:FindFirstChildOfClass("Tool") ~= item or not tmachine
+                            end
                         end
                     end
                     task.wait(0.5)
@@ -732,7 +747,7 @@ event:AddToggle("", {
     end
 })
 
-]]
+
 
 
 
