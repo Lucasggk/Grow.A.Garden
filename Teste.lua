@@ -1,12 +1,12 @@
 local script_version = {
-    version = 1.0,
+    version = "1.15",
     alpha = true
 }
 
 if script_version.alpha == true then
     script_version.alpha = "Alpha version"
 else
-    script_version.alpha = "Final version"
+    script_version.alpha = "Release version"
 end
 
 print("MADE BY LUCAS\nScript Version " .. script_version.version .. " - " .. script_version.alpha)
@@ -39,8 +39,8 @@ end)
 local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Grow a Garden |   ".. vful,
-    SubTitle = "  Made by Lucas | Version: ".. vful,
+    Title = "Grow a Garden |   ",
+    SubTitle = "  Made by Lucas | Version:      ".. vful,
     TabWidth = 160,
     Size = UDim2.fromOffset(500, 350),
     Acrylic = false,
