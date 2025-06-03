@@ -650,6 +650,7 @@ ui:AddButton({
 
 local section = event:AddSection("Honey | bizze")
 local tmachine = false
+
 event:AddToggle("", {
     Title = "Auto trade event machine\n",
     Description = "Equipa apenas itens Pollinated do menor para maior peso e interage com máquina",
@@ -704,14 +705,13 @@ event:AddToggle("", {
 
                 while tmachine do
                     local items = getPollinatedItems()
-                  table.sort(items, function(a, b)
-    local weightA = a and a.Name and getWeight(a.Name) or math.huge
-    local weightB = b and b.Name and getWeight(b.Name) or math.huge
-    
-    if weightA == weightB then return false end
-    return weightA < weightB
-end)
-                    
+                    table.sort(items, function(a, b)
+                        local weightA = a and a.Name and getWeight(a.Name) or math.huge
+                        local weightB = b and b.Name and getWeight(b.Name) or math.huge
+                        if weightA == weightB then return false end
+                        return weightA < weightB
+                    end)
+
                     if #items == 0 then
                         task.wait(1)
                     else
