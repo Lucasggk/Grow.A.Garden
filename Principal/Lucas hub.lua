@@ -518,8 +518,7 @@ ui:AddButton({
 
 --
 
-Local section = loja:AddSection("moon night | Moon")
-
+local section = loja:AddSection("moon night | Moon")
 
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
 local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
