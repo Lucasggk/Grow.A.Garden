@@ -712,7 +712,11 @@ event:AddToggle("", {
                 while tmachine do
                     local items = getPollinatedItems()
                     table.sort(items, function(a, b)
-                        return getWeight(a.Name) < getWeight(b.Name)
+                        if not a or not a.Name then return false end
+                        if not b or not b.Name then return true end
+                        local weightA = getWeight(a.Name)
+                        local weightB = getWeight(b.Name)
+                        return weightA < weightB
                     end)
                     
                     if #items == 0 then
@@ -746,7 +750,6 @@ event:AddToggle("", {
         end
     end
 })
-
 
 
 
