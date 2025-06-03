@@ -712,9 +712,8 @@ event:AddToggle("", {
                 while tmachine do
                     local items = getPollinatedItems()
                     table.sort(items, function(a, b)
-                        if not a or not b then return false end
-                        if not a.Name then return false end
-                        if not b.Name then return true end
+                        if not a or not a.Name then return false end
+                        if not b or not b.Name then return true end
                         return getWeight(a.Name) < getWeight(b.Name)
                     end)
                     
@@ -723,7 +722,7 @@ event:AddToggle("", {
                     else
                         for _, item in ipairs(items) do
                             if not tmachine then break end
-                            if character and humanoid and item and item.Parent then
+                            if character and humanoid and item then
                                 humanoid:EquipTool(item)
                                 ufav()
                                 task.wait(0.1)
@@ -739,7 +738,7 @@ event:AddToggle("", {
                                         ReplicatedStorage.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
                                         lastTrigger = now
                                     end
-                                until not tmachine or not character or not character:FindFirstChildOfClass("Tool") or character:FindFirstChildOfClass("Tool") ~= item
+                                until not character or not character:FindFirstChildOfClass("Tool") or character:FindFirstChildOfClass("Tool") ~= item or not tmachine
                             end
                         end
                     end
@@ -749,7 +748,6 @@ event:AddToggle("", {
         end
     end
 })
-
 
 
 
