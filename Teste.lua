@@ -38,7 +38,7 @@ local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoa
 
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden |",
-    SubTitle = "  Made by Lucas | Version:   ".. vful .. " in correction",
+    SubTitle = "  Made by Lucas | Version:   ".. vful,
     TabWidth = 160,
     Size = UDim2.fromOffset(500, 350),
     Acrylic = false,
