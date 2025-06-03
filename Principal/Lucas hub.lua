@@ -716,7 +716,6 @@ event:AddToggle("", {
                         for _, item in ipairs(items) do
                             if not tmachine then break end
                             if character and humanoid and item then
-                                ReplicatedStorage.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
                                 humanoid:EquipTool(item)
                                 ufav()
                                 task.wait(0.1)
@@ -728,7 +727,7 @@ event:AddToggle("", {
                                 repeat
                                     task.wait(0.5)
                                     local now = tick()
-                                    if now - lastTrigger >= 10 then
+                                    if now - lastTrigger >= 2 then
                                         ReplicatedStorage.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
                                         lastTrigger = now
                                     end
@@ -742,8 +741,6 @@ event:AddToggle("", {
         end
     end
 })
-
-
 
 --
 
