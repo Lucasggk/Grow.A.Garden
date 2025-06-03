@@ -39,7 +39,7 @@ end)
 local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Grow a Garden |   ",
+    Title = "Grow a Garden |   ".. vful,
     SubTitle = "  Made by Lucas | Version: ".. vful,
     TabWidth = 160,
     Size = UDim2.fromOffset(500, 350),
