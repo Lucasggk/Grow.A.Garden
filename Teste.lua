@@ -1,5 +1,5 @@
 local script_version = {
-    version = "1.15",
+    version = "1.99995",
     alpha = true
 }
 
