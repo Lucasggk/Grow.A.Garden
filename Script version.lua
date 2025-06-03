@@ -1,10 +1,8 @@
-return function(script_version)
-    if script_version.alpha == true then
-        script_version.alpha = "Alpha version"
-    else
-        script_version.alpha = "Release version"
-    end
-    local vful = script_version.version .. " - " .. script_version.alpha
-    print("Versão completa:", vful)
-    return vful
+function sc()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Teste.lua"))()
 end
+
+sc()
+task.wait(0.1)
+Fluent:Destroy()
+sc()
