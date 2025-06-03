@@ -708,7 +708,7 @@ event:AddToggle("", {
                 while tmachine do
     local items = getPollinatedItems()
     table.sort(items, function(a, b)
-        return getWeight(a and a.Name or "") < getWeight(b and b.Name or "")
+        return getWeight(a and a.Name or "") <= getWeight(b and b.Name or "")
     end)
                     if #items == 0 then
                         task.wait(1)
