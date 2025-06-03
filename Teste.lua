@@ -649,14 +649,8 @@ ui:AddButton({
 
 --
 
-
-
-
-
 local section = event:AddSection("Honey | bizze")
-
 local tmachine = false
-
 event:AddToggle("", {
     Title = "Auto trade event machine\n",
     Description = "Equipa apenas itens Pollinated do menor para maior peso e interage com máquina",
