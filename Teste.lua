@@ -1,5 +1,5 @@
 local script_version = {
-    version = "1.20",
+    version = "1.25",
     alpha = true
 }
 
@@ -38,7 +38,8 @@ local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoa
 
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden |",
-    SubTitle = "  Made by Lucas | Version:   ".. vful,
+    SubTitle = "  Made by Lucas | Version:   ".. vful .. " 
+        in correction",
     TabWidth = 160,
     Size = UDim2.fromOffset(500, 350),
     Acrylic = false,
@@ -717,6 +718,7 @@ event:AddToggle("", {
                         for _, item in ipairs(items) do
                             if not tmachine then break end
                             if character and humanoid and item then
+                                ReplicatedStorage.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
                                 humanoid:EquipTool(item)
                                 ufav()
                                 task.wait(0.1)
