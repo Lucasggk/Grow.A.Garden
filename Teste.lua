@@ -1,4 +1,9 @@
+local script_version = {
+    version = "1.15",
+    alpha = true
+}
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Script%20version.lua"))(script_version)
 
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
