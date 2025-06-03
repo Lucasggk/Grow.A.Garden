@@ -518,7 +518,7 @@ ui:AddButton({
 
 --[[
 
-Local section = event:AddSection("moon night | Moon")
+Local section = loja:AddSection("moon night | Moon")
 
 
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
@@ -548,9 +548,9 @@ function byallmoon2fc()
     end
 end
 
-local section = event:AddSection("Bloodlit moon shop")
+local section = loja:AddSection("Bloodlit moon shop")
 
-event:AddToggle("", {
+loja:AddToggle("", {
     Title = "Buy all shop Bloodlit",
     Description = "Buy all shop moon",
     Default = false,
@@ -559,7 +559,7 @@ event:AddToggle("", {
     end
 })
 
-local dropdownMoon = event:AddDropdown("DropdownMoon", {
+local dropdownMbyallmoon loja:AddDropdown("DropdownMoon", {
     Title = "Selecione itens da loja moon\n",
     Description = "Selecione itens da loja moon\n",
     Values = byallmoon,
@@ -577,9 +577,9 @@ dropdownMoon:OnChanged(function(Value)
 end)
 
 
-local section = event:AddSection("Moonlit moon shop")
+local section = loja:AddSection("Moonlit moon shop")
 
-event:AddToggle("", {
+loja:AddToggle("", {
     Title = "Buy all shop moonlit",
     Description = "Buy all shop seed",
     Default = false,
@@ -588,7 +588,7 @@ event:AddToggle("", {
     end
 })
 
-local dropdownMoon2 = event:AddDropdown("DropdownSeed", {
+local dropdownMoon2 loja:AddDropdown("DropdownSeed", {
     Title = "Selecione seeds para comprar\n",
     Description = "Selecione seeds para comprar\n",
     Values = byallmoon2,
