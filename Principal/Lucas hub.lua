@@ -649,97 +649,88 @@ ui:AddButton({
 --
 
 local section = event:AddSection("Honey | bizze")
-local tmachine = false
+local tradeMachineActive = false
 
-event:AddToggle("", {
+event:AddToggle("Auto Trade Machine", {
     Title = "Auto trade event machine\n",
-    Description = "Equipa apenas itens Pollinated do menor para maior peso e interage com máquina",
+    Description = "Equips only Pollinated items from lightest to heaviest and interacts with machine",
     Default = false,
-    Callback = function(val)
-        tmachine = val
-        if val then
-            spawn(function()
+    Callback = function(isEnabled)
+        tradeMachineActive = isEnabled
+        if isEnabled then
+            coroutine.wrap(function()
+                -- Services
                 local Players = game:GetService("Players")
                 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+                
+                -- Player references
                 local player = Players.LocalPlayer
-                local backpack = player:WaitForChild("Backpack")
-                local character = player.Character or player.CharacterAdded:Wait()
-                local humanoid = character:WaitForChild("Humanoid")
-
-                local function getWeight(itemName)
-                    if not itemName then return math.huge end
-                    local weightStr = itemName:match("%[(%d+%.%d+)kg%]")
-                    return weightStr and tonumber(weightStr) or math.huge
-                end
-
-                local function isPollinated(itemName)
-                    if not itemName then return false end
-                    local mutationStr = itemName:match("%[(.-)%]")
-                    if mutationStr then
-                        for mutation in mutationStr:gmatch("[^,%s]+") do
-                            if mutation == "Pollinated" then
-                                return true
+                
+                while tradeMachineActive and wait(0.5) do
+                    local character = player.Character or player.CharacterAdded:Wait()
+                    local humanoid = character:WaitForChild("Humanoid")
+                    local backpack = player:WaitForChild("Backpack")
+                    
+                    -- Helper functions
+                    local function extractWeight(itemName)
+                        if not itemName then return math.huge end
+                        local weightPattern = "%[(%d+%.%d+)kg%]"
+                        local weightString = itemName:match(weightPattern)
+                        return weightString and tonumber(weightString) or math.huge
+                    end
+                    
+                    local function hasPollinatedMutation(itemName)
+                        if not itemName then return false end
+                        local mutationString = itemName:match("%[(.-)%]")
+                        if mutationString then
+                            for mutation in mutationString:gmatch("[^,%s]+") do
+                                if mutation == "Pollinated" then
+                                    return true
+                                end
                             end
                         end
+                        return false
                     end
-                    return false
-                end
-
-                local function getPollinatedItems()
-                    local items = {}
-                    local function addItemsFromContainer(container)
+                    
+                    -- Get and sort pollinated items by weight
+                    local pollinatedItems = {}
+                    local function scanContainer(container)
                         if container then
-                            for _, item in pairs(container:GetChildren()) do
-                                if item:IsA("Tool") and item.Name and isPollinated(item.Name) then
-                                    table.insert(items, item)
+                            for _, item in ipairs(container:GetChildren()) do
+                                if item:IsA("Tool") and hasPollinatedMutation(item.Name) then
+                                    table.insert(pollinatedItems, item)
                                 end
                             end
                         end
                     end
-                    addItemsFromContainer(backpack)
-                    if character then
-                        addItemsFromContainer(character)
-                    end
-                    return items
-                end
-
-                while tmachine do
-                    local items = getPollinatedItems()
-                    table.sort(items, function(a, b)
-                        local weightA = a and a.Name and getWeight(a.Name) or math.huge
-                        local weightB = b and b.Name and getWeight(b.Name) or math.huge
-                        if weightA == weightB then return false end
-                        return weightA < weightB
+                    
+                    scanContainer(backpack)
+                    scanContainer(character)
+                    
+                    table.sort(pollinatedItems, function(a, b)
+                        return extractWeight(a.Name) < extractWeight(b.Name)
                     end)
-
-                    if #items == 0 then
-                        task.wait(1)
-                    else
-                        for _, item in ipairs(items) do
-                            if not tmachine then break end
-                            if character and humanoid and item then
-                                humanoid:EquipTool(item)
-                                ufav()
-                                task.wait(0.1)
-                                ReplicatedStorage.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
-
-                                local start = tick()
-                                local lastTrigger = start
-
-                                repeat
-                                    task.wait(0.5)
-                                    local now = tick()
-                                    if now - lastTrigger >= 2 then
-                                        ReplicatedStorage.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
-                                        lastTrigger = now
-                                    end
-                                until not character or not character:FindFirstChildOfClass("Tool") or character:FindFirstChildOfClass("Tool") ~= item or not tmachine
+                    
+                    if #pollinatedItems > 0 then
+                        for _, tool in ipairs(pollinatedItems) do
+                            if not tradeMachineActive then break end
+                            
+                            humanoid:EquipTool(tool)
+                            task.wait(0.1)
+                            ReplicatedStorage.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                            
+                            local lastInteraction = tick()
+                            while tradeMachineActive and character:FindFirstChildOfClass("Tool") == tool do
+                                if tick() - lastInteraction >= 2 then
+                                    ReplicatedStorage.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                                    lastInteraction = tick()
+                                end
+                                task.wait(0.5)
                             end
                         end
                     end
-                    task.wait(0.5)
                 end
-            end)
+            end)()
         end
     end
 })
