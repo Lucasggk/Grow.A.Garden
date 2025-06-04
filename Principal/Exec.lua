@@ -1,5 +1,8 @@
+game:GetService("StarterGui"):SetCore("SendNotification", {Title="Script loading...", Text="Made by Lucas", Duration=5})
+wait(math.random(0.1, 0.5))
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Lucas%20hub.lua"))()
 Fluent:Destroy()
 task.wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Lucas%20hub.lua"))()
-
+wait(0.3)
+game:GetService("StarterGui"):SetCore("SendNotification", {Title="script loaded...", Text="Made by Lucas", Duration=5})
