@@ -1,21 +1,29 @@
 local script_version = {
-    version = "1.55 {beta version}",
-    alpha = true,
+    -- version
+    version = "1.55",
+    alpha = "not",
+    msg = "oi :)"
+    -- event 
     Night = false,
     Bee = true 
 }
 
 if script_version.alpha == true then
     script_version.alpha = "Alpha version"
-else
+elseif script_version.alpha == false then
     script_version.alpha = "Release version"
+elseif script_version.alpha == "not" then
+    script_version.alpha = script_version.msg
 end
+
+
 print("MADE BY LUCAS\nScript Version " .. script_version.version .. " - " .. script_version.alpha)
 local vful = script_version.version .." - ".. script_version.alpha
 
+
+
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
-
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
