@@ -754,7 +754,7 @@ loja:AddToggle("", {
     Description = "Buy all Bee shop",
     Default = false,
     Callback = function(Value)
-        bsa = Value
+        bsb = Value
     end
 })
 
