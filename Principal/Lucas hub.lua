@@ -1,6 +1,8 @@
 local script_version = {
     version = "1.4",
     alpha = true
+    Night = false
+    Bee = true 
 }
 
 if script_version.alpha == true then
@@ -509,11 +511,37 @@ ui:AddButton({
 Parte do moon event
 ]]
 
---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 --[[
 Parte do Bee event
 ]]
+if script_version.Bee == true then
 local section = event:AddSection("Honey | bizze")
 local ativo = false
 
@@ -627,7 +655,7 @@ dropdownBee:OnChanged(function(Value)
         end
     end
 end)
-
+end 
 
 --
 
