@@ -1,6 +1,6 @@
 local script_version = {
     version = "1.3",
-    alpha = true
+    alpha = false 
 }
 
 if script_version.alpha == true then
@@ -491,6 +491,18 @@ ui:AddButton({
     end
 })
 
+ui:AddButton({
+    Title = "Daily quest UI",
+    Description = "Ativa/Desativa a Daily quest ui",
+    Callback = function()
+        local ui = game:GetService("Players").LocalPlayer.PlayerGui.DailyQuests_UI
+        if ui then
+            ui.Enabled = not ui.Enabled
+            print("Daily Quest UI:", ui.Enabled and "Ativada" or "Desativada")
+        end
+    end
+})
+
 --
 
 --[[ 
@@ -556,6 +568,18 @@ event:AddToggle("Auto Trade Machine", {
                 task.wait(0.5)
             end
         end)
+    end
+})
+
+ui:AddButton({
+    Title = "Honey Shop UI",
+    Description = "Ativa/Desativa a loja de Honey",
+    Callback = function()
+        local ui = game:GetService("Players").LocalPlayer.PlayerGui.HoneyEventShop_UI
+        if ui then
+            ui.Enabled = not ui.Enabled
+            print("Honey Shop UI:", ui.Enabled and "Ativada" or "Desativada")
+        end
     end
 })
 
