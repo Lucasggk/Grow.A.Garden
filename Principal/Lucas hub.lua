@@ -21,7 +21,9 @@ local vful = script_version.version .." - ".. script_version.alpha
 
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
+
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
 local Plant = ReplicatedStorage.GameEvents.Plant_RE
