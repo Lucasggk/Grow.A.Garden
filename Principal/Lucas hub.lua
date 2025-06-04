@@ -511,8 +511,8 @@ ui:AddButton({
 Parte do moon event
 ]]
 if script_version.Night == true then
-    local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
-local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
+local buyMoon = game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock
+local buymoon2 = game:GetService("ReplicatedStorage").GameEvents.BuyNightEventShopStock
 local byallmoon = {"Mysterious Crate", "Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Star Caller", "Blood Hedgehog", "Blood Kiwi", "Blood Owl"}
 local byallmoon2 = {"Night Egg", "Night Seed Pack", "Twilight Crate", "Star Caller", "Moon Cat", "Celestiberry", "Moon Mango"}
 local bsm = false
@@ -734,7 +734,7 @@ ui:AddButton({
 })
 
 local byallBee = { "Flower Seed Pack", "Nectarine", "Hive Fruit", "Honey Sprinkler", "Bee Egg", "Bee Crate", "Honey Comb", "Bee Chair", "Honey Torch", "Honey Walkway" }
-local buyBee = ReplicatedStorage.GameEvents.BuyEventShopStock
+local buyBee = game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock
 local selectedBees = {}
 local bsb = false
 
