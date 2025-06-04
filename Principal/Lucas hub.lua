@@ -518,8 +518,6 @@ ui:AddButton({
 
 --
 
-local section = loja:AddSection("moon night | Moon")
-
 local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
 local buymoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
 local byallmoon = {"Mysterious Crate", "Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Star Caller", "Blood Hedgehog", "Blood Kiwi", "Blood Owl"}
@@ -605,7 +603,7 @@ dropdownMoon2:OnChanged(function(Value)
 end)
 
 ui:AddButton({
-    Title = "BloodMoon Shop UI",
+    Title = "BloodMoon Shop UI | não funcionando",
     Description = "Ativa/Desativa a loja BloodMoon",
     Callback = function()
         local eventShop = game.Players.LocalPlayer.PlayerGui:FindFirstChild("EventShop_UI")
@@ -620,7 +618,7 @@ ui:AddButton({
 
 
 ui:AddButton({
-    Title = "Moonlit Shop UI",
+    Title = "Moonlit Shop UI | não funcionando",
     Description = "Ativa/Desativa a loja Moonlit",
     Callback = function()
         local ui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("NightEventShop_UI")
@@ -633,7 +631,7 @@ ui:AddButton({
 
 
 ui:AddButton({
-    Title = "Event Quest UI",
+    Title = "Event Quest UI | não funcionando",
     Description = "Ativa/Desativa a UI de missões do evento",
     Callback = function()
         local ui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("NightQuest_UI")
