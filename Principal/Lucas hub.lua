@@ -343,29 +343,6 @@ sell:AddButton({
     end
 })
 
-sell:AddButton({
-    Title = "Vender bloodlit/bloodmon",
-    Description = "vende para a coruja",
-    Callback = function()
-        tsm()       
-    end
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
