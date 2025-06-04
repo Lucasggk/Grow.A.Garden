@@ -1,8 +1,7 @@
 local script_version = {
     -- version
     version = "1.55",
-    alpha = "not",
-    msg = "oi :)"
+    alpha = false,
     -- event 
     Night = false,
     Bee = true 
@@ -10,10 +9,8 @@ local script_version = {
 
 if script_version.alpha == true then
     script_version.alpha = "Alpha version"
-elseif script_version.alpha == false then
+else 
     script_version.alpha = "Release version"
-elseif script_version.alpha == "not" then
-    script_version.alpha = script_version.msg
 end
 
 
@@ -814,15 +811,10 @@ task.spawn(function()
             if bsp then
                 buypetegg()
             end
-            if bsb then
-                byallbeefc()
-            end
         end
         task.wait(1)
     end
 end)
-
-
 
 task.spawn(function()
     local lastMinute = -1
@@ -830,12 +822,14 @@ task.spawn(function()
         local minutos = os.date("*t").min
         if minutos ~= lastMinute then
             lastMinute = minutos
+
             if bsb then 
                 byallbeefc()
-                end
             end
         end
-    end)
+        task.wait(1)
+    end
+end)
 
 
 
