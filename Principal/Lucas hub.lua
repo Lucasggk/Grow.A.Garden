@@ -804,6 +804,7 @@ task.spawn(function()
             end
             if bsb then
                 byallbeefc()
+                print(selectedBees)
             end
         end
         task.wait(1)
