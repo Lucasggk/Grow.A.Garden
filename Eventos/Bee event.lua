@@ -70,4 +70,42 @@ ui:AddButton({
     end
 })
 
+local byallBee = { "Flower Seed Pack", "Nectarine", "Hive Fruit", "Honey Sprinkler", "Bee Egg", "Bee Crate", "Honey Comb", "Bee Chair", "Honey Torch", "Honey Walkway" }
+local buyBee = ReplicatedStorage.GameEvents.BuyEventShopStock
+local selectedBees = {}
+local bsb = false
 
+function byallbeefc()
+    for i = 1, 25 do
+        for _, bee in ipairs(selectedBees) do
+            buyBee:FireServer(bee)
+            task.wait()
+        end
+    end
+end
+
+loja:AddToggle("", {
+    Title = "Buy all Bee Shop",
+    Description = "Buy all Bee shop",
+    Default = false,
+    Callback = function(Value)
+        bsa = Value
+    end
+})
+
+local dropdownBee = loja:AddDropdown("DropdownSeed", {
+    Title = "Selecione Beeshop para comprar\n",
+    Description = "Selecione Beeshop para comprar\n",
+    Values = byallBee,
+    Multi = true,
+    Default = {},
+})
+
+dropdownBee:OnChanged(function(Value)
+    selectedSeeds = {}
+    for v, state in pairs(Value) do
+        if state then
+            table.insert(selectedBees, v)
+        end
+    end
+end)
