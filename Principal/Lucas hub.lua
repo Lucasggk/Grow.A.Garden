@@ -587,7 +587,7 @@ loja:AddToggle("", {
     end
 })
 
-local dropdownMoon2 loja:AddDropdown("DropdownSeed", {
+local dropdownMoon2 = loja:AddDropdown("DropdownSeed", {
     Title = "Selecione seeds para comprar\n",
     Description = "Selecione seeds para comprar\n",
     Values = byallmoon2,
