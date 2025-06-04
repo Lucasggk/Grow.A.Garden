@@ -558,7 +558,7 @@ loja:AddToggle("", {
     end
 })
 
-local dropdownMbyallmoon loja:AddDropdown("DropdownMoon", {
+local dropdownMoon = loja:AddDropdown("DropdownMoon", {
     Title = "Selecione itens da loja moon\n",
     Description = "Selecione itens da loja moon\n",
     Values = byallmoon,
