@@ -1,5 +1,5 @@
 local script_version = {
-    version = "1.4",
+    version = "1.5",
     alpha = true,
     Night = false,
     Bee = true 
