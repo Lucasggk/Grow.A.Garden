@@ -516,7 +516,7 @@ ui:AddButton({
 
 --
 
---[[
+--
 
 local section = loja:AddSection("moon night | Moon")
 
@@ -644,11 +644,10 @@ ui:AddButton({
     end
 })
 
-]]
+
 
 --
 
-local section = event:AddSection("Honey | bizze")
 local section = event:AddSection("Honey | bizze")
 local ativo = false
 
@@ -708,6 +707,9 @@ event:AddToggle("Auto Trade Machine", {
         end)
     end
 })
+
+
+
 --
 
 task.spawn(function()
