@@ -583,6 +583,20 @@ ui:AddButton({
     end
 })
 
+local shopbee = { "Flower Seed Pack", "Nectarine", "Hive Fruit", "Honey Sprinkler", "Bee Egg", "Bee Crate", "Honey Comb", "Bee Chair", "Honey Torch", "Honey Walkway" }
+local buyBee = ReplicatedStorage.GameEvents.BuyEventShopStock
+local selectedBees = {}
+local bsb = false
+
+function byallbeefc()
+    for i = 1, 25 do
+        for _, bee in ipairs(selectedBees) do
+            buyBee:FireServer(bee)
+            task.wait()
+        end
+    end
+end
+
 
 
 --
@@ -608,6 +622,9 @@ task.spawn(function()
             end
             if bsp then
                 buypetegg()
+            end
+            if bsb then
+                byallbeefc()
             end
         end
         task.wait(1)
