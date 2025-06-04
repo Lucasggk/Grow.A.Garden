@@ -649,89 +649,59 @@ ui:AddButton({
 --
 
 local section = event:AddSection("Honey | bizze")
-local tradeMachineActive = false
+local ativo = false
 
 event:AddToggle("Auto Trade Machine", {
     Title = "Auto trade event machine\n",
     Description = "Equips only Pollinated items from lightest to heaviest and interacts with machine",
     Default = false,
-    Callback = function(isEnabled)
-        tradeMachineActive = isEnabled
-        if isEnabled then
-            coroutine.wrap(function()
-                -- Services
-                local Players = game:GetService("Players")
-                local ReplicatedStorage = game:GetService("ReplicatedStorage")
-                
-                -- Player references
-                local player = Players.LocalPlayer
-                
-                while tradeMachineActive and wait(0.5) do
-                    local character = player.Character or player.CharacterAdded:Wait()
-                    local humanoid = character:WaitForChild("Humanoid")
-                    local backpack = player:WaitForChild("Backpack")
-                    
-                    -- Helper functions
-                    local function extractWeight(itemName)
-                        if not itemName then return math.huge end
-                        local weightPattern = "%[(%d+%.%d+)kg%]"
-                        local weightString = itemName:match(weightPattern)
-                        return weightString and tonumber(weightString) or math.huge
-                    end
-                    
-                    local function hasPollinatedMutation(itemName)
-                        if not itemName then return false end
-                        local mutationString = itemName:match("%[(.-)%]")
-                        if mutationString then
-                            for mutation in mutationString:gmatch("[^,%s]+") do
-                                if mutation == "Pollinated" then
-                                    return true
-                                end
-                            end
-                        end
-                        return false
-                    end
-                    
-                    -- Get and sort pollinated items by weight
-                    local pollinatedItems = {}
-                    local function scanContainer(container)
-                        if container then
-                            for _, item in ipairs(container:GetChildren()) do
-                                if item:IsA("Tool") and hasPollinatedMutation(item.Name) then
-                                    table.insert(pollinatedItems, item)
-                                end
-                            end
-                        end
-                    end
-                    
-                    scanContainer(backpack)
-                    scanContainer(character)
-                    
-                    table.sort(pollinatedItems, function(a, b)
-                        return extractWeight(a.Name) < extractWeight(b.Name)
-                    end)
-                    
-                    if #pollinatedItems > 0 then
-                        for _, tool in ipairs(pollinatedItems) do
-                            if not tradeMachineActive then break end
-                            
-                            humanoid:EquipTool(tool)
-                            task.wait(0.1)
-                            ReplicatedStorage.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
-                            
-                            local lastInteraction = tick()
-                            while tradeMachineActive and character:FindFirstChildOfClass("Tool") == tool do
-                                if tick() - lastInteraction >= 2 then
-                                    ReplicatedStorage.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
-                                    lastInteraction = tick()
-                                end
-                                task.wait(0.5)
+    Callback = function(toggle)
+        ativo = toggle
+        if not toggle then return end
+        task.spawn(function()
+            local player = game:GetService("Players").LocalPlayer
+            local rs = game:GetService("ReplicatedStorage")
+            local function getPeso(nome)
+                local p = nome:match("%[(%d+%.%d+)kg%]")
+                return tonumber(p) or math.huge
+            end
+            local function temPollinated(nome)
+                return nome:lower():find("pollinated") ~= nil
+            end
+            while ativo do
+                local char = player.Character or player.CharacterAdded:Wait()
+                local humanoid = char:FindFirstChildOfClass("Humanoid")
+                local mochila = player:FindFirstChild("Backpack")
+                local itens = {}
+                for _, container in ipairs({char, mochila}) do
+                    if container then
+                        for _, item in ipairs(container:GetChildren()) do
+                            if item:IsA("Tool") and temPollinated(item.Name) then
+                                table.insert(itens, item)
                             end
                         end
                     end
                 end
-            end)()
-        end
+                table.sort(itens, function(a, b)
+                    return getPeso(a.Name) < getPeso(b.Name)
+                end)
+                for _, item in ipairs(itens) do
+                    if not ativo then return end
+                    humanoid:EquipTool(item)
+                    task.wait(0.1)
+                    rs.GameEvents.HoneyMachineService_RE:FireServer("ufav")
+                    local tempo = tick()
+                    while ativo and char:FindFirstChildOfClass("Tool") == item do
+                        if tick() - tempo >= 2 then
+                            rs.GameEvents.HoneyMachineService_RE:FireServer("ufav")
+                            tempo = tick()
+                        end
+                        task.wait(0.5)
+                    end
+                end
+                task.wait(0.5)
+            end
+        end)
     end
 })
 
