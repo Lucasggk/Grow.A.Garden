@@ -649,6 +649,7 @@ ui:AddButton({
 --
 
 local section = event:AddSection("Honey | bizze")
+local section = event:AddSection("Honey | bizze")
 local ativo = false
 
 event:AddToggle("Auto Trade Machine", {
@@ -683,20 +684,19 @@ event:AddToggle("Auto Trade Machine", {
                     end
                 end
 
-                -- Removido table.sort baseado no peso
-
                 for _, item in ipairs(itens) do
                     if not ativo then return end
 
                     humanoid:EquipTool(item)
                     task.wait(0.1)
 
-                    rs.GameEvents.HoneyMachineService_RE:FireServer("ufav")
+                    ufav()
+                    rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
 
                     local tempo = tick()
                     while ativo and char:FindFirstChildOfClass("Tool") == item do
                         if tick() - tempo >= 2 then
-                            rs.GameEvents.HoneyMachineService_RE:FireServer("ufav")
+                            rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
                             tempo = tick()
                         end
                         task.wait(0.5)
@@ -708,7 +708,6 @@ event:AddToggle("Auto Trade Machine", {
         end)
     end
 })
-
 --
 
 task.spawn(function()
