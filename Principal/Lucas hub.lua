@@ -1,6 +1,6 @@
 local script_version = {
-    version = "1.3",
-    alpha = false 
+    version = "1.4",
+    alpha = true
 }
 
 if script_version.alpha == true then
