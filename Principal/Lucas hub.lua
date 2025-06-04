@@ -653,7 +653,7 @@ local ativo = false
 
 event:AddToggle("Auto Trade Machine", {
     Title = "Auto trade event machine\n",
-    Description = "Equips only Pollinated items from lightest to heaviest and interacts with machine",
+    Description = "Equips only Pollinated items and interacts with machine",
     Default = false,
     Callback = function(toggle)
         ativo = toggle
@@ -662,11 +662,6 @@ event:AddToggle("Auto Trade Machine", {
         task.spawn(function()
             local player = game:GetService("Players").LocalPlayer
             local rs = game:GetService("ReplicatedStorage")
-
-            local function getPeso(nome)
-                local p = nome:match("%[(%d+%.%d+)kg%]")
-                return tonumber(p) or math.huge
-            end
 
             local function temPollinated(nome)
                 return nome:lower():find("pollinated") ~= nil
@@ -688,9 +683,7 @@ event:AddToggle("Auto Trade Machine", {
                     end
                 end
 
-                table.sort(itens, function(a, b)
-                    return getPeso(a.Name) < getPeso(b.Name)
-                end)
+                -- Removido table.sort baseado no peso
 
                 for _, item in ipairs(itens) do
                     if not ativo then return end
@@ -715,6 +708,7 @@ event:AddToggle("Auto Trade Machine", {
         end)
     end
 })
+
 --
 
 task.spawn(function()
