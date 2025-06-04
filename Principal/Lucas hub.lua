@@ -779,7 +779,7 @@ dropdownBee:OnChanged(function(Value)
     print("Itens selecionados:", table.concat(selectedBees, ", "))
 end)
 
-end -- fechamento do if script_version.Bee
+end 
 
 
 --
@@ -807,13 +807,29 @@ task.spawn(function()
                 buypetegg()
             end
             if bsb then
-                print("Chamando byallbeefc com bsb = true")
                 byallbeefc()
             end
         end
         task.wait(1)
     end
 end)
+
+
+
+task.spawn(function()
+    local lastMinute = -1
+    while true do
+        local minutos = os.date("*t").min
+        if minutos ~= lastMinute then
+            lastMinute = minutos
+            if bsb then 
+                byallbeefc()
+                end
+            end
+        end
+    end)
+
+
 
 game:GetService("Players").LocalPlayer.Idled:Connect(function()
     local VirtualUser = game:GetService("VirtualUser")
