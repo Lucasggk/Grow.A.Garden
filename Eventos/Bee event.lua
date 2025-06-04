@@ -58,5 +58,16 @@ event:AddToggle("Auto Trade Machine", {
     end
 })
 
+ui:AddButton({
+    Title = "Honey Shop UI",
+    Description = "Ativa/Desativa a loja de Honey",
+    Callback = function()
+        local ui = game:GetService("Players").LocalPlayer.PlayerGui.HoneyEventShop_UI
+        if ui then
+            ui.Enabled = not ui.Enabled
+            print("Honey Shop UI:", ui.Enabled and "Ativada" or "Desativada")
+        end
+    end
+})
 
 
