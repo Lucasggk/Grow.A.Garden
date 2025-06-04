@@ -813,18 +813,6 @@ task.spawn(function()
             if bsp then
                 buypetegg()
             end
-        end
-        task.wait(1)
-    end
-end)
-
-task.spawn(function()
-    local lastMinute = -1
-    while true do
-        local minutos = os.date("*t").min
-        if minutos ~= lastMinute then
-            lastMinute = minutos
-
             if bsb then 
                 byallbeefc()
             end
