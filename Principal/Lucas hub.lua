@@ -767,7 +767,7 @@ local dropdownBee = loja:AddDropdown("DropdownSeed", {
 })
 
 dropdownBee:OnChanged(function(Value)
-    selectedSeeds = {}
+    selectedBees = {}
     for v, state in pairs(Value) do
         if state then
             table.insert(selectedBees, v)
