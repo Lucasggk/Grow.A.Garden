@@ -600,6 +600,8 @@ function byallbeefc()
     end
 end
 
+local section = loja:AddSection("Shop Honeh")
+
 loja:AddToggle("", {
     Title = "Buy all Bee Shop",
     Description = "Buy all Bee shop",
