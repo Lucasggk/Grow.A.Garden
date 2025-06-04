@@ -1,3 +1,4 @@
+local section = event:AddSection("Honey | bizze")
 local ativo = false
 
 event:AddToggle("Auto Trade Machine", {
