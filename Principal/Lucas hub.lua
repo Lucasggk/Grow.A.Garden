@@ -97,6 +97,11 @@ local config = Window:AddTab({
     Icon = "settings"
 })
 
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/main/interface/manager.lua"))() 
+InterfaceManager:SetLibrary(Fluent)
+InterfaceManager:SetFolder("GrowAGarden")
+InterfaceManager:BuildInterfaceSection(config)
+
 -- Local Variáveis --
 
 local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
