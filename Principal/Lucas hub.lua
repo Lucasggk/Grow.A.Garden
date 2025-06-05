@@ -529,7 +529,7 @@ ui:AddButton({
 --[[ 
 Parte do moon event
 ]]
-function secmoon()
+ 
 local buyMoon = game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock
 local buymoon2 = game:GetService("ReplicatedStorage").GameEvents.BuyNightEventShopStock
 local byallmoon = {"Mysterious Crate", "Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Star Caller", "Blood Hedgehog", "Blood Kiwi", "Blood Owl"}
@@ -662,15 +662,12 @@ sell:AddButton({
     end
 })
 
-end
-
 
 
 --[[
 Parte do Bee event
 ]]
 
-function secbee()
 local section = event:AddSection("Honey | bizze")
 local ativo = false
 
@@ -788,20 +785,8 @@ dropdownBee:OnChanged(function(Value)
     end
 end)
 
-end 
 
-
-
-if script_version.Bee == true then
-    for i = 1, 20 do
-    secbee()
-    end
-end 
-if script_version.Night == true then 
-    secmoon()
-end
-
-
+    
 --
 
 task.spawn(function()
