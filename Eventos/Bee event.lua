@@ -1,4 +1,4 @@
-local vful = getgenv().vers
+local vful = getgenv().vers or "h"
 
 local Windowuibee = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
