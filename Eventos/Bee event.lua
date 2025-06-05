@@ -9,6 +9,7 @@ local Window = Windowuibee:CreateWindow({
     Size = UDim2.fromOffset(510, 390),
     Acrylic = false,
     Theme = "Dark",
+    Keybind = Enum.KeyCode.A
 })
 
 local loja = Window:AddTab({ Title = "Loja", Icon = "home" })
