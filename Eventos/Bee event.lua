@@ -71,14 +71,17 @@ ui:AddButton({
 })
 
 local byallBee = { "Flower Seed Pack", "Nectarine", "Hive Fruit", "Honey Sprinkler", "Bee Egg", "Bee Crate", "Honey Comb", "Bee Chair", "Honey Torch", "Honey Walkway" }
-local buyBee = ReplicatedStorage.GameEvents.BuyEventShopStock
+local buyBee = game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock
 local selectedBees = {}
 local bsb = false
 
 function byallbeefc()
     for i = 1, 25 do
         for _, bee in ipairs(selectedBees) do
-            buyBee:FireServer(bee)
+            local args = {
+                [1] = bee
+            }
+            game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock:FireServer(unpack(args))
             task.wait()
         end
     end
@@ -86,13 +89,12 @@ end
 
 local section = loja:AddSection("Shop Honey")
 
-
 loja:AddToggle("", {
     Title = "Buy all Bee Shop",
     Description = "Buy all Bee shop",
     Default = false,
     Callback = function(Value)
-        bsa = Value
+        bsb = Value
     end
 })
 
@@ -105,10 +107,25 @@ local dropdownBee = loja:AddDropdown("DropdownSeed", {
 })
 
 dropdownBee:OnChanged(function(Value)
-    selectedSeeds = {}
+    selectedBees = {}
     for v, state in pairs(Value) do
         if state then
             table.insert(selectedBees, v)
         end
+    end
+end)
+
+task.spawn(function()
+    local lastMinute = -1
+    while true do
+        local minutos = os.date("*t").min
+        if minutos ~= lastMinute then
+            lastMinute = minutos
+
+            if bsb then
+                byallbeefc()
+            end
+        end
+        task.wait(1)
     end
 end)
