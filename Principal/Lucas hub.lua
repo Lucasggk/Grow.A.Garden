@@ -516,7 +516,9 @@ event:AddButton({
         Title = "Ui do evento Bee",
         Description = "Abre uma nova ui\n(Feita por min)",
         Callback = function()
-         
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Eventos/Bee%20event.lua"))()
+Windowuibee:Destroy()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Eventos/Bee%20event.lua"))()
         end
     )}
 
@@ -524,7 +526,9 @@ event:AddButton({
         Title = "Ui do evento Moon",
         Description = "Abre uma nova ui\n(Feita por min)",
         Callback = function()
-
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Eventos/Moon%20event.lua"))()
+Windowuimoon:Destroy()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Eventos/Moon%20event.lua"))()
         end
     )}
 
