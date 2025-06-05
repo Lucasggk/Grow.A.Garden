@@ -22,6 +22,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 InterfaceManager:SetLibrary(Windowuimoon)
 InterfaceManager:SetFolder("GrowAGardenMoon")
 InterfaceManager:BuildInterfaceSection(config)
+Keybind = Enum.KeyCode.B
 
 config:AddButton({
     Title = "Delete ui",
