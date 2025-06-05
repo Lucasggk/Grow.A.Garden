@@ -51,7 +51,8 @@ local Window = Fluent:CreateWindow({
     Acrylic = false,
     Theme = "Dark",
     Center = true,
-    IsDraggable = true
+    IsDraggable = true,
+    Keybind = Enum.KeyCode.LeftControl
 })
 
 -- Local Tabs --
