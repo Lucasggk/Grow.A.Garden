@@ -1,3 +1,10 @@
+local ui = Window:AddTab({ Title = "UIs", Icon = "list" )}
+local loja = Window:AddTab({ Title = "loja", Icon = "home" )}
+local event = Window:AddTab({ Title = "Event", Icon = "list" )}
+
+
+
+
 local section = event:AddSection("Honey | bizze")
 local ativo = false
 
