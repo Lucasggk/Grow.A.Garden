@@ -17,6 +17,11 @@ local sell = Window:AddTab({ Title = "Sell", Icon = "list" })
 local event = Window:AddTab({ Title = "Event", Icon = "list" })
 local config = Window:AddTab({ Title = "Config", Icon = "settings" })
 
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+InterfaceManager:SetLibrary(Windowuimoon)
+InterfaceManager:SetFolder("GrowAGarden")
+InterfaceManager:BuildInterfaceSection(config)
+
 config:AddButton({
     Title = "Delete ui",
     Callback = function()
