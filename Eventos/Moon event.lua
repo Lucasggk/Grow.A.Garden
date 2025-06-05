@@ -20,7 +20,7 @@ local config = Window:AddTab({ Title = "Config", Icon = "settings" })
 config:AddButton({
     Title = "Delete ui",
     Callback = function()
-        Window:Destroy()
+        Windowuimoon:Destroy()
     end
 })
 
