@@ -11,8 +11,8 @@ local Window = Windowuibee:CreateWindow({
     Theme = "Dark",
 })
 
-local ui = Window:AddTab({ Title = "UIs", Icon = "list" })
 local loja = Window:AddTab({ Title = "Loja", Icon = "home" })
+local ui = Window:AddTab({ Title = "UIs", Icon = "list" })
 local event = Window:AddTab({ Title = "Event", Icon = "list" })
 local config = Window:AddTab({ Title = "Config", Icon = "settings" })
 
