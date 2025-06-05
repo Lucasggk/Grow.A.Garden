@@ -1,9 +1,9 @@
 local vful = getgenv().vers
 
-local Windowui = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
+local Windowuibee = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
 
 
-local Window = Fluent:CreateWindow({
+local Window = Windowuibee:CreateWindow({
     Title = "Bee event |",
     SubTitle = "Made by Lucas | Version: ".. vful,
     TabWidth = 120,
