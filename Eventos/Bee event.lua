@@ -6,7 +6,7 @@ local Window = Windowuibee:CreateWindow({
     Title = "Bee event |",
     SubTitle = "Made by Lucas | Version: " .. vful,
     TabWidth = 120,
-    Size = UDim2.fromOffset(390, 390),
+    Size = UDim2.fromOffset(390, 510),
     Acrylic = false,
     Theme = "Dark",
 })
