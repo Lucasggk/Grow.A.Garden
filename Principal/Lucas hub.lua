@@ -667,7 +667,7 @@ end
 --[[
 Parte do Bee event
 ]]
-if script_version.Bee == true then
+
 local section = event:AddSection("Honey | bizze")
 local ativo = false
 
@@ -786,7 +786,7 @@ dropdownBee:OnChanged(function(Value)
     end
 end)
 
-end 
+ 
 
 
 --
