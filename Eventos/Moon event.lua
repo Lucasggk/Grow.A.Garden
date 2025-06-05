@@ -9,6 +9,7 @@ local Window = Windowuimoon:CreateWindow({
     Size = UDim2.fromOffset(510, 390),
     Acrylic = false,
     Theme = "Dark",
+    Keybind = Enum.KeyCode.B
 })
 
 local loja = Window:AddTab({ Title = "Loja", Icon = "home" })
