@@ -1,32 +1,3 @@
-local vful = getgenv().vers or "h"
-
-local Windowuimoon = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
-
-local Window = Windowuimoon:CreateWindow({
-    Title = "Moon event |",
-    SubTitle = "Made by Lucas | Version: " .. vful,
-    TabWidth = 120,
-    Size = UDim2.fromOffset(510, 390),
-    Acrylic = false,
-    Theme = "Dark",
-    Keybind = Enum.KeyCode.B
-})
-
-local loja = Window:AddTab({ Title = "Loja", Icon = "home" })
-local ui = Window:AddTab({ Title = "UIs", Icon = "list" })
-local sell = Window:AddTab({ Title = "Sell", Icon = "list" })
-local event = Window:AddTab({ Title = "Event", Icon = "list" })
-local config = Window:AddTab({ Title = "Config", Icon = "settings" })
-
-config:AddButton({
-    Title = "Delete ui",
-    Callback = function()
-        Windowuimoon:Destroy()
-    end
-})
-
-
-
 local buyMoon = game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock
 local buymoon2 = game:GetService("ReplicatedStorage").GameEvents.BuyNightEventShopStock
 local byallmoon = {"Mysterious Crate", "Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Star Caller", "Blood Hedgehog", "Blood Kiwi", "Blood Owl"}
