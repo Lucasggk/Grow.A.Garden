@@ -42,7 +42,7 @@ player.CharacterAdded:Connect(function(char)
 end)
 
 local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
-Button_Icon = "rbxassetid://126150160887278"
+
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden |",
     SubTitle = "Made by Lucas | Version: ".. vful,
@@ -59,7 +59,7 @@ local Window = Fluent:CreateWindow({
 
 local loja = Window:AddTab({
     Title = "loja",
-    Icon = "Rbxassetsid://5873794894"
+    Icon = "home"
 })
 
 local plant = Window:AddTab({
