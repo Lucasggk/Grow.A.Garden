@@ -4,7 +4,7 @@ local Windowuimoon = loadstring(Game:HttpGet("https://raw.githubusercontent.com/
 
 
 local Window = Windowuimoon:CreateWindow({
-    Title = "Bee event |",
+    Title = "Moon event |",
     SubTitle = "Made by Lucas | Version: ".. vful,
     TabWidth = 120,
     Size = UDim2.fromOffset(390, 390),
