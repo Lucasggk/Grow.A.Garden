@@ -129,3 +129,23 @@ sell:AddButton({
         tsm()       
     end
 })
+
+
+
+task.spawn(function()
+    local lastMinute = -1
+    while true do
+        local minutos = os.date("*t").min
+        if minutos ~= lastMinute then
+            lastMinute = minutos
+
+            if bsm then
+                byallmoonfc()
+            end
+            if bsm2 then
+                byallmoon2fc()
+            end
+        end
+        task.wait(1)
+    end
+end)
