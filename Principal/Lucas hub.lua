@@ -527,9 +527,6 @@ ui:AddButton({
 --
 
 --[[ 
-Parte do moon event
-]]
- 
 local buyMoon = game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock
 local buymoon2 = game:GetService("ReplicatedStorage").GameEvents.BuyNightEventShopStock
 local byallmoon = {"Mysterious Crate", "Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Star Caller", "Blood Hedgehog", "Blood Kiwi", "Blood Owl"}
@@ -661,6 +658,7 @@ sell:AddButton({
         tsm()       
     end
 })
+]]
 
 
 
