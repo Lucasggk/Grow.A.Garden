@@ -1,6 +1,6 @@
 local vful = getgenv().vers or "h"
 
-local Windowuibee = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
+local Windowuibee = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
 local Window = Windowuibee:CreateWindow({
     Title = "Bee event |",
@@ -9,7 +9,7 @@ local Window = Windowuibee:CreateWindow({
     Size = UDim2.fromOffset(510, 390),
     Acrylic = false,
     Theme = "Dark",
-    Keybind = Enum.KeyCode.A
+    MinimizeKey = Enum.KeyCode.A
 })
 
 local loja = Window:AddTab({ Title = "Loja", Icon = "home" })
