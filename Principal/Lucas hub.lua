@@ -793,7 +793,9 @@ end
 
 
 if script_version.Bee == true then
+    for i = 1, 20 do
     secbee()
+    end
 end 
 if script_version.Night == true then 
     secmoon()
