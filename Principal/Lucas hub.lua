@@ -59,7 +59,7 @@ local Window = Fluent:CreateWindow({
 
 local loja = Window:AddTab({
     Title = "loja",
-    Icon = "home"
+    Icon = "rbxassetsid://94979807066345"
 })
 
 local plant = Window:AddTab({
