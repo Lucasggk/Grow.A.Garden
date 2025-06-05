@@ -18,7 +18,7 @@ local config = Window:AddTab({ Title = "Config", Icon = "settings" })
 
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 InterfaceManager:SetLibrary(Windowuibee)
-InterfaceManager:SetFolder("GrowAGarden")
+InterfaceManager:SetFolder("GrowAGardenBee")
 InterfaceManager:BuildInterfaceSection(config)
 
 config:AddButton({
