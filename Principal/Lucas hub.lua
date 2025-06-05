@@ -587,7 +587,7 @@ event:AddToggle("Auto Trade Machine", {
     end
 })
 
-ui:AddButton({
+event:AddButton({
     Title = "Honey Shop UI",
     Description = "Ativa/Desativa a loja de Honey",
     Callback = function()
@@ -616,9 +616,9 @@ function byallbeefc()
     end
 end
 
-local section = loja:AddSection("Shop Honey")
+local section = event:AddSection("Shop Honey")
 
-loja:AddToggle("", {
+event:AddToggle("", {
     Title = "Buy all Bee Shop",
     Description = "Buy all Bee shop",
     Default = false,
@@ -627,7 +627,7 @@ loja:AddToggle("", {
     end
 })
 
-local dropdownBee = loja:AddDropdown("DropdownSeed", {
+local dropdownBee = event:AddDropdown("DropdownSeed", {
     Title = "Selecione Beeshop para comprar\n",
     Description = "Selecione Beeshop para comprar\n",
     Values = byallBee,
@@ -644,20 +644,6 @@ dropdownBee:OnChanged(function(Value)
     end
 end)
 
-task.spawn(function()
-    local lastMinute = -1
-    while true do
-        local minutos = os.date("*t").min
-        if minutos ~= lastMinute then
-            lastMinute = minutos
-
-            if bsb then
-                byallbeefc()
-            end
-        end
-        task.wait(1)
-    end
-end)
 
 
 
