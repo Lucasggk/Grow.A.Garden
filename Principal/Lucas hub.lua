@@ -4,7 +4,7 @@ local script_version = {
     alpha = false,
     -- event 
     Night = false,
-    Bee = true 
+    Bee = false,
 }
 if script_version.alpha == true then
     script_version.alpha = "Alpha version"
