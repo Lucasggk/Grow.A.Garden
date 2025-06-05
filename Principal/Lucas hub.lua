@@ -649,9 +649,6 @@ sell:AddButton({
 
 
 --[[
-Parte do Bee event
-]]
-
 local section = event:AddSection("Honey | bizze")
 local ativo = false
 
@@ -768,6 +765,9 @@ dropdownBee:OnChanged(function(Value)
         end
     end
 end)
+]]
+
+
 
 
     
