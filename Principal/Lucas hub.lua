@@ -746,11 +746,12 @@ local selectedBees = {}
 local bsb = false
 
 function byallbeefc()
-    print("Executando byallbeefc()")
     for i = 1, 25 do
         for _, bee in ipairs(selectedBees) do
-            print("Comprando:", bee)
-            buyBee:FireServer(bee)
+            local args = {
+                [1] = bee
+            }
+            game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock:FireServer(unpack(args))
             task.wait()
         end
     end
@@ -783,7 +784,6 @@ dropdownBee:OnChanged(function(Value)
             table.insert(selectedBees, v)
         end
     end
-    print("Itens selecionados:", table.concat(selectedBees, ", "))
 end)
 
 end 
