@@ -6,7 +6,7 @@ local Window = Windowuimoon:CreateWindow({
     Title = "Moon event |",
     SubTitle = "Made by Lucas | Version: " .. vful,
     TabWidth = 120,
-    Size = UDim2.fromOffset(390, 390),
+    Size = UDim2.fromOffset(510, 390),
     Acrylic = false,
     Theme = "Dark",
 })
