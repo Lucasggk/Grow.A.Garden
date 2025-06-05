@@ -767,7 +767,6 @@ loja:AddToggle("", {
     Default = false,
     Callback = function(Value)
         bsb = Value
-        print("Toggle bsb:", bsb)
     end
 })
 
