@@ -12,7 +12,7 @@ local Window = Windowuibee:CreateWindow({
     MinimizeKey = Enum.KeyCode.A
 })
 
-local loja = Window:AddTab({ Title = "Loja", Icon = "home" })
+local loja = Window:AddTab({ Title = "Loja", Icon = "Rbxassetsid://94979807066345" })
 local ui = Window:AddTab({ Title = "UIs", Icon = "list" })
 local event = Window:AddTab({ Title = "Event", Icon = "list" })
 local config = Window:AddTab({ Title = "Config", Icon = "settings" })
