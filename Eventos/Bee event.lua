@@ -1,30 +1,3 @@
-local vful = getgenv().vers or "h"
-
-local Windowuibee = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-
-local Window = Windowuibee:CreateWindow({
-    Title = "Bee event |",
-    SubTitle = "Made by Lucas | Version: " .. vful,
-    TabWidth = 120,
-    Size = UDim2.fromOffset(510, 390),
-    Acrylic = false,
-    Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.A
-})
-
-local loja = Window:AddTab({ Title = "Loja", Icon = "home" })
-local ui = Window:AddTab({ Title = "UIs", Icon = "list" })
-local event = Window:AddTab({ Title = "Event", Icon = "list" })
-local config = Window:AddTab({ Title = "Config", Icon = "settings" })
-
-config:AddButton({
-    Title = "Delete ui",
-    Callback = function()
-        Windowuibee:Destroy()
-    end
-})
-
-
 local section = event:AddSection("Honey | bizze")
 local ativo = false
 
