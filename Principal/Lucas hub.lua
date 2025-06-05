@@ -42,7 +42,7 @@ player.CharacterAdded:Connect(function(char)
 end)
 
 local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
-
+Button_Icon = "rbxassetid://94979807066345"
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden |",
     SubTitle = "Made by Lucas | Version: ".. vful,
