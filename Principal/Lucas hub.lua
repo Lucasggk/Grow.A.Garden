@@ -14,20 +14,6 @@ end
 print("MADE BY LUCAS\nScript Version " .. script_version.version .. " - " .. script_version.alpha)
 local vful = script_version.version .." - ".. script_version.alpha
 
--- event Variáveis 
-local bsb
-local bsm
-local bsm2 
-local SelectedMoons
-local SelectedMoons2
-local byallBee
-local buyBee
-local selectedBees
-local buyMoon
-local buymoon2
-local byallmoon
-local byallmoon2 
--- 
 
 
 
