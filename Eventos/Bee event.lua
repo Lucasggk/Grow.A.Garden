@@ -1,7 +1,26 @@
+local Windowui = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
+
+
+local Window = Fluent:CreateWindow({
+    Title = "Bee event |",
+    SubTitle = "Made by Lucas |",
+    TabWidth = 120,
+    Size = UDim2.fromOffset(390, 390),
+    Acrylic = false
+    Theme = "Dark",
+    })
+
+
 local ui = Window:AddTab({ Title = "UIs", Icon = "list" )}
 local loja = Window:AddTab({ Title = "loja", Icon = "home" )}
 local event = Window:AddTab({ Title = "Event", Icon = "list" )}
-
+local config = Window:AddTab({ Title = "config", Icon = "settings" )}
+config:AddButton({
+        Title = "Delete ui"
+        Callback = function()
+            Windowui:Destroy()
+        end
+    })
 
 
 
