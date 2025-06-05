@@ -6,21 +6,35 @@ local script_version = {
     Night = false,
     Bee = true 
 }
-
 if script_version.alpha == true then
     script_version.alpha = "Alpha version"
 else 
     script_version.alpha = "Release version"
 end
-
-
 print("MADE BY LUCAS\nScript Version " .. script_version.version .. " - " .. script_version.alpha)
 local vful = script_version.version .." - ".. script_version.alpha
+
+-- event Variáveis 
+local bsb
+local bsm
+local bsm2 
+local SelectedMoons
+local SelectedMoons2
+local byallBee
+local buyBee
+local selectedBees
+local buyMoon
+local buymoon2
+local byallmoon
+local byallmoon2 
+-- 
+
 
 
 
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui") 
+
 local ReplicatedStorage = game:GetService("ReplicatedStorage") 
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
@@ -651,21 +665,11 @@ end
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 --[[
 Parte do Bee event
 ]]
 
+if script_version.Bee == true then
 local section = event:AddSection("Honey | bizze")
 local ativo = false
 
@@ -784,7 +788,7 @@ dropdownBee:OnChanged(function(Value)
     end
 end)
 
- 
+end 
 
 
 --
@@ -823,7 +827,6 @@ end)
 
 game:GetService("Players").LocalPlayer.Idled:Connect(function()
     local VirtualUser = game:GetService("VirtualUser")
-    VirtualUser:Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
-    task.wait(1)
+    VirtualUser:Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)task.wait(1)
     VirtualUser:Button2Up(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
 end)
