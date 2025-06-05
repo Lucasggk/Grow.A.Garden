@@ -13,7 +13,7 @@ else
 end
 print("MADE BY LUCAS\nScript Version " .. script_version.version .. " - " .. script_version.alpha)
 local vful = script_version.version .." - ".. script_version.alpha
-
+getgenv().vers = vful
 
 
 
@@ -516,7 +516,7 @@ event:AddButton({
         Title = "Ui do evento Bee",
         Description = "Abre uma nova ui\n(Feita por min)",
         Callback = function()
-
+         
         end
     )}
 
