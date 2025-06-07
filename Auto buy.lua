@@ -5,7 +5,7 @@ local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
 --local buyMoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
 local buyPet = ReplicatedStorage.GameEvents.BuyPetEgg
 
-local seed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
+local seed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk", "Ember Lily"}
 local gear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler"}
 --[[
 local bloodlit = {"Mysterious Crate", "Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Star Caller", "Blood Owl"}
@@ -24,6 +24,7 @@ function g()
     buyGear:FireServer(gr)
   end
 end
+
 --[[
 function b() 
   for _, bl in ipairs(bloodlit) do
@@ -39,16 +40,16 @@ end
 ]]
 
 function p() 
-for i = 1, 50 do
-  for _, pt in ipairs(pet) do
-    buyPet:FireServer(pt)
+  for i = 1, 3 do
+    for _, pt in ipairs(pet) do
+      buyPet:FireServer(pt)
+    end
+    task.wait(0.1)
   end
-task.wait()
-end
 end
 
 function buyall()
-  for i = 1, 150 do
+  for i = 1, 30 do
     s()
     g()
     --b()
@@ -59,13 +60,14 @@ function buyall()
 end
 
 task.spawn(function()
-	local ultimoMinuto = -1
-	while true do
-		local minuto = os.date("*t").min
-		if minuto % 5 == 0 and minuto ~= ultimoMinuto then
-			ultimoMinuto = minuto
-			buyall()
-		end
-		task.wait(1)
-	end
+  local ultimoMinuto = -1
+  while true do
+    local minuto = os.date("*t").min
+    if minuto % 5 == 0 and minuto ~= ultimoMinuto then
+      ultimoMinuto = minuto
+      buyall()
+    end
+    task.wait(1)
+  end
 end)
+
