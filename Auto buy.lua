@@ -48,7 +48,7 @@ end
 end
 
 function buyall()
-  for i = 1, 50 do
+  for i = 1, 150 do
     s()
     g()
     --b()
