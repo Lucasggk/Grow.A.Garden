@@ -1,14 +1,16 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
-local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
-local buyMoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
+--local buyMoon = ReplicatedStorage.GameEvents.BuyEventShopStock
+--local buyMoon2 = ReplicatedStorage.GameEvents.BuyNightEventShopStock
 local buyPet = ReplicatedStorage.GameEvents.BuyPetEgg
 
 local seed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk"}
 local gear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler"}
+--[[
 local bloodlit = {"Mysterious Crate", "Night Seed Pack", "Night Egg", "Blood Banana", "Moon Melon", "Star Caller", "Blood Owl"}
 local moonlit = {"Night Egg", "Night Seed Pack", "Twilight Crate", "Star Caller", "Moon Cat", "Celestiberry", "Moon Mango"}
+]]
 local pet = {1, 2, 3}
 
 function s() 
@@ -22,7 +24,7 @@ function g()
     buyGear:FireServer(gr)
   end
 end
-
+--[[
 function b() 
   for _, bl in ipairs(bloodlit) do
     buyMoon:FireServer(bl)
@@ -34,9 +36,10 @@ function m()
     buyMoon2:FireServer(ml)
   end
 end
+]]
 
 function p() 
-for i = 1, 3 do
+for i = 1, 50 do
   for _, pt in ipairs(pet) do
     buyPet:FireServer(pt)
   end
@@ -48,8 +51,8 @@ function buyall()
   for i = 1, 50 do
     s()
     g()
-    b()
-    m()
+    --b()
+    --m()
     p()
     task.wait(0.05)
   end
