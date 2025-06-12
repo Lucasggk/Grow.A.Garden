@@ -524,61 +524,79 @@ ui:AddButton({
 
 --
 
-
-
-
-
 local section = event:AddSection("Honey | bizze")
 local ativo = false
+local itensOrdenados = {}
 
 event:AddToggle("Auto Trade Machine", {
     Title = "Auto trade event machine\n",
-    Description = "Equips only Pollinated items and interacts with machine",
+    Description = "Equips only Pollinated items and interacts with machine (sorted by weight)",
     Default = false,
     Callback = function(toggle)
         ativo = toggle
         if not toggle then return end
 
+        local player = game:GetService("Players").LocalPlayer
+        local rs = game:GetService("ReplicatedStorage")
+
+        local function temPollinated(nome)
+            return nome:lower():find("pollinated") ~= nil
+        end
+
         task.spawn(function()
-            local player = game:GetService("Players").LocalPlayer
-            local rs = game:GetService("ReplicatedStorage")
-
-            local function temPollinated(nome)
-                return nome:lower():find("pollinated") ~= nil
-            end
-
             while ativo do
+                local novaLista = {}
                 local char = player.Character or player.CharacterAdded:Wait()
-                local humanoid = char:FindFirstChildOfClass("Humanoid")
                 local mochila = player:FindFirstChild("Backpack")
-                local itens = {}
 
                 for _, container in ipairs({char, mochila}) do
                     if container then
                         for _, item in ipairs(container:GetChildren()) do
                             if item:IsA("Tool") and temPollinated(item.Name) then
-                                table.insert(itens, item)
+                                local success, weight = pcall(function()
+                                    return item:FindFirstChild("Weight").Value
+                                end)
+                                if success then
+                                    table.insert(novaLista, {Tool = item, Weight = weight})
+                                end
                             end
                         end
                     end
                 end
 
-                for _, item in ipairs(itens) do
+                table.sort(novaLista, function(a, b)
+                    return a.Weight < b.Weight
+                end)
+
+                itensOrdenados = novaLista
+                task.wait(2)
+            end
+        end)
+
+        task.spawn(function()
+            while ativo do
+                local char = player.Character or player.CharacterAdded:Wait()
+                local humanoid = char:FindFirstChildOfClass("Humanoid")
+
+                for _, itemData in ipairs(itensOrdenados) do
                     if not ativo then return end
 
-                    humanoid:EquipTool(item)
-                    task.wait(0.1)
+                    local tool = itemData.Tool
+                    if tool and tool.Parent then
+                        humanoid:EquipTool(tool)
+                        task.wait(0.1)
 
-                    ufav()
-                    rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                        ufav()
+                        rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
 
-                    local tempo = tick()
-                    while ativo and char:FindFirstChildOfClass("Tool") == item do
-                        if tick() - tempo >= 2 then
-                            rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
-                            tempo = tick()
+                        local tempo = tick()
+                        while ativo and char:FindFirstChildOfClass("Tool") == tool do
+                            if tick() - tempo >= 2 then
+                                rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                                tempo = tick()
+                            end
+                            task.wait(0.5)
                         end
-                        task.wait(0.5)
                     end
                 end
 
