@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))() 
 local script_version = {
     -- version
-    version = "1.6",
+    version = "1.65",
     alpha = true,
     -- event 
     Night = false,
@@ -529,7 +529,7 @@ local ativo = false
 local itensOrdenados = {}
 
 event:AddToggle("Auto Trade Machine", {
-    Title = "Auto trade event machine\n",
+    Title = "Auto trade event machine",
     Description = "Equips only Pollinated items and interacts with machine (sorted by weight)",
     Default = false,
     Callback = function(toggle)
@@ -596,7 +596,7 @@ event:AddToggle("Auto Trade Machine", {
                             if label then
                                 local texto = label.Text
                                 if texto == "READY" or texto:match("^%d*%.?%d+/10 KG$") then
-                                    task.wait(0.1)
+                                    task.wait(0.25)
                                     rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
                                     break
                                 end
