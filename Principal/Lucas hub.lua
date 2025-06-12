@@ -1,8 +1,8 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))() 
 local script_version = {
     -- version
-    version = "1.55",
-    alpha = false,
+    version = "1.6",
+    alpha = true,
     -- event 
     Night = false,
     Bee = false,
