@@ -540,6 +540,7 @@ event:AddToggle("Auto Trade Machine", {
             return nome:lower():find("pollinated") ~= nil
         end
 
+        -- Atualiza a lista de itens ordenados por peso
         task.spawn(function()
             while ativo do
                 local novaLista = {}
@@ -570,6 +571,7 @@ event:AddToggle("Auto Trade Machine", {
             end
         end)
 
+        -- Interação com a máquina
         task.spawn(function()
             while ativo do
                 local char = player.Character or player.CharacterAdded:Wait()
@@ -584,22 +586,31 @@ event:AddToggle("Auto Trade Machine", {
                     if not ativo then return end
                     local tool = itemData.Tool
 
-                    if tool and tool.Parent then
-                        humanoid:EquipTool(tool)
-                        task.wait(0.1)
-                        ufav()
+                    if tool and tool.Parent and label then
+                        local texto = label.Text
+                        if texto == "READY" or texto:match("^%d*%.?%d+/10 KG$") then
 
-                        while ativo and char:FindFirstChildOfClass("Tool") == tool do
-                            if label then
-                                local texto = label.Text
-                                if texto == "READY" or texto:match("^%d*%.?%d+/10 KG$") then
-                                    task.wait(0.1)
-                                    rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
-                                    task.wait(0.1)
-                                    break
+                            repeat
+                                if not ativo then return end
+
+                                humanoid:EquipTool(tool)
+                                task.wait(0.1)
+                                ufav()
+
+                                rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                                task.wait(0.1)
+
+                                task.wait(0.5)
+
+                                local aindaTem = false
+                                for _, container in ipairs({char, player:FindFirstChild("Backpack")}) do
+                                    if container and container:FindFirstChild(tool.Name) then
+                                        aindaTem = true
+                                        break
+                                    end
                                 end
-                            end
-                            task.wait(0.25)
+                            until not aindaTem
+
                         end
                     end
                 end
@@ -609,8 +620,6 @@ event:AddToggle("Auto Trade Machine", {
         end)
     end
 })
-
-
 event:AddButton({
     Title = "Honey Shop UI",
     Description = "Ativa/Desativa a loja de Honey",
