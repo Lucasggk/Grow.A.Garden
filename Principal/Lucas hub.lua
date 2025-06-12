@@ -543,6 +543,7 @@ event:AddToggle("Auto Trade Machine", {
             return nome:lower():find("pollinated") ~= nil
         end
 
+        -- Atualizador de lista de itens
         task.spawn(function()
             while ativo do
                 local novaLista = {}
@@ -573,29 +574,35 @@ event:AddToggle("Auto Trade Machine", {
             end
         end)
 
+        -- Executor de troca quando pronto
         task.spawn(function()
             while ativo do
                 local char = player.Character or player.CharacterAdded:Wait()
                 local humanoid = char:FindFirstChildOfClass("Humanoid")
+                local label
+
+                pcall(function()
+                    label = workspace.HoneyEvent.HoneyCombpressor.Sign.SurfaceGui.TextLabel
+                end)
 
                 for _, itemData in ipairs(itensOrdenados) do
                     if not ativo then return end
-
                     local tool = itemData.Tool
+
                     if tool and tool.Parent then
                         humanoid:EquipTool(tool)
                         task.wait(0.1)
-
                         ufav()
-                        rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
 
-                        local tempo = tick()
                         while ativo and char:FindFirstChildOfClass("Tool") == tool do
-                            if tick() - tempo >= 2 then
-                                rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
-                                tempo = tick()
+                            if label then
+                                local texto = label.Text
+                                if texto == "Ready!" or texto:match("^%d*%.?%d+/10kg$") then
+                                    rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                                    break
+                                end
                             end
-                            task.wait(0.5)
+                            task.wait(0.25)
                         end
                     end
                 end
