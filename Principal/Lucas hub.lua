@@ -529,7 +529,7 @@ local ativo = false
 local itensOrdenados = {}
 
 event:AddToggle("Auto Trade Machine", {
-    Title = "Auto trade event machine",
+    Title = "Auto trade event machine\n",
     Description = "Equips only Pollinated items and interacts with machine (sorted by weight)",
     Default = false,
     Callback = function(toggle)
@@ -543,7 +543,6 @@ event:AddToggle("Auto Trade Machine", {
             return nome:lower():find("pollinated") ~= nil
         end
 
-        -- Atualiza lista de itens com peso a cada 2 segundos
         task.spawn(function()
             while ativo do
                 local novaLista = {}
@@ -574,7 +573,6 @@ event:AddToggle("Auto Trade Machine", {
             end
         end)
 
-        -- Executa troca quando texto for READY ou X/10 KG
         task.spawn(function()
             while ativo do
                 local char = player.Character or player.CharacterAdded:Wait()
@@ -598,6 +596,7 @@ event:AddToggle("Auto Trade Machine", {
                             if label then
                                 local texto = label.Text
                                 if texto == "READY" or texto:match("^%d*%.?%d+/10 KG$") then
+                                    task.wait(0.1)
                                     rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
                                     break
                                 end
