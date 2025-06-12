@@ -593,8 +593,9 @@ event:AddToggle("Auto Trade Machine", {
                             if label then
                                 local texto = label.Text
                                 if texto == "READY" or texto:match("^%d*%.?%d+/10 KG$") then
-                                    task.wait(0.25)
+                                    task.wait(0.1)
                                     rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                                    task.wait(0.1)
                                     break
                                 end
                             end
@@ -608,6 +609,7 @@ event:AddToggle("Auto Trade Machine", {
         end)
     end
 })
+
 
 event:AddButton({
     Title = "Honey Shop UI",
