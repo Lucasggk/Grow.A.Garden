@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))() 
 local script_version = {
     -- version
-    version = "1.675",
+    version = "1.7 Test",
     alpha = true,
     -- event 
     Night = false,
@@ -705,13 +705,13 @@ task.spawn(function()
             lastMinute = minutos
 
             if bsa then
-                byallseedfc()
+                task.spawn(byallseedfc)
             end
             if bsg then
-                byallgearfc()
+                task.spawn(byallgearfc)
             end
             if bsp then
-                buypetegg()
+                task.spawn(buypetegg)
             end
         end
         task.wait(1)
