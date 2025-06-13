@@ -1,3 +1,20 @@
+
+task.spawn(function()
+    local vu = game:GetService("VirtualUser")
+    game:GetService("Players").LocalPlayer.Idled:Connect(function()
+        vu:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+        task.wait(1)
+        vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+    end)
+end)
+
+
+if game.PlaceId ~= 126884695634066 then
+    return 
+end
+
+
+
 local player = game:GetService("Players").LocalPlayer
 local rs = game:GetService("ReplicatedStorage")
 local scrollingFrame = player.PlayerGui.Seed_Shop.Frame.ScrollingFrame
