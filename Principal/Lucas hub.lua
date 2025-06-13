@@ -527,7 +527,7 @@ local itensOrdenados = {}
 
 event:AddToggle("Auto Trade Machine", {
     Title = "Auto trade event machine",
-    Description = "Equips only Pollinated items and interacts with machine (sorted by weight)",
+    Description = "Equipe apenas itens Polinizados e interaja com a máquina do evento (ordenado por peso)",
     Default = false,
     Callback = function(toggle)
         ativo = toggle
@@ -551,11 +551,9 @@ event:AddToggle("Auto Trade Machine", {
                     if container then
                         for _, item in ipairs(container:GetChildren()) do
                             if item:IsA("Tool") and temPollinated(item.Name) then
-                                local success, weight = pcall(function()
-                                    return item:FindFirstChild("Weight").Value
-                                end)
-                                if success then
-                                    table.insert(novaLista, {Tool = item, Weight = weight})
+                                local weightObj = item:FindFirstChild("Weight")
+                                if weightObj and weightObj:IsA("NumberValue") then
+                                    table.insert(novaLista, {Tool = item, Weight = weightObj.Value})
                                 end
                             end
                         end
@@ -582,16 +580,19 @@ event:AddToggle("Auto Trade Machine", {
                     label = workspace.HoneyEvent.HoneyCombpressor.Sign.SurfaceGui.TextLabel
                 end)
 
-                for _, itemData in ipairs(itensOrdenados) do
-                    if not ativo then return end
+                local listaLocal = table.clone(itensOrdenados)
+
+                for _, itemData in ipairs(listaLocal) do
+                    if not ativo then break end
                     local tool = itemData.Tool
 
                     if tool and tool.Parent and label then
                         local texto = label.Text
                         if texto == "READY" or texto:match("^%d*%.?%d+/10 KG$") then
 
+                            local tentativas = 0
                             repeat
-                                if not ativo then return end
+                                if not ativo then break end
 
                                 humanoid:EquipTool(tool)
                                 task.wait(0.1)
@@ -602,6 +603,7 @@ event:AddToggle("Auto Trade Machine", {
 
                                 task.wait(0.5)
 
+                                tentativas += 1
                                 local aindaTem = false
                                 for _, container in ipairs({char, player:FindFirstChild("Backpack")}) do
                                     if container and container:FindFirstChild(tool.Name) then
@@ -609,7 +611,7 @@ event:AddToggle("Auto Trade Machine", {
                                         break
                                     end
                                 end
-                            until not aindaTem
+                            until not aindaTem or tentativas >= 10
 
                         end
                     end
@@ -620,6 +622,7 @@ event:AddToggle("Auto Trade Machine", {
         end)
     end
 })
+
 event:AddButton({
     Title = "Honey Shop UI",
     Description = "Ativa/Desativa a loja de Honey",
