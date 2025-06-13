@@ -1,3 +1,4 @@
+wait(5)
 
 task.spawn(function()
     local vu = game:GetService("VirtualUser")
