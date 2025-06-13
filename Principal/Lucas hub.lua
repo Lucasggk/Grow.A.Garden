@@ -672,6 +672,27 @@ end)
 
 
 
+task.spawn(function()
+    local lastMinute = -1
+    while true do
+        local minutos = os.date("*t").min
+        if minutos ~= lastMinute then
+            lastMinute = minutos
+
+            if bsb then
+                byallbeefc()
+            end
+            if bsm then
+                byallmoonfc()
+            end
+            if bsm2 then
+                byallmoon2fc()
+            end
+        end
+        task.wait(1)
+    end
+end)
+
 
   
 --
@@ -686,27 +707,16 @@ task.spawn(function()
             if bsa then
                 byallseedfc()
             end
-            if bsm then
-                byallmoonfc()
-            end
             if bsg then
                 byallgearfc()
             end
-            if bsm2 then
-                byallmoon2fc()
-            end
             if bsp then
                 buypetegg()
-            end
-            if bsb then 
-                byallbeefc()
             end
         end
         task.wait(1)
     end
 end)
-
-
 
 game:GetService("Players").LocalPlayer.Idled:Connect(function()
     local VirtualUser = game:GetService("VirtualUser")
