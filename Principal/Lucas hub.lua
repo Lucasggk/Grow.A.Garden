@@ -525,8 +525,8 @@ local section = event:AddSection("Honey | bizze")
 local ativo = false
 local itensOrdenados = {}
 
-event:AddToggle("Auto Trade Machine", {
-    Title = "Auto trade event machine",
+event:AddToggle("Auto Máquina de Troca", {
+    Title = "Auto Máquina de Troca",
     Description = "Equipe apenas itens Polinizados e interaja com a máquina do evento (ordenado por peso)",
     Default = false,
     Callback = function(toggle)
@@ -590,28 +590,18 @@ event:AddToggle("Auto Trade Machine", {
                         local texto = label.Text
                         if texto == "READY" or texto:match("^%d*%.?%d+/10 KG$") then
 
-                            local tentativas = 0
-                            repeat
-                                if not ativo then break end
+                            if tool.Parent == player.Backpack or tool.Parent == player.Character then
+                                local sucesso, erro = pcall(function()
+                                    humanoid:EquipTool(tool)
+                                end)
 
-                                humanoid:EquipTool(tool)
-                                task.wait(0.1)
-                                ufav()
-
-                                rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
-                                task.wait(0.1)
-
-                                task.wait(0.5)
-
-                                tentativas += 1
-                                local aindaTem = false
-                                for _, container in ipairs({char, player:FindFirstChild("Backpack")}) do
-                                    if container and container:FindFirstChild(tool.Name) then
-                                        aindaTem = true
-                                        break
-                                    end
+                                if sucesso then
+                                    task.wait(0.1)
+                                    ufav()
+                                    rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                                    task.wait(0.6)
                                 end
-                            until not aindaTem or tentativas >= 10
+                            end
 
                         end
                     end
