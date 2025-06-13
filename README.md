@@ -34,6 +34,11 @@ task.wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Auto%20buy.lua"))()
 ``` 
 
+## Auto buy v2
+```lua
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Auto%20buyV2.lua"))()
+```
+
 # meu script:)
 
 ```lua
