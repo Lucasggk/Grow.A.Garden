@@ -633,10 +633,7 @@ local bsb = false
 function byallbeefc()
     for i = 1, 25 do
         for _, bee in ipairs(selectedBees) do
-            local args = {
-                [1] = bee
-            }
-            game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock:FireServer(unpack(args))
+            game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock:FireServer(bee)
             task.wait()
         end
     end
