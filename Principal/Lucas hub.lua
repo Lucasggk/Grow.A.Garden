@@ -585,7 +585,6 @@ event:AddToggle("Auto Máquina de Troca", {
                 for _, itemData in ipairs(listaLocal) do
                     if not ativo then break end
                     local tool = itemData.Tool
-
                     if tool and tool.Parent and label then
                         local texto = label.Text
                         if texto == "READY" or texto:match("^%d*%.?%d+/10 KG$") then
@@ -692,9 +691,6 @@ task.spawn(function()
         task.wait(1)
     end
 end)
-
-
-  
 --
 
 task.spawn(function()
