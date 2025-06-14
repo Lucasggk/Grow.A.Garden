@@ -1,4 +1,5 @@
-wait(5)
+repeat task.wait() until game:IsLoaded()
+repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui") 
 
 task.spawn(function()
     local vu = game:GetService("VirtualUser")
