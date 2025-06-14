@@ -2,9 +2,9 @@ local section = event:AddSection("Honey | bizze")
 local ativo = false
 local itensOrdenados = {}
 
-event:AddToggle("Auto Trade Machine", {
-    Title = "Auto trade event machine",
-    Description = "Equips only Pollinated items and interacts with machine (sorted by weight)",
+event:AddToggle("Auto Máquina de Troca", {
+    Title = "Auto Máquina de Troca",
+    Description = "Equipe apenas itens Polinizados e interaja com a máquina do evento (ordenado por peso)",
     Default = false,
     Callback = function(toggle)
         ativo = toggle
@@ -17,6 +17,7 @@ event:AddToggle("Auto Trade Machine", {
             return nome:lower():find("pollinated") ~= nil
         end
 
+        -- Atualiza a lista de itens ordenados por peso
         task.spawn(function()
             while ativo do
                 local novaLista = {}
@@ -27,11 +28,9 @@ event:AddToggle("Auto Trade Machine", {
                     if container then
                         for _, item in ipairs(container:GetChildren()) do
                             if item:IsA("Tool") and temPollinated(item.Name) then
-                                local success, weight = pcall(function()
-                                    return item:FindFirstChild("Weight").Value
-                                end)
-                                if success then
-                                    table.insert(novaLista, {Tool = item, Weight = weight})
+                                local weightObj = item:FindFirstChild("Weight")
+                                if weightObj and weightObj:IsA("NumberValue") then
+                                    table.insert(novaLista, {Tool = item, Weight = weightObj.Value})
                                 end
                             end
                         end
@@ -47,6 +46,7 @@ event:AddToggle("Auto Trade Machine", {
             end
         end)
 
+        -- Interação com a máquina
         task.spawn(function()
             while ativo do
                 local char = player.Character or player.CharacterAdded:Wait()
@@ -57,25 +57,28 @@ event:AddToggle("Auto Trade Machine", {
                     label = workspace.HoneyEvent.HoneyCombpressor.Sign.SurfaceGui.TextLabel
                 end)
 
-                for _, itemData in ipairs(itensOrdenados) do
-                    if not ativo then return end
+                local listaLocal = table.clone(itensOrdenados)
+
+                for _, itemData in ipairs(listaLocal) do
+                    if not ativo then break end
                     local tool = itemData.Tool
+                    if tool and tool.Parent and label then
+                        local texto = label.Text
+                        if texto == "READY" or texto:match("^%d*%.?%d+/10 KG$") then
 
-                    if tool and tool.Parent then
-                        humanoid:EquipTool(tool)
-                        task.wait(0.1)
-                        ufav()
+                            if tool.Parent == player.Backpack or tool.Parent == player.Character then
+                                local sucesso, erro = pcall(function()
+                                    humanoid:EquipTool(tool)
+                                end)
 
-                        while ativo and char:FindFirstChildOfClass("Tool") == tool do
-                            if label then
-                                local texto = label.Text
-                                if texto == "READY" or texto:match("^%d*%.?%d+/10 KG$") then
-                                    task.wait(0.25)
+                                if sucesso then
+                                    task.wait(0.1)
+                                    ufav()
                                     rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
-                                    break
+                                    task.wait(0.6)
                                 end
                             end
-                            task.wait(0.25)
+
                         end
                     end
                 end
@@ -86,7 +89,7 @@ event:AddToggle("Auto Trade Machine", {
     end
 })
 
-ui:AddButton({
+event:AddButton({
     Title = "Honey Shop UI",
     Description = "Ativa/Desativa a loja de Honey",
     Callback = function()
@@ -106,18 +109,15 @@ local bsb = false
 function byallbeefc()
     for i = 1, 25 do
         for _, bee in ipairs(selectedBees) do
-            local args = {
-                [1] = bee
-            }
-            game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock:FireServer(unpack(args))
+            game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock:FireServer(bee)
             task.wait()
         end
     end
 end
 
-local section = loja:AddSection("Shop Honey")
+local section = event:AddSection("Shop Honey")
 
-loja:AddToggle("", {
+event:AddToggle("", {
     Title = "Buy all Bee Shop",
     Description = "Buy all Bee shop",
     Default = false,
@@ -126,7 +126,7 @@ loja:AddToggle("", {
     end
 })
 
-local dropdownBee = loja:AddDropdown("DropdownSeed", {
+local dropdownBee = event:AddDropdown("DropdownSeed", {
     Title = "Selecione Beeshop para comprar\n",
     Description = "Selecione Beeshop para comprar\n",
     Values = byallBee,
@@ -140,20 +140,5 @@ dropdownBee:OnChanged(function(Value)
         if state then
             table.insert(selectedBees, v)
         end
-    end
-end)
-
-task.spawn(function()
-    local lastMinute = -1
-    while true do
-        local minutos = os.date("*t").min
-        if minutos ~= lastMinute then
-            lastMinute = minutos
-
-            if bsb then
-                byallbeefc()
-            end
-        end
-        task.wait(1)
     end
 end)
