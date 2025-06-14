@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))() 
 local script_version = {
     -- version
-    version = "1.7 Test",
+    version = "1.8",
     alpha = true,
     -- event 
     Night = false,
@@ -86,6 +86,11 @@ local pet = Window:AddTab({
 local ui = Window:AddTab({
         Title = "UIs",
         Icon = "list"
+    })
+
+local vuln = Window:AddTab({
+        Title = "Vulnerabilidade",
+        Icon = "list",
     })
 
 local event = Window:AddTab({
@@ -693,6 +698,49 @@ task.spawn(function()
     end
 end)
 --
+
+
+vuln:AddButton({
+        Title "Gear skip | Bee event",
+        Description = "skipa o tempo de criação De sua Gear",
+        Callback = function()
+            local args = {
+    [1] = "Claim",
+    [2] = workspace.Interaction.UpdateItems.NewCrafting.EventCraftingWorkBench,
+    [3] = "GearEventWorkbench",
+    [4] = 1
+}
+
+game:GetService("ReplicatedStorage").GameEvents.CraftingGlobalObjectService:FireServer(unpack(args))
+        end
+    })
+
+vuln:AddButton({
+        Title "Seed skip | Bee event",
+        Description = "skipa o tempo de criação De sua Seed",
+        Callback = function()
+            local args = {
+    [1] = "Claim",
+    [2] = workspace.Interaction.UpdateItems.NewCrafting.SeedEventCraftingWorkBench,
+    [3] = "SeedEventWorkbench",
+    [4] = 1
+}
+
+game:GetService("ReplicatedStorage").GameEvents.CraftingGlobalObjectService:FireServer(unpack(args))
+        end
+    })
+
+
+
+
+
+
+
+
+
+
+
+
 
 task.spawn(function()
     local lastMinute = -1
