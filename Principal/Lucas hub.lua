@@ -90,7 +90,7 @@ local ui = Window:AddTab({
 
 local vuln = Window:AddTab({
         Title = "Vulnerabilidade",
-        Icon = "list",
+        Icon = "list"
     })
 
 local event = Window:AddTab({
@@ -700,42 +700,37 @@ end)
 --
 
 
-vuln:AddButton({
-        Title "Gear skip | Bee event",
-        Description = "skipa o tempo de criação De sua Gear",
-        Callback = function()
-            local args = {
-    [1] = "Claim",
-    [2] = workspace.Interaction.UpdateItems.NewCrafting.EventCraftingWorkBench,
-    [3] = "GearEventWorkbench",
-    [4] = 1
-}
 
-game:GetService("ReplicatedStorage").GameEvents.CraftingGlobalObjectService:FireServer(unpack(args))
-        end
-    })
 
 vuln:AddButton({
-        Title "Seed skip | Bee event",
-        Description = "skipa o tempo de criação De sua Seed",
-        Callback = function()
-            local args = {
-    [1] = "Claim",
-    [2] = workspace.Interaction.UpdateItems.NewCrafting.SeedEventCraftingWorkBench,
-    [3] = "SeedEventWorkbench",
-    [4] = 1
-}
+    Title = "Gear skip | Bee event",
+    Description = "Skipa o tempo de criação da sua Gear",
+    Callback = function()
+        local args = {
+            [1] = "Claim",
+            [2] = workspace.Interaction.UpdateItems.NewCrafting.EventCraftingWorkBench,
+            [3] = "GearEventWorkbench",
+            [4] = 1
+        }
 
-game:GetService("ReplicatedStorage").GameEvents.CraftingGlobalObjectService:FireServer(unpack(args))
-        end
-    })
+        game:GetService("ReplicatedStorage").GameEvents.CraftingGlobalObjectService:FireServer(unpack(args))
+    end
+})
 
+vuln:AddButton({
+    Title = "Seed skip | Bee event",
+    Description = "Skipa o tempo de criação da sua Seed",
+    Callback = function()
+        local args = {
+            [1] = "Claim",
+            [2] = workspace.Interaction.UpdateItems.NewCrafting.SeedEventCraftingWorkBench,
+            [3] = "SeedEventWorkbench",
+            [4] = 1
+        }
 
-
-
-
-
-
+        game:GetService("ReplicatedStorage").GameEvents.CraftingGlobalObjectService:FireServer(unpack(args))
+    end
+})
 
 
 
