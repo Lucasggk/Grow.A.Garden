@@ -702,11 +702,12 @@ local versgame = (game:GetService("Players").LocalPlayer.PlayerGui.Version_UI.Ve
 
 
 function svvererr(v)
-if versgame > v then
+local newv = tonumber(v)
+if versgame > newv then
         Fluent:Notify({
            Title = "Versão necessária errada!",
            Content = "Versão Atual: ".. versgame,
-           SubContent = "Você tem que estar na versão: ".. v .."Ou menos!",
+           SubContent = "Você tem que estar na versão: ".. newv .."Ou menos!",
            Duration = 5
 })
     end
