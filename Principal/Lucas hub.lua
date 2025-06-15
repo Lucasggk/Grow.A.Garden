@@ -701,7 +701,7 @@ end)
 
 local versgame = (game:GetService("Players").LocalPlayer.PlayerGui.Version_UI.Version.Text):gsub("^v", "")
 vuln:AddParagraph({
-        Title = "Versao atual".. versgame,
+        Title = "Versao atual do serve: ", Content = versgame
     })
 
 vuln:AddButton({
