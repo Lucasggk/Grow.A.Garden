@@ -15,6 +15,8 @@ if game.PlaceId ~= 126884695634066 then
     return 
 end
 
+game:GetService("StarterGui"):SetCore("SendNotification",{Title="Script Executado",Text="O script foi iniciado com sucesso!",Duration=5})
+
 -- false compra
 -- true ignora
 
