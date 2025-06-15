@@ -698,8 +698,20 @@ task.spawn(function()
     end
 end)
 --
-
 local versgame = (game:GetService("Players").LocalPlayer.PlayerGui.Version_UI.Version.Text):gsub("^v", "")
+
+
+function svvererr(v)
+if versgame > v then
+        Fluent:Notify({
+           Title = "Versão necessária errada!",
+           Content = "Versão Atual: ".. versgame,
+           SubContent = "Você tem que estar na versão: ".. v .."Ou menos!",
+           Duration = 5
+})
+    end
+end
+
 vuln:AddParagraph({
         Title = "Versao atual do serve: ", Content = versgame
     })
@@ -708,6 +720,7 @@ vuln:AddButton({
     Title = "Gear skip | Bee event",
     Description = "Skipa o tempo de criação da sua Gear",
     Callback = function()
+        svvererr(1349)
         local args = {
             [1] = "Claim",
             [2] = workspace.Interaction.UpdateItems.NewCrafting.EventCraftingWorkBench,
@@ -723,6 +736,7 @@ vuln:AddButton({
     Title = "Seed skip | Bee event",
     Description = "Skipa o tempo de criação da sua Seed",
     Callback = function()
+        svvererr(1349)
         local args = {
             [1] = "Claim",
             [2] = workspace.Interaction.UpdateItems.NewCrafting.SeedEventCraftingWorkBench,
