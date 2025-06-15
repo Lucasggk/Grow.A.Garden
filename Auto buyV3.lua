@@ -15,11 +15,11 @@ if game.PlaceId ~= 126884695634066 then
     return 
 end
 
-local player = game:GetService("Players").LocalPlayer
-local rs = game:GetService("ReplicatedStorage")
-local scrollingFrame = player.PlayerGui.Seed_Shop.Frame.ScrollingFrame
+-- false compra
+-- true ignora
 
 local ignoreNames = {
+    -- Sementes
     ["Carrot"] = true,
     ["Strawberry"] = true,
     ["Blueberry"] = true,
@@ -42,7 +42,25 @@ local ignoreNames = {
     ["Beanstalk"] = false,
     ["Ember Lily"] = false,
     ["Sugar Apple"] = false,
+
+    -- Gears
+    ["Watering Can"] = false,
+    ["Trowel"] = false,
+    ["Recall Wrench"] = false,
+    ["Basic Sprinkler"] = false,
+    ["Advanced Sprinkler"] = false,
+    ["Godly Sprinkler"] = false,
+    ["Lightning Rod"] = false,
+    ["Master Sprinkler"] = false,
+    ["Cleaning Spray"] = true,
+    ["Favorite Tool"] = true,
+    ["Harvest Tool"] = true,
+    ["Friendship Pot"] = true,
 }
+
+local player = game:GetService("Players").LocalPlayer
+local rs = game:GetService("ReplicatedStorage")
+local scrollingFrame = player.PlayerGui.Seed_Shop.Frame.ScrollingFrame
 
 task.spawn(function()
     while true do
