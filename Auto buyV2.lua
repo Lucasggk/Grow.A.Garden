@@ -32,7 +32,7 @@ task.spawn(function()
                 end
             end
         end
-        task.wait(0.1) -- intervalo geral entre cada varredura
+        task.wait(0.1) 
     end
 end)
 
