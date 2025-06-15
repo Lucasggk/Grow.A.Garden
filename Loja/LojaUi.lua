@@ -229,19 +229,24 @@ function ufav()
     local player = game:GetService("Players").LocalPlayer
     local char = player.Character
     local backpack = player.Backpack
-
     local tool = char:FindFirstChildOfClass("Tool") or backpack:FindFirstChildOfClass("Tool")
-
     if tool and tool:GetAttribute("Favorite") == true then
-
         game:GetService("ReplicatedStorage").GameEvents.Favorite_Item:FireServer(tool)
     end
 end
 
-
 local section = event:AddSection("Honey | bizze")
 local ativo = false
 local itensOrdenados = {}
+
+-- função de clone segura
+local function shallowClone(tbl)
+    local t = {}
+    for i, v in ipairs(tbl) do
+        t[i] = v
+    end
+    return t
+end
 
 event:AddToggle("Auto Máquina de Troca", {
     Title = "Auto Máquina de Troca",
@@ -264,7 +269,6 @@ event:AddToggle("Auto Máquina de Troca", {
                 local novaLista = {}
                 local char = player.Character or player.CharacterAdded:Wait()
                 local mochila = player:FindFirstChild("Backpack")
-
                 for _, container in ipairs({char, mochila}) do
                     if container then
                         for _, item in ipairs(container:GetChildren()) do
@@ -277,11 +281,9 @@ event:AddToggle("Auto Máquina de Troca", {
                         end
                     end
                 end
-
                 table.sort(novaLista, function(a, b)
                     return a.Weight < b.Weight
                 end)
-
                 itensOrdenados = novaLista
                 task.wait(2)
             end
@@ -291,39 +293,39 @@ event:AddToggle("Auto Máquina de Troca", {
         task.spawn(function()
             while ativo do
                 local char = player.Character or player.CharacterAdded:Wait()
-                local humanoid = char:FindFirstChildOfClass("Humanoid")
-                local label
+                local humanoid = char and char:FindFirstChildOfClass("Humanoid")
+                local label = nil
 
                 pcall(function()
-                    label = workspace.HoneyEvent.HoneyCombpressor.Sign.SurfaceGui.TextLabel
+                    local sign = workspace:FindFirstChild("HoneyEvent") and workspace.HoneyEvent:FindFirstChild("HoneyCombpressor")
+                    if sign and sign:FindFirstChild("Sign") and sign.Sign:FindFirstChild("SurfaceGui") then
+                        label = sign.Sign.SurfaceGui:FindFirstChild("TextLabel")
+                    end
                 end)
 
-                local listaLocal = table.clone(itensOrdenados)
+                local listaLocal = shallowClone(itensOrdenados)
 
                 for _, itemData in ipairs(listaLocal) do
                     if not ativo then break end
                     local tool = itemData.Tool
-                    if tool and tool.Parent and label then
+                    if tool and tool.Parent and label and humanoid then
                         local texto = label.Text
                         if texto == "READY" or texto:match("^%d*%.?%d+/10 KG$") then
-
                             if tool.Parent == player.Backpack or tool.Parent == player.Character then
                                 local sucesso, erro = pcall(function()
                                     humanoid:EquipTool(tool)
                                 end)
-
-                                if sucesso then
+                                if sucesso and tool.Parent == char then
                                     task.wait(0.1)
                                     ufav()
+                                    task.wait(0.05)
                                     rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
                                     task.wait(0.6)
                                 end
                             end
-
                         end
                     end
                 end
-
                 task.wait(0.5)
             end
         end)
