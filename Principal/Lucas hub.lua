@@ -699,8 +699,10 @@ task.spawn(function()
 end)
 --
 
-
-
+local versgame = (game:GetService("Players").LocalPlayer.PlayerGui.Version_UI.Version.Text):gsub("^v", "")
+vuln:AddParagraph({
+        Title = "Versao atual".. versgame,
+    })
 
 vuln:AddButton({
     Title = "Gear skip | Bee event",
