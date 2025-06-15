@@ -225,7 +225,7 @@ end
 local section = loja:AddSection("Seeds")
 
 loja:AddToggle("", {
-    Title = "Buy all shop seed",
+    Title = "Buy shop seed",
     Description = "Buy all shop seed",
     Default = false,
     Callback = function(Value)
@@ -647,7 +647,7 @@ end
 local section = event:AddSection("Shop Honey")
 
 event:AddToggle("", {
-    Title = "Buy all Bee Shop",
+    Title = "Buy Bee Shop",
     Description = "Buy all Bee shop",
     Default = false,
     Callback = function(Value)
