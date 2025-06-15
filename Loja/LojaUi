@@ -222,3 +222,94 @@ task.spawn(function()
         task.wait(1)
     end
 end)
+
+local section = event:AddSection("Honey | bizze")
+local ativo = false
+local itensOrdenados = {}
+
+event:AddToggle("Auto Máquina de Troca", {
+    Title = "Auto Máquina de Troca",
+    Description = "Equipe apenas itens Polinizados e interaja com a máquina do evento (ordenado por peso)",
+    Default = false,
+    Callback = function(toggle)
+        ativo = toggle
+        if not toggle then return end
+
+        local player = game:GetService("Players").LocalPlayer
+        local rs = game:GetService("ReplicatedStorage")
+
+        local function temPollinated(nome)
+            return nome:lower():find("pollinated") ~= nil
+        end
+
+        -- Atualiza a lista de itens ordenados por peso
+        task.spawn(function()
+            while ativo do
+                local novaLista = {}
+                local char = player.Character or player.CharacterAdded:Wait()
+                local mochila = player:FindFirstChild("Backpack")
+
+                for _, container in ipairs({char, mochila}) do
+                    if container then
+                        for _, item in ipairs(container:GetChildren()) do
+                            if item:IsA("Tool") and temPollinated(item.Name) then
+                                local weightObj = item:FindFirstChild("Weight")
+                                if weightObj and weightObj:IsA("NumberValue") then
+                                    table.insert(novaLista, {Tool = item, Weight = weightObj.Value})
+                                end
+                            end
+                        end
+                    end
+                end
+
+                table.sort(novaLista, function(a, b)
+                    return a.Weight < b.Weight
+                end)
+
+                itensOrdenados = novaLista
+                task.wait(2)
+            end
+        end)
+
+        -- Interação com a máquina
+        task.spawn(function()
+            while ativo do
+                local char = player.Character or player.CharacterAdded:Wait()
+                local humanoid = char:FindFirstChildOfClass("Humanoid")
+                local label
+
+                pcall(function()
+                    label = workspace.HoneyEvent.HoneyCombpressor.Sign.SurfaceGui.TextLabel
+                end)
+
+                local listaLocal = table.clone(itensOrdenados)
+
+                for _, itemData in ipairs(listaLocal) do
+                    if not ativo then break end
+                    local tool = itemData.Tool
+                    if tool and tool.Parent and label then
+                        local texto = label.Text
+                        if texto == "READY" or texto:match("^%d*%.?%d+/10 KG$") then
+
+                            if tool.Parent == player.Backpack or tool.Parent == player.Character then
+                                local sucesso, erro = pcall(function()
+                                    humanoid:EquipTool(tool)
+                                end)
+
+                                if sucesso then
+                                    task.wait(0.1)
+                                    ufav()
+                                    rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
+                                    task.wait(0.6)
+                                end
+                            end
+
+                        end
+                    end
+                end
+
+                task.wait(0.5)
+            end
+        end)
+    end
+})
