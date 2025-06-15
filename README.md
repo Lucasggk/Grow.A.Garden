@@ -32,21 +32,21 @@ task.wait(0.1)
 ### compra itens selecionados usando o método normal 
 
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Auto%20buy.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Loja/Auto%20buy.lua"))()
 ``` 
 
 ## Auto buy v2
 ### compra todos itens da loja usando método rápido (bom)
 
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Auto%20buyV2.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Loja/Auto%20buyV2.lua"))()
 ```
 
 ## Auto buy v3
 ### compra todos itens selecionados usando método rápido (bom)
 
 ```lua
-
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Loja/Auto%20buyV3.lua"))()
 ```
 
 # meu script:)
