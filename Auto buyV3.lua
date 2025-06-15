@@ -108,3 +108,22 @@ task.spawn(function()
         task.wait(0.1)
     end
 end)
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local buyPet = ReplicatedStorage.GameEvents.BuyPetEgg
+local pet = {1, 2, 3}
+
+task.spawn(function()
+    while true do
+        local t = tick()
+        local waitTime = 60 - (t % 60)
+        task.wait(waitTime) 
+
+        for i = 1, 3 do
+            for _, pt in ipairs(pet) do
+                buyPet:FireServer(pt)
+            end
+            task.wait(0.1)
+        end
+    end
+end)
