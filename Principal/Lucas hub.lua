@@ -700,18 +700,20 @@ end)
 --
 local versgame = (game:GetService("Players").LocalPlayer.PlayerGui.Version_UI.Version.Text):gsub("^v", "")
 
-
 function svvererr(v)
-local newv = tonumber(v)
-if versgame > newv then
+    local newv = tonumber(v)
+    local numvers = tonumber(versgame)
+    if numvers and newv and numvers > newv then
         Fluent:Notify({
-           Title = "Versão necessária errada!",
-           Content = "Versão Atual: ".. versgame,
-           SubContent = "Você tem que estar na versão: ".. newv .."Ou menos!",
-           Duration = 5
-})
+            Title = "Versão necessária errada!",
+            Content = "Versão Atual: " .. versgame,
+            SubContent = "Você tem que estar na versão: " .. newv .. " ou menos!",
+            Duration = 5
+        })
     end
 end
+
+
 
 vuln:AddParagraph({
         Title = "Versao atual do serve: ", Content = versgame
