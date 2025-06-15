@@ -42,5 +42,5 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garde
 # meu script:)
 
 ```lua
-loadstring(game:HttpGet("https://github.com/Lucasggk/Grow.A.Garden/blob/main/Principal/Lucas.loader.lua"))()
+loadstring(game:HttpGet(""))()
 ```
