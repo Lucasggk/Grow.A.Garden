@@ -223,6 +223,22 @@ task.spawn(function()
     end
 end)
 
+
+
+function ufav()
+    local player = game:GetService("Players").LocalPlayer
+    local char = player.Character
+    local backpack = player.Backpack
+
+    local tool = char:FindFirstChildOfClass("Tool") or backpack:FindFirstChildOfClass("Tool")
+
+    if tool and tool:GetAttribute("Favorite") == true then
+
+        game:GetService("ReplicatedStorage").GameEvents.Favorite_Item:FireServer(tool)
+    end
+end
+
+
 local section = event:AddSection("Honey | bizze")
 local ativo = false
 local itensOrdenados = {}
