@@ -17,47 +17,47 @@ end
 
 game:GetService("StarterGui"):SetCore("SendNotification",{Title="Script Executado",Text="O script foi iniciado com sucesso!",Duration=5})
 
--- false compra
--- true ignora
+-- false ignora
+-- true compra
 
 local ignoreNames = {
     -- Sementes
-    ["Carrot"] = false,
-    ["Strawberry"] = false,
-    ["Blueberry"] = false,
-    ["Orange Tulip"] = false,
-    ["Tomato"] = false,
-    ["Corn"] = false,
-    ["Daffodil"] = false,
-    ["Watermelon"] = false,
-    ["Pumpkin"] = false,
-    ["Apple"] = false,
-    ["Bamboo"] = false,
-    ["Coconut"] = false,
-    ["Cactus"] = false,
-    ["Dragon Fruit"] = false,
-    ["Mango"] = false,
-    ["Grape"] = false,
-    ["Mushroom"] = false,
-    ["Pepper"] = false,
-    ["Cacao"] = false,
-    ["Beanstalk"] = false,
-    ["Ember Lily"] = false,
-    ["Sugar Apple"] = false,
+    ["Carrot"] = true,
+    ["Strawberry"] = true,
+    ["Blueberry"] = true,
+    ["Orange Tulip"] = true,
+    ["Tomato"] = true,
+    ["Corn"] = true,
+    ["Daffodil"] = true,
+    ["Watermelon"] = true,
+    ["Pumpkin"] = true,
+    ["Apple"] = true,
+    ["Bamboo"] = true,
+    ["Coconut"] = true,
+    ["Cactus"] = true,
+    ["Dragon Fruit"] = true,
+    ["Mango"] = true,
+    ["Grape"] = true,
+    ["Mushroom"] = true,
+    ["Pepper"] = true,
+    ["Cacao"] = true,
+    ["Beanstalk"] = true,
+    ["Ember Lily"] = true,
+    ["Sugar Apple"] = true,
 
     -- Gears
-    ["Watering Can"] = false,
-    ["Trowel"] = false,
-    ["Recall Wrench"] = false,
-    ["Basic Sprinkler"] = false,
-    ["Advanced Sprinkler"] = false,
-    ["Godly Sprinkler"] = false,
-    ["Lightning Rod"] = false,
-    ["Master Sprinkler"] = false,
-    ["Cleaning Spray"] = true,
-    ["Favorite Tool"] = true,
-    ["Harvest Tool"] = true,
-    ["Friendship Pot"] = true,
+    ["Watering Can"] = true,
+    ["Trowel"] = true,
+    ["Recall Wrench"] = true,
+    ["Basic Sprinkler"] = true,
+    ["Advanced Sprinkler"] = true,
+    ["Godly Sprinkler"] = true,
+    ["Lightning Rod"] = true,
+    ["Master Sprinkler"] = true,
+    ["Cleaning Spray"] = false,
+    ["Favorite Tool"] = false,
+    ["Harvest Tool"] = false,
+    ["Friendship Pot"] = false,
 }
 
 local player = game:GetService("Players").LocalPlayer
@@ -68,7 +68,7 @@ task.spawn(function()
     while true do
         for _, item in ipairs(scrollingFrame:GetChildren()) do
             if not string.find(item.Name, "_") then
-                if not ignoreNames[item.Name] then
+                if ignoreNames[item.Name] then
                     local stock = item:FindFirstChild("Main_Frame") and item.Main_Frame:FindFirstChild("Stock_Text")
                     if stock and stock:IsA("TextLabel") and stock.Text ~= "X0 Stock" then
                         rs.GameEvents.BuySeedStock:FireServer(item.Name)
@@ -77,7 +77,7 @@ task.spawn(function()
                 end
             else
                 local baseName = item.Name:gsub("_P", "")
-                if not (string.find(item.Name, "_P") and ignoreNames[baseName]) then
+                if string.find(item.Name, "_P") and ignoreNames[baseName] then
                     local stock = item:FindFirstChild("Main_Frame") and item.Main_Frame:FindFirstChild("Stock_Text")
                     if stock and stock:IsA("TextLabel") and stock.Text ~= "X0 Stock" then
                         rs.GameEvents.BuySeedStock:FireServer(item.Name)
@@ -96,7 +96,7 @@ task.spawn(function()
     while true do
         for _, item in ipairs(gearScroll:GetChildren()) do
             if item:IsA("Frame") then
-                if not ignoreNames[item.Name] and not string.find(item.Name, "_P") then
+                if ignoreNames[item.Name] and not string.find(item.Name, "_P") then
                     local stock = item:FindFirstChild("Main_Frame") and item.Main_Frame:FindFirstChild("Stock_Text")
                     if stock and stock:IsA("TextLabel") and stock.Text ~= "X0 Stock" then
                         rs.GameEvents.BuyGearStock:FireServer(item.Name)
@@ -109,8 +109,7 @@ task.spawn(function()
     end
 end)
 
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local buyPet = ReplicatedStorage.GameEvents.BuyPetEgg
+local buyPet = rs.GameEvents.BuyPetEgg
 local pet = {1, 2, 3}
 
 task.spawn(function()
