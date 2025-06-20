@@ -23,8 +23,8 @@ local localPlayer = Players.LocalPlayer
 
 local allowedIds = {
     [5557980719] = true,
-    [2400571180] = true,
-    [2000903030] = true
+    [2400571180] = false,
+    [2000903030] = false,
 }
 
 if not allowedIds[localPlayer.UserId] then
