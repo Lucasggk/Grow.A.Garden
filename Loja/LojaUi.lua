@@ -14,6 +14,27 @@ if game.PlaceId ~= 126884695634066 then
     return 
 end
 
+
+
+
+
+local Players = game:GetService("Players")
+local localPlayer = Players.LocalPlayer
+
+local allowedIds = {
+    [5557980719] = true,
+    [2400571180] = true,
+    [2000903030] = true
+}
+
+if not allowedIds[localPlayer.UserId] then
+    localPlayer:Kick("Você não tem permissão para usar este script.")
+end
+
+
+
+
+
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))() 
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage") 
