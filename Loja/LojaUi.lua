@@ -21,7 +21,7 @@ local buySeed = ReplicatedStorage.GameEvents.BuySeedStock
 local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
 local BuyPet = ReplicatedStorage.GameEvents.BuyPetEgg
 
-local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/release.lua", true))()
+local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/alpha.lua", true))()
 
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden |",
