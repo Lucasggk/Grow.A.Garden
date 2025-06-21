@@ -15,7 +15,7 @@ local seed = {
 
 local gear = {
     "Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler",
-    "Godly Sprinkler", "Lightning Rod", "Master Sprinkler"
+    "Godly Sprinkler", "Lightning Rod", "Master Sprinkler", "Tanning Mirror"
 }
 
 --[[
