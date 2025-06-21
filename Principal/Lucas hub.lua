@@ -113,7 +113,6 @@ InterfaceManager:BuildInterfaceSection(config)
 
 --[[ old
 local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk", "Ember Lily", "Sugar Apple"}
-local pseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk", "Ember Lily", "Sugar Apple"}
 ]]
 
 local byallseed = {
@@ -123,8 +122,6 @@ local byallseed = {
 }
 
 local bygear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Master Sprinkler", "Cleaning Spray", "Favorite Tool", "Harvest Tool", "Friendship Pot"}
-
-
 
 local bsa = false
 local bsg = false
@@ -137,7 +134,6 @@ local buypets = {1, 2, 3}
 local step = 0.001
 local x = Vector3.new(34.14344024658203, 0.13552513718605042, -112.62083435058594)
 local y = Vector3.new(31.82763671875, 0.13552513718605042, -112.6816635131836)
-local plap = ""
 
 local Pos = hrp.Position
 local pos = tostring(Pos)
@@ -326,18 +322,6 @@ plant:AddButton({
         end
     })
 
-local plantDropdown = plant:AddDropdown("Dropdown", {
-    Title = "Selecione a seed\n",
-    Description = "Selecione a seed\n",
-    Values = pseed,
-    Multi = false,
-    Default = 1,
-})
-
-plantDropdown:OnChanged(function(Value)
-    plap = Value
-end)
-
 local Slider = plant:AddSlider("Slider", 
 {
     Title = "Distancia de uma seed para outra\n",
@@ -353,18 +337,24 @@ local Slider = plant:AddSlider("Slider",
 
 plant:AddButton({
     Title = "click para plantar",
-    Description = "esteja com a seed na mão", 
+    Description = "esteja com a seed na mão",
     Callback = function()
+        local player = game.Players.LocalPlayer
+        local tool = player.Character and player.Character:FindFirstChildOfClass("Tool")
+        if not tool then return end
+
+        local baseName = tool.Name:match("^(.-)%s+[Ss]eed") or tool.Name
+        baseName = baseName:gsub("%s+$", "")
+
         local direction = (y - x).Unit
         local distance = (y - x).Magnitude
         for i = 0, distance, step do
             local pos = x + direction * i
-            Plant:FireServer(pos, plap)
+            Plant:FireServer(pos, baseName)
             task.wait()
         end
     end
 })
-
 --
 
 sell:AddButton({
