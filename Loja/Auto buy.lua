@@ -8,9 +8,9 @@ local buyGear = ReplicatedStorage.GameEvents.BuyGearStock
 local buyPet = ReplicatedStorage.GameEvents.BuyPetEgg
 
 local seed = {
-    "Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon",
-    "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom",
-    "Pepper", "Cacao", "Beanstalk", "Ember Lily", "Sugar Apple"
+    "Carrot", "Strawberry", "Blueberry", "Tomato", "Cauliflower", "Watermelon", "Green Apple",
+    "Avocado", "Banana", "Pineapple", "Kiwi", "Bell Pepper", "Prickly Pear", "Loquat",
+    "Feijoa", "Sugar Apple"
 }
 
 local gear = {
