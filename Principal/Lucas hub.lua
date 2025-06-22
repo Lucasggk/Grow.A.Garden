@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "1.8",
+    version = "2",
     alpha = true,
     -- event 
     Night = false,
@@ -375,17 +375,38 @@ sell:AddSlider("Slider", {
 })
 
 function platse()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local hrp = character:FindFirstChild("HumanoidRootPart")
+    local tool = character:FindFirstChildOfClass("Tool")
+    if not (tool and hrp) then return end
+
+    local baseName = tool.Name:match("^(.-)%s+[Ss]eed") or tool.Name
+    baseName = baseName:gsub("%s+$", "")
+
+    local pos = hrp.Position
+    local altura = math.random() * (10 - 0.13) + 0.13
+    local args = {
+        [1] = Vector3.new(pos.X, altura, pos.Z),
+        [2] = baseName
+    }
+
+    game:GetService("ReplicatedStorage").GameEvents.Plant_RE:FireServer(unpack(args))
+end
     
-
-sell:AddToggle("",{
-        Title = "Auto Spam plant",
-        Description = "planta a seed na sua mão em sua atual localização\n",
-        Default = false,
-        Callback = function(v) 
-            
-
-
-
+sell:AddToggle({
+    Title = "Auto Spam plant",
+    Description = "Planta a seed na sua mão em sua atual localização\n",
+    Default = false,
+    Callback = function(v) 
+        task.spawn(function()
+            while v do 
+                platse()
+                task.wait(dlayp)
+            end
+        end)
+    end
+})
 
 --
 
