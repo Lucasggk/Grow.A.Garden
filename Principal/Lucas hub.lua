@@ -363,7 +363,7 @@ plant:AddSection("plant spam")
 
 local dlayp = 0.2
 
-sell:AddSlider("Slider", {
+plant:AddSlider("Slider", {
     Title = "Delay do spam plant",
     Default = dlayp,
     Min = 0.05,
@@ -394,7 +394,7 @@ function platse()
     game:GetService("ReplicatedStorage").GameEvents.Plant_RE:FireServer(unpack(args))
 end
     
-sell:AddToggle({
+plant:AddToggle({
     Title = "Auto Spam plant",
     Description = "Planta a seed na sua mão em sua atual localização\n",
     Default = false,
@@ -410,40 +410,41 @@ sell:AddToggle({
 
 --
 
+local tmpps = 30
+
 sell:AddButton({
     Title = "Vender Colheitas",
-    Description = "vende para o seller",
+    Description = "Vende para o vendedor imediatamente.",
     Callback = function()
-        tsf()       
+        tsf()
     end
 })
 
-local tmpps = 30
-
-sell:AddSlider("Slider", {
-    Title = "delay para o auto sell",
+sell:AddSlider("SellDelaySlider", {
+    Title = "Delay do Auto Sell (segundos)",
+    Description = "Define o intervalo entre cada venda automática.",
     Default = tmpps,
     Min = 20,
     Max = 60,
     Rounding = 1,
-    Callback = function(Value)
-        tmpps = Value
+    Callback = function(value)
+        tmpps = value
     end
 })
-        
 
- sell:AddToggle({
+sell:AddToggle({
     Title = "Vender Colheitas automaticamente",
+    Description = "Ativa a venda automática com base no delay definido.",
     Default = false,
-    Callback = function(a)
+    Callback = function(enabled)
         task.spawn(function()
-            while a do
+            while enabled do
                 tsf()
                 task.wait(tmpps)
             end
         end)
     end
-})       
+})
         
 --
 
