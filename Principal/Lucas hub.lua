@@ -411,7 +411,7 @@ plant:AddSection("Water manual")
 local Player = game.Players.LocalPlayer
 local HRP = Player.Character and Player.Character:WaitForChild("HumanoidRootPart")
 local Locations = {}
-local wms = 0.5
+local wms = 0.1
 local pwms = Vector3.new(-204.42526245117188, 0.13552704453468323, -83.74856567382812)
 local running = false
 
@@ -477,7 +477,7 @@ plant:AddSlider("Velocidade", {
 })
 
 plant:AddToggle("w", {
-    Title = "Ativar spam water (pos)",
+    Title = "Ativar spam water (pos do dropdown)",
     Default = false,
     Callback = function(v)
         running = v
@@ -486,6 +486,39 @@ plant:AddToggle("w", {
                 while running do
                     game:GetService("ReplicatedStorage").GameEvents.Water_RE:FireServer(pwms)
                     task.wait(wms)
+                end
+            end)
+        end
+    end
+})
+
+plant:AddSlider("DelayWater", {
+    Title = "Delay entre usos",
+    Min = 0.1,
+    Max = 5,
+    Default = 0.1,
+    Rounding = 1,
+    Callback = function(value)
+        getgenv().wms_spam = value
+    end
+})
+
+plant:AddToggle("ToggleWaterSpam", {
+    Title = "Ativar spam water (pos do player)",
+    Default = false,
+    Callback = function(state)
+        getgenv().running_spam = state
+        if state then
+            task.spawn(function()
+                while getgenv().running_spam do
+                    local player = game.Players.LocalPlayer
+                    local char = player.Character
+                    local hrp = char and char:FindFirstChild("HumanoidRootPart")
+                    if hrp then
+                        local pos = Vector3.new(hrp.Position.X, 0.14, hrp.Position.Z)
+                        game:GetService("ReplicatedStorage").GameEvents.Water_RE:FireServer(pos)
+                    end
+                    task.wait(getgenv().wms_spam or 0.1)
                 end
             end)
         end
