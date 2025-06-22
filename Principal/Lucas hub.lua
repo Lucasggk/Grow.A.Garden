@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2",
+    version = "2.1",
     alpha = true,
     -- event 
     Night = false,
@@ -433,7 +433,7 @@ sell:AddSlider("SellDelaySlider", {
     end
 })
 
-sell:AddToggle({
+sell:AddToggle("", {
     Title = "Vender Colheitas automaticamente",
     Description = "Ativa a venda automática com base no delay definido.",
     Default = false,
