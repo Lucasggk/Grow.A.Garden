@@ -413,6 +413,7 @@ local HRP = Player.Character and Player.Character:WaitForChild("HumanoidRootPart
 local Locations = {}
 local wms = 0.5
 local pwms = Vector3.new(-204.42526245117188, 0.13552704453468323, -83.74856567382812)
+local running = false
 
 local dropdown = plant:AddDropdown("Locais", {
     Title = "Destinos",
@@ -421,16 +422,28 @@ local dropdown = plant:AddDropdown("Locais", {
     Default = nil
 })
 
+local function formatPos(vec)
+    return string.format("X:%.1f Y:%.2f Z:%.1f", vec.X, vec.Y, vec.Z)
+end
+
+local function UpdateDropdown()
+    local keys = {}
+    for name, pos in pairs(Locations) do
+        table.insert(keys, name .. " [" .. formatPos(pos) .. "]")
+    end
+    dropdown:SetValues(keys)
+end
+
 plant:AddButton({
     Title = "Adicionar Local",
     Callback = function()
         HRP = Player.Character and Player.Character:FindFirstChild("HumanoidRootPart")
         if HRP then
             local p = Vector3.new(HRP.Position.X, 0.14, HRP.Position.Z)
-            local name = "Ponto " .. tostring(#Locations + 1)
+            local id = #Locations + 1
+            local name = "Local " .. id
             Locations[name] = p
-            local keys = {}; for k in pairs(Locations) do table.insert(keys, k) end
-            dropdown:SetValues(keys)
+            UpdateDropdown()
         end
     end
 })
@@ -439,16 +452,16 @@ plant:AddButton({
     Title = "Limpar Locais",
     Callback = function()
         Locations = {}
-        dropdown:SetValues({})
+        UpdateDropdown()
     end
 })
 
 dropdown:OnChanged(function(selected)
-    local p = Locations[selected]
-    if p then
-        pwms = p
-        HRP = Player.Character and Player.Character:FindFirstChild("HumanoidRootPart")
-        if HRP then HRP.CFrame = CFrame.new(p) end
+    for name, pos in pairs(Locations) do
+        if selected:find(name) then
+            pwms = pos
+            break
+        end
     end
 end)
 
@@ -467,12 +480,15 @@ plant:AddToggle("w", {
     Title = "Ativar spam water (pos)",
     Default = false,
     Callback = function(v)
-        task.spawn(function()
-            while v do
-                game:GetService("ReplicatedStorage").GameEvents.Water_RE:FireServer(pwms)
-                task.wait(wms)
-            end
-        end)
+        running = v
+        if running then
+            task.spawn(function()
+                while running do
+                    game:GetService("ReplicatedStorage").GameEvents.Water_RE:FireServer(pwms)
+                    task.wait(wms)
+                end
+            end)
+        end
     end
 })
 
