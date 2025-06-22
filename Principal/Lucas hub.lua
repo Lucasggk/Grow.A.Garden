@@ -3,9 +3,6 @@ local script_version = {
     -- version
     version = "2.1",
     alpha = true,
-    -- event 
-    Night = false,
-    Bee = false,
 }
 if script_version.alpha == true then
     script_version.alpha = "Alpha version"
@@ -47,8 +44,8 @@ Button_Icon = "rbxassetid://108331420562921"
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden |",
     SubTitle = "Made by Lucas | Version: ".. vful,
-    TabWidth = 160,
-    Size = UDim2.fromOffset(500, 350),
+    TabWidth = 180,
+    Size = UDim2.fromOffset(600, 350),
     Acrylic = false,
     Theme = "Dark",
     Center = true,
