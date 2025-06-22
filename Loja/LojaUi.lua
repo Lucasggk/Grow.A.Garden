@@ -356,3 +356,43 @@ event:AddToggle("Auto Máquina de Troca", {
         end)
     end
 })
+
+event:AddToggle("AutoUsarItens", {
+    Title = "Auto Usar Itens",
+    Default = false,
+    Callback = function(Value)
+        _G.AutoUsarItens = Value
+        task.spawn(function()
+            while _G.AutoUsarItens do
+                local Players = game:GetService("Players")
+                local LocalPlayer = Players.LocalPlayer
+                local Backpack = LocalPlayer:WaitForChild("Backpack")
+                local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+                local Remote = game:GetService("ReplicatedStorage").GameEvents.SummerHarvestRemoteEvent
+
+                local lista = {
+                    "Carrot", "Strawberry", "Blueberry", "Tomato",
+                    "Cauliflower", "Watermelon", "Green Apple", "Avocado",
+                    "Banana", "Pineapple", "Kiwi", "Bell Pepper",
+                    "Prickly Pear", "Loquat", "Feijoa", "Sugar Apple"
+                }
+
+                for _, tool in pairs(Backpack:GetChildren()) do
+                    if tool:IsA("Tool") and not tool.Name:lower():find("seed") then
+                        for _, nome in ipairs(lista) do
+                            if tool.Name:find(nome) then
+                                tool.Parent = Character
+                                task.wait(0.05)
+                                Remote:FireServer("SubmitHeldPlant")
+                                task.wait(0.05)
+                                break
+                            end
+                        end
+                    end
+                end
+
+                task.wait(0.1)
+            end
+        end)
+    end
+})
