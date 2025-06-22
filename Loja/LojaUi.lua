@@ -382,9 +382,9 @@ event:AddToggle("AutoUsarItens", {
                         for _, nome in ipairs(lista) do
                             if tool.Name:find(nome) then
                                 tool.Parent = Character
-                                task.wait(0.05)
+                                task.wait(0.15)
                                 Remote:FireServer("SubmitHeldPlant")
-                                task.wait(0.05)
+                                task.wait(0.15)
                                 break
                             end
                         end
