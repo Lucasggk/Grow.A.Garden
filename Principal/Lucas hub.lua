@@ -616,66 +616,6 @@ event:AddToggle("Auto Máquina de Troca", {
     end
 })
 
-event:AddButton({
-    Title = "Honey Shop UI",
-    Description = "Ativa/Desativa a loja de Honey",
-    Callback = function()
-        local ui = game:GetService("Players").LocalPlayer.PlayerGui.HoneyEventShop_UI
-        if ui then
-            ui.Enabled = not ui.Enabled
-            print("Honey Shop UI:", ui.Enabled and "Ativada" or "Desativada")
-        end
-    end
-})
-
-local byallBee = { "Flower Seed Pack", "Lavender", "Nectarshade", "Nectarine", "Hive Fruit", "Pollen Radar", "Nectar Staff", "Honey Sprinkler", "Bee Egg", "Bee Crate", "Honey Comb", "Bee Chair", "Honey Torch", "Honey Walkway" }
-
-local buyBee = game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock
-local selectedBees = {}
-local bsb = false
-
-function byallbeefc()
-    for i = 1, 25 do
-        for _, bee in ipairs(selectedBees) do
-            game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock:FireServer(bee)
-            task.wait()
-        end
-    end
-end
-
-local section = event:AddSection("Shop Honey")
-
-event:AddToggle("", {
-    Title = "Buy Bee Shop",
-    Description = "Buy all Bee shop",
-    Default = false,
-    Callback = function(Value)
-        bsb = Value
-    end
-})
-
-local dropdownBee = event:AddDropdown("DropdownSeed", {
-    Title = "Selecione Beeshop para comprar\n",
-    Description = "Selecione Beeshop para comprar\n",
-    Values = byallBee,
-    Multi = true,
-    Default = {},
-})
-
-dropdownBee:OnChanged(function(Value)
-    selectedBees = {}
-    for v, state in pairs(Value) do
-        if state then
-            table.insert(selectedBees, v)
-        end
-    end
-end)
-
-
-
-
-
-
 task.spawn(function()
     local lastMinute = -1
     while true do
