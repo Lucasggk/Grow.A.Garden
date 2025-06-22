@@ -364,7 +364,7 @@ plant:AddSection("plant spam")
 local dlayp = 0.2
 
 plant:AddSlider("Slider", {
-    Title = "Delay do spam plant",
+    Title = "Delay do spam plant\n",
     Default = dlayp,
     Min = 0.05,
     Max = 1,
