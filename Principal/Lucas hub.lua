@@ -304,6 +304,8 @@ loja:AddToggle("", {
 
 -- 
 
+plant:AddSection("Plant Manual")
+
 plant:AddButton({
         Title = "Set local X",
         Description = "click para setar o inicio do auto plant\n",
@@ -356,6 +358,35 @@ plant:AddButton({
         end
     end
 })
+
+plant:AddSection("plant spam")
+
+local dlayp = 0.2
+
+sell:AddSlider("Slider", {
+    Title = "Delay do spam plant",
+    Default = dlayp,
+    Min = 0.05,
+    Max = 1,
+    Rounding = 1,
+    Callback = function(Value)
+        dlayp = Value
+    end
+})
+
+function platse()
+    
+
+sell:AddToggle("",{
+        Title = "Auto Spam plant",
+        Description = "planta a seed na sua mão em sua atual localização\n",
+        Default = false,
+        Callback = function(v) 
+            
+
+
+
+
 --
 
 sell:AddButton({
@@ -366,6 +397,33 @@ sell:AddButton({
     end
 })
 
+local tmpps = 30
+
+sell:AddSlider("Slider", {
+    Title = "delay para o auto sell",
+    Default = tmpps,
+    Min = 20,
+    Max = 60,
+    Rounding = 1,
+    Callback = function(Value)
+        tmpps = Value
+    end
+})
+        
+
+ sell:AddToggle({
+    Title = "Vender Colheitas automaticamente",
+    Default = false,
+    Callback = function(a)
+        task.spawn(function()
+            while a do
+                tsf()
+                task.wait(tmpps)
+            end
+        end)
+    end
+})       
+        
 --
 
 player:AddSlider("WalkSpeedSlider", {
