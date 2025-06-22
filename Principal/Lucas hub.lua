@@ -409,6 +409,76 @@ plant:AddToggle("", {
     end
 })
 
+plant:AddSection("Water manual")
+
+local Player = game.Players.LocalPlayer
+local HRP = Player.Character and Player.Character:WaitForChild("HumanoidRootPart")
+local Locations = {}
+local wms = 0.5
+local pwms = Vector3.new(-204.42526245117188, 0.13552704453468323, -83.74856567382812)
+
+local dropdown = plant:AddDropdown("Locais", {
+    Title = "Destinos",
+    Values = {},
+    Multi = false,
+    Default = nil
+})
+
+plant:AddButton({
+    Title = "Adicionar Local",
+    Callback = function()
+        HRP = Player.Character and Player.Character:FindFirstChild("HumanoidRootPart")
+        if HRP then
+            local p = Vector3.new(HRP.Position.X, 0.14, HRP.Position.Z)
+            local name = "Ponto " .. tostring(#Locations + 1)
+            Locations[name] = p
+            local keys = {}; for k in pairs(Locations) do table.insert(keys, k) end
+            dropdown:SetValues(keys)
+        end
+    end
+})
+
+plant:AddButton({
+    Title = "Limpar Locais",
+    Callback = function()
+        Locations = {}
+        dropdown:SetValues({})
+    end
+})
+
+dropdown:OnChanged(function(selected)
+    local p = Locations[selected]
+    if p then
+        pwms = p
+        HRP = Player.Character and Player.Character:FindFirstChild("HumanoidRootPart")
+        if HRP then HRP.CFrame = CFrame.new(p) end
+    end
+end)
+
+plant:AddSlider("Velocidade", {
+    Title = "Delay entre uso",
+    Min = 0.1,
+    Max = 5,
+    Default = wms,
+    Rounding = 1,
+    Callback = function(v)
+        wms = v
+    end
+})
+
+plant:AddToggle("w", {
+    Title = "Ativar spam water (pos)",
+    Default = false,
+    Callback = function(v)
+        task.spawn(function()
+            while v do
+                game:GetService("ReplicatedStorage").GameEvents.Water_RE:FireServer(pwms)
+                task.wait(wms)
+            end
+        end)
+    end
+})
+
 --
 
 local tmpps = 30
