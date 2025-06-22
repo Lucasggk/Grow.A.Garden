@@ -468,7 +468,7 @@ end)
 plant:AddSlider("Velocidade", {
     Title = "Delay entre uso",
     Min = 0.1,
-    Max = 5,
+    Max = 1,
     Default = wms,
     Rounding = 1,
     Callback = function(v)
@@ -495,7 +495,7 @@ plant:AddToggle("w", {
 plant:AddSlider("DelayWater", {
     Title = "Delay entre usos",
     Min = 0.1,
-    Max = 5,
+    Max = 1,
     Default = 0.1,
     Rounding = 1,
     Callback = function(value)
