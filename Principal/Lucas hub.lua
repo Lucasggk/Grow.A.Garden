@@ -365,6 +365,7 @@ local dlayp = 0.2
 
 plant:AddSlider("Slider", {
     Title = "Delay do spam plant\n",
+    Description = "\n",
     Default = dlayp,
     Min = 0.05,
     Max = 1,
@@ -394,7 +395,7 @@ function platse()
     game:GetService("ReplicatedStorage").GameEvents.Plant_RE:FireServer(unpack(args))
 end
     
-plant:AddToggle({
+plant:AddToggle("", {
     Title = "Auto Spam plant",
     Description = "Planta a seed na sua mão em sua atual localização\n",
     Default = false,
