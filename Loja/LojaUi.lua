@@ -262,62 +262,40 @@ event:AddButton({
 
 event:AddSection("Summer")
 
+function submitalls()
+    local args = {
+    [1] = "SubmitAllPlants"
+}
+
+game:GetService("ReplicatedStorage").GameEvents.SummerHarvestRemoteEvent:FireServer(unpack(args))
+end
+local tsas = 5
+event:AddSlider("Slider", {
+    Title = "Delay to submit all",
+    Description = "",
+    Default = tsas,
+    Min = 1,
+    Max = 5,
+    Rounding = 1,
+    Callback = function(v)
+        tsas = v
+    end
+})
+
 event:AddToggle("AutoUsarItens", {
     Title = "Auto Usar Itens",
     Default = false,
     Callback = function(Value)
-        print("AutoUsarItens:", Value)
-        _G.AutoUsarItens = Value
-
-        if not Value then return end
-
-        task.spawn(function()
-            local Players = game:GetService("Players")
-            local LocalPlayer = Players.LocalPlayer
-            local ReplicatedStorage = game:GetService("ReplicatedStorage")
-            local Remote = ReplicatedStorage:WaitForChild("GameEvents"):WaitForChild("SummerHarvestRemoteEvent")
-
-            local nomesValidos = {
-                "Carrot", "Strawberry", "Blueberry", "Tomato",
-                "Cauliflower", "Watermelon", "Green Apple", "Avocado",
-                "Banana", "Pineapple", "Kiwi", "Bell Pepper",
-                "Prickly Pear", "Loquat", "Feijoa", "Sugar Apple"
-            }
-
-            local lista = {}
-            for _, nome in ipairs(nomesValidos) do
-                lista[nome] = true
-            end
-
-            while _G.AutoUsarItens do
-                local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-                local Humanoid = Character:FindFirstChildOfClass("Humanoid")
-                local Backpack = LocalPlayer:FindFirstChild("Backpack")
-
-                if not (Character and Humanoid and Backpack and Humanoid.Health > 0) then
-                    print("Aguardando personagem válido...")
-                    task.wait(0.5)
-                    continue
-                end
-
-                for _, tool in ipairs(Backpack:GetChildren()) do
-                    if tool:IsA("Tool") and not tool.Name:lower():find("seed") and lista[tool.Name] then
-                        print("Equipando:", tool.Name)
-
-                        local sucesso = pcall(function()
-                            Humanoid:EquipTool(tool)
-                        end)
-
-                        if sucesso then
-                            task.wait(0.15)
-                            Remote:FireServer("SubmitHeldPlant")
-                            task.wait(0.15)
+            local v = Value
+            task.spawn(function()
+                    while v do
+                        if v then
+                           submitalls()
+                           task.wait(tsas)
                         end
                     end
-                end
+                end)
+        end})
 
-                task.wait(0.1)
-            end
-        end)
-    end
-})
+
+ 
