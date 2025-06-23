@@ -361,46 +361,50 @@ event:AddToggle("AutoUsarItens", {
     Callback = function(Value)
         print("AutoUsarItens:", Value)
         _G.AutoUsarItens = Value
-        task.spawn(function()
-            while _G.AutoUsarItens do
-                local Players = game:GetService("Players")
-                local LocalPlayer = Players.LocalPlayer
-                local Backpack = LocalPlayer:FindFirstChild("Backpack")
-                local Character = LocalPlayer.Character
-                local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
 
-                if not (Backpack and Character and Humanoid and Humanoid.Health > 0) then
+        if not Value then return end
+
+        task.spawn(function()
+            local Players = game:GetService("Players")
+            local LocalPlayer = Players.LocalPlayer
+            local ReplicatedStorage = game:GetService("ReplicatedStorage")
+            local Remote = ReplicatedStorage:WaitForChild("GameEvents"):WaitForChild("SummerHarvestRemoteEvent")
+
+            local nomesValidos = {
+                "Carrot", "Strawberry", "Blueberry", "Tomato",
+                "Cauliflower", "Watermelon", "Green Apple", "Avocado",
+                "Banana", "Pineapple", "Kiwi", "Bell Pepper",
+                "Prickly Pear", "Loquat", "Feijoa", "Sugar Apple"
+            }
+
+            local lista = {}
+            for _, nome in ipairs(nomesValidos) do
+                lista[nome] = true
+            end
+
+            while _G.AutoUsarItens do
+                local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+                local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+                local Backpack = LocalPlayer:FindFirstChild("Backpack")
+
+                if not (Character and Humanoid and Backpack and Humanoid.Health > 0) then
+                    print("Aguardando personagem válido...")
                     task.wait(0.5)
                     continue
                 end
 
-                local Remote = game:GetService("ReplicatedStorage").GameEvents.SummerHarvestRemoteEvent
-
-                local nomesValidos = {
-                    "Carrot", "Strawberry", "Blueberry", "Tomato",
-                    "Cauliflower", "Watermelon", "Green Apple", "Avocado",
-                    "Banana", "Pineapple", "Kiwi", "Bell Pepper",
-                    "Prickly Pear", "Loquat", "Feijoa", "Sugar Apple"
-                }
-
-                local lista = {}
-                for _, nome in ipairs(nomesValidos) do
-                    lista[nome] = true
-                end
-
                 for _, tool in ipairs(Backpack:GetChildren()) do
-                    if tool:IsA("Tool") and not tool.Name:lower():find("seed") then
-                        print("Encontrado:", tool.Name)
-                        if lista[tool.Name] then
-                            print("Equipando:", tool.Name)
-                            pcall(function()
-                                Humanoid:EquipTool(tool)
-                            end)
+                    if tool:IsA("Tool") and not tool.Name:lower():find("seed") and lista[tool.Name] then
+                        print("Equipando:", tool.Name)
+
+                        local sucesso = pcall(function()
+                            Humanoid:EquipTool(tool)
+                        end)
+
+                        if sucesso then
                             task.wait(0.15)
                             Remote:FireServer("SubmitHeldPlant")
                             task.wait(0.15)
-                        else
-                            print("Ignorado (fora da lista):", tool.Name)
                         end
                     end
                 end
