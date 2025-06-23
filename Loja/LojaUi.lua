@@ -371,22 +371,19 @@ event:AddToggle("AutoUsarItens", {
                 local Remote = game:GetService("ReplicatedStorage").GameEvents.SummerHarvestRemoteEvent
 
                 local lista = {
-                    "Carrot", "Strawberry", "Blueberry", "Tomato",
-                    "Cauliflower", "Watermelon", "Green Apple", "Avocado",
-                    "Banana", "Pineapple", "Kiwi", "Bell Pepper",
-                    "Prickly Pear", "Loquat", "Feijoa", "Sugar Apple"
+                    ["Carrot"] = true, ["Strawberry"] = true, ["Blueberry"] = true, ["Tomato"] = true,
+                    ["Cauliflower"] = true, ["Watermelon"] = true, ["Green Apple"] = true, ["Avocado"] = true,
+                    ["Banana"] = true, ["Pineapple"] = true, ["Kiwi"] = true, ["Bell Pepper"] = true,
+                    ["Prickly Pear"] = true, ["Loquat"] = true, ["Feijoa"] = true, ["Sugar Apple"] = true
                 }
 
                 for _, tool in pairs(Backpack:GetChildren()) do
                     if tool:IsA("Tool") and not tool.Name:lower():find("seed") then
-                        for _, nome in ipairs(lista) do
-                            if tool.Name:find(nome) then
-                                tool.Parent = Character
-                                task.wait(0.15)
-                                Remote:FireServer("SubmitHeldPlant")
-                                task.wait(0.15)
-                                break
-                            end
+                        if lista[tool.Name] then
+                            tool.Parent = Character
+                            task.wait(0.15)
+                            Remote:FireServer("SubmitHeldPlant")
+                            task.wait(0.15)
                         end
                     end
                 end
