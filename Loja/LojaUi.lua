@@ -250,28 +250,9 @@ end)
 
 
 
-function ufav()
-    local player = game:GetService("Players").LocalPlayer
-    local char = player.Character
-    local backpack = player.Backpack
-    local tool = char:FindFirstChildOfClass("Tool") or backpack:FindFirstChildOfClass("Tool")
-    if tool and tool:GetAttribute("Favorite") == true then
-        game:GetService("ReplicatedStorage").GameEvents.Favorite_Item:FireServer(tool)
-    end
-end
-
 local section = event:AddSection("Honey | bizze")
 local ativo = false
 local itensOrdenados = {}
-
--- função de clone segura
-local function shallowClone(tbl)
-    local t = {}
-    for i, v in ipairs(tbl) do
-        t[i] = v
-    end
-    return t
-end
 
 event:AddToggle("Auto Máquina de Troca", {
     Title = "Auto Máquina de Troca",
@@ -294,6 +275,7 @@ event:AddToggle("Auto Máquina de Troca", {
                 local novaLista = {}
                 local char = player.Character or player.CharacterAdded:Wait()
                 local mochila = player:FindFirstChild("Backpack")
+
                 for _, container in ipairs({char, mochila}) do
                     if container then
                         for _, item in ipairs(container:GetChildren()) do
@@ -306,9 +288,11 @@ event:AddToggle("Auto Máquina de Troca", {
                         end
                     end
                 end
+
                 table.sort(novaLista, function(a, b)
                     return a.Weight < b.Weight
                 end)
+
                 itensOrdenados = novaLista
                 task.wait(2)
             end
@@ -318,49 +302,64 @@ event:AddToggle("Auto Máquina de Troca", {
         task.spawn(function()
             while ativo do
                 local char = player.Character or player.CharacterAdded:Wait()
-                local humanoid = char and char:FindFirstChildOfClass("Humanoid")
-                local label = nil
+                local humanoid = char:FindFirstChildOfClass("Humanoid")
+                local label
 
                 pcall(function()
-                    local sign = workspace:FindFirstChild("HoneyEvent") and workspace.HoneyEvent:FindFirstChild("HoneyCombpressor")
-                    if sign and sign:FindFirstChild("Sign") and sign.Sign:FindFirstChild("SurfaceGui") then
-                        label = sign.Sign.SurfaceGui:FindFirstChild("TextLabel")
-                    end
+                    label = workspace.HoneyEvent.HoneyCombpressor.Sign.SurfaceGui.TextLabel
                 end)
 
-                local listaLocal = shallowClone(itensOrdenados)
+                local listaLocal = table.clone(itensOrdenados)
 
                 for _, itemData in ipairs(listaLocal) do
                     if not ativo then break end
                     local tool = itemData.Tool
-                    if tool and tool.Parent and label and humanoid then
+                    if tool and tool.Parent and label then
                         local texto = label.Text
                         if texto == "READY" or texto:match("^%d*%.?%d+/10 KG$") then
+
                             if tool.Parent == player.Backpack or tool.Parent == player.Character then
                                 local sucesso, erro = pcall(function()
                                     humanoid:EquipTool(tool)
                                 end)
-                                if sucesso and tool.Parent == char then
+
+                                if sucesso then
                                     task.wait(0.1)
                                     ufav()
-                                    task.wait(0.05)
                                     rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
                                     task.wait(0.6)
                                 end
                             end
+
                         end
                     end
                 end
+
                 task.wait(0.5)
             end
         end)
     end
 })
 
+event:AddButton({
+    Title = "Honey Shop UI",
+    Description = "Ativa/Desativa a loja de Honey",
+    Callback = function()
+        local ui = game:GetService("Players").LocalPlayer.PlayerGui.HoneyEventShop_UI
+        if ui then
+            ui.Enabled = not ui.Enabled
+            print("Honey Shop UI:", ui.Enabled and "Ativada" or "Desativada")
+        end
+    end
+})
+
+event:AddSection("Summer")
+
 event:AddToggle("AutoUsarItens", {
     Title = "Auto Usar Itens",
     Default = false,
     Callback = function(Value)
+        print("AutoUsarItens:", Value)
         _G.AutoUsarItens = Value
         task.spawn(function()
             while _G.AutoUsarItens do
@@ -368,7 +367,7 @@ event:AddToggle("AutoUsarItens", {
                 local LocalPlayer = Players.LocalPlayer
                 local Backpack = LocalPlayer:FindFirstChild("Backpack")
                 local Character = LocalPlayer.Character
-                local Humanoid = Character and Character:FindFirstChild("Humanoid")
+                local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
 
                 if not (Backpack and Character and Humanoid and Humanoid.Health > 0) then
                     task.wait(0.5)
@@ -377,7 +376,6 @@ event:AddToggle("AutoUsarItens", {
 
                 local Remote = game:GetService("ReplicatedStorage").GameEvents.SummerHarvestRemoteEvent
 
-                -- Lista limpa
                 local nomesValidos = {
                     "Carrot", "Strawberry", "Blueberry", "Tomato",
                     "Cauliflower", "Watermelon", "Green Apple", "Avocado",
@@ -385,21 +383,24 @@ event:AddToggle("AutoUsarItens", {
                     "Prickly Pear", "Loquat", "Feijoa", "Sugar Apple"
                 }
 
-                -- Converter para tabela de busca rápida
                 local lista = {}
                 for _, nome in ipairs(nomesValidos) do
                     lista[nome] = true
                 end
 
-                for _, tool in pairs(Backpack:GetChildren()) do
+                for _, tool in ipairs(Backpack:GetChildren()) do
                     if tool:IsA("Tool") and not tool.Name:lower():find("seed") then
+                        print("Encontrado:", tool.Name)
                         if lista[tool.Name] then
+                            print("Equipando:", tool.Name)
                             pcall(function()
-                                tool.Parent = Character
+                                Humanoid:EquipTool(tool)
                             end)
                             task.wait(0.15)
                             Remote:FireServer("SubmitHeldPlant")
                             task.wait(0.15)
+                        else
+                            print("Ignorado (fora da lista):", tool.Name)
                         end
                     end
                 end
