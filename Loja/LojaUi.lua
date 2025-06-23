@@ -366,21 +366,37 @@ event:AddToggle("AutoUsarItens", {
             while _G.AutoUsarItens do
                 local Players = game:GetService("Players")
                 local LocalPlayer = Players.LocalPlayer
-                local Backpack = LocalPlayer:WaitForChild("Backpack")
-                local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+                local Backpack = LocalPlayer:FindFirstChild("Backpack")
+                local Character = LocalPlayer.Character
+                local Humanoid = Character and Character:FindFirstChild("Humanoid")
+
+                if not (Backpack and Character and Humanoid and Humanoid.Health > 0) then
+                    task.wait(0.5)
+                    continue
+                end
+
                 local Remote = game:GetService("ReplicatedStorage").GameEvents.SummerHarvestRemoteEvent
 
-                local lista = {
-                    ["Carrot"] = true, ["Strawberry"] = true, ["Blueberry"] = true, ["Tomato"] = true,
-                    ["Cauliflower"] = true, ["Watermelon"] = true, ["Green Apple"] = true, ["Avocado"] = true,
-                    ["Banana"] = true, ["Pineapple"] = true, ["Kiwi"] = true, ["Bell Pepper"] = true,
-                    ["Prickly Pear"] = true, ["Loquat"] = true, ["Feijoa"] = true, ["Sugar Apple"] = true
+                -- Lista limpa
+                local nomesValidos = {
+                    "Carrot", "Strawberry", "Blueberry", "Tomato",
+                    "Cauliflower", "Watermelon", "Green Apple", "Avocado",
+                    "Banana", "Pineapple", "Kiwi", "Bell Pepper",
+                    "Prickly Pear", "Loquat", "Feijoa", "Sugar Apple"
                 }
+
+                -- Converter para tabela de busca rápida
+                local lista = {}
+                for _, nome in ipairs(nomesValidos) do
+                    lista[nome] = true
+                end
 
                 for _, tool in pairs(Backpack:GetChildren()) do
                     if tool:IsA("Tool") and not tool.Name:lower():find("seed") then
                         if lista[tool.Name] then
-                            tool.Parent = Character
+                            pcall(function()
+                                tool.Parent = Character
+                            end)
                             task.wait(0.15)
                             Remote:FireServer("SubmitHeldPlant")
                             task.wait(0.15)
