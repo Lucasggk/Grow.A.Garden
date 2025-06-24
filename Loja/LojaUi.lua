@@ -260,15 +260,15 @@ event:AddButton({
     end
 })
 
-event:AddSection("Summer")
+_event:AddSection("Summer")
 
-function submitalls()
+local function submitalls()
     local args = {
-    [1] = "SubmitAllPlants"
-}
-
-game:GetService("ReplicatedStorage").GameEvents.SummerHarvestRemoteEvent:FireServer(unpack(args))
+        [1] = "SubmitAllPlants"
+    }
+    game:GetService("ReplicatedStorage").GameEvents.SummerHarvestRemoteEvent:FireServer(unpack(args))
 end
+
 local tsas = 5
 event:AddSlider("Slider", {
     Title = "Delay to submit all",
@@ -282,20 +282,18 @@ event:AddSlider("Slider", {
     end
 })
 
+_G.AutoUsarItens = false
+
 event:AddToggle("AutoUsarItens", {
     Title = "Auto Usar Itens",
     Default = false,
     Callback = function(Value)
-            local v = Value
-            task.spawn(function()
-                    while v do
-                        if v then
-                           submitalls()
-                           task.wait(tsas)
-                        end
-                    end
-                end)
-        end})
-
-
- 
+        _G.AutoUsarItens = Value
+        task.spawn(function()
+            while _G.AutoUsarItens do
+                submitalls()
+                task.wait(tsas)
+            end
+        end)
+    end
+})
