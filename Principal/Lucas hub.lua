@@ -357,6 +357,7 @@ plant:AddButton({
 })
 
 plant:AddSection("plant spam (Pos player)")
+plant:AddSection("plant spam (Pos player)")
 
 local dlayp = 0.1
 
@@ -365,8 +366,9 @@ plant:AddSlider("Slider", {
     Default = dlayp,
     Min = 0.05,
     Max = 1,
+    Rounding = 2, -- arredonda até duas casas decimais (0.05, 0.10, etc)
     Callback = function(v)
-        dlayp = v
+        dlayp = tonumber(string.format("%.2f", v))
     end
 })
 
