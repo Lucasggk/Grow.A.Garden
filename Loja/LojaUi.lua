@@ -260,7 +260,7 @@ event:AddButton({
     end
 })
 
-_event:AddSection("Summer")
+event:AddSection("Summer")
 
 local function submitalls()
     local args = {
