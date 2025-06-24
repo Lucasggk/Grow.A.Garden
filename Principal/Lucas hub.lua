@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.2",
+    version = "2.25",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -358,22 +358,19 @@ plant:AddButton({
 
 plant:AddSection("plant spam (Pos player)")
 
-local dlayp = 0.2
+local dlayp = 0.1
 
 plant:AddSlider("Slider", {
-    Title = "Delay do spam plant\n",
-    Description = "\n",
+    Title = "Delay do spam plant",
     Default = dlayp,
     Min = 0.05,
     Max = 1,
-    Rounding = 1,
-    Callback = function(Value)
-        dlayp = Value
+    Callback = function(v)
+        dlayp = v
     end
 })
 
 _G.AutoSpamPlant = false
-local dlayp = 1
 
 local function platse()
     local p = game.Players.LocalPlayer
