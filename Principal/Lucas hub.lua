@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.25",
+    version = "2.275",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -356,7 +356,6 @@ plant:AddButton({
     end
 })
 
-plant:AddSection("plant spam (Pos player)")
 plant:AddSection("plant spam (Pos player)")
 
 local dlayp = 0.1
