@@ -301,7 +301,7 @@ loja:AddToggle("", {
 
 -- 
 
-plant:AddSection("Plant Manual")
+plant:AddSection("Plant spam (Pos set)")
 
 plant:AddButton({
         Title = "Set local X",
@@ -356,7 +356,7 @@ plant:AddButton({
     end
 })
 
-plant:AddSection("plant spam")
+plant:AddSection("plant spam (Pos player)")
 
 local dlayp = 0.2
 
@@ -404,7 +404,7 @@ plant:AddToggle("AutoSpamPlant", {
     end
 })
 
-plant:AddSection("Water manual")
+plant:AddSection("Water spam (Pos Dropdown)")
 
 local Player = game.Players.LocalPlayer
 local HRP = Player.Character and Player.Character:WaitForChild("HumanoidRootPart")
@@ -489,7 +489,7 @@ plant:AddToggle("w", {
         end
     end
 })
-
+plant:AddSection("Water spam (Pos player)")
 plant:AddSlider("DelayWater", {
     Title = "Delay entre usos",
     Min = 0.1,
@@ -720,23 +720,6 @@ ui:AddButton({
 
 --
 
-local section = event:AddSection("Honey | bizze")
-
-
-
-
-event:AddButton({
-    Title = "Honey Shop UI",
-    Description = "Ativa/Desativa a loja de Honey",
-    Callback = function()
-        local ui = game:GetService("Players").LocalPlayer.PlayerGui.HoneyEventShop_UI
-        if ui then
-            ui.Enabled = not ui.Enabled
-            print("Honey Shop UI:", ui.Enabled and "Ativada" or "Desativada")
-        end
-    end
-})
-
 local byallBee = { "Flower Seed Pack", "Lavender", "Nectarshade", "Nectarine", "Hive Fruit", "Pollen Radar", "Nectar Staff", "Honey Sprinkler", "Bee Egg", "Bee Crate", "Honey Comb", "Bee Chair", "Honey Torch", "Honey Walkway" }
 
 local buyBee = game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock
@@ -779,6 +762,18 @@ dropdownBee:OnChanged(function(Value)
         end
     end
 end)
+
+event:AddButton({
+    Title = "Honey Shop UI",
+    Description = "Ativa/Desativa a loja de Honey",
+    Callback = function()
+        local ui = game:GetService("Players").LocalPlayer.PlayerGui.HoneyEventShop_UI
+        if ui then
+            ui.Enabled = not ui.Enabled
+            print("Honey Shop UI:", ui.Enabled and "Ativada" or "Desativada")
+        end
+    end
+})
 
 task.spawn(function()
     local lastMinute = -1
