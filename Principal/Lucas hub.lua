@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.1",
+    version = "2.2",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -372,33 +372,31 @@ plant:AddSlider("Slider", {
     end
 })
 
-function platse()
-    local player = game.Players.LocalPlayer
-    local character = player.Character or player.CharacterAdded:Wait()
-    local hrp = character:FindFirstChild("HumanoidRootPart")
-    local tool = character:FindFirstChildOfClass("Tool")
+_G.AutoSpamPlant = false
+local dlayp = 1
+
+local function platse()
+    local p = game.Players.LocalPlayer
+    local c = p.Character or p.CharacterAdded:Wait()
+    local hrp = c:FindFirstChild("HumanoidRootPart")
+    local tool = c:FindFirstChildOfClass("Tool")
     if not (tool and hrp) then return end
 
-    local baseName = tool.Name:match("^(.-)%s+[Ss]eed") or tool.Name
-    baseName = baseName:gsub("%s+$", "")
-
+    local name = tool.Name:match("^(.-)%s+[Ss]eed") or tool.Name
+    name = name:gsub("%s+$", "")
     local pos = hrp.Position
-    local altura = math.random() * (10 - 0.13) + 0.13
-    local args = {
-        [1] = Vector3.new(pos.X, altura, pos.Z),
-        [2] = baseName
-    }
+    local y = math.random() * (10 - 0.13) + 0.13
 
-    game:GetService("ReplicatedStorage").GameEvents.Plant_RE:FireServer(unpack(args))
+    game:GetService("ReplicatedStorage").GameEvents.Plant_RE:FireServer(Vector3.new(pos.X, y, pos.Z), name)
 end
-    
-plant:AddToggle("", {
-    Title = "Auto Spam plant",
-    Description = "Planta a seed na sua mão em sua atual localização\n",
+
+plant:AddToggle("AutoSpamPlant", {
+    Title = "Auto Spam Plant",
     Default = false,
-    Callback = function(v) 
+    Callback = function(v)
+        _G.AutoSpamPlant = v
         task.spawn(function()
-            while v do 
+            while _G.AutoSpamPlant do
                 platse()
                 task.wait(dlayp)
             end
@@ -723,98 +721,12 @@ ui:AddButton({
 --
 
 local section = event:AddSection("Honey | bizze")
-local ativo = false
-local itensOrdenados = {}
 
-event:AddToggle("Auto Máquina de Troca", {
-    Title = "Auto Máquina de Troca",
-    Description = "Equipe apenas itens Polinizados e interaja com a máquina do evento (ordenado por peso)",
-    Default = false,
-    Callback = function(toggle)
-        ativo = toggle
-        if not toggle then return end
 
-        local player = game:GetService("Players").LocalPlayer
-        local rs = game:GetService("ReplicatedStorage")
 
-        local function temPollinated(nome)
-            return nome:lower():find("pollinated") ~= nil
-        end
-
-        -- Atualiza a lista de itens ordenados por peso
-        task.spawn(function()
-            while ativo do
-                local novaLista = {}
-                local char = player.Character or player.CharacterAdded:Wait()
-                local mochila = player:FindFirstChild("Backpack")
-
-                for _, container in ipairs({char, mochila}) do
-                    if container then
-                        for _, item in ipairs(container:GetChildren()) do
-                            if item:IsA("Tool") and temPollinated(item.Name) then
-                                local weightObj = item:FindFirstChild("Weight")
-                                if weightObj and weightObj:IsA("NumberValue") then
-                                    table.insert(novaLista, {Tool = item, Weight = weightObj.Value})
-                                end
-                            end
-                        end
-                    end
-                end
-
-                table.sort(novaLista, function(a, b)
-                    return a.Weight < b.Weight
-                end)
-
-                itensOrdenados = novaLista
-                task.wait(2)
-            end
-        end)
-
-        -- Interação com a máquina
-        task.spawn(function()
-            while ativo do
-                local char = player.Character or player.CharacterAdded:Wait()
-                local humanoid = char:FindFirstChildOfClass("Humanoid")
-                local label
-
-                pcall(function()
-                    label = workspace.HoneyEvent.HoneyCombpressor.Sign.SurfaceGui.TextLabel
-                end)
-
-                local listaLocal = table.clone(itensOrdenados)
-
-                for _, itemData in ipairs(listaLocal) do
-                    if not ativo then break end
-                    local tool = itemData.Tool
-                    if tool and tool.Parent and label then
-                        local texto = label.Text
-                        if texto == "READY" or texto:match("^%d*%.?%d+/10 KG$") then
-
-                            if tool.Parent == player.Backpack or tool.Parent == player.Character then
-                                local sucesso, erro = pcall(function()
-                                    humanoid:EquipTool(tool)
-                                end)
-
-                                if sucesso then
-                                    task.wait(0.1)
-                                    ufav()
-                                    rs.GameEvents.HoneyMachineService_RE:FireServer("MachineInteract")
-                                    task.wait(0.6)
-                                end
-                            end
-
-                        end
-                    end
-                end
-
-                task.wait(0.5)
-            end
-        end)
-    end
-})
 
 event:AddButton({
-    Title = "Honey Shop UI | AINDA FUNCIONAL!!!!",
+    Title = "Honey Shop UI",
     Description = "Ativa/Desativa a loja de Honey",
     Callback = function()
         local ui = game:GetService("Players").LocalPlayer.PlayerGui.HoneyEventShop_UI
@@ -889,6 +801,57 @@ task.spawn(function()
     end
 end)
 --
+
+
+event:AddSection("Summer")
+
+local function submitalls()
+    local args = {
+        [1] = "SubmitAllPlants"
+    }
+    game:GetService("ReplicatedStorage").GameEvents.SummerHarvestRemoteEvent:FireServer(unpack(args))
+end
+
+local tsas = 5
+event:AddSlider("Slider", {
+    Title = "Delay to submit all",
+    Description = "",
+    Default = tsas,
+    Min = 1,
+    Max = 5,
+    Rounding = 1,
+    Callback = function(v)
+        tsas = v
+    end
+})
+
+_G.AutoUsarItens = false
+
+event:AddToggle("AutoUsarItens", {
+    Title = "Auto Usar Itens",
+    Default = false,
+    Callback = function(Value)
+        _G.AutoUsarItens = Value
+        task.spawn(function()
+            while _G.AutoUsarItens do
+                submitalls()
+                task.wait(tsas)
+            end
+        end)
+    end
+})
+
+ 
+
+
+
+
+
+
+--
+
+
+
 local versgame = (game:GetService("Players").LocalPlayer.PlayerGui.Version_UI.Version.Text):gsub("^v", "")
 
 function svvererr(v)
@@ -941,6 +904,8 @@ vuln:AddButton({
         game:GetService("ReplicatedStorage").GameEvents.CraftingGlobalObjectService:FireServer(unpack(args))
     end
 })
+
+
 
 
 
