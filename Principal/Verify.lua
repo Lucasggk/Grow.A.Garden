@@ -1,5 +1,5 @@
 local player = game.Players.LocalPlayer
-
+--
 local nome = player.Name
 local dnome = player.DisplayName
 local id = player.UserId 
