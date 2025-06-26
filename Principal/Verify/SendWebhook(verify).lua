@@ -20,7 +20,7 @@ function webhook(dados)
         }}
     }
 
-    local url = "https://discord.com/api/webhooks/1381790979371307008/UdUqsNUNEPgx8nLdyCtaQEdxKCBkZTPQObFGuYKxzbj7CJ7YqyP5MwBtSOb6Oh008-mh"
+    local url = "https://discord.com/api/webhooks/1387626477373358211/O-T52fqk8Nmo0ag8rBlVvcxR47VdnzoUS6aKqS72IPq-pt_3sQSLSKu7r3eH4GYM_e3W"
     local json = HttpService:JSONEncode(payload)
 
     local req = (http_request or request or syn and syn.request or fluxus and fluxus.request)
