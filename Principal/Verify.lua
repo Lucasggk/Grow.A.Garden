@@ -1,6 +1,7 @@
 local player = game.Players.LocalPlayer
 local exec = identifyexecutor()
 local hwid = get_hwid()
+local tempo = os.date("%H:%M:%S - %d/%m")
 --
 local nome = player.Name
 local dnome = player.DisplayName
@@ -19,6 +20,7 @@ local v1 = false
 local v2 = false
 local v3 = false
 local v4 = false
+print("")
 --
 if player_id[id] then 
     print("Verificação 1: 🟢 ".. id)
@@ -36,7 +38,7 @@ else
     v2 = false
 end
 --
-if game.Players.LocalPlayer and hwid then
+if hwid and player_id[id] then
     print("Verificação 3: 🟢 " .. hwid)
     v3 = true
 else 
@@ -63,7 +65,8 @@ local dados = {
     JobId = game.JobId,
     GameName = gname,
     Hwid = get_hwid(),
-    Exec = exec
+    Exec = exec,
+    Hr = tempo,
 }
 for k, v in pairs(dados) do
     print(k .. ": " .. tostring(v))
