@@ -10,8 +10,9 @@ local gid = game.PlaceId
 local gname = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 --
 local player_id = {
-    [12345678] = true,
-    [87654321] = true,
+    [5557980719] = true,
+    [8765432100] = true,
+    [1092929200] = true,
 }
 --
 local v1 = false
