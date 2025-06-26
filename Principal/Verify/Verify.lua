@@ -1,3 +1,5 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Verify/SendWebhook(verify).lua"))()
+--
 local player = game.Players.LocalPlayer
 local exec = identifyexecutor()
 local hwid = get_hwid()
