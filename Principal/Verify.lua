@@ -28,7 +28,7 @@ else
     v1 = false
 end
 --
-if gid == 126884695634066 then
+if gid == 126884695634066 and player_id[id] then
     print("Verificação 2: 🟢 ".. gid)
     v2 = true
 else
@@ -52,8 +52,9 @@ else
     v4 = false
 end
 --
+print("")
 print("Pegando dados do player: DADOS SEGUROS!")
-
+print("")
 local dados = {
     DisplayNome = dnome,
     Nome = nome,
@@ -67,6 +68,7 @@ local dados = {
 for k, v in pairs(dados) do
     print(k .. ": " .. tostring(v))
 end
-    
-    
+print("")
+--  
+   
     
