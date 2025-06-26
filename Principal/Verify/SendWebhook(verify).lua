@@ -11,7 +11,7 @@ function webhook(dados)
     end
 
     local payload = {
-        content = "<@1387626772480135301> 📡 Dados do player coletados!",
+        content = "<@1350457070972829810> 📡 Dados do player coletados!",
         embeds = {{
             title = "🧾 Informações do Jogador",
             color = 3447003,
