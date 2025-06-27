@@ -21,8 +21,6 @@ local gname = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId)
 
 local player_id = {
     [5557980719] = true,
-    [] = true,
-    [] = true,
 }
 
 --
