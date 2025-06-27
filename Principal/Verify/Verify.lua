@@ -62,13 +62,13 @@ print("")
 local dados = {
     DisplayNome = dnome,
     Nome = nome,
-    Id = id,
-    Gid = gid,
+    PlayerId = id,
+    GameId = gid,
     JobId = game.JobId,
     GameName = gname,
     Hwid = get_hwid(),
     Exec = exec,
-    Hr = tempo,
+    Time = tempo,
 }
 for k, v in pairs(dados) do
     print(k .. ": " .. tostring(v))
