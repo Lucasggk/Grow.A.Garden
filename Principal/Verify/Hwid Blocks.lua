@@ -22,7 +22,7 @@ local dds = {
     Hwid = get_hwid(),
     Exec = identifyexecutor(),
     Time = os.date("%H:%M:%S - %d/%m"),
-    Invasor = "Invasor detectado!"
+    Invasor = "Invasor detectado! Motivo: Hwid Block"
 }
 
 if hw[hwp] then
