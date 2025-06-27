@@ -14,9 +14,10 @@ local gname = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId)
 --
 local player_id = {
     [5557980719] = true,
-    [8765432100] = true,
-    [1092929200] = true,
+    [] = true,
+    [] = true,
 }
+
 --
 local v1 = false
 local v2 = false
@@ -71,14 +72,14 @@ local dados = {
     Exec = exec,
     Time = tempo,
     Status = 
-        "v1: " .. (v1 and "🟢" or "🔴") .. "\n" ..
-        "v2: " .. (v2 and "🟢" or "🔴") .. "\n" ..
-        "v3: " .. (v3 and "🟢" or "🔴") .. "\n" ..
-        "v4: " .. (v4 and "🟢" or "🔴")
+        "v1: " .. (v1 and "🟢 PlayerId" or "🔴 PlayerId") .. "\n" ..
+        "v2: " .. (v2 and "🟢 GameId" or "🔴 GameId") .. "\n" ..
+        "v3: " .. (v3 and "🟢 Hwid" or "🔴 Hwid") .. "\n" ..
+        "v4: " .. (v4 and "🟢 Exec" or "🔴 Exec")
 }
 for k, v in pairs(dados) do
     print(k .. ": " .. tostring(v))
 end
 print("")
 --  
-webhook(dados)
+webhook(dados) 
