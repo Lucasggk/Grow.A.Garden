@@ -92,8 +92,14 @@ local dados = {
         "v3: " .. (v3 and "🟢 Hwid" or "🔴 Hwid") .. "\n" ..
         "v4: " .. (v4 and "🟢 Exec" or "🔴 Exec")
 }
+
 for k, v in pairs(dados) do
-    print(k .. ": " .. tostring(v))
+    if k == "Status" then
+        print(k .. ":")
+        print(v)
+    else
+        print(k .. ": " .. tostring(v))
+    end
 end
 
 print("")
