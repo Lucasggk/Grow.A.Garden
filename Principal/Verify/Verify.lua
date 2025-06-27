@@ -55,6 +55,7 @@ else
     print("Verificação 4: 🔴 ")
     v4 = false
 end
+
 --
 print("")
 print("Pegando dados do player: DADOS SEGUROS!")
@@ -69,6 +70,12 @@ local dados = {
     Hwid = get_hwid(),
     Exec = exec,
     Time = tempo,
+    Status = {
+        v1 = v1 and "🟢" or "🔴",
+        v2 = v2 and "🟢" or "🔴",
+        v3 = v3 and "🟢" or "🔴",
+        v4 = v4 and "🟢" or "🔴"
+    }
 }
 for k, v in pairs(dados) do
     print(k .. ": " .. tostring(v))
