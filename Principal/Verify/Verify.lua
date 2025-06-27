@@ -3,7 +3,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garde
 
 local player = game.Players.LocalPlayer
 local exec = identifyexecutor()
-local hwid = get_hwid()
+local hwid = (get_hwid and get_hwid()) or (gethwid and gethwid())
 local tempo = os.date("%H:%M:%S - %d/%m")
 
 --
