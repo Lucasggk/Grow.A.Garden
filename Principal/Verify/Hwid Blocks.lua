@@ -26,6 +26,7 @@ local dds = {
 }
 
 if hw[hwp] then
-  game.Players.LocalPlayer:Kick(msg)
   webhook(dds)
+  task.wait(0.1)
+  game.Players.LocalPlayer:Kick(msg)
 end
