@@ -12,6 +12,20 @@ Dono do script já foi avisado!
 
 local hwp = get_hwid()  
 
+local dds = {
+    DisplayNome = game.Players.LocalPlayer.DisplayName,
+    Nome = game.Players.LocalPlayer.Name,
+    PlayerId = game.Players.LocalPlayer.UserId,
+    GameId = game.PlaceId,
+    JobId = game.JobId,
+    GameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,
+    Hwid = get_hwid(),
+    Exec = identifyexecutor(),
+    Time = os.date("%H:%M:%S - %d/%m"),
+    Invasor = "Invasor detectado!"
+}
+
 if hw[hwp] then
   game.Players.LocalPlayer:Kick(msg)
+  webhook(dds)
 end
