@@ -2,6 +2,18 @@ local hwid = (get_hwid and get_hwid()) or (gethwid and gethwid())
 local id = tostring(game.Players.LocalPlayer.UserId)
 local exec = identifyexecutor()
 
+function kick(text)
+  game.Players.LocalPlayer:Kick(text)
+end
+
+local block_hwid = {
+  ["Nada ainda"] = true
+}
+
+if block_hwid[hwid] then 
+  kick("Hwid blocked")
+end
+
 local miguel = {
   Id = "2000903030",
   Exec = "Krnl",
@@ -9,4 +21,8 @@ local miguel = {
 }
 
 if (miguel.Id == id) and (miguel.Exec == exec) and (miguel.Hwid == hwid) then
+  Print("Fazendo Outras Verificações...")
+  task.wait(0.1)
+  print("Usuário Miguel verificado.")
+  
 end
