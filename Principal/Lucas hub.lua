@@ -724,61 +724,6 @@ ui:AddButton({
 
 --
 
-local byallBee = { "Flower Seed Pack", "Lavender", "Nectarshade", "Nectarine", "Hive Fruit", "Pollen Radar", "Nectar Staff", "Honey Sprinkler", "Bee Egg", "Bee Crate", "Honey Comb", "Bee Chair", "Honey Torch", "Honey Walkway" }
-
-local buyBee = game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock
-local selectedBees = {}
-local bsb = false
-
-function byallbeefc()
-    for i = 1, 25 do
-        for _, bee in ipairs(selectedBees) do
-            buyBee:FireServer(bee)
-            task.wait()
-        end
-    end
-end
-
-local section = event:AddSection("Shop Honey")
-
-event:AddToggle("", {
-    Title = "Buy all Bee Shop",
-    Description = "Buy all Bee shop",
-    Default = false,
-    Callback = function(Value)
-        bsb = Value
-    end
-})
-
-local dropdownBee = event:AddDropdown("DropdownSeed", {
-    Title = "Selecione Beeshop para comprar\n",
-    Description = "Selecione Beeshop para comprar\n",
-    Values = byallBee,
-    Multi = true,
-    Default = {},
-})
-
-dropdownBee:OnChanged(function(Value)
-    selectedBees = {}
-    for beeName, selected in pairs(Value) do
-        if selected then
-            table.insert(selectedBees, beeName)
-        end
-    end
-end)
-
-event:AddButton({
-    Title = "Honey Shop UI",
-    Description = "Ativa/Desativa a loja de Honey",
-    Callback = function()
-        local ui = game:GetService("Players").LocalPlayer.PlayerGui.HoneyEventShop_UI
-        if ui then
-            ui.Enabled = not ui.Enabled
-            print("Honey Shop UI:", ui.Enabled and "Ativada" or "Desativada")
-        end
-    end
-})
-
 task.spawn(function()
     local lastMinute = -1
     while true do
@@ -817,8 +762,8 @@ event:AddSlider("Slider", {
     Description = "",
     Default = tsas,
     Min = 1,
-    Max = 5,
-    Rounding = 1,
+    Max = 20,
+    Rounding = 2,
     Callback = function(v)
         tsas = v
     end
@@ -827,7 +772,7 @@ event:AddSlider("Slider", {
 _G.AutoUsarItens = false
 
 event:AddToggle("AutoUsarItens", {
-    Title = "Auto Usar Itens",
+    Title = "Auto Submit All to summer",
     Default = false,
     Callback = function(Value)
         _G.AutoUsarItens = Value
@@ -852,7 +797,6 @@ event:AddToggle("AutoUsarItens", {
 
 
 local versgame = (game:GetService("Players").LocalPlayer.PlayerGui.Version_UI.Version.Text):gsub("^v", "")
-
 function svvererr(v)
     local newv = tonumber(v)
     local numvers = tonumber(versgame)
@@ -865,44 +809,11 @@ function svvererr(v)
         })
     end
 end
-
-
-
 vuln:AddParagraph({
         Title = "Versao atual do serve: ", Content = versgame
     })
 
-vuln:AddButton({
-    Title = "Gear skip | Bee event",
-    Description = "Skipa o tempo de criação da sua Gear",
-    Callback = function()
-        svvererr(1349)
-        local args = {
-            [1] = "Claim",
-            [2] = workspace.Interaction.UpdateItems.NewCrafting.EventCraftingWorkBench,
-            [3] = "GearEventWorkbench",
-            [4] = 1
-        }
 
-        game:GetService("ReplicatedStorage").GameEvents.CraftingGlobalObjectService:FireServer(unpack(args))
-    end
-})
-
-vuln:AddButton({
-    Title = "Seed skip | Bee event",
-    Description = "Skipa o tempo de criação da sua Seed",
-    Callback = function()
-        svvererr(1349)
-        local args = {
-            [1] = "Claim",
-            [2] = workspace.Interaction.UpdateItems.NewCrafting.SeedEventCraftingWorkBench,
-            [3] = "SeedEventWorkbench",
-            [4] = 1
-        }
-
-        game:GetService("ReplicatedStorage").GameEvents.CraftingGlobalObjectService:FireServer(unpack(args))
-    end
-})
 
 
 
