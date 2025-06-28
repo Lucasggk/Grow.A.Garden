@@ -1,4 +1,3 @@
-local ignoreNames = {
     -- Sementes
     ["Carrot"] = true,
     ["Strawberry"] = true,
@@ -27,6 +26,8 @@ local ignoreNames = {
     ["Godly Sprinkler"] = true,
     ["Lightning Rod"] = true,
     ["Master Sprinkler"] = true,
+    ["Magnifying Glass"] = false,
+    ["Tanning Mirror"] = true,
     ["Cleaning Spray"] = false,
     ["Favorite Tool"] = false,
     ["Harvest Tool"] = false,
