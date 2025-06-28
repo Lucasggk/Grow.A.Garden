@@ -28,7 +28,6 @@ if (miguel.Id == id) and (miguel.Exec == exec) and (miguel.Hwid == hwid) then
     print("Usuário Miguel verificado.")
     print("Executando...")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Principal/Lucas%20hub.lua"))()
-else
-    print("Voce nao passou mas isso e teste.")
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Principal/Lucas%20hub.lua"))()
+else 
+    kick(".")
 end
