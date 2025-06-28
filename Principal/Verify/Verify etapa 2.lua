@@ -25,5 +25,7 @@ if (miguel.Id == id) and (miguel.Exec == exec) and (miguel.Hwid == hwid) then
     task.wait(0.1)
     print("Usuário Miguel verificado.")
     print("Executando...")
-    
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Principal/Lucas%20hub.lua"))()
+else
+    kick("Você não tem permissão.")
 end
