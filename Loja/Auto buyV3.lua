@@ -37,6 +37,7 @@ local ignoreNames = {
     ["Prickly Pear"] = true,
     ["Loquat"] = true,
     ["Feijoa"] = true,
+    ["Pitcher Plant"] = true,
     ["Sugar Apple"] = true,
 
     -- Gears
@@ -48,6 +49,7 @@ local ignoreNames = {
     ["Godly Sprinkler"] = true,
     ["Lightning Rod"] = true,
     ["Master Sprinkler"] = true,
+    ["Magnifying Glass"] = false,
     ["Tanning Mirror"] = true,
     ["Cleaning Spray"] = false,
     ["Favorite Tool"] = false,
