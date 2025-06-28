@@ -72,4 +72,5 @@ if motivo then
     player:Kick(motivo)
 else
     print("\nVocê Passou Em todas Verificações!\nIndo para proxima Verificação!")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Principal/Lucas%20hub.lua"))()
 end
