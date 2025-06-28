@@ -71,5 +71,5 @@ end
 if motivo then
     player:Kick(motivo)
 else
-    print("Você Passou Em todas Verificações!\nIndo para proxima Verificação!")
+    print("\nVocê Passou Em todas Verificações!\nIndo para proxima Verificação!")
 end
