@@ -21,6 +21,7 @@ local gname = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId)
 
 local player_id = {
     [5557980719] = true,
+    [2000903030] = true,
 }
 
 --
@@ -93,10 +94,13 @@ local dados = {
         "v4: " .. (v4 and "🟢 Exec" or "🔴 Exec")
 }
 
+local tempo = os.date("%H:%M")
 for k, v in pairs(dados) do
     if k == "Status" then
-        print(k .. ":")
-        print(v)
+        print(tempo .. " -- status:")
+        for line in v:gmatch("[^\n]+") do
+            print(line)
+        end
     else
         print(k .. ": " .. tostring(v))
     end
@@ -113,4 +117,19 @@ print("")
 print("Fazendo Verificações de Kick!")
 
 --  
- 
+
+local motivo
+if hwid_blc[hwid] then
+    motivo = "Seu HWID está na blacklist."
+elseif not player_id[id] then
+    motivo = "Seu ID não está na lista autorizada."
+elseif not (v1 and v2 and v3 and v4) then
+    motivo = "Você não passou em uma ou mais verificações."
+end
+
+if motivo then
+    game.Players.LocalPlayer:Kick(motivo)
+else 
+    print("Você Passou Em todas Verificações!")
+end
+
