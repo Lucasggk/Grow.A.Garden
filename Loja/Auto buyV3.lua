@@ -28,6 +28,7 @@ local ignoreNames = {
     ["Tomato"] = true,
     ["Cauliflower"] = true,
     ["Watermelon"] = true,
+    ["Rafflesia"] = true,
     ["Green Apple"] = true,
     ["Avocado"] = true,
     ["Banana"] = true,
