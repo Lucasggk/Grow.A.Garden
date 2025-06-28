@@ -15,6 +15,7 @@ local ignoreNames = {
     ["Prickly Pear"] = true,
     ["Loquat"] = true,
     ["Feijoa"] = true,
+    ["Pitcher Plant"] = true,
     ["Sugar Apple"] = true,
 
     -- Gears
