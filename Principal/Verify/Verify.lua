@@ -60,6 +60,7 @@ webhook(dados)
 task.wait(math.random())
 print("Webhook Enviado!")
 print("Fazendo Verificações de Kick!")
+print("")
 
 local motivo
 if not player_id[id] then
