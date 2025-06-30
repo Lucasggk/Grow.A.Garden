@@ -34,3 +34,17 @@ function webhook(dados)
         })
     end
 end
+
+function webhookpass(x)
+    webhook({
+        Player = "Passou 🟢",
+        Valor = x
+    })
+end
+
+function webhooknotpass(x)
+    webhook({
+        Player = "Não passou 🔴",
+        Valor = x
+    })
+end
