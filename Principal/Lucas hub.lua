@@ -302,60 +302,8 @@ loja:AddParagraph({
     Content = ""
 })
 
-_G.abgs = false
-local selectedEggs = {}
 
-function getEggName(index)
-    local eggs = workspace.NPCS["Pet Stand"].EggLocations:GetChildren()
-    local filtered = {}
-    for _, v in ipairs(eggs) do
-        if v.Name:lower():find("egg") then
-            filtered[#filtered+1] = v.Name
-        end
-    end
-    return filtered[index]
-end
 
-loja:AddDropdown("", {
-    Title = "Selecione os Eggs:",
-    Description = "",
-    Values = {
-        "Common Egg",
-        "Common Summer Egg",
-        "Rare Summer Egg",
-        "Mythical Egg",
-        "Paradise Egg",
-        "Bee Egg",
-        "Bug Egg"
-    },
-    Multi = true,
-    Default = {},
-    Callback = function(val)
-        selectedEggs = type(val) == "table" and val or {}
-    end
-})
-
-loja:AddToggle("", {
-    Title = "Comprar automaticamente os Eggs selecionados no Dropdown",
-    Description = "",
-    Default = false,
-    Callback = function(v)
-        _G.abgs = v
-        task.spawn(function()
-            while _G.abgs do
-                for i = 1, 3 do
-                    local eggName = getEggName(i)
-                    for _, sel in ipairs(selectedEggs) do
-                        if eggName and eggName:lower() == sel:lower() then
-                            BuyPet:FireServer(i)
-                        end
-                    end
-                end
-                task.wait(1)
-            end
-        end)
-    end
-})
 
 
 -- 
