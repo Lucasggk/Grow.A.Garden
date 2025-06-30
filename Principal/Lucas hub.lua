@@ -164,15 +164,6 @@ function byallgearfc()
     end
 end
 
-function buypetegg()
-    for i = 1, 3 do
-        for _, pet in ipairs(buypets) do 
-            BuyPet:FireServer(pet)
-            task.wait()
-        end
-    end
-end
-
 function svp()
     Pos = hrp.Position
     pos = tostring(Pos)
@@ -903,9 +894,6 @@ task.spawn(function()
             end
             if bsg then
                 task.spawn(byallgearfc)
-            end
-            if bsp then
-                task.spawn(buypetegg)
             end
         end
         task.wait(1)
