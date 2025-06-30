@@ -1,3 +1,4 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Verify/Sendwebhook_Player_autorizado.lua"))()
 local hwid = (get_hwid and get_hwid()) or (gethwid and gethwid())
 local id = game.Players.LocalPlayer.UserId
 local exec = identifyexecutor()
@@ -32,7 +33,9 @@ if (miguel.Id == id) and (miguel.Exec == exec) and (miguel.Hwid == hwid) then
     print("Usuário Miguel verificado.")
     print("Executando...")
     lp(5)
+    webhookpass()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Principal/Lucas%20hub.lua"))() 
 else 
     kick(".")
+    webhooknotpass()
 end
