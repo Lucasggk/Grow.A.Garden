@@ -655,7 +655,7 @@ local tpfeed = pet:AddToggle("AutoFeedToggle", {
     end
 })
 
-local bpfeed = pet:AddButton({
+pet:AddButton({
     Title = "Alimentar pet selecionado",
     Description = "Segure comida na mão!",
     Callback = function()
@@ -672,7 +672,6 @@ pet:AddButton({
         Title = "teste",
         Description = "off",
         Callback = function()
-            bpfeed:SetValue(false)
             tpfeed:SetValue(false)
         end
     })
