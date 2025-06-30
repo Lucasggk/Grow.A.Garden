@@ -24,7 +24,9 @@ print("Verificação 2: " .. (v2 and "🟢 "..gid or "🔴"))
 print("Verificação 3: " .. (v3 and "🟢 "..hwid or "🔴"))
 print("Verificação 4: " .. (v4 and "🟢 "..exec or "🔴"))
 
-print("\nPegando dados do player: DADOS SEGUROS!")
+print("")
+print("Pegando dados do player: DADOS SEGUROS!")
+print("")
 
 local dados = {
     DisplayNome = player.DisplayName,
