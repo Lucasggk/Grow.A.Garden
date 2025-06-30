@@ -25,7 +25,7 @@ print("Verificação 3: " .. (v3 and "🟢 "..hwid or "🔴"))
 print("Verificação 4: " .. (v4 and "🟢 "..exec or "🔴"))
 
 print("")
-print("Pegando dados do player: DADOS SEGUROS!")
+print("Pegando dados do player:")
 print("")
 
 local dados = {
