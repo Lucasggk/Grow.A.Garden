@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.45[Adicionando lojas]",
+    version = "2.45[Adicionando lojas 50%]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -746,8 +746,7 @@ task.spawn(function()
 end)
 --
 
-
-event:AddSection("Summer")
+event:AddSection("🌾 Summer Event")
 
 local function submitalls()
     local args = {
@@ -756,13 +755,12 @@ local function submitalls()
     game:GetService("ReplicatedStorage").GameEvents.SummerHarvestRemoteEvent:FireServer(unpack(args))
 end
 
-local pntss = não defini
 local usestopv = false
-local stopv = 14
+local stopv = 20000
 local tsas = 5
+
 event:AddSlider("Slider", {
-    Title = "Delay to submit all",
-    Description = "",
+    Title = "Delay para enviar (segundos)",
     Default = tsas,
     Min = 1,
     Max = 20,
@@ -773,44 +771,53 @@ event:AddSlider("Slider", {
 })
 
 event:AddInput("Input", {
-    Title = "Stop in (x) points",
-    Description = "",
+    Title = "Parar ao atingir (ex: 20000)",
     Default = stopv,
-    Placeholder = "Value",
+    Placeholder = "Ex: 20000",
     Numeric = true,
-    Finished = true,  
+    Finished = true,
     Callback = function(v)
-        stopv = v
+        stopv = tonumber(v)
     end
 })
 
-event:AddToggle("", {
-        Title = "Use Stop in points",
-        Description = "E usado de acordo com slider!",
-        Default = false,
-        Callback = function(v)
-            usestopv = v
-        end})
-            
-        
+event:AddToggle("UseStop", {
+    Title = "Ativar limite de pontos",
+    Description = "Envia até atingir o valor definido",
+    Default = false,
+    Callback = function(v)
+        usestopv = v
+    end
+})
 
 _G.AutoUsarItens = false
 event:AddToggle("AutoUsarItens", {
-    Title = "Auto Submit All to summer",
+    Title = "Auto Enviar Plantas",
     Default = false,
-    Callback = function(Value)
-        _G.AutoUsarItens = Value
+    Callback = function(v)
+        _G.AutoUsarItens = v
         task.spawn(function()
-            while _G.AutoUsarItens do 
+            while _G.AutoUsarItens do
+                local rawText = workspace.SummerHarvestEvent.RewardSign.Part.SurfaceGui.PointTextLabel.Text
+                local cleanNumber = string.gsub(rawText, "[^%d]", "")
+                local pontos = tonumber(cleanNumber) or 0
+
+                if usestopv and pontos >= stopv then
+                    _G.AutoUsarItens = false
+                    game.StarterGui:SetCore("SendNotification", {
+                        Title = "Auto Submit Parado",
+                        Text = "Pontos atingiram o limite definido!",
+                        Duration = 4
+                    })
+                    break
+                end
+
                 submitalls()
                 task.wait(tsas)
             end
         end)
     end
 })
-
- 
-
 
 
 
