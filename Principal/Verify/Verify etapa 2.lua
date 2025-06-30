@@ -34,6 +34,12 @@ local px4 = {
     Hwid = "b4d60eedb11a24dd",
 }
 
+local Lucas = {
+    Id = 5557980719,
+    Exec = "RonixExploit",
+    Hwid = "d2ca17f317d62734",
+}
+
 if (miguel.Id == id and miguel.Exec == exec and miguel.Hwid == hwid) then
     print("Fazendo Outras Verificações...")
     task.wait(0.1)
@@ -50,6 +56,15 @@ elseif (px4.Id == id and px4.Exec == exec and px4.Hwid == hwid) then
     print("Executando...")
     lp(5)
     webhookpass("PX4 passou! HWID: ".. hwid)
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Principal/Lucas%20hub.lua"))()
+
+elseif (Lucas.Id == id and Lucas.Exec == exec and Lucas.Hwid == hwid) then
+    print("Fazendo Outras Verificações...")
+    task.wait(0.1)
+    print("Usuário Lucas verificado.")
+    print("Executando...")
+    lp(5)
+    webhookpass("Lucas passou! HWID: ".. hwid)
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Principal/Lucas%20hub.lua"))()
 
 else
