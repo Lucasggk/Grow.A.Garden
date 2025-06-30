@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.45[teste 3-commith]",
+    version = "2.45[teste 4-commith]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -300,7 +300,7 @@ loja:AddToggle("", {
     Callback = function(state)
         _G.bpd = state
         task.spawn(function()
-            while _G.buying do
+            while _G.bpd do
                 for _, name in ipairs(selected) do
                     local indices = gne(name)
                     for _, i in ipairs(indices) do
