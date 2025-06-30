@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.45[Adicionando lojas 50%]",
+    version = "2.45[Adicionando lojas | EM BREVE!]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -591,9 +591,9 @@ function prefsh()
         end
     end
     print("Pets atualizados:")
-    for _, id in ipairs(PetsId) do
+    --[[for _, id in ipairs(PetsId) do
         print(id)
-    end
+    end]]
     return PetsId
 end
 
@@ -633,7 +633,7 @@ updatePetDropdown()
 
 local autoFeed = false
 
-pet:AddToggle("AutoFeedToggle", {
+local tpfeed = pet:AddToggle("AutoFeedToggle", {
     Title = "Alimentação Automática\n",
     Description = "Alimenta o pet selecionado automaticamente\nPorem pegue a comida na mão!\n",
     Default = false,
@@ -655,7 +655,7 @@ pet:AddToggle("AutoFeedToggle", {
     end
 })
 
-pet:AddButton({
+local bpfeed = pet:AddButton({
     Title = "Alimentar pet selecionado",
     Description = "Segure comida na mão!",
     Callback = function()
@@ -667,6 +667,15 @@ pet:AddButton({
         end
     end
 })
+
+pet:AddButton({
+        Title = "teste",
+        Description = "off",
+        Callback = function()
+            bpfeed:SetValue(false)
+            tpfeed:SetValue(false)
+        end
+    })
 
 --
 
