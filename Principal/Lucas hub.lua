@@ -747,6 +747,7 @@ end)
 --
 
 event:AddSection("🌾 Summer Event")
+event:AddSection("🌾 Summer Event")
 
 local function submitalls()
     local args = {
@@ -798,9 +799,14 @@ event:AddToggle("AutoUsarItens", {
         _G.AutoUsarItens = v
         task.spawn(function()
             while _G.AutoUsarItens do
-                local rawText = workspace.SummerHarvestEvent.RewardSign.Part.SurfaceGui.PointTextLabel.Text
-                local cleanNumber = string.gsub(rawText, "[^%d]", "")
-                local pontos = tonumber(cleanNumber) or 0
+                local pontos = 0
+                local success, result = pcall(function()
+                    return workspace.SummerHarvestEvent.RewardSign:GetChildren()[2].SurfaceGui.PointTextLabel.ContentText
+                end)
+                if success and result then
+                    local clean = string.gsub(result, "[^%d]", "")
+                    pontos = tonumber(clean) or 0
+                end
 
                 if usestopv and pontos >= stopv then
                     _G.AutoUsarItens = false
