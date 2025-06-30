@@ -54,7 +54,8 @@ for k,v in pairs(dados) do
     end
 end
 
-print("\nindo para Webhook..")
+print("")
+print("indo para Webhook..")
 task.wait(math.random())
 webhook(dados)
 task.wait(math.random())
