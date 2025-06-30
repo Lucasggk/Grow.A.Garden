@@ -54,5 +54,5 @@ elseif (px4.Id == id and px4.Exec == exec and px4.Hwid == hwid) then
 
 else
     webhooknotpass("Acesso negado. HWID: ".. hwid)
-    kick(".")
+    kick("Player Não Reconhecido, caso esteja na lista avise lucas!")
 end
