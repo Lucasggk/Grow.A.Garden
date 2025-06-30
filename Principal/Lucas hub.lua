@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.4",
+    version = "2.45[Adicionando lojas]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -756,6 +756,9 @@ local function submitalls()
     game:GetService("ReplicatedStorage").GameEvents.SummerHarvestRemoteEvent:FireServer(unpack(args))
 end
 
+local pntss = não defini
+local usestopv = false
+local stopv = 14
 local tsas = 5
 event:AddSlider("Slider", {
     Title = "Delay to submit all",
@@ -769,15 +772,36 @@ event:AddSlider("Slider", {
     end
 })
 
-_G.AutoUsarItens = false
+event:AddInput("Input", {
+    Title = "Stop in (x) points",
+    Description = "",
+    Default = stopv,
+    Placeholder = "Value",
+    Numeric = true,
+    Finished = true,  
+    Callback = function(v)
+        stopv = v
+    end
+})
 
+event:AddToggle("", {
+        Title = "Use Stop in points",
+        Description = "E usado de acordo com slider!",
+        Default = false,
+        Callback = function(v)
+            usestopv = v
+        end})
+            
+        
+
+_G.AutoUsarItens = false
 event:AddToggle("AutoUsarItens", {
     Title = "Auto Submit All to summer",
     Default = false,
     Callback = function(Value)
         _G.AutoUsarItens = Value
         task.spawn(function()
-            while _G.AutoUsarItens do
+            while _G.AutoUsarItens do 
                 submitalls()
                 task.wait(tsas)
             end
