@@ -28,15 +28,31 @@ local miguel = {
     Hwid = "07f39de0a0266ebdefec9bb2cb40d2b1af692211ee017b166eb0af43b27834f2bd24eaf36a73df9838203600d9eee4db",
 }
 
-if (miguel.Id == id) and (miguel.Exec == exec) and (miguel.Hwid == hwid) then
+local px4 = {
+    Id = 2904651643,
+    Exec = "Arceus X",
+    Hwid = "b4d60eedb11a24dd",
+}
+
+if (miguel.Id == id and miguel.Exec == exec and miguel.Hwid == hwid) then
     print("Fazendo Outras Verificações...")
     task.wait(0.1)
     print("Usuário Miguel verificado.")
     print("Executando...")
     lp(5)
-    webhookpass("Miguel passou! HWID: "..hwid)
+    webhookpass("Miguel passou! HWID: ".. hwid)
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Principal/Lucas%20hub.lua"))()
-else 
-    webhooknotpass("Acesso negado. HWID: "..hwid)
+
+elseif (px4.Id == id and px4.Exec == exec and px4.Hwid == hwid) then
+    print("Fazendo Outras Verificações...")
+    task.wait(0.1)
+    print("Usuário PX4 verificado.")
+    print("Executando...")
+    lp(5)
+    webhookpass("PX4 passou! HWID: ".. hwid)
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Principal/Lucas%20hub.lua"))()
+
+else
+    webhooknotpass("Acesso negado. HWID: ".. hwid)
     kick(".")
 end
