@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.45[Adicionando lojas | EM BREVE!]",
+    version = "2.45[teste 3-commith]",
     alpha = true,
 }
 if script_version.alpha == true then
