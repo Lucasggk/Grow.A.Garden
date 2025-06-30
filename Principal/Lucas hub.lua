@@ -746,7 +746,7 @@ task.spawn(function()
 end)
 --
 
-event:AddSection("🌾 Summer Event")
+event:AddSection("🌾 Summer Event... [ERROR 60092]")
 event:AddSection("🌾 Summer Event")
 
 local function submitalls()
@@ -803,22 +803,22 @@ event:AddToggle("AutoUsarItens", {
                 local success, result = pcall(function()
                     return workspace.SummerHarvestEvent.RewardSign:GetChildren()[2].SurfaceGui.PointTextLabel.ContentText
                 end)
+
                 if success and result then
                     local clean = string.gsub(result, "[^%d]", "")
                     pontos = tonumber(clean) or 0
                 end
 
                 if usestopv and pontos >= stopv then
-                    _G.AutoUsarItens = false
                     game.StarterGui:SetCore("SendNotification", {
-                        Title = "Auto Submit Parado",
-                        Text = "Pontos atingiram o limite definido!",
-                        Duration = 4
+                        Title = "Auto Submit Pausado",
+                        Text = "Aguardando os pontos aumentarem...",
+                        Duration = 3
                     })
-                    break
+                else
+                    submitalls()
                 end
 
-                submitalls()
                 task.wait(tsas)
             end
         end)
