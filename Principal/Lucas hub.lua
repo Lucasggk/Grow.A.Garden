@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.45[teste 4-commith]",
+    version = "2.45[Teste: EggBuy + shop event]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -848,7 +848,32 @@ event:AddToggle("AutoUsarItens", {
     end
 })
 
+event:AddSection("Summer Shop")
 
+local ss = {"Summer Seed Pack","Delphinium","Lily of the Valley","Traveler's Fruit","Mutation Spray Burnt","Oasis Crate","Oasis Egg","Hamster"}
+local bssp = game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("BuyEventShopStock")
+local selshp, bsshp = {}, false
+
+event:AddDropdown("MultiDropdown",{
+    Title = "Selecione items para comprar: \n",
+    Description = "Summer stock\n",
+    Values = ss,
+    Multi = true,
+    Default = {},
+}):OnChanged(function(v)
+    selshp = {} for _, i in ipairs(v) do selshp[#selshp+1] = i end
+end)
+
+event:AddToggle("AutoBuySummerToggle",{
+    Title = "Ativar Auto Buy Summer\n",
+    Description = "",
+    Default = false,
+    Callback = function(v) bsshp = v end
+})
+
+function bssi()
+    for _ = 1,10 do for _, i in ipairs(selshp) do bssp:FireServer(i) task.wait(0.1) end end
+end
 
 
 
@@ -894,6 +919,9 @@ task.spawn(function()
             end
             if bsg then
                 task.spawn(byallgearfc)
+            end
+            if bsshp then
+                task.spawn(bssi)
             end
         end
         task.wait(1)
