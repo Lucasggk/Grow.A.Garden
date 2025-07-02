@@ -92,7 +92,7 @@ local vuln = Window:AddTab({
 
 local config = Window:AddTab({
     Title = "Settings",
-    Icon = "rbxassetid://7734053490"
+    Icon = "settings"
 })
 
 local ui = Window:AddTab({
