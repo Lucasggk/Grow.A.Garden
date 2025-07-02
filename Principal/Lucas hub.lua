@@ -62,7 +62,7 @@ local player = Window:AddTab({
 
 local pet = Window:AddTab({
     Title = "Mascotes",
-    Icon = "rbxassetid://7734022301" -- ícone de pata/pet
+    Icon = "rbxassetid://7734005260" -- mais detalhado, estilo fofo -- ícone de pata/pet
 })
 
 local loja = Window:AddTab({
