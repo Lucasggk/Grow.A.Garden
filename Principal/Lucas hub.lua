@@ -57,47 +57,47 @@ local Window = Fluent:CreateWindow({
 
 local player = Window:AddTab({
     Title = "Jogador",
-    Icon = "user"
+    Icon = "rbxassetid://7733960981" -- ícone de usuário
 })
 
 local pet = Window:AddTab({
     Title = "Mascotes",
-    Icon = "paw-print"
+    Icon = "rbxassetid://7734022301" -- ícone de pata/pet
 })
 
 local loja = Window:AddTab({
     Title = "Loja",
-    Icon = "shopping-cart"
+    Icon = "rbxassetid://7733658504" -- ícone de sacola/compra
 })
 
 local plant = Window:AddTab({
     Title = "Plantar",
-    Icon = "leaf"
+    Icon = "rbxassetid://7734035252" -- ícone de planta/folha
 })
 
 local sell = Window:AddTab({
     Title = "Vender",
-    Icon = "dollar-sign"
+    Icon = "rbxassetid://7734009285" -- ícone de dinheiro/moeda
 })
 
 local event = Window:AddTab({
     Title = "Eventos",
-    Icon = "calendar"
+    Icon = "rbxassetid://7733964640" -- ícone de calendário
 })
 
 local vuln = Window:AddTab({
     Title = "Exploits",
-    Icon = "shield-alert"
+    Icon = "rbxassetid://7733960986" -- ícone de alerta/segurança
 })
 
 local ui = Window:AddTab({
     Title = "Interface",
-    Icon = "layout-grid"
+    Icon = "rbxassetid://7733920763" -- ícone de layout/interface
 })
 
 local config = Window:AddTab({
     Title = "Configurações",
-    Icon = "settings"
+    Icon = "rbxassetid://7734053490" -- ícone de engrenagem
 })
 
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
