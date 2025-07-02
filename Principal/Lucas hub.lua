@@ -60,44 +60,44 @@ local player = Window:AddTab({
     Icon = "rbxassetid://7733960981"
 })
 
+local loja = Window:AddTab({
+    Title = "Loja",
+    Icon = "rbxassetid://7734056813"
+})
+
 local pet = Window:AddTab({
     Title = "Mascotes",
     Icon = "rbxassetid://7733911824"
 })
 
-local loja = Window:AddTab({
-    Title = "Loja",
-    Icon = "rbxassetid://13882434881"
-})
-
 local plant = Window:AddTab({
     Title = "Plantar",
-    Icon = "rbxassetid://13421742442"
+    Icon = "rbxassetid://7734051304"
 })
 
 local sell = Window:AddTab({
     Title = "Vender",
-    Icon = "rbxassetid://7734009285"
+    Icon = "rbxassetid://7734052890"
 })
 
 local event = Window:AddTab({
     Title = "Eventos",
-    Icon = "rbxassetid://7733964640"
+    Icon = "rbxassetid://7734052185"
 })
 
 local vuln = Window:AddTab({
     Title = "Exploits",
-    Icon = "rbxassetid://7733960986"
+    Icon = "rbxassetid://7734009026"
+})
+
+local config = Window:AddTab({
+    Title = "Settings",
+    Icon = "rbxassetid://7734053490"
 })
 
 local ui = Window:AddTab({
     Title = "Interface",
-    Icon = "rbxassetid://7734056813"
-})
-
-local config = Window:AddTab({
-    Title = "Configurações",
-    Icon = "rbxassetid://7734053490"
+    Icon = "rbxassetid://7733920763"
 })
 
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
