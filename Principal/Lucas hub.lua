@@ -55,48 +55,48 @@ local Window = Fluent:CreateWindow({
 
 -- Local Tabs --
 
+local player = Window:AddTab({
+    Title = "Jogador",
+    Icon = "user"
+})
+
+local pet = Window:AddTab({
+    Title = "Mascotes",
+    Icon = "paw-print"
+})
+
 local loja = Window:AddTab({
-    Title = "loja",
-    Icon = "home"
+    Title = "Loja",
+    Icon = "shopping-cart"
 })
 
 local plant = Window:AddTab({
-    Title = "plant",
-    Icon = "list"
+    Title = "Plantar",
+    Icon = "leaf"
 })
 
 local sell = Window:AddTab({
-    Title = "sell",
-    Icon = "list"
+    Title = "Vender",
+    Icon = "dollar-sign"
 })
-
-local player = Window:AddTab({
-        Title = "Player",
-        Icon = "list"
-    })
-
-local pet = Window:AddTab({
-        Title = "pet",
-        Icon = "list"
-    })
-
-local ui = Window:AddTab({
-        Title = "UIs",
-        Icon = "list"
-    })
-
-local vuln = Window:AddTab({
-        Title = "Vulnerabilidade",
-        Icon = "list"
-    })
 
 local event = Window:AddTab({
     Title = "Eventos",
-    Icon = "list"
+    Icon = "calendar"
+})
+
+local vuln = Window:AddTab({
+    Title = "Exploits",
+    Icon = "shield-alert"
+})
+
+local ui = Window:AddTab({
+    Title = "Interface",
+    Icon = "layout-grid"
 })
 
 local config = Window:AddTab({
-    Title = "configurações",
+    Title = "Configurações",
     Icon = "settings"
 })
 
