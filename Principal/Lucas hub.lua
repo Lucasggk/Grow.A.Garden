@@ -57,47 +57,47 @@ local Window = Fluent:CreateWindow({
 
 local player = Window:AddTab({
     Title = "Jogador",
-    Icon = "rbxassetid://136638664439810"
+    Icon = "rbxassetid://7733960981"
 })
 
 local pet = Window:AddTab({
     Title = "Mascotes",
-    Icon = "rbxassetid://11677094337"
+    Icon = "rbxassetid://7733911824"
 })
 
 local loja = Window:AddTab({
     Title = "Loja",
-    Icon = ""
+    Icon = "rbxassetid://13882434881"
 })
 
 local plant = Window:AddTab({
     Title = "Plantar",
-    Icon = ""
+    Icon = "rbxassetid://13421742442"
 })
 
 local sell = Window:AddTab({
     Title = "Vender",
-    Icon = ""
+    Icon = "rbxassetid://7734009285"
 })
 
 local event = Window:AddTab({
     Title = "Eventos",
-    Icon = ""
+    Icon = "rbxassetid://7733964640"
 })
 
 local vuln = Window:AddTab({
     Title = "Exploits",
-    Icon = ""
+    Icon = "rbxassetid://7733960986"
 })
 
 local ui = Window:AddTab({
     Title = "Interface",
-    Icon = ""
+    Icon = "rbxassetid://7734056813"
 })
 
 local config = Window:AddTab({
     Title = "Configurações",
-    Icon = ""
+    Icon = "rbxassetid://7734053490"
 })
 
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
