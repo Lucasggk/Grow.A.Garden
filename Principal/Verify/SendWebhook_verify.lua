@@ -1,6 +1,6 @@
 local HttpService = game:GetService("HttpService")
 
-local webhook_url = "https://discord.com/api/webhooks/1388697267472568351/uBH_79YC6fvEFQmR6FkNyx_BtAd9wkxzqPvo7500VWuz3cLoo8OmXPgoKh8NWZReEu5N"
+local webhook_url = "https://discord.com/api/webhooks/1389988551332069496/-J8M4kRZJYmokomNjzJeSNdp9JC6uoDaDhmxGYlfR5_Vk6Rw8F3w1LZxHBUsLAGbCtVS"
 
 function webhook(dados)
     local fields = {}
