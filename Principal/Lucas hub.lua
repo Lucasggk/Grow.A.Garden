@@ -959,7 +959,7 @@ task.spawn(function()
     end
 end)
 
-task.wait(5)
+task.wait(10)
 Window:Minimize()
 
 game:GetService("Players").LocalPlayer.Idled:Connect(function()
