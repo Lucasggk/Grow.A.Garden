@@ -957,6 +957,9 @@ task.spawn(function()
     end
 end)
 
+task.wait(5)
+Fluent:Minimize()
+
 game:GetService("Players").LocalPlayer.Idled:Connect(function()
     local VirtualUser = game:GetService("VirtualUser")
     VirtualUser:Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)task.wait(1)
