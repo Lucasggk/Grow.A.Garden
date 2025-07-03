@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.52[Adicionando icons: pets + event]",
+    version = "2.52[Adicionando icons..]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -70,7 +70,7 @@ local pet = Window:AddTab({
 
 local plant = Window:AddTab({
     Title = "plant/water",
-    Icon = "rbxassetid://7734051304"
+    Icon = "rbxassetid://91815274279491"
 })
 
 local sell = Window:AddTab({
