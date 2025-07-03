@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.51[Adicionando icons: pets + event]",
+    version = "2.52[Adicionando icons: pets + event]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -51,7 +51,7 @@ local Window = Fluent:CreateWindow({
     IsDraggable = true,
     Keybind = Enum.KeyCode.LeftControl
 })
-
+Minimizer.Visible = false
 -- Local Tabs --
 
 local player = Window:AddTab({
