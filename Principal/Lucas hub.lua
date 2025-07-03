@@ -57,12 +57,12 @@ local Window = Fluent:CreateWindow({
 
 local player = Window:AddTab({
     Title = "Jogador",
-    Icon = "rbxassetid://7733960981"
+    Icon = "user"
 })
 
 local loja = Window:AddTab({
     Title = "Loja",
-    Icon = "rbxassetid://7734056813"
+    Icon = "shopping-cart"
 })
 
 local pet = Window:AddTab({
