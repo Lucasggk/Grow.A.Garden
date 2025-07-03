@@ -1019,11 +1019,3 @@ imageButton.MouseButton1Click:Connect(function()
 	Window:Minimize()
 end)
 
-while true do
-	if Window then
-		--
-	else 
-		game.Players.LocalPlayer.PlayerGui:FindFirstChild("DraggableImageButtonGui"):Destroy()
-	end
-task.wait(0.1)
-end
