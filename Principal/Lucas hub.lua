@@ -56,7 +56,7 @@ local Window = Fluent:CreateWindow({
 
 local player = Window:AddTab({
     Title = "Jogador",
-    Icons = "user"
+    Icon = "user"
 })
 
 local loja = Window:AddTab({
