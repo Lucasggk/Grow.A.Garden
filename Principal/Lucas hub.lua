@@ -211,7 +211,7 @@ local section = loja:AddSection("Seeds")
 
 loja:AddToggle("", {
     Title = "Buy shop seed",
-    Description = "Buy all shop seed",
+    Description = "Buy select shop seed",
     Default = false,
     Callback = function(Value)
         bsa = Value
@@ -220,7 +220,7 @@ loja:AddToggle("", {
 
 local dropdownSeed = loja:AddDropdown("DropdownSeed", {
     Title = "Selecione seeds para comprar\n",
-    Description = "Selecione seeds para comprar\n",
+    Description = "Selecione select para comprar\n",
     Values = byallseed,
     Multi = true,
     Default = {},
