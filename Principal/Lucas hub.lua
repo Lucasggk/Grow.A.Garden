@@ -70,7 +70,7 @@ imageButton.Image = decalId
 imageButton.Size = UDim2.new(0, 60, 0, 60)
 imageButton.AnchorPoint = Vector2.new(0.5, 0.5)
 imageButton.Position = UDim2.new(0, 100, 1, -170)
-imageButton.BackgroundTransparency = 1
+imageButton.BackgroundTransparency = 0
 imageButton.AutoButtonColor = false
 imageButton.Parent = screenGui
 
