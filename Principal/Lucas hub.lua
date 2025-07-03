@@ -769,7 +769,6 @@ task.spawn(function()
 end)
 --
 
-event:AddSection("🌾 Summer Event... [ERROR 60092]")
 event:AddSection("🌾 Summer Event")
 
 local function submitalls()
@@ -850,30 +849,63 @@ event:AddToggle("AutoUsarItens", {
 
 event:AddSection("Summer Shop")
 
-local ss = {"Summer Seed Pack","Delphinium","Lily of the Valley","Traveler's Fruit","Mutation Spray Burnt","Oasis Crate","Oasis Egg","Hamster"}
 local bssp = game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("BuyEventShopStock")
-local selshp, bsshp = {}, false
 
-event:AddDropdown("MultiDropdown",{
-    Title = "Selecione items para comprar: \n",
+local ss = {
+    "Summer Seed Pack",
+    "Delphinium",
+    "Lily of the Valley",
+    "Traveler's Fruit",
+    "Mutation Spray Burnt",
+    "Oasis Crate",
+    "Oasis Egg",
+    "Hamster"
+}
+
+local selshp = {}
+local bsshp = false
+
+event:AddDropdown("MultiDropdown", {
+    Title = "Selecione itens para comprar:\n",
     Description = "Summer stock\n",
     Values = ss,
     Multi = true,
     Default = {},
 }):OnChanged(function(v)
-    selshp = {} for _, i in ipairs(v) do selshp[#selshp+1] = i end
+    selshp = v or {}
 end)
 
-event:AddToggle("AutoBuySummerToggle",{
+event:AddToggle("AutoBuySummerToggle", {
     Title = "Ativar Auto Buy Summer\n",
-    Description = "",
     Default = false,
-    Callback = function(v) bsshp = v end
+    Callback = function(v)
+        bsshp = v
+    end
 })
 
-function bssi()
-    for _ = 1,10 do for _, i in ipairs(selshp) do bssp:FireServer(i) task.wait(0.1) end end
+local function bssi()
+    if #selshp == 0 then return end
+    for _ = 1, 10 do
+        for _, itemName in ipairs(selshp) do
+            bssp:FireServer(itemName)
+            task.wait(0.1)
+        end
+    end
 end
+
+task.spawn(function()
+    local lastMinute = -1
+    while true do
+        local currentMinute = os.date("*t").min
+        if currentMinute ~= lastMinute then
+            lastMinute = currentMinute
+            if bsshp then
+                task.spawn(bssi)
+            end
+        end
+        task.wait(1)
+    end
+end)
 
 
 
@@ -919,9 +951,6 @@ task.spawn(function()
             end
             if bsg then
                 task.spawn(byallgearfc)
-            end
-            if bsshp then
-                task.spawn(bssi)
             end
         end
         task.wait(1)
