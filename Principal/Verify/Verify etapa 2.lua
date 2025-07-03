@@ -23,9 +23,9 @@ if block_hwid[hwid] then
 end
 
 local miguel = {
-    Id = 2000903030,
-    Exec = "Krnl",
-    Hwid = "07f39de0a0266ebdefec9bb2cb40d2b1af692211ee017b166eb0af43b27834f2bd24eaf36a73df9838203600d9eee4db",
+  Id = "2000903030",
+  Exec = "Delta",
+  Hwid = "d6c128b73f1a4064ae284db85ed1964134f764bd53476d81e44c036ce46c2b6a",
 }
 
 local px4 = {
