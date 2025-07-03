@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.4775",
+    version = "2.5",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -57,7 +57,7 @@ local Window = Fluent:CreateWindow({
 
 local player = Window:AddTab({
     Title = "Jogador",
-    Icons = icss.user
+    Icons = icss["user"]
 })
 
 local loja = Window:AddTab({
