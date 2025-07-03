@@ -95,7 +95,7 @@ local config = Window:AddTab({
 
 local ui = Window:AddTab({
     Title = "Interface",
-    Icon = "rbxassetid://7733920763"
+    Icon = "rbxassetid://133691553274983"
 })
 
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
