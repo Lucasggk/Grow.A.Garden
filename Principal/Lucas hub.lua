@@ -41,6 +41,7 @@ end)
 
 getgenv().Show_Button = false
 local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/Beta.lua"))() 
+getgenv().Show_Button = false
 
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden |",
@@ -977,7 +978,7 @@ end)
 local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
-local decalId = "82709442554199"
+local decalId = "119963300684494"
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "DraggableImageButtonGui"
