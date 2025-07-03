@@ -51,7 +51,7 @@ local Window = Fluent:CreateWindow({
     IsDraggable = true,
     Keybind = Enum.KeyCode.LeftControl
 })
-Minimizer:Destroy()
+
 -- Local Tabs --
 
 local player = Window:AddTab({
