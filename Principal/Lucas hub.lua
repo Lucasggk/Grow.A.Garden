@@ -778,7 +778,7 @@ local function submitalls()
 end
 
 local usestopv = false
-local stopv = 20000
+local stopv
 local tsas = 5
 
 event:AddSlider("Slider", {
@@ -793,8 +793,8 @@ event:AddSlider("Slider", {
 })
 
 event:AddInput("Input", {
-    Title = "Parar ao atingir (ex: 20000)",
-    Default = stopv,
+    Title = "Parar ao atingir ",
+    Default = nil,
     Placeholder = "Ex: 20000",
     Numeric = true,
     Finished = true,
