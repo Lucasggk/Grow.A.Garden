@@ -13,11 +13,6 @@ print("MADE BY LUCAS\nScript Version " .. script_version.version .. " - " .. scr
 local vful = script_version.version .." - ".. script_version.alpha
 getgenv().vers = vful
 
-function ld(a)
-    loadstring(game:HttpGet(a))()
-end
-
-
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui") 
 
@@ -56,8 +51,7 @@ local Window = Fluent:CreateWindow({
     IsDraggable = true,
     Keybind = Enum.KeyCode.LeftControl
 })
-_G.FluentWindow = Window
-ld("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Bot%C3%A3o.lua")
+
 -- Local Tabs --
 
 local player = Window:AddTab({
