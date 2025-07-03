@@ -1019,3 +1019,23 @@ imageButton.MouseButton1Click:Connect(function()
 	Window:Minimize()
 end)
 
+task.spawn(function()
+    local Players = game:GetService("Players")
+    local RunService = game:GetService("RunService")
+    local CoreGui = game:GetService("CoreGui")
+    local LocalPlayer = Players.LocalPlayer
+    local parent = RunService:IsStudio() and LocalPlayer.PlayerGui or CoreGui
+
+    while true do
+        local gui = parent:FindFirstChild("ScreenGui")
+        if not gui then
+            local draggable = LocalPlayer.PlayerGui:FindFirstChild("DraggableImageButtonGui")
+            if draggable then
+                draggable:Destroy()
+                print("DraggableImageButtonGui destruída porque ScreenGui sumiu.")
+            end
+            break -- remove essa linha se quiser que continue monitorando pra recriação
+        end
+        task.wait(0.5)
+    end
+end)
