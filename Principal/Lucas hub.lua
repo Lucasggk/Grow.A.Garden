@@ -978,7 +978,7 @@ end)
 local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
-local decalId = "119963300684494"
+local decalId = "rbxassetid://119963300684494"
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "DraggableImageButtonGui"
@@ -991,7 +991,7 @@ imageButton.Image = decalId
 imageButton.Size = UDim2.new(0, 60, 0, 60)
 imageButton.Position = UDim2.new(0.5, -50, 0.5, -50)
 imageButton.AnchorPoint = Vector2.new(0.5, 0.5)
-imageButton.BackgroundTransparency = 1
+imageButton.BackgroundTransparency = 0
 imageButton.AutoButtonColor = false
 imageButton.Parent = screenGui
 
