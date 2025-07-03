@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.5",
+    version = "2.5[Adicionando icons: pets + event]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -66,7 +66,7 @@ local loja = Window:AddTab({
 
 local pet = Window:AddTab({
     Title = "Mascotes",
-    Icon = "rbxassetid://7733911824"
+    Icon = "rbxassetid://130754538725129"
 })
 
 local plant = Window:AddTab({
@@ -81,7 +81,7 @@ local sell = Window:AddTab({
 
 local event = Window:AddTab({
     Title = "Eventos",
-    Icon = "rbxassetid://7734052185"
+    Icon = "rbxassetid://88058653294248"
 })
 
 local vuln = Window:AddTab({
