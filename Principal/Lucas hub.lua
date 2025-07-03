@@ -76,7 +76,7 @@ local plant = Window:AddTab({
 
 local sell = Window:AddTab({
     Title = "Vender",
-    Icon = "rbxassetid://6865302105"
+    Icon = "rbxassetid://87631616608256"
 })
 
 local event = Window:AddTab({
