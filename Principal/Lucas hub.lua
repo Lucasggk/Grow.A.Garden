@@ -56,6 +56,7 @@ local Window = Fluent:CreateWindow({
     IsDraggable = true,
     Keybind = Enum.KeyCode.LeftControl
 })
+_G.FluentWindow = Window
 ld("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Bot%C3%A3o.lua")
 -- Local Tabs --
 
