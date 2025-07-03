@@ -13,7 +13,9 @@ print("MADE BY LUCAS\nScript Version " .. script_version.version .. " - " .. scr
 local vful = script_version.version .." - ".. script_version.alpha
 getgenv().vers = vful
 
-
+function ld(a)
+    loadstring(game:HttpGet(a))()
+end
 
 
 repeat task.wait() until game:IsLoaded()
@@ -40,8 +42,8 @@ player.CharacterAdded:Connect(function(char)
 end)
 
 
-local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/Beta.lua"))() 
-
+--local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/Beta.lua"))() 
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden |",
@@ -54,7 +56,7 @@ local Window = Fluent:CreateWindow({
     IsDraggable = true,
     Keybind = Enum.KeyCode.LeftControl
 })
-
+ld("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Bot%C3%A3o.lua")
 -- Local Tabs --
 
 local player = Window:AddTab({
