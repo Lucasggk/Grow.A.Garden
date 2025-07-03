@@ -56,12 +56,12 @@ local Window = Fluent:CreateWindow({
 
 local player = Window:AddTab({
     Title = "Jogador",
-    Icon = "user"
+    Icon = "user" -- pronto
 })
 
 local loja = Window:AddTab({
     Title = "Loja",
-    Icon = "shopping-cart"
+    Icon = "shopping-cart" -- pronto
 })
 
 local pet = Window:AddTab({
@@ -76,7 +76,7 @@ local plant = Window:AddTab({
 
 local sell = Window:AddTab({
     Title = "Vender",
-    Icon = "rbxassetid://87631616608256"
+    Icon = "rbxassetid://87631616608256" -- pronto
 })
 
 local event = Window:AddTab({
@@ -91,7 +91,7 @@ local vuln = Window:AddTab({
 
 local config = Window:AddTab({
     Title = "Settings",
-    Icon = "settings"
+    Icon = "settings" -- pronto 
 })
 
 local ui = Window:AddTab({
