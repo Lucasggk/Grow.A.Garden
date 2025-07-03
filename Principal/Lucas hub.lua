@@ -69,7 +69,7 @@ local pet = Window:AddTab({
 })
 
 local plant = Window:AddTab({
-    Title = "Plantar",
+    Title = "plant/water",
     Icon = "rbxassetid://7734051304"
 })
 
