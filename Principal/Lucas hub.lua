@@ -39,7 +39,6 @@ end)
 
 --local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/Beta.lua"))() 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local icss = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Icons.lua"))()
 
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden |",
@@ -57,12 +56,12 @@ local Window = Fluent:CreateWindow({
 
 local player = Window:AddTab({
     Title = "Jogador",
-    Icons = icss["user"]
+    Icons = "user"
 })
 
 local loja = Window:AddTab({
     Title = "Loja",
-    Icon = "shopping-cart" -- pronto
+    Icon = "shopping-cart" 
 })
 
 local pet = Window:AddTab({
@@ -77,7 +76,7 @@ local plant = Window:AddTab({
 
 local sell = Window:AddTab({
     Title = "Vender",
-    Icon = "rbxassetid://87631616608256" -- pronto
+    Icon = "rbxassetid://87631616608256" 
 })
 
 local event = Window:AddTab({
