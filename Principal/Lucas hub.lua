@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.45[Teste: EggBuy + shop event]",
+    version = "2.475",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -39,6 +39,7 @@ end)
 
 --local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/Beta.lua"))() 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local icss = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Icons.lua"))()
 
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden |",
@@ -56,7 +57,7 @@ local Window = Fluent:CreateWindow({
 
 local player = Window:AddTab({
     Title = "Jogador",
-    Icon = "user" -- pronto
+    Icons = icones.user
 })
 
 local loja = Window:AddTab({
