@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.5[Adicionando icons: pets + event]",
+    version = "2.51[Adicionando icons: pets + event]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -1019,3 +1019,11 @@ imageButton.MouseButton1Click:Connect(function()
 	Window:Minimize()
 end)
 
+while true do
+	if Window then
+		--
+	else 
+		game.Players.LocalPlayer.PlayerGui:FindFirstChild("DraggableImageButtonGui"):Destroy()
+	end
+task.wait(0.1)
+end
