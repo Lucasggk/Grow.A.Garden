@@ -90,7 +90,7 @@ local vuln = Window:AddTab({
 
 local config = Window:AddTab({
     Title = "Settings",
-    Icon = "settings" -- pronto 
+    Icon = "settings"  
 })
 
 local ui = Window:AddTab({
