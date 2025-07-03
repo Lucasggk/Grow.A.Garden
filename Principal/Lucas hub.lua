@@ -960,7 +960,7 @@ task.spawn(function()
 end)
 
 task.wait(5)
-Fluent:Minimize()
+Window:Minimize()
 
 game:GetService("Players").LocalPlayer.Idled:Connect(function()
     local VirtualUser = game:GetService("VirtualUser")
