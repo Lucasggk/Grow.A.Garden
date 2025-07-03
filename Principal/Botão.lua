@@ -46,5 +46,7 @@ game:GetService("UserInputService").InputChanged:Connect(function(input)
 end)
 
 imageButton.MouseButton1Click:Connect(function()
-	Window:Minimize()
+	if _G.FluentWindow then
+		_G.FluentWindow:Minimize()
+	end
 end)
