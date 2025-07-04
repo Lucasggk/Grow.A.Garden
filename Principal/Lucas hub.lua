@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.56",
+    version = "2.55",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -108,10 +108,32 @@ InterfaceManager:SetLibrary(Fluent)
 InterfaceManager:SetFolder("GrowAGarden")
 InterfaceManager:BuildInterfaceSection(config)
 
--- Local Variáveis --
+-- Local VariÃ¡veis --
 
+
+--[[ old
+local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk", "Ember Lily", "Sugar Apple"}
+]]
+
+local byallseed = {
+    "Carrot", "Strawberry", "Blueberry", "Tomato", "Cauliflower", "Watermelon", "Rafflesia", "Green Apple",
+    "Avocado", "Banana", "Pineapple", "Kiwi", "Bell Pepper", "Prickly Pear", "Loquat",
+    "Feijoa", "Pitcher Plant", "Sugar Apple"
+}
+
+local bygear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Magnifying Glass", "Tanning Mirror", "Master Sprinkler", "Cleaning Spray", "Favorite Tool", "Harvest Tool", "Friendship Pot"}
+
+
+
+
+
+
+local bsa = false
+local bsg = false
 local bsp = false 
 
+local selectedSeeds = {}
+local selectedGears = {}
 local buypets = {1, 2, 3}
 
 local step = 0.001
@@ -126,6 +148,24 @@ local walkSpeed = humanoid.WalkSpeed
 local PetsId = {}
 
 -- Local functions --
+
+function byallseedfc()
+    for i = 1, 25 do
+        for _, seed in ipairs(selectedSeeds) do
+            buySeed:FireServer(seed)
+            task.wait()
+        end
+    end
+end
+
+function byallgearfc()
+    for i = 1, 25 do
+        for _, gear in ipairs(selectedGears) do
+            buyGear:FireServer(gear)
+            task.wait()
+        end
+    end
+end
 
 function svp()
     Pos = hrp.Position
@@ -171,177 +211,61 @@ end
 
 -- Local Script --
 
-
-local ignoreNames = {
-    -- Sementes
-    ["Carrot"] = false,
-    ["Strawberry"] = false,
-    ["Blueberry"] = false,
-    ["Tomato"] = false,
-    ["Cauliflower"] = false,
-    ["Watermelon"] = false,
-    ["Rafflesia"] = false,
-    ["Green Apple"] = false,
-    ["Avocado"] = false,
-    ["Banana"] = false,
-    ["Pineapple"] = false,
-    ["Kiwi"] = false,
-    ["Bell Pepper"] = false,
-    ["Prickly Pear"] = false,
-    ["Loquat"] = false,
-    ["Feijoa"] = false,
-    ["Pitcher Plant"] = false,
-    ["Sugar Apple"] = false,
-
-    -- Gears
-    ["Watering Can"] = false,
-    ["Trowel"] = false,
-    ["Recall Wrench"] = false,
-    ["Basic Sprinkler"] = false,
-    ["Advanced Sprinkler"] = false,
-    ["Godly Sprinkler"] = false,
-    ["Lightning Rod"] = false,
-    ["Master Sprinkler"] = false,
-    ["Magnifying Glass"] = false,
-    ["Tanning Mirror"] = false,
-    ["Cleaning Spray"] = false,
-    ["Favorite Tool"] = false,
-    ["Harvest Tool"] = false,
-    ["Friendship Pot"] = false,
-}
-
-local player = game:GetService("Players").LocalPlayer
-local rs = game:GetService("ReplicatedStorage")
-local seedFrame = player.PlayerGui.Seed_Shop.Frame.ScrollingFrame
-local gearFrame = player.PlayerGui.Gear_Shop.Frame.ScrollingFrame
-
-local buySeedsToggle = false
-local buyGearsToggle = false
-
-local loja = Window:AddTab({Title = "Loja", Icon = "shopping-cart"})
-local sectionSeed = loja:AddSection("Seeds")
-local sectionGear = loja:AddSection("Gears")
-
-local byallseed = {}
-local bygear = {}
-
-for k, _ in pairs(ignoreNames) do
-    if string.find(k, " ") then
-        table.insert(byallseed, k)
-    else
-        table.insert(bygear, k)
-    end
-end
+local section = loja:AddSection("Seeds")
 
 loja:AddToggle("", {
     Title = "Buy shop seed",
     Description = "Buy select shop seed",
     Default = false,
-    Callback = function(val)
-        buySeedsToggle = val
+    Callback = function(Value)
+        bsa = Value
     end
 })
 
 local dropdownSeed = loja:AddDropdown("DropdownSeed", {
-    Title = "Selecione seeds para comprar",
-    Description = "Selecione seeds para comprar",
+    Title = "Selecione seeds para comprar\n",
+    Description = "Selecione select para comprar\n",
     Values = byallseed,
     Multi = true,
     Default = {},
 })
 
-dropdownSeed:OnChanged(function(val)
-    -- Reset all seeds to false
-    for _, seed in ipairs(byallseed) do
-        ignoreNames[seed] = false
-    end
-    -- Set selected seeds to true
-    for seed, selected in pairs(val) do
-        if selected then
-            ignoreNames[seed] = true
+dropdownSeed:OnChanged(function(Value)
+    selectedSeeds = {}
+    for v, state in pairs(Value) do
+        if state then
+            table.insert(selectedSeeds, v)
         end
     end
 end)
+
+local section = loja:AddSection("Gears")
 
 loja:AddToggle("", {
     Title = "Buy shop gear",
     Description = "Buy shop gear",
     Default = false,
-    Callback = function(val)
-        buyGearsToggle = val
+    Callback = function(Value)
+        bsg = Value
     end
 })
 
 local dropdownGear = loja:AddDropdown("DropdownGear", {
-    Title = "Selecione gears para comprar",
-    Description = "Selecione gears para comprar",
+    Title = "Selecione gears para comprar\n",
+    Description = "Selecione gears para comprar\n",
     Values = bygear,
     Multi = true,
     Default = {},
 })
 
-dropdownGear:OnChanged(function(val)
-    -- Reset all gears to false
-    for _, gear in ipairs(bygear) do
-        ignoreNames[gear] = false
-    end
-    -- Set selected gears to true
-    for gear, selected in pairs(val) do
-        if selected then
-            ignoreNames[gear] = true
+dropdownGear:OnChanged(function(Value)
+    selectedGears = {}
+    for v, state in pairs(Value) do
+        if state then
+            table.insert(selectedGears, v)
         end
     end
 end)
-
-task.spawn(function()
-    while true do
-        if buySeedsToggle then
-            for _, item in ipairs(seedFrame:GetChildren()) do
-                if not string.find(item.Name, "_") then
-                    if ignoreNames[item.Name] then
-                        local stock = item:FindFirstChild("Main_Frame") and item.Main_Frame:FindFirstChild("Stock_Text")
-                        if stock and stock:IsA("TextLabel") and stock.Text ~= "X0 Stock" then
-                            rs.GameEvents.BuySeedStock:FireServer(item.Name)
-                            task.wait(0.1)
-                        end
-                    end
-                else
-                    local baseName = item.Name:gsub("_P", "")
-                    if string.find(item.Name, "_P") and ignoreNames[baseName] then
-                        local stock = item:FindFirstChild("Main_Frame") and item.Main_Frame:FindFirstChild("Stock_Text")
-                        if stock and stock:IsA("TextLabel") and stock.Text ~= "X0 Stock" then
-                            rs.GameEvents.BuySeedStock:FireServer(item.Name)
-                            task.wait(0.1)
-                        end
-                    end
-                end
-            end
-        end
-        task.wait(0.1)
-    end
-end)
-
-task.spawn(function()
-    while true do
-        if buyGearsToggle then
-            for _, item in ipairs(gearFrame:GetChildren()) do
-                if item:IsA("Frame") then
-                    if ignoreNames[item.Name] and not string.find(item.Name, "_P") then
-                        local stock = item:FindFirstChild("Main_Frame") and item.Main_Frame:FindFirstChild("Stock_Text")
-                        if stock and stock:IsA("TextLabel") and stock.Text ~= "X0 Stock" then
-                            rs.GameEvents.BuyGearStock:FireServer(item.Name)
-                            task.wait(0.1)
-                        end
-                    end
-                end
-            end
-        end
-        task.wait(0.1)
-    end
-end)
-
-
-
 
 local section = loja:AddSection("Auto Buy egg")
 
@@ -435,7 +359,7 @@ local Slider = plant:AddSlider("Slider",
 
 plant:AddButton({
     Title = "click para plantar",
-    Description = "esteja com a seed na mão",
+    Description = "esteja com a seed na mÃ£o",
     Callback = function()
         local player = game.Players.LocalPlayer
         local tool = player.Character and player.Character:FindFirstChildOfClass("Tool")
@@ -463,7 +387,7 @@ plant:AddSlider("Slider", {
     Default = dlayp,
     Min = 0.05,
     Max = 1,
-    Rounding = 2, -- arredonda até duas casas decimais (0.05, 0.10, etc)
+    Rounding = 2, -- arredonda atÃ© duas casas decimais (0.05, 0.10, etc)
     Callback = function(v)
         dlayp = tonumber(string.format("%.2f", v))
     end
@@ -633,7 +557,7 @@ sell:AddButton({
 
 sell:AddSlider("SellDelaySlider", {
     Title = "Delay do Auto Sell (segundos)",
-    Description = "Define o intervalo entre cada venda automática.",
+    Description = "Define o intervalo entre cada venda automÃ¡tica.",
     Default = tmpps,
     Min = 20,
     Max = 60,
@@ -646,7 +570,7 @@ sell:AddSlider("SellDelaySlider", {
 getgenv().Atsell = false
 sell:AddToggle("", {
     Title = "Vender Colheitas automaticamente",
-    Description = "Ativa a venda automática com base no delay definido.",
+    Description = "Ativa a venda automÃ¡tica com base no delay definido.",
     Default = false,
     Callback = function(enabled)
         getgenv().Atsell = enabled 
@@ -728,8 +652,8 @@ updatePetDropdown()
 local autoFeed = false
 
 local tpfeed = pet:AddToggle("AutoFeedToggle", {
-    Title = "Alimentação Automática\n",
-    Description = "Alimenta o pet selecionado automaticamente\nPorem pegue a comida na mão!\n",
+    Title = "AlimentaÃ§Ã£o AutomÃ¡tica\n",
+    Description = "Alimenta o pet selecionado automaticamente\nPorem pegue a comida na mÃ£o!\n",
     Default = false,
     Callback = function(Value)
         autoFeed = Value
@@ -751,7 +675,7 @@ local tpfeed = pet:AddToggle("AutoFeedToggle", {
 
 pet:AddButton({
     Title = "Alimentar pet selecionado",
-    Description = "Segure comida na mão!",
+    Description = "Segure comida na mÃ£o!",
     Callback = function()
         if pfeed then
             feedsc:FireServer("Feed", pfeed)
@@ -776,7 +700,7 @@ ui:AddSection("Controle de UIs")
 
 ui:AddButton({
     Title = "Cosmetic Shop UI",
-    Description = "Ativa/Desativa a loja de cosméticos",
+    Description = "Ativa/Desativa a loja de cosmÃ©ticos",
     Callback = function()
         local ui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("CosmeticShop_UI")
         if ui then
@@ -848,7 +772,7 @@ task.spawn(function()
 end)
 --
 
-event:AddSection("🌾 Summer Event")
+event:AddSection("ðŸŒ¾ Summer Event")
 
 local function submitalls()
     local args = {
@@ -885,7 +809,7 @@ event:AddInput("Input", {
 
 event:AddToggle("UseStop", {
     Title = "Ativar limite de pontos",
-    Description = "Envia até atingir o valor definido",
+    Description = "Envia atÃ© atingir o valor definido",
     Default = false,
     Callback = function(v)
         usestopv = v
@@ -998,9 +922,9 @@ function svvererr(v)
     local numvers = tonumber(versgame)
     if numvers and newv and numvers > newv then
         Fluent:Notify({
-            Title = "Versão necessária errada!",
-            Content = "Versão Atual: " .. versgame,
-            SubContent = "Você tem que estar na versão: " .. newv .. " ou menos!",
+            Title = "VersÃ£o necessÃ¡ria errada!",
+            Content = "VersÃ£o Atual: " .. versgame,
+            SubContent = "VocÃª tem que estar na versÃ£o: " .. newv .. " ou menos!",
             Duration = 5
         })
     end
@@ -1014,6 +938,27 @@ vuln:AddParagraph({
 
 
 
+
+
+
+
+task.spawn(function()
+    local lastMinute = -1
+    while true do
+        local minutos = os.date("*t").min
+        if minutos ~= lastMinute then
+            lastMinute = minutos
+
+            if bsa then
+                task.spawn(byallseedfc)
+            end
+            if bsg then
+                task.spawn(byallgearfc)
+            end
+        end
+        task.wait(1)
+    end
+end)
 
 task.spawn(function()
     local player = game:GetService("Players").LocalPlayer
