@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.53",
+    version = "2.54",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -1018,7 +1018,7 @@ end)
 imageButton.MouseButton1Click:Connect(function()
 	Window:Minimize()
 end)
-
+print(Fluent.Visible)
 while true do 
 	task.wait(0.1)
 	if not Fluent.Window then
