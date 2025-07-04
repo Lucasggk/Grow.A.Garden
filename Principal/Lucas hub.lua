@@ -89,6 +89,11 @@ local vuln = Window:AddTab({
     Icon = "rbxassetid://92158036430997"
 })
 
+local utility = Window:AddTab({
+    Title = "utility",
+    Icon = "wrench"
+})
+
 local config = Window:AddTab({
     Title = "Settings",
     Icon = "settings"  
