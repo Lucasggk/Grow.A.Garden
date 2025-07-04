@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.52[Adicionando icons..]",
+    version = "2.52[Backup stepfy]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -84,8 +84,8 @@ local event = Window:AddTab({
 })
 
 local vuln = Window:AddTab({
-    Title = "Exploits",
-    Icon = "rbxassetid://7734009026"
+    Title = "Vulnerabilidade",
+    Icon = "rbxassetid://92158036430997"
 })
 
 local config = Window:AddTab({
@@ -980,7 +980,7 @@ screenGui.Parent = playerGui
 local imageButton = Instance.new("ImageButton")
 imageButton.Name = "DraggableButton"
 imageButton.Image = decalId
-imageButton.Size = UDim2.new(0, 75, 0, 75)
+imageButton.Size = UDim2.new(0, 65, 0, 65)
 imageButton.AnchorPoint = Vector2.new(0.5, 0.5)
 imageButton.Position = UDim2.new(0, 100, 1, -400)
 imageButton.BackgroundTransparency = 0
