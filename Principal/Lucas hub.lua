@@ -807,7 +807,7 @@ event:AddToggle("UseStop", {
 })
 
 _G.AutoUsarItens = false
-local sbalpt = event:AddToggle("AutoUsarItens", {
+event:AddToggle("AutoUsarItens", {
     Title = "Auto Enviar Plantas",
     Default = false,
     Callback = function(v)
@@ -827,10 +827,9 @@ local sbalpt = event:AddToggle("AutoUsarItens", {
                 if usestopv and pontos >= stopv then
                     game.StarterGui:SetCore("SendNotification", {
                         Title = "Auto Submit Pausado",
-                        Text = "",
+                        Text = "Altere o valor maximo para pausar para continuar!",
                         Duration = 3
-                    })
-			sbalpt:SetValue(false)			
+                    })			
                 else
                     submitalls()
                 end
