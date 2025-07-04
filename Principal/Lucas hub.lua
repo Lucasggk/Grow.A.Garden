@@ -130,11 +130,9 @@ local bygear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "A
 
 local bsa = false
 local bsg = false
-local bsp = false 
 
 local selectedSeeds = {}
 local selectedGears = {}
-local buypets = {1, 2, 3}
 
 local step = 0.001
 local x = Vector3.new(34.14344024658203, 0.13552513718605042, -112.62083435058594)
