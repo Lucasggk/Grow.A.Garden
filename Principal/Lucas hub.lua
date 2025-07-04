@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.55",
+    version = "2.56",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -171,116 +171,172 @@ end
 
 -- Local Script --
 
---[[ old
-local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk", "Ember Lily", "Sugar Apple"}
-]]
 
-local byallseed = {
-    "Carrot", "Strawberry", "Blueberry", "Tomato", "Cauliflower", "Watermelon", "Rafflesia", "Green Apple",
-    "Avocado", "Banana", "Pineapple", "Kiwi", "Bell Pepper", "Prickly Pear", "Loquat",
-    "Feijoa", "Pitcher Plant", "Sugar Apple"
+local ignoreNames = {
+    -- Sementes
+    ["Carrot"] = false,
+    ["Strawberry"] = false,
+    ["Blueberry"] = false,
+    ["Tomato"] = false,
+    ["Cauliflower"] = false,
+    ["Watermelon"] = false,
+    ["Rafflesia"] = false,
+    ["Green Apple"] = false,
+    ["Avocado"] = false,
+    ["Banana"] = false,
+    ["Pineapple"] = false,
+    ["Kiwi"] = false,
+    ["Bell Pepper"] = false,
+    ["Prickly Pear"] = false,
+    ["Loquat"] = false,
+    ["Feijoa"] = false,
+    ["Pitcher Plant"] = false,
+    ["Sugar Apple"] = false,
+
+    -- Gears
+    ["Watering Can"] = false,
+    ["Trowel"] = false,
+    ["Recall Wrench"] = false,
+    ["Basic Sprinkler"] = false,
+    ["Advanced Sprinkler"] = false,
+    ["Godly Sprinkler"] = false,
+    ["Lightning Rod"] = false,
+    ["Master Sprinkler"] = false,
+    ["Magnifying Glass"] = false,
+    ["Tanning Mirror"] = false,
+    ["Cleaning Spray"] = false,
+    ["Favorite Tool"] = false,
+    ["Harvest Tool"] = false,
+    ["Friendship Pot"] = false,
 }
 
-local bygear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Magnifying Glass", "Tanning Mirror", "Master Sprinkler", "Cleaning Spray", "Favorite Tool", "Harvest Tool", "Friendship Pot"}
+local player = game:GetService("Players").LocalPlayer
+local rs = game:GetService("ReplicatedStorage")
+local seedFrame = player.PlayerGui.Seed_Shop.Frame.ScrollingFrame
+local gearFrame = player.PlayerGui.Gear_Shop.Frame.ScrollingFrame
 
+local buySeedsToggle = false
+local buyGearsToggle = false
 
+local loja = Window:AddTab({Title = "Loja", Icon = "shopping-cart"})
+local sectionSeed = loja:AddSection("Seeds")
+local sectionGear = loja:AddSection("Gears")
 
-function byallseedfc()
-    for i = 1, 25 do
-        for _, seed in ipairs(selectedSeeds) do
-            buySeed:FireServer(seed)
-            task.wait()
-        end
+local byallseed = {}
+local bygear = {}
+
+for k, _ in pairs(ignoreNames) do
+    if string.find(k, " ") then
+        table.insert(byallseed, k)
+    else
+        table.insert(bygear, k)
     end
 end
-
-function byallgearfc()
-    for i = 1, 25 do
-        for _, gear in ipairs(selectedGears) do
-            buyGear:FireServer(gear)
-            task.wait()
-        end
-    end
-end
-
-local selectedSeeds = {}
-local selectedGears = {}
-
-local bsa = false
-local bsg = false
-
-local section = loja:AddSection("Seeds")
 
 loja:AddToggle("", {
     Title = "Buy shop seed",
     Description = "Buy select shop seed",
     Default = false,
-    Callback = function(Value)
-        bsa = Value
+    Callback = function(val)
+        buySeedsToggle = val
     end
 })
 
 local dropdownSeed = loja:AddDropdown("DropdownSeed", {
-    Title = "Selecione seeds para comprar\n",
-    Description = "Selecione select para comprar\n",
+    Title = "Selecione seeds para comprar",
+    Description = "Selecione seeds para comprar",
     Values = byallseed,
     Multi = true,
     Default = {},
 })
 
-dropdownSeed:OnChanged(function(Value)
-    selectedSeeds = {}
-    for v, state in pairs(Value) do
-        if state then
-            table.insert(selectedSeeds, v)
+dropdownSeed:OnChanged(function(val)
+    -- Reset all seeds to false
+    for _, seed in ipairs(byallseed) do
+        ignoreNames[seed] = false
+    end
+    -- Set selected seeds to true
+    for seed, selected in pairs(val) do
+        if selected then
+            ignoreNames[seed] = true
         end
     end
 end)
-
-local section = loja:AddSection("Gears")
 
 loja:AddToggle("", {
     Title = "Buy shop gear",
     Description = "Buy shop gear",
     Default = false,
-    Callback = function(Value)
-        bsg = Value
+    Callback = function(val)
+        buyGearsToggle = val
     end
 })
 
 local dropdownGear = loja:AddDropdown("DropdownGear", {
-    Title = "Selecione gears para comprar\n",
-    Description = "Selecione gears para comprar\n",
+    Title = "Selecione gears para comprar",
+    Description = "Selecione gears para comprar",
     Values = bygear,
     Multi = true,
     Default = {},
 })
 
-dropdownGear:OnChanged(function(Value)
-    selectedGears = {}
-    for v, state in pairs(Value) do
-        if state then
-            table.insert(selectedGears, v)
+dropdownGear:OnChanged(function(val)
+    -- Reset all gears to false
+    for _, gear in ipairs(bygear) do
+        ignoreNames[gear] = false
+    end
+    -- Set selected gears to true
+    for gear, selected in pairs(val) do
+        if selected then
+            ignoreNames[gear] = true
         end
     end
 end)
 
-
 task.spawn(function()
-    local lastMinute = -1
     while true do
-        local minutos = os.date("*t").min
-        if minutos ~= lastMinute then
-            lastMinute = minutos
-
-            if bsa then
-                task.spawn(byallseedfc)
-            end
-            if bsg then
-                task.spawn(byallgearfc)
+        if buySeedsToggle then
+            for _, item in ipairs(seedFrame:GetChildren()) do
+                if not string.find(item.Name, "_") then
+                    if ignoreNames[item.Name] then
+                        local stock = item:FindFirstChild("Main_Frame") and item.Main_Frame:FindFirstChild("Stock_Text")
+                        if stock and stock:IsA("TextLabel") and stock.Text ~= "X0 Stock" then
+                            rs.GameEvents.BuySeedStock:FireServer(item.Name)
+                            task.wait(0.1)
+                        end
+                    end
+                else
+                    local baseName = item.Name:gsub("_P", "")
+                    if string.find(item.Name, "_P") and ignoreNames[baseName] then
+                        local stock = item:FindFirstChild("Main_Frame") and item.Main_Frame:FindFirstChild("Stock_Text")
+                        if stock and stock:IsA("TextLabel") and stock.Text ~= "X0 Stock" then
+                            rs.GameEvents.BuySeedStock:FireServer(item.Name)
+                            task.wait(0.1)
+                        end
+                    end
+                end
             end
         end
-        task.wait(1)
+        task.wait(0.1)
+    end
+end)
+
+task.spawn(function()
+    while true do
+        if buyGearsToggle then
+            for _, item in ipairs(gearFrame:GetChildren()) do
+                if item:IsA("Frame") then
+                    if ignoreNames[item.Name] and not string.find(item.Name, "_P") then
+                        local stock = item:FindFirstChild("Main_Frame") and item.Main_Frame:FindFirstChild("Stock_Text")
+                        if stock and stock:IsA("TextLabel") and stock.Text ~= "X0 Stock" then
+                            rs.GameEvents.BuyGearStock:FireServer(item.Name)
+                            task.wait(0.1)
+                        end
+                    end
+                end
+            end
+        end
+        task.wait(0.1)
     end
 end)
 
