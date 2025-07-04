@@ -912,9 +912,9 @@ function svvererr(v)
     local numvers = tonumber(versgame)
     if numvers and newv and numvers > newv then
         Fluent:Notify({
-            Title = "VersÃ£o necessÃ¡ria errada!",
-            Content = "VersÃ£o Atual: " .. versgame,
-            SubContent = "VocÃª tem que estar na versÃ£o: " .. newv .. " ou menos!",
+            Title = "Versão necessária errada!",
+            Content = "Versão Atual: " .. versgame,
+            SubContent = "Você tem que estar na versão: " .. newv .. " ou menos!",
             Duration = 5
         })
     end
@@ -926,6 +926,11 @@ vuln:AddParagraph({
 
 
 
+
+utility:AddParagraph({
+	Title = "Se você viu isto, obrigado por ter chegado ate aqui",
+	Content = "Irei parar de programar. Ass: Lucas"
+	})
 
 
 
