@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.52[Backup stepfy]",
+    version = "2.53",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -1018,3 +1018,9 @@ imageButton.MouseButton1Click:Connect(function()
 	Window:Minimize()
 end)
 
+while true do 
+	task.wait(0.1)
+	if not Fluent.Window then
+		game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("DraggableImageButtonGui"):Destroy()
+	end
+end
