@@ -110,30 +110,8 @@ InterfaceManager:BuildInterfaceSection(config)
 
 -- Local Variáveis --
 
-
---[[ old
-local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk", "Ember Lily", "Sugar Apple"}
-]]
-
-local byallseed = {
-    "Carrot", "Strawberry", "Blueberry", "Tomato", "Cauliflower", "Watermelon", "Rafflesia", "Green Apple",
-    "Avocado", "Banana", "Pineapple", "Kiwi", "Bell Pepper", "Prickly Pear", "Loquat",
-    "Feijoa", "Pitcher Plant", "Sugar Apple"
-}
-
-local bygear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Magnifying Glass", "Tanning Mirror", "Master Sprinkler", "Cleaning Spray", "Favorite Tool", "Harvest Tool", "Friendship Pot"}
-
-
-
-
-
-
-local bsa = false
-local bsg = false
 local bsp = false 
 
-local selectedSeeds = {}
-local selectedGears = {}
 local buypets = {1, 2, 3}
 
 local step = 0.001
@@ -148,24 +126,6 @@ local walkSpeed = humanoid.WalkSpeed
 local PetsId = {}
 
 -- Local functions --
-
-function byallseedfc()
-    for i = 1, 25 do
-        for _, seed in ipairs(selectedSeeds) do
-            buySeed:FireServer(seed)
-            task.wait()
-        end
-    end
-end
-
-function byallgearfc()
-    for i = 1, 25 do
-        for _, gear in ipairs(selectedGears) do
-            buyGear:FireServer(gear)
-            task.wait()
-        end
-    end
-end
 
 function svp()
     Pos = hrp.Position
@@ -210,6 +170,44 @@ function tsm()
 end
 
 -- Local Script --
+
+--[[ old
+local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk", "Ember Lily", "Sugar Apple"}
+]]
+
+local byallseed = {
+    "Carrot", "Strawberry", "Blueberry", "Tomato", "Cauliflower", "Watermelon", "Rafflesia", "Green Apple",
+    "Avocado", "Banana", "Pineapple", "Kiwi", "Bell Pepper", "Prickly Pear", "Loquat",
+    "Feijoa", "Pitcher Plant", "Sugar Apple"
+}
+
+local bygear = {"Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Lightning Rod", "Magnifying Glass", "Tanning Mirror", "Master Sprinkler", "Cleaning Spray", "Favorite Tool", "Harvest Tool", "Friendship Pot"}
+
+
+
+function byallseedfc()
+    for i = 1, 25 do
+        for _, seed in ipairs(selectedSeeds) do
+            buySeed:FireServer(seed)
+            task.wait()
+        end
+    end
+end
+
+function byallgearfc()
+    for i = 1, 25 do
+        for _, gear in ipairs(selectedGears) do
+            buyGear:FireServer(gear)
+            task.wait()
+        end
+    end
+end
+
+local selectedSeeds = {}
+local selectedGears = {}
+
+local bsa = false
+local bsg = false
 
 local section = loja:AddSection("Seeds")
 
@@ -266,6 +264,28 @@ dropdownGear:OnChanged(function(Value)
         end
     end
 end)
+
+
+task.spawn(function()
+    local lastMinute = -1
+    while true do
+        local minutos = os.date("*t").min
+        if minutos ~= lastMinute then
+            lastMinute = minutos
+
+            if bsa then
+                task.spawn(byallseedfc)
+            end
+            if bsg then
+                task.spawn(byallgearfc)
+            end
+        end
+        task.wait(1)
+    end
+end)
+
+
+
 
 local section = loja:AddSection("Auto Buy egg")
 
@@ -938,27 +958,6 @@ vuln:AddParagraph({
 
 
 
-
-
-
-
-task.spawn(function()
-    local lastMinute = -1
-    while true do
-        local minutos = os.date("*t").min
-        if minutos ~= lastMinute then
-            lastMinute = minutos
-
-            if bsa then
-                task.spawn(byallseedfc)
-            end
-            if bsg then
-                task.spawn(byallgearfc)
-            end
-        end
-        task.wait(1)
-    end
-end)
 
 task.spawn(function()
     local player = game:GetService("Players").LocalPlayer
