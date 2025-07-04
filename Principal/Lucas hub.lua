@@ -1023,5 +1023,6 @@ while true do
 	task.wait(0.1)
 	if not Fluent.Window then
 		game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("DraggableImageButtonGui"):Destroy()
+		print(Fluent.Visible)
 	end
 end
