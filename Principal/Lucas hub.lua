@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.54",
+    version = "2.55",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -37,8 +37,7 @@ player.CharacterAdded:Connect(function(char)
 end)
 
 
---local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local Fluent = loadstring(Game:HttpGet("https://raw.githubusercontent.com/discoart/FluentPlus/refs/heads/main/Beta.lua", true))()
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
 local Window = Fluent:CreateWindow({
     Title = "Grow a Garden |",
@@ -1023,11 +1022,5 @@ end)
 imageButton.MouseButton1Click:Connect(function()
 	Window:Minimize()
 end)
-print(Fluent.Visible)
-while true do 
-	task.wait(0.1)
-	if not Fluent.Window then
-		game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("DraggableImageButtonGui"):Destroy()
-		print(Fluent.Visible)
-	end
-end
+
+print(Fluent.Window)
