@@ -23,7 +23,7 @@ if block_hwid[hwid] then
 end
 
 local miguel = {
-  Id = "2000903030",
+  Id = 2000903030,
   Exec = "Delta",
   Hwid = "d6c128b73f1a4064ae284db85ed1964134f764bd53476d81e44c036ce46c2b6a",
 }
