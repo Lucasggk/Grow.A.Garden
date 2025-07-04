@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.55",
+    version = "2.56[correção de utf8]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -357,7 +357,7 @@ local Slider = plant:AddSlider("Slider",
 
 plant:AddButton({
     Title = "click para plantar",
-    Description = "esteja com a seed na mÃ£o",
+    Description = "esteja com a seed na mão",
     Callback = function()
         local player = game.Players.LocalPlayer
         local tool = player.Character and player.Character:FindFirstChildOfClass("Tool")
@@ -385,7 +385,7 @@ plant:AddSlider("Slider", {
     Default = dlayp,
     Min = 0.05,
     Max = 1,
-    Rounding = 2, -- arredonda atÃ© duas casas decimais (0.05, 0.10, etc)
+    Rounding = 2, -- arredonda até duas casas decimais (0.05, 0.10, etc)
     Callback = function(v)
         dlayp = tonumber(string.format("%.2f", v))
     end
@@ -555,7 +555,7 @@ sell:AddButton({
 
 sell:AddSlider("SellDelaySlider", {
     Title = "Delay do Auto Sell (segundos)",
-    Description = "Define o intervalo entre cada venda automÃ¡tica.",
+    Description = "Define o intervalo entre cada venda automática.",
     Default = tmpps,
     Min = 20,
     Max = 60,
@@ -568,7 +568,7 @@ sell:AddSlider("SellDelaySlider", {
 getgenv().Atsell = false
 sell:AddToggle("", {
     Title = "Vender Colheitas automaticamente",
-    Description = "Ativa a venda automÃ¡tica com base no delay definido.",
+    Description = "Ativa a venda automática com base no delay definido.",
     Default = false,
     Callback = function(enabled)
         getgenv().Atsell = enabled 
@@ -650,8 +650,8 @@ updatePetDropdown()
 local autoFeed = false
 
 local tpfeed = pet:AddToggle("AutoFeedToggle", {
-    Title = "AlimentaÃ§Ã£o AutomÃ¡tica\n",
-    Description = "Alimenta o pet selecionado automaticamente\nPorem pegue a comida na mÃ£o!\n",
+    Title = "Alimentação Automática\n",
+    Description = "Alimenta o pet selecionado automaticamente\nPorem pegue a comida na mão!\n",
     Default = false,
     Callback = function(Value)
         autoFeed = Value
@@ -673,7 +673,7 @@ local tpfeed = pet:AddToggle("AutoFeedToggle", {
 
 pet:AddButton({
     Title = "Alimentar pet selecionado",
-    Description = "Segure comida na mÃ£o!",
+    Description = "Segure comida na mão!",
     Callback = function()
         if pfeed then
             feedsc:FireServer("Feed", pfeed)
@@ -684,21 +684,13 @@ pet:AddButton({
     end
 })
 
-pet:AddButton({
-        Title = "teste",
-        Description = "off",
-        Callback = function()
-            tpfeed:SetValue(false)
-        end
-    })
-
 --
 
 ui:AddSection("Controle de UIs")
 
 ui:AddButton({
     Title = "Cosmetic Shop UI",
-    Description = "Ativa/Desativa a loja de cosmÃ©ticos",
+    Description = "Ativa/Desativa a loja de cosmeticos",
     Callback = function()
         local ui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("CosmeticShop_UI")
         if ui then
@@ -770,7 +762,7 @@ task.spawn(function()
 end)
 --
 
-event:AddSection("ðŸŒ¾ Summer Event")
+event:AddSection("🏄‍♂️ Summer Event")
 
 local function submitalls()
     local args = {
@@ -807,7 +799,7 @@ event:AddInput("Input", {
 
 event:AddToggle("UseStop", {
     Title = "Ativar limite de pontos",
-    Description = "Envia atÃ© atingir o valor definido",
+    Description = "Envia até atingir o valor definido",
     Default = false,
     Callback = function(v)
         usestopv = v
@@ -815,7 +807,7 @@ event:AddToggle("UseStop", {
 })
 
 _G.AutoUsarItens = false
-event:AddToggle("AutoUsarItens", {
+local sbalpt = event:AddToggle("AutoUsarItens", {
     Title = "Auto Enviar Plantas",
     Default = false,
     Callback = function(v)
@@ -835,9 +827,10 @@ event:AddToggle("AutoUsarItens", {
                 if usestopv and pontos >= stopv then
                     game.StarterGui:SetCore("SendNotification", {
                         Title = "Auto Submit Pausado",
-                        Text = "Aguardando os pontos aumentarem...",
+                        Text = "",
                         Duration = 3
                     })
+			sbalpt:SetValue(false)			
                 else
                     submitalls()
                 end
