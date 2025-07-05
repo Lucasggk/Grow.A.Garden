@@ -20,26 +20,32 @@ game:GetService("StarterGui"):SetCore("SendNotification",{Title="Script Executad
 -- false ignora
 -- true compra
 
+
 local ignoreNames = {
     -- Sementes
     ["Carrot"] = true,
     ["Strawberry"] = true,
     ["Blueberry"] = true,
+    ["Orange Tulip"] = true,
     ["Tomato"] = true,
-    ["Cauliflower"] = true,
+    ["Corn"] = true,
+    ["Daffodil"] = true,
     ["Watermelon"] = true,
-    ["Rafflesia"] = true,
-    ["Green Apple"] = true,
-    ["Avocado"] = true,
-    ["Banana"] = true,
-    ["Pineapple"] = true,
-    ["Kiwi"] = true,
-    ["Bell Pepper"] = true,
-    ["Prickly Pear"] = true,
-    ["Loquat"] = true,
-    ["Feijoa"] = true,
-    ["Pitcher Plant"] = true,
+    ["Pumpkin"] = true,
+    ["Apple"] = true,
+    ["Bamboo"] = true,
+    ["Coconut"] = true,
+    ["Cactus"] = true,
+    ["Dragon Fruit"] = true,
+    ["Mango"] = true,
+    ["Grape"] = true,
+    ["Mushroom"] = true,
+    ["Pepper"] = true,
+    ["Cacao"] = true,
+    ["Beanstalk"] = true,
+    ["Ember Lily"] = true,
     ["Sugar Apple"] = true,
+    ["Burning Bud"] = true,
 
     -- Gears
     ["Watering Can"] = true,
@@ -50,8 +56,6 @@ local ignoreNames = {
     ["Godly Sprinkler"] = true,
     ["Lightning Rod"] = true,
     ["Master Sprinkler"] = true,
-    ["Magnifying Glass"] = false,
-    ["Tanning Mirror"] = true,
     ["Cleaning Spray"] = false,
     ["Favorite Tool"] = false,
     ["Harvest Tool"] = false,
