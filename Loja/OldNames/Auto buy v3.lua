@@ -23,6 +23,7 @@ local ignoreNames = {
     ["Beanstalk"] = true,
     ["Ember Lily"] = true,
     ["Sugar Apple"] = true,
+    ["Burning Bud"] = true,
 
     -- Gears
     ["Watering Can"] = true,
