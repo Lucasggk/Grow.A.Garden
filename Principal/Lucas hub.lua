@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.57[leia utility]",
+    version = "2.57[no updates]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -464,6 +464,7 @@ plant:AddButton({
     Callback = function()
         Locations = {}
         UpdateDropdown()
+        dropdown:SetValue("four")
     end
 })
 
@@ -877,4 +878,4 @@ imageButton.MouseButton1Click:Connect(function()
 	Window:Minimize()
 end)
 
-print(Fluent.Window)
+print(Fluent.Options)
