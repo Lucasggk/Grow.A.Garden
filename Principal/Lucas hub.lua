@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.57[testes gui 4]",
+    version = "2.57[testes gui 5]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -885,16 +885,6 @@ task.spawn(function()
 			local drag = player.PlayerGui:FindFirstChild("DraggableImageButtonGui")
 			if drag then drag:Destroy() end
 			break
-		end
-		task.wait(0.05)
-	end
-end)
-
-task.spawn(function()
-	while true do
-		local drag = player.PlayerGui:FindFirstChild("DraggableImageButtonGui")
-		if drag and gui then
-			drag.Enabled = gui.Enabled
 		end
 		task.wait(0.05)
 	end
