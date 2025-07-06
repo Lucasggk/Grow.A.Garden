@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.57[testes gui 3]",
+    version = "2.57[testes gui 4]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -878,18 +878,24 @@ imageButton.MouseButton1Click:Connect(function()
 end)
 
 local gui = Fluent.GUI
+
 task.spawn(function()
-while true do
-	if not gui:IsDescendantOf(game) then
-		player.PlayerGui:FindFirstChild("DraggableImageButtonGui"):Destroy()
-		break
+	while true do
+		if not gui:IsDescendantOf(game) then
+			local drag = player.PlayerGui:FindFirstChild("DraggableImageButtonGui")
+			if drag then drag:Destroy() end
+			break
+		end
+		task.wait(0.05)
 	end
-	task.wait(0.05)
-end
 end)
+
 task.spawn(function()
-while true do 
-	player.PlayerGui:FindFirstChild("DraggableImageButtonGui").Enabled = not Fluent.GUI.Enabled
-	task.wait(0.001)
-end
+	while true do
+		local drag = player.PlayerGui:FindFirstChild("DraggableImageButtonGui")
+		if drag and gui then
+			drag.Enabled = gui.Enabled
+		end
+		task.wait(0.05)
+	end
 end)
