@@ -426,7 +426,7 @@ local wms = 0.1
 local pwms = Vector3.new(-204.42526245117188, 0.13552704453468323, -83.74856567382812)
 local running = false
 
-local dropdown = plant:AddDropdown("Locais", {
+local ddpw = plant:AddDropdown("Locais", {
     Title = "Destinos",
     Values = {},
     Multi = false,
@@ -442,7 +442,7 @@ local function UpdateDropdown()
     for name, pos in pairs(Locations) do
         table.insert(keys, name .. " [" .. formatPos(pos) .. "]")
     end
-    dropdown:SetValues(keys)
+    ddpw:SetValues(keys)
 end
 
 plant:AddButton({
@@ -464,7 +464,7 @@ plant:AddButton({
     Callback = function()
         Locations = {}
         UpdateDropdown()
-        dropdown:SetValue("four")
+        ddpw:SetValue()
     end
 })
 
