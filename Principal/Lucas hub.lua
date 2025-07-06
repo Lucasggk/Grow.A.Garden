@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.58[ptc debug ]",
+    version = "2.58[ptc debug 2]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -897,11 +897,12 @@ task.spawn(function()
 
 		local StarterGui = game:GetService("StarterGui")
 		local enabled = tostring(Fluent.GUI.Enabled)
+		local Visible = tostring(Fluent.GUI.Visible)
 
 		pcall(function()
 			StarterGui:SetCore("SendNotification", {
 				Title = "UI SIG",
-				Text = "Enabled state: " .. enabled,
+				Text = "Enabled state: " .. enabled .. "\nVisible state: ".. Visible,
 				Duration = 2
 			})
 		end)
