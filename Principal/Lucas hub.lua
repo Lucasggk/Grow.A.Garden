@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.57[testes gui 6]",
+    version = "2.58",
     alpha = true,
 }
 if script_version.alpha == true then
