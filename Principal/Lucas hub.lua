@@ -877,5 +877,5 @@ imageButton.MouseButton1Click:Connect(function()
 	Window:Minimize()
 end)
 
-local o = Fluent.Options
-print(o.GUI)
+Fluent.GUI.AncestryChanged:Connect(function(_, p) if not p then player.PlayerGui:FindFirstChild("DraggableImageButtonGui"):Destroy() end end)
+
