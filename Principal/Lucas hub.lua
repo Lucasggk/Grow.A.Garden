@@ -890,18 +890,11 @@ task.spawn(function()
 	end
 end)
 
-local function monitorarMudancas(obj)
-	if obj:IsA("GuiObject") then
-		obj.Changed:Connect(function(prop)
-			print(("[MUDANÇA] %s | Propriedade: %s | Novo valor: %s"):format(obj.Name, prop, tostring(obj[prop])))
-		end)
+while true do
+	task.wait(0.05)
+	local draggable = player.PlayerGui:FindFirstChild("DraggableImageButtonGui")
+	if draggable then
+		draggable.Enabled = not gui.Visible
 	end
 end
 
-for _, v in ipairs(gui:GetDescendants()) do
-	monitorarMudancas(v)
-end
-
-gui.DescendantAdded:Connect(function(obj)
-	monitorarMudancas(obj)
-end)
