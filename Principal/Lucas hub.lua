@@ -891,20 +891,3 @@ task.spawn(function()
 end)
 
 
-task.spawn(function()
-	while true do 
-		task.wait(2)
-
-		local StarterGui = game:GetService("StarterGui")
-		local enabled = tostring(Fluent.GUI.Enabled)
-		local Visible = tostring(Fluent.GUI.Visible)
-
-		pcall(function()
-			StarterGui:SetCore("SendNotification", {
-				Title = "UI SIG",
-				Text = "Enabled state: " .. enabled .. "\nVisible state: ".. Visible,
-				Duration = 2
-			})
-		end)
-	end
-end)
