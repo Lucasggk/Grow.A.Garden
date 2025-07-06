@@ -1,12 +1,12 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.57[old shop+]",
+    version = "2.57[leia utility]",
     alpha = true,
 }
 if script_version.alpha == true then
     script_version.alpha = "Alpha version"
-else 
+else
     script_version.alpha = "Release version"
 end
 print("MADE BY LUCAS\nScript Version " .. script_version.version .. " - " .. script_version.alpha)
@@ -111,9 +111,7 @@ InterfaceManager:BuildInterfaceSection(config)
 -- Local VariÃ¡veis --
 
 
---[[ old
-local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk", "Ember Lily", "Sugar Apple"}
-]]
+
 
 local byallseed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk", "Ember Lily", "Sugar Apple", "Burning Bud"}
 
@@ -790,7 +788,7 @@ vuln:AddParagraph({
 
 utility:AddParagraph({
 	Title = "Se você viu isto, obrigado por ter chegado ate aqui",
-	Content = "Irei parar de programar. Ass: Lucas"
+	Content = "Irei parar de programar.\nAindq Terá Atualizações\nMas n frequentemente\nAss: Lucas"
 	})
 
 
