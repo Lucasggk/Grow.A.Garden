@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.57[testes gui]",
+    version = "2.57[testes gui 2]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -879,8 +879,9 @@ end)
 
 local gui = Fluent.GUI
 while true do
-	if not gui then
-		task.wait()
+	if not gui:IsDescendantOf(game) then
 		player.PlayerGui:FindFirstChild("DraggableImageButtonGui"):Destroy()
+		break
 	end
+	task.wait(0.05)
 end
