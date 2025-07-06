@@ -426,7 +426,7 @@ local wms = 0.1
 local pwms = Vector3.new(-204.42526245117188, 0.13552704453468323, -83.74856567382812)
 local running = false
 
-local ddpw = plant:AddDropdown("Locais", {
+local dropdown = plant:AddDropdown("Locais", {
     Title = "Destinos",
     Values = {},
     Multi = false,
@@ -442,7 +442,7 @@ local function UpdateDropdown()
     for name, pos in pairs(Locations) do
         table.insert(keys, name .. " [" .. formatPos(pos) .. "]")
     end
-    ddpw:SetValues(keys)
+    dropdown:SetValues(keys)
 end
 
 plant:AddButton({
@@ -877,5 +877,10 @@ imageButton.MouseButton1Click:Connect(function()
 	Window:Minimize()
 end)
 
-Fluent.GUI.AncestryChanged:Connect(function(_, p) if not p then player.PlayerGui:FindFirstChild("DraggableImageButtonGui"):Destroy() end end)
-
+local gui = Fluent.GUI
+while true do
+	if not gui then
+		task.wait()
+		player.PlayerGui:FindFirstChild("DraggableImageButtonGui"):Destroy()
+	end
+end
