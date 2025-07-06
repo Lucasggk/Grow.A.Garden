@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.57[testes gui 5]",
+    version = "2.57[testes gui 6]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -888,4 +888,20 @@ task.spawn(function()
 		end
 		task.wait(0.05)
 	end
+end)
+
+local function monitorarMudancas(obj)
+	if obj:IsA("GuiObject") then
+		obj.Changed:Connect(function(prop)
+			print(("[MUDANÇA] %s | Propriedade: %s | Novo valor: %s"):format(obj.Name, prop, tostring(obj[prop])))
+		end)
+	end
+end
+
+for _, v in ipairs(gui:GetDescendants()) do
+	monitorarMudancas(v)
+end
+
+gui.DescendantAdded:Connect(function(obj)
+	monitorarMudancas(obj)
 end)
