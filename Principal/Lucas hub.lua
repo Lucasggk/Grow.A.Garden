@@ -464,7 +464,6 @@ plant:AddButton({
     Callback = function()
         Locations = {}
         UpdateDropdown()
-        ddpw:SetValue()
     end
 })
 
