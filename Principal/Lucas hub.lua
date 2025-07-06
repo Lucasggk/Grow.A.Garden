@@ -877,4 +877,4 @@ imageButton.MouseButton1Click:Connect(function()
 	Window:Minimize()
 end)
 
-print(Fluent.Options)
+print(Fluent.GUI)
