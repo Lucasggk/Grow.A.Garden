@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.58",
+    version = "2.58[ptc debug]",
     alpha = true,
 }
 if script_version.alpha == true then
@@ -890,3 +890,16 @@ task.spawn(function()
 	end
 end)
 
+
+task.spawn(function()
+	while true do 
+	task.wait(2)
+	local StarterGui = game:GetService("StarterGui")
+
+StarterGui:SetCore("SendNotification", {
+    Title = "Ui sig",
+    Text = "Visible state: ".. Fluent.GUI.Visible,
+    Duration = 4
+})
+		end
+	end)
