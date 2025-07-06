@@ -890,11 +890,3 @@ task.spawn(function()
 	end
 end)
 
-while true do
-	task.wait(0.05)
-	local draggable = player.PlayerGui:FindFirstChild("DraggableImageButtonGui")
-	if draggable then
-		draggable.Enabled = not gui.Visible
-	end
-end
-
