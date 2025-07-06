@@ -898,7 +898,7 @@ task.spawn(function()
 
 StarterGui:SetCore("SendNotification", {
     Title = "Ui sig",
-    Text = "Enabled state: ".. Fluent.GUI.Enabled,
+    Text = "Enabled state: ".. Fluent.GUI.Enable,
     Duration = 4
 })
 		end
