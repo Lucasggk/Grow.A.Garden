@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.58[Ideias (Utility tab) (ptc n5)]",
+    version = "2.58[Ideias (Utility tab) (ptc n6]",
     alpha = true,
 }
 if script_version.alpha then
@@ -950,7 +950,7 @@ task.spawn(function()
                 local StarterGui = game:GetService("StarterGui")
                 local minimized = Fluent and Fluent.Window and Fluent.Window.Minimized
 		local drag = player.PlayerGui:FindFirstChild("DraggableImageButtonGui")
-		if minimized then
+		if drag then
 			drag.Enabled = minimized
 		end 
 	        task.wait(0.05)
