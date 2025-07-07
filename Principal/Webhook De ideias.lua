@@ -4,6 +4,7 @@ function enviarweb(txt)
     local username = game.Players.LocalPlayer.Name
 
     local data = {
+        content = "<@1350457070972829810>",
         embeds = {{
             title = "📨 Ideia Recebida",
             color = 0x00bfff,
