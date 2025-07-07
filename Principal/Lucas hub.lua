@@ -4,7 +4,7 @@ local script_version = {
     version = "2.58[ptc debug 2]",
     alpha = true,
 }
-if script_version.alpha == true then
+if script_version.alpha then
     script_version.alpha = "Alpha version"
 else
     script_version.alpha = "Release version"
