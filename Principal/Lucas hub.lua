@@ -804,7 +804,7 @@ local podeEnviar = true
 
 utility:AddInput("Input", {
     Title = "De ideias de que por aqui\n\n",
-    Description = "Agora tenho tempo para arrumar tudo\nE por adições\n\n",
+    Description = "Agora tenho tempo para arrumar\nTudo e por adições\n\n",
     Default = "",
     Placeholder = ":) Seja criativo",
     Numeric = false,
@@ -832,11 +832,11 @@ task.spawn(function()
             local tempoRestante = 600 - (os.time() - ultimoEnvio)
             if tempoRestante <= 0 then
                 podeEnviar = true
-                envweb:SetContent("Enviar ideias")
+                envweb:SetDesc("Envia por webhook (meu discord)")
             else
                 local m = math.floor(tempoRestante / 60)
                 local s = tempoRestante % 60
-                envweb:SetContent("Aguarde: " .. string.format("%02d:%02d", m, s))
+                envweb:SetDesc("Aguarde: " .. string.format("%02d:%02d", m, s))
             end
         end
         task.wait(1)
