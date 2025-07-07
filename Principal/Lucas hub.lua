@@ -954,5 +954,6 @@ task.spawn(function()
 			drag.Enabled = minimized
 		end 
 	        task.wait(0.05)
-	end)
+	end 
+end)
 
