@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.58[Ideias tab + upd Minimize button]",
+    version = "2.58[Ideias tab + upd Minimize]",
     alpha = true,
 }
 if script_version.alpha then
@@ -822,7 +822,7 @@ ideias:AddDropdown("Dropdown", {
 ideias:AddInput("Input", {
     Title = "De ideias de que por aqui\n",
     Description = "Agora tenho tempo para arrumar\nTudo e por adições\n",
-    Default = "",
+    Default = nil,
     Placeholder = ":) Seja criativo",
     Numeric = false,
     Finished = false, 
@@ -838,10 +838,10 @@ local envweb = ideias:AddButton({
         if podeEnviar then
             local camposVazios = {}
 
-            if txt == "" then
+            if txt == nil then
                 table.insert(camposVazios, "'txt'")
             end
-            if tabss == "" then
+            if tabss ~= "Jogador" and tabss ~= "Loja" and tabss ~= "Mascotes" and tabss ~= "plant/water" and tabss ~= "Vender" and tabss ~= "Eventos" and tabss ~= "Vulnerabilidade" and tabss ~= "utility" and tabss ~= "Settings" and tabss ~= "Interface" then
                 table.insert(camposVazios, "'tabs'")
             end
 
