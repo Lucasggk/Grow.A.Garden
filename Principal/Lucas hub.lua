@@ -836,6 +836,25 @@ local envweb = ideias:AddButton({
     Description = "Envia por webhook (meu discord)",
     Callback = function()
         if podeEnviar then
+            local camposVazios = {}
+
+            if txt == "" then
+                table.insert(camposVazios, "'txt'")
+            end
+            if tabss == "" then
+                table.insert(camposVazios, "'tabs'")
+            end
+
+            if #camposVazios > 0 then
+                Fluent:Notify({
+                    Title = "Erro",
+                    Content = "Campo(s) vazio(s): " .. table.concat(camposVazios, ", "),
+                    SubContent = "Preencha antes de enviar.",
+                    Duration = 5
+                })
+                return
+            end
+
             ultimoEnvio = os.time()
             podeEnviar = false
             enviarweb(txt, tabss)
@@ -955,7 +974,7 @@ task.spawn(function()
 	while true do
 		if not gui:IsDescendantOf(game) then
 			local drag = player.PlayerGui:FindFirstChild("DraggableImageButtonGui")
-			if drag then drag:Destroy() end
+			if drag then drag.Enabled = true drag:Destroy() end
 			break
 		end
 		task.wait(0.05)
@@ -970,7 +989,7 @@ task.spawn(function()
 		if drag then
 			drag.Enabled = minimized
 		end 
-	        task.wait(0.05)
+	        task.wait(0.1)
 	end 
 end)
 
