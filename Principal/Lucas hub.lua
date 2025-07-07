@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.58[Ideias (Utility tab)]",
+    version = "2.58[Ideias (Utility tab) (ptc n2)]",
     alpha = true,
 }
 if script_version.alpha then
