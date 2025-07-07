@@ -969,27 +969,41 @@ imageButton.MouseButton1Click:Connect(function()
 end)
 
 local gui = Fluent.GUI
+local playerGui = player.PlayerGui
+
+if _G.fluentLoopRunning then
+    _G.fluentLoopRunning = _G.fluentLoopRunning + 1
+else
+    _G.fluentLoopRunning = 1
+end
+local runId = _G.fluentLoopRunning
 
 task.spawn(function()
-	while true do
-		if not gui:IsDescendantOf(game) then
-			local drag = player.PlayerGui:FindFirstChild("DraggableImageButtonGui")
-			if drag then drag.Enabled = true drag:Destroy() end
-			break
-		end
-		task.wait(0.05)
-	end
+    while gui and gui:IsDescendantOf(game) do
+        if _G.fluentLoopRunning ~= runId then break end
+        task.wait(0.05)
+    end
+    if _G.fluentLoopRunning == runId then
+        local drag = playerGui:FindFirstChild("DraggableImageButtonGui")
+        if drag then drag.Enabled = true end
+    end
 end)
 
 task.spawn(function()
-	while true do 
-                local StarterGui = game:GetService("StarterGui")
-                local minimized = Fluent and Fluent.Window and Fluent.Window.Minimized
-		local drag = player.PlayerGui:FindFirstChild("DraggableImageButtonGui")
-		if drag then
-			drag.Enabled = minimized
-		end 
-	        task.wait(0.1)
-	end 
+    while true do
+        if _G.fluentLoopRunning ~= runId then break end
+        if not gui or not gui:IsDescendantOf(game) then
+            local drag = playerGui:FindFirstChild("DraggableImageButtonGui")
+            if drag then drag:Destroy() end
+            break
+        end
+        local minimized = Fluent and Fluent.Window and Fluent.Window.Minimized
+        local drag = playerGui:FindFirstChild("DraggableImageButtonGui")
+        if drag then drag.Enabled = minimized end
+        task.wait(0.025)
+    end
+    if _G.fluentLoopRunning == runId then
+        local drag = playerGui:FindFirstChild("DraggableImageButtonGui")
+        if drag then drag.Enabled = true end
+    end
 end)
-
