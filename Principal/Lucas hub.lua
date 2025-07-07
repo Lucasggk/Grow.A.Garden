@@ -810,7 +810,7 @@ utility:AddInput("Input", {
     Numeric = false,
     Finished = false, 
     Callback = function(Value)
-        txt = Value
+        txt = tostring(Value)
     end
 })
 
