@@ -951,7 +951,7 @@ task.spawn(function()
                 local minimized = Fluent and Fluent.Window and Fluent.Window.Minimized
 		local drag = player.PlayerGui:FindFirstChild("DraggableImageButtonGui")
 		if minimized then
-			drag.Enabled = not minimized
+			drag.Enabled = minimized
 		end 
 	        task.wait(0.05)
 	end)
