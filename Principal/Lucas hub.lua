@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.58[Ideias (Utility tab) (ptc n6]",
+    version = "2.58[Ideias tab]",
     alpha = true,
 }
 if script_version.alpha then
@@ -102,6 +102,11 @@ local config = Window:AddTab({
 local ui = Window:AddTab({
     Title = "Interface",
     Icon = "rbxassetid://133691553274983"
+})
+
+local ideias = Window:AddTab({
+    Title = "ideias",
+    Icon = ""
 })
 
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
@@ -798,11 +803,23 @@ function fav(Status)
 end
 
 
-local txt
+local txt, tabss
 local ultimoEnvio = 0
 local podeEnviar = true
 
-utility:AddInput("Input", {
+ideias:AddDropdown("Dropdown", {
+    Title = "Selecione a tab da ideia.\n",
+    Description = "",
+    Values = {"Jogador", "Loja", "Mascotes", "plant/water", "Vender", "Eventos", "Vulnerabilidade", "utility", "Settings", "Interface"},
+    Multi = false,
+    Default = "",
+    Callback = function(v)
+	tabss = v
+    end
+
+})
+
+ideias:AddInput("Input", {
     Title = "De ideias de que por aqui\n",
     Description = "Agora tenho tempo para arrumar\nTudo e por adições\n",
     Default = "",
@@ -814,14 +831,14 @@ utility:AddInput("Input", {
     end
 })
 
-local envweb = utility:AddButton({
+local envweb = ideias:AddButton({
     Title = "Enviar ideias",
     Description = "Envia por webhook (meu discord)",
     Callback = function()
         if podeEnviar then
             ultimoEnvio = os.time()
             podeEnviar = false
-            enviarweb(txt)
+            enviarweb(txt, tabss)
         end
     end
 })
