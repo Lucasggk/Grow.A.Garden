@@ -1,7 +1,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 local script_version = {
     -- version
-    version = "2.58[ptc debug 2]",
+    version = "2.58[Fav func]",
     alpha = true,
 }
 if script_version.alpha then
@@ -782,19 +782,73 @@ vuln:AddParagraph({
         Title = "Versao atual do serve: ", Content = versgame
     })
 
+--
 
 
 
 
-utility:AddParagraph({
-	Title = "Se você viu isto, obrigado por ter chegado ate aqui",
-	Content = "Irei parar de programar.\nAindq Terá Atualizações\nMas n frequentemente\nAss: Lucas"
-	})
+function fav(Status)
+	local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local tool = character:FindFirstChildOfClass("Tool")
+        if tool then
+           tool:SetAttribute("d", Status)
+	end
+end
+
+
+local txt
+local ultimoEnvio = 0
+local podeEnviar = true
+
+utility:AddInput("Input", {
+    Title = "De ideias de que por aqui\n\n",
+    Description = "Agora tenho tempo para arrumar tudo\nE por adições\n\n",
+    Default = "",
+    Placeholder = ":) Seja criativo",
+    Numeric = false,
+    Finished = false, 
+    Callback = function(Value)
+        txt = Value
+    end
+})
+
+local envweb = utility:AddButton({
+    Title = "Enviar ideias",
+    Description = "Envia por webhook (meu discord)",
+    Callback = function()
+        if podeEnviar then
+            ultimoEnvio = os.time()
+            podeEnviar = false
+            eviarweb(txt)
+        end
+    end
+})
+
+task.spawn(function()
+    while true do
+        if not podeEnviar then
+            local tempoRestante = 600 - (os.time() - ultimoEnvio)
+            if tempoRestante <= 0 then
+                podeEnviar = true
+                envweb:SetContent("Enviar ideias")
+            else
+                local m = math.floor(tempoRestante / 60)
+                local s = tempoRestante % 60
+                envweb:SetContent("Aguarde: " .. string.format("%02d:%02d", m, s))
+            end
+        end
+        task.wait(1)
+    end
+end)
 
 
 
 
 
+
+
+--
 
 task.spawn(function()
     local lastMinute = -1
