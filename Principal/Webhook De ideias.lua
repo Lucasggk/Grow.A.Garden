@@ -15,8 +15,8 @@ function enviarweb(txt, tab)
                     inline = true
                 },
                 {
-                    name = "📎 Tab"
-                    value = (tab and tab ~= "") and tab or "sem tab enviado"
+                    name = "📎 Tab",
+                    value = (tab and tab ~= "") and tab or "sem tab enviado",
                     inline = true
                 },
                 {
