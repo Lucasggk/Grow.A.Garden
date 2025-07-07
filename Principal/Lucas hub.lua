@@ -804,19 +804,28 @@ end
 
 
 local txt, tabss
-local ultimoEnvio = 0
-local podeEnviar = true
+
+local validTabs = {"Jogador", "Loja", "Mascotes", "plant/water", "Vender", "Eventos", "Vulnerabilidade", "utility", "Settings", "Interface"}
+
+if _G.ultimoEnvio == nil then
+    _G.ultimoEnvio = 0
+end
+if _G.podeEnviar == nil then
+    _G.podeEnviar = true
+end
+
+local ultimoEnvio = _G.ultimoEnvio
+local podeEnviar = _G.podeEnviar
 
 ideias:AddDropdown("Dropdown", {
     Title = "Selecione a tab da ideia.\n",
     Description = "",
-    Values = {"Jogador", "Loja", "Mascotes", "plant/water", "Vender", "Eventos", "Vulnerabilidade", "utility", "Settings", "Interface"},
+    Values = validTabs,
     Multi = false,
     Default = "",
     Callback = function(v)
-	tabss = v
+        tabss = v
     end
-
 })
 
 ideias:AddInput("Input", {
@@ -831,6 +840,15 @@ ideias:AddInput("Input", {
     end
 })
 
+local function tabssValida(valor)
+    for _, v in ipairs(validTabs) do
+        if v == valor then
+            return true
+        end
+    end
+    return false
+end
+
 local envweb = ideias:AddButton({
     Title = "Enviar ideias",
     Description = "Envia por webhook (meu discord)",
@@ -841,7 +859,7 @@ local envweb = ideias:AddButton({
             if txt == nil then
                 table.insert(camposVazios, "'txt'")
             end
-            if tabss ~= "Jogador" and tabss ~= "Loja" and tabss ~= "Mascotes" and tabss ~= "plant/water" and tabss ~= "Vender" and tabss ~= "Eventos" and tabss ~= "Vulnerabilidade" and tabss ~= "utility" and tabss ~= "Settings" and tabss ~= "Interface" then
+            if not tabssValida(tabss) then
                 table.insert(camposVazios, "'tabs'")
             end
 
@@ -856,7 +874,9 @@ local envweb = ideias:AddButton({
             end
 
             ultimoEnvio = os.time()
+            _G.ultimoEnvio = ultimoEnvio
             podeEnviar = false
+            _G.podeEnviar = false
             enviarweb(txt, tabss)
         end
     end
@@ -868,6 +888,7 @@ task.spawn(function()
             local tempoRestante = 600 - (os.time() - ultimoEnvio)
             if tempoRestante <= 0 then
                 podeEnviar = true
+                _G.podeEnviar = true
                 envweb:SetDesc("Envia por webhook (meu discord)")
             else
                 local m = math.floor(tempoRestante / 60)
