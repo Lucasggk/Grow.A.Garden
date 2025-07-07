@@ -821,7 +821,7 @@ local envweb = utility:AddButton({
         if podeEnviar then
             ultimoEnvio = os.time()
             podeEnviar = false
-            eviarweb(txt)
+            enviarweb(txt)
         end
     end
 })
