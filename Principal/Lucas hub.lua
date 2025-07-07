@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.58[Ideias (Utility tab) (ptc n2)]",
+    version = "2.58[Ideias (Utility tab) (ptc n3)]",
     alpha = true,
 }
 if script_version.alpha then
@@ -803,8 +803,8 @@ local ultimoEnvio = 0
 local podeEnviar = true
 
 utility:AddInput("Input", {
-    Title = "De ideias de que por aqui\n\n",
-    Description = "Agora tenho tempo para arrumar\nTudo e por adições\n\n",
+    Title = "De ideias de que por aqui\n",
+    Description = "Agora tenho tempo para arrumar\nTudo e por adições\n",
     Default = "",
     Placeholder = ":) Seja criativo",
     Numeric = false,
