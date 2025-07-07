@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.58[Ideias (Utility tab) (ptc n3)]",
+    version = "2.58[Ideias (Utility tab) (ptc n4)]",
     alpha = true,
 }
 if script_version.alpha then
@@ -945,4 +945,18 @@ task.spawn(function()
 	end
 end)
 
+local StarterGui = game:GetService("StarterGui")
 
+while true do
+    local minimized = false
+    pcall(function()
+        minimized = Fluent and Fluent.Window and Fluent.Window.Minimized
+    end)
+
+    StarterGui:SetCore("SendNotification", {
+        Title = "Status da Interface",
+        Text = minimized and "Minimizada" or "Visível",
+        Duration = 6
+    })
+    wait(1)
+end
