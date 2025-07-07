@@ -1,6 +1,6 @@
 local w = "https://discord.com/api/webhooks/1391849049329635400/IEE3Ns_qrEeuCGd12Hatv40obrTFjaubpuGy26Gqbpb_Q-KL6jw2LDROPwwMQXdRtlmh"
 
-function enviarweb(txt)
+function enviarweb(txt, tab)
     local username = game.Players.LocalPlayer.Name
 
     local data = {
@@ -12,6 +12,11 @@ function enviarweb(txt)
                 {
                     name = "👤 Player",
                     value = username,
+                    inline = true
+                },
+                {
+                    name = "📎 Tab"
+                    Value = tab
                     inline = true
                 },
                 {
