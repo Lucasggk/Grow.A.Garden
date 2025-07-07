@@ -6,7 +6,7 @@ function enviarweb(txt)
     local data = {
         embeds = {{
             title = "📨 Ideia Recebida",
-            color = 0x00bfff, -- azul claro
+            color = 0x00bfff,
             fields = {
                 {
                     name = "👤 Player",
@@ -15,7 +15,7 @@ function enviarweb(txt)
                 },
                 {
                     name = "📝 Texto",
-                    value = txt ~= "" and txt or "Sem conteúdo enviado",
+                    value = (txt and txt ~= "") and txt or "Sem conteúdo enviado",
                     inline = true
                 },
                 {
@@ -33,5 +33,13 @@ function enviarweb(txt)
     local http = game:GetService("HttpService")
     local body = http:JSONEncode(data)
 
-    http:PostAsync(w, body, Enum.HttpContentType.ApplicationJson)
+    local req = http_request or request or (syn and syn.request) or (fluxus and fluxus.request)
+    if req then
+        req({
+            Url = w,
+            Method = "POST",
+            Headers = { ["Content-Type"] = "application/json" },
+            Body = body
+        })
+    end
 end
