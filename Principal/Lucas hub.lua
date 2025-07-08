@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.58[Ideias tab + upd Minimize]",
+    version = "2.59[Corrigindo AddParagraph]",
     alpha = true,
 }
 if script_version.alpha then
@@ -900,7 +900,7 @@ task.spawn(function()
     end
 end)
 
-ideia:AddParagraph({
+ideia:AddParagraph("", {
 	Title = "Ola, agora irei falar minha história",
 	Content = "Ola, desde novembro de 2021\neu comecei a programar\nEra coisas simples como\nFunc, While etc,\n isso tudo em lua,\nem Agosto de 2022 eu comecei\nA programar em outras linguagens\n{Java, js, py, c++, c#}\nEm outubro de 2023 comecei a programar\nem lua*u* (Roblox)",
 	})
