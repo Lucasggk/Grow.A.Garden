@@ -818,7 +818,7 @@ local ultimoEnvio = _G.ultimoEnvio
 local podeEnviar = _G.podeEnviar
 
 ideias:AddDropdown("Dropdown", {
-    Title = "Selecione a tab direcionada da ideia.\n",
+    Title = "Selecione a tab da ideia.\n",
     Description = "",
     Values = validTabs,
     Multi = false,
