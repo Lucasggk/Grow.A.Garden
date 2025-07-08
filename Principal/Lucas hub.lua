@@ -1,3 +1,8 @@
+if game.Players.LocalPlayer.Name == "ABYZx95999" then
+	game.Players.LocalPlayer:Kick("IDIOTA")
+	Return 
+end
+
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
