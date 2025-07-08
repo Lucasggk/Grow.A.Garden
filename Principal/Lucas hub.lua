@@ -818,7 +818,7 @@ local ultimoEnvio = _G.ultimoEnvio
 local podeEnviar = _G.podeEnviar
 
 ideias:AddDropdown("Dropdown", {
-    Title = "Selecione a tab da ideia.\n",
+    Title = "Selecione a tab direcionada da ideia.\n",
     Description = "",
     Values = validTabs,
     Multi = false,
@@ -885,7 +885,7 @@ local envweb = ideias:AddButton({
 task.spawn(function()
     while true do
         if not podeEnviar then
-            local tempoRestante = 600 - (os.time() - ultimoEnvio)
+            local tempoRestante = 300 - (os.time() - ultimoEnvio)
             if tempoRestante <= 0 then
                 podeEnviar = true
                 _G.podeEnviar = true
@@ -893,7 +893,7 @@ task.spawn(function()
             else
                 local m = math.floor(tempoRestante / 60)
                 local s = tempoRestante % 60
-                envweb:SetDesc("Aguarde: " .. string.format("%02d:%02d", m, s))
+                envweb:SetDesc("Aguarde: " .. string.format("%02d:%02d", m, s) .." Para enviar outra ideia")
             end
         end
         task.wait(1)
