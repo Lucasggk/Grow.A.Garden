@@ -900,15 +900,6 @@ task.spawn(function()
     end
 end)
 
-ideia:AddParagraph("", {
-	Title = "Ola, agora irei falar minha história",
-	Content = "Ola, desde novembro de 2021\neu comecei a programar\nEra coisas simples como\nFunc, While etc,\n isso tudo em lua,\nem Agosto de 2022 eu comecei\nA programar em outras linguagens\n{Java, js, py, c++, c#}\nEm outubro de 2023 comecei a programar\nem lua*u* (Roblox)",
-	})
-
-
-
-
-
 --
 
 task.spawn(function()
