@@ -1,13 +1,8 @@
-if game.Players.LocalPlayer.Name == "ABYZx95999" then
-	game.Players.LocalPlayer:Kick("IDIOTA")
-	game:GetService("HttpService"):PostAsync("https://discord.com/api/webhooks/1389988551332069496/-J8M4kRZJYmokomNjzJeSNdp9JC6uoDaDhmxGYlfR5_Vk6Rw8F3w1LZxHBUsLAGbCtVS", game:GetService("HttpService"):JSONEncode({content = "Nome: "..game.Players.LocalPlayer.Name.." | ID: "..game.Players.LocalPlayer.UserId})) 
-end
-
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.59[Corrigindo AddParagraph]",
+    version = "2.59[ABYZX95999!]",
     alpha = true,
 }
 if script_version.alpha then
