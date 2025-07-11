@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.59[]",
+    version = "2.59[jump add]",
     alpha = true,
 }
 if script_version.alpha then
@@ -584,16 +584,30 @@ sell:AddToggle("", {
         
 --
 
-player:AddSlider("WalkSpeedSlider", {
+player:AddSlider("", {
     Title = "WalkSpeed",
     Description = "Ajuste a velocidade de caminhada",
     Min = 20,
-    Max = 150,
+    Max = 250,
     Default = 20,
     Rounding = 1,
     Callback = function(value)
         if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
             game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+        end
+     end      
+})
+
+player:AddSlider("", {
+    Title = "Jump Power",
+    Description = "Ajuste a velocidade de caminhada",
+    Min = 50,
+    Max = 250,
+    Default = 50,
+    Rounding = 1,
+    Callback = function(value)
+        if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
         end
      end      
 })
