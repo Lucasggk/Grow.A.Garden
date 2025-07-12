@@ -55,19 +55,22 @@ task.spawn(function()
     end
 end)
 
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local buyPet = ReplicatedStorage.GameEvents.BuyPetEgg
-local pet = {1, 2, 3}
+local buyPet = game:GetService("ReplicatedStorage").GameEvents.BuyPetEgg
+
+local petNames = {
+    "Common Egg", "Common Summer Egg", "Rare Summer Egg",
+    "Mythical Egg", "Paradise Egg", "Bug Egg"
+}
 
 task.spawn(function()
     while true do
         local t = tick()
         local waitTime = 60 - (t % 60)
-        task.wait(waitTime) -- espera até o minuto virar
+        task.wait(waitTime)
 
         for i = 1, 3 do
-            for _, pt in ipairs(pet) do
-                buyPet:FireServer(pt)
+            for _, name in ipairs(petNames) do
+                buyPet:FireServer(name)
             end
             task.wait(0.1)
         end
