@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.59[jump add]",
+    version = "2.59[Egg shop att]",
     alpha = true,
 }
 if script_version.alpha then
@@ -268,28 +268,23 @@ end)
 
 local section = loja:AddSection("Auto Buy egg")
 
-function gne(n)
-    local f, l, r = workspace.NPCS["Pet Stand"].EggLocations:GetChildren(), {}, {}
-    for _, v in ipairs(f) do if v.Name:lower():find("egg") then l[#l+1] = v.Name end end
-    n = n:lower()
-    for i = 1, #l do if l[i]:lower() == n then r[#r+1] = i end end
-    return r
-end
 local selected = {}
+
 local mdp = loja:AddDropdown("MultiDropdown", {
     Title = "Selecionar Eggs",
     Description = "",
     Values = {
         "Common Egg", "Common Summer Egg", "Rare Summer Egg",
-        "Mythical Egg", "Paradise Egg", "Bee Egg", "Bug Egg"
+        "Mythical Egg", "Paradise Egg", "Bug Egg"
     },
     Multi = true,
     Default = {},
 })
+
 mdp:OnChanged(function(Value)
     selected = {}
     for name, state in next, Value do
-        selected[#selected+1] = name
+        selected[#selected + 1] = name
     end
 end)
 
@@ -304,10 +299,7 @@ loja:AddToggle("", {
         task.spawn(function()
             while _G.bpd do
                 for _, name in ipairs(selected) do
-                    local indices = gne(name)
-                    for _, i in ipairs(indices) do
-                        BuyPet:FireServer(i)
-                    end
+                    game:GetService("ReplicatedStorage").GameEvents.BuyPetEgg:FireServer(name)
                 end
                 task.wait(1)
             end
