@@ -53,6 +53,8 @@ local ignoreNames = {
     ["Recall Wrench"] = true,
     ["Basic Sprinkler"] = true,
     ["Advanced Sprinkler"] = true,
+    ["Medium Toy"] = true,
+    ["Medium Treat"] = true,
     ["Godly Sprinkler"] = true,
     ["Lightning Rod"] = true,
     ["Master Sprinkler"] = true,
@@ -60,6 +62,7 @@ local ignoreNames = {
     ["Favorite Tool"] = false,
     ["Harvest Tool"] = false,
     ["Friendship Pot"] = false,
+    ["Levelup Lollipop"] = true,
 }
 
 local player = game:GetService("Players").LocalPlayer
