@@ -48,9 +48,14 @@ end
 ]]
 
 function p()
+    local petNames = {
+        "Common Egg", "Common Summer Egg", "Rare Summer Egg",
+        "Mythical Egg", "Paradise Egg", "Bug Egg"
+    }
+
     for i = 1, 3 do
-        for _, pt in ipairs(pet) do
-            buyPet:FireServer(pt)
+        for _, name in ipairs(petNames) do
+            buyPet:FireServer(name)
         end
         task.wait()
     end
