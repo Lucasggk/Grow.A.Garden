@@ -68,6 +68,6 @@ elseif (Lucas.Id == id and Lucas.Exec == exec and Lucas.Hwid == hwid) then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Principal/Lucas%20hub.lua"))()
 
 else
-    webhooknotpass("Acesso negado. HWID: ".. hwid .. " - " game.Players.LocalPlayer.Name)
+    webhooknotpass("Acesso negado. HWID: ".. hwid .. " - ".. game.Players.LocalPlayer.Name)
     kick("Player Não Reconhecido, caso esteja na lista avise lucas!")
 end
