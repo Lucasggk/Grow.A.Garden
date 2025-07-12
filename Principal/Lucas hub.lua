@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.59[Egg shop att]",
+    version = "2.59[Timer ideias redução]",
     alpha = true,
 }
 if script_version.alpha then
@@ -891,7 +891,7 @@ local envweb = ideias:AddButton({
 task.spawn(function()
     while true do
         if not podeEnviar then
-            local tempoRestante = 300 - (os.time() - ultimoEnvio)
+            local tempoRestante = 150 - (os.time() - ultimoEnvio)
             if tempoRestante <= 0 then
                 podeEnviar = true
                 _G.podeEnviar = true
