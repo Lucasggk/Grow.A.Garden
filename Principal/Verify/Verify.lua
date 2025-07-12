@@ -7,7 +7,6 @@ local hwid = (get_hwid and get_hwid()) or (gethwid and gethwid())
 local exec = identifyexecutor()
 local gname = game:GetService("MarketplaceService"):GetProductInfo(gid).Name
 local tempo = os.date("%H:%M:%S - %d/%m")
-local tempo2 = os.date("%H:%M")
 
 local player_id = {
     [5557980719] = true,
@@ -18,15 +17,6 @@ local v1 = player_id[id] == true
 local v2 = gid == 126884695634066 and v1
 local v3 = hwid and v1
 local v4 = exec and v1
-
-print("Verificação 1: " .. (v1 and "🟢 "..id or "🔴"))
-print("Verificação 2: " .. (v2 and "🟢 "..gid or "🔴"))
-print("Verificação 3: " .. (v3 and "🟢 "..hwid or "🔴"))
-print("Verificação 4: " .. (v4 and "🟢 "..exec or "🔴"))
-
-print("")
-print("Pegando dados do player:")
-print("")
 
 local dados = {
     DisplayNome = player.DisplayName,
@@ -45,37 +35,15 @@ local dados = {
         "v4: " .. (v4 and "🟢 Exec" or "🔴 Exec")
 }
 
-for k,v in pairs(dados) do
-    if k == "Status" then
-        print(tempo2 .. " -- status:")
-        for line in v:gmatch("[^\n]+") do
-            print(line)
-        end
-    else
-        print(k .. ": " .. tostring(v))
-    end
-end
-
-print("")
-print("indo para Webhook..")
-task.wait(math.random())
 webhook(dados)
-task.wait(math.random())
-print("Webhook Enviado!")
-print("Fazendo Verificações de Kick!")
-print("")
 
 local motivo
 if not player_id[id] then
     motivo = "Seu ID não está na lista autorizada."
-elseif not (v1 and v2 and v3 and v4) then
-    motivo = "Você não passou em uma ou mais verificações."
 end
 
 if motivo then
     player:Kick(motivo)
 else
-    print("Você Passou Em todas Verificações!")
-    print("Indo para proxima Verificação!")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Verify/Verify%20etapa%202.lua"))()
 end
