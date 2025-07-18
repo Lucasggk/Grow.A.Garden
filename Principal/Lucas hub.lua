@@ -446,11 +446,18 @@ end
 plant:AddButton({
     Title = "Adicionar Local",
     Callback = function()
-        HRP = Player.Character and Player.Character:FindFirstChild("HumanoidRootPart")
+        local HRP = Player.Character and Player.Character:FindFirstChild("HumanoidRootPart")
         if HRP then
             local p = Vector3.new(HRP.Position.X, 0.14, HRP.Position.Z)
-            local id = #Locations + 1
-            local name = "Local " .. id
+
+            -- Gera um nome único como "Local 1", "Local 2", etc.
+            local id = 1
+            local name
+            repeat
+                name = "Local " .. id
+                id += 1
+            until not Locations[name]
+
             Locations[name] = p
             UpdateDropdown()
         end
@@ -461,18 +468,21 @@ plant:AddButton({
     Title = "Limpar Locais",
     Callback = function()
         Locations = {}
-        UpdateDropdown()
+        pwms = nil
+        dropdown:SetValues({})
     end
 })
 
 dropdown:OnChanged(function(selected)
     for name, pos in pairs(Locations) do
-        if selected:find(name) then
+        if selected:match("^" .. name .. " ") then
             pwms = pos
             break
         end
     end
 end)
+
+
 
 plant:AddSlider("Velocidade", {
     Title = "Delay entre uso",
