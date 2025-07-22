@@ -851,18 +851,18 @@ utility:AddToggle("", {
                                         buffer.fromstring("\1\1\0\1"),
                                         {fruta}
                                     )
-                                    task.wait(0.15)
+                                    task.wait(0.05)
                                 end
                             else
                                 game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
                                     buffer.fromstring("\1\1\0\1"),
                                     {p}
                                 )
-                                task.wait(0.15)
+                                task.wait(0.05)
                             end
                         end
                     end
-                    task.wait(0.1)
+                    task.wait(0.2)
                 end
             end)
         end
