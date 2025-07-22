@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.59[Auto Collect[9]",
+    version = "2.59[Auto Collect[10]",
     alpha = true,
 }
 if script_version.alpha then
@@ -820,16 +820,16 @@ end
 
 
 _G.AutoCollect = false
-local frutasSelecionadas = {}
+local frutaSelecionada = {} -- Única alteração necessária (de nil para {})
 
 utility:AddDropdown("", {
     Title = "Fruta para Auto Collect",
     Description = "Escolha uma fruta para coleta.",
     Values = {"Carrot", "Strawberry", "Chocolate Carrot", "Pink Tulip", "Blueberry", "Orange Tulip", "Lavender", "Stonebite", "Crocus", "Rose", "Nightshade", "Red Lollipop", "Manuka Flower", "Blue Lollipop", "Tomato", "Corn", "Daffodil", "Glowshroom", "Mint", "Cauliflower", "Bee Balm", "Peace Lily", "Horsetail", "Dandelion", "Noble Flower", "Candy Sunflower", "Pear", "Raspberry", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Lingonberry", "Lilac", "Nectarine", "Violet Corn", "Cantaloupe", "Starfruit", "Moonflower", "Avocado", "Banana", "Durian", "Green Apple", "Lumira", "Peach", "Pineapple", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Eggplant", "Passionfruit", "Celestiberry", "Blood Banana", "Moonglow", "Moon Melon", "Wild Carrot", "Kiwi", "Honeysuckle", "Suncoil", "Rosy Delight", "Cocovine", "Parasol Flower", "Pink Lily", "Purple Dahlia", "Firefly Fern", "Elephant Ears", "Bendboo", "Traveler's Fruit", "Amber Spine", "Boneboo", "Horned Dinoshroom", "Aloe Vera", "Cherry Blossom", "Soul Fruit", "Pepper", "Cacao", "Grape", "Cursed Fruit", "Moon Blossom", "Candy Blossom", "Lotus", "Venus Fly Trap", "Hive Fruit", "Moon Mango", "Sunflower", "Dragon Pepper", "Pitcher Plant", "Trail Fruit", "Feijoa", "Grand Volcania", "Fossilight", "Sugar Apple", "Ember Lily", "Burning Bud", "Giant Pinecone", "Beanstalk", "Bone Blossom"},
     Multi = true,
-    Default = {},
+    Default = nil, -- Mantido igual
     Callback = function(v)
-        frutasSelecionadas = v
+        frutaSelecionada = v -- Mantido igual (agora aceita múltiplos valores)
     end
 })
 
@@ -841,9 +841,9 @@ utility:AddToggle("", {
         _G.AutoCollect = v
         if v then
             task.spawn(function()
-                while _G.AutoCollect and #frutasSelecionadas > 0 do
+                while _G.AutoCollect and #frutaSelecionada > 0 do -- Alterado para verificar tabela
                     for _, p in ipairs(workspace.Farm.Farm.Important.Plants_Physical:GetChildren()) do
-                        if table.find(frutasSelecionadas, p.Name) then
+                        if table.find(frutaSelecionada, p.Name) then -- Verifica se a planta está na lista
                             local f = p:FindFirstChild("Fruits")
                             if f and #f:GetChildren() > 0 then
                                 for _, fruta in ipairs(f:GetChildren()) do
@@ -868,7 +868,6 @@ utility:AddToggle("", {
         end
     end
 })
-
 
 
 
