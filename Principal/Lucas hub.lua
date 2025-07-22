@@ -822,7 +822,7 @@ end
 local FrutasToColl = {}
 _G.Autocoll = false
 
-utility:AddDropdown("", {
+local dropdown = utility:AddDropdown("", {
     Title = "Selecione frutas pro auto collect.",
     Description = "Auto se explica.",
     Values = {
@@ -840,31 +840,34 @@ utility:AddDropdown("", {
     },
     Multi = true,
     Default = {},
-    Callback = function(v)
-        FrutasToColl = v
+    Callback = function(selected)
+        FrutasToColl = selected
     end
 })
 
-local function sendFruit(fruta)
-    game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-        buffer.fromstring("\1\1\0\1"),
-        {fruta}
-    )
-    task.wait(0.05)
-end
-
-local function checkAndCollect(nome)
+local function collectFromPlant(name)
     for _, p in ipairs(workspace.Farm.Farm.Important.Plants_Physical:GetChildren()) do
-        if p.Name == nome then
-            local f = p:FindFirstChild("Fruits")
-            if f and #f:GetChildren() > 0 then
-                for _, fruta in ipairs(f:GetChildren()) do
-                    sendFruit(fruta)
+        if p.Name == name then
+            local fruits = p:FindFirstChild("Fruits")
+            if fruits and #fruits:GetChildren() > 0 then
+                for _, fruit in ipairs(fruits:GetChildren()) do
+                    pcall(function()
+                        game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+                            buffer.fromstring("\1\1\0\1"),
+                            {fruit}
+                        )
+                    end)
+                    task.wait(0.2)
                 end
             else
-                sendFruit(p)
+                pcall(function()
+                    game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+                        buffer.fromstring("\1\1\0\1"),
+                        {p}
+                    )
+                end)
+                task.wait(0.2)
             end
-            break
         end
     end
 end
@@ -873,21 +876,20 @@ utility:AddToggle("", {
     Title = "Ativar auto Collect",
     Description = "",
     Default = false,
-    Callback = function(v)
-        _G.Autocoll = v
-        if v then
+    Callback = function(enabled)
+        _G.Autocoll = enabled
+        if enabled then
             task.spawn(function()
                 while _G.Autocoll do
-                    for _, nome in ipairs(FrutasToColl) do
-                        checkAndCollect(nome)
-                        task.wait(0.1)
+                    for _, name in ipairs(FrutasToColl) do
+                        collectFromPlant(name)
                     end
+                    task.wait(0.1)
                 end
             end)
         end
     end
 })
-
 
 
 
