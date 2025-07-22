@@ -822,10 +822,22 @@ end
 local FrutasToColl = {}
 _G.Autocoll = false
 
-local cddd = utility:AddDropdown("", {
+utility:AddDropdown("", {
     Title = "Selecione frutas pro auto collect.",
     Description = "Auto se explica.",
-    Values = {"Carrot", "Strawberry", "Chocolate Carrot", "Pink Tulip", "Blueberry", "Orange Tulip", "Lavender", "Stonebite", "Crocus", "Rose", "Nightshade", "Red Lollipop", "Manuka Flower", "Blue Lollipop", "Tomato", "Corn", "Daffodil", "Glowshroom", "Mint", "Cauliflower", "Bee Balm", "Peace Lily", "Horsetail", "Dandelion", "Noble Flower", "Candy Sunflower", "Pear", "Raspberry", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Lingonberry", "Lilac", "Nectarine", "Violet Corn", "Cantaloupe", "Starfruit", "Moonflower", "Avocado", "Banana", "Durian", "Green Apple", "Lumira", "Peach", "Pineapple", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Eggplant", "Passionfruit", "Celestiberry", "Blood Banana", "Moonglow", "Moon Melon", "Wild Carrot", "Kiwi", "Honeysuckle", "Suncoil", "Rosy Delight", "Cocovine", "Parasol Flower", "Pink Lily", "Purple Dahlia", "Firefly Fern", "Elephant Ears", "Bendboo", "Traveler's Fruit", "Amber Spine", "Boneboo", "Horned Dinoshroom", "Aloe Vera", "Cherry Blossom", "Soul Fruit", "Pepper", "Cacao", "Grape", "Cursed Fruit", "Moon Blossom", "Candy Blossom", "Lotus", "Venus Fly Trap", "Hive Fruit", "Moon Mango", "Sunflower", "Dragon Pepper", "Pitcher Plant", "Trail Fruit", "Feijoa", "Grand Volcania", "Fossilight", "Sugar Apple", "Ember Lily", "Burning Bud", "Giant Pinecone", "Beanstalk", "Bone Blossom"},
+    Values = {
+        "Carrot", "Strawberry", "Chocolate Carrot", "Pink Tulip", "Blueberry", "Orange Tulip", "Lavender", "Stonebite", "Crocus",
+        "Rose", "Nightshade", "Red Lollipop", "Manuka Flower", "Blue Lollipop", "Tomato", "Corn", "Daffodil", "Glowshroom", "Mint",
+        "Cauliflower", "Bee Balm", "Peace Lily", "Horsetail", "Dandelion", "Noble Flower", "Candy Sunflower", "Pear", "Raspberry",
+        "Watermelon", "Pumpkin", "Apple", "Bamboo", "Lingonberry", "Lilac", "Nectarine", "Violet Corn", "Cantaloupe", "Starfruit",
+        "Moonflower", "Avocado", "Banana", "Durian", "Green Apple", "Lumira", "Peach", "Pineapple", "Coconut", "Cactus", "Dragon Fruit",
+        "Mango", "Eggplant", "Passionfruit", "Celestiberry", "Blood Banana", "Moonglow", "Moon Melon", "Wild Carrot", "Kiwi",
+        "Honeysuckle", "Suncoil", "Rosy Delight", "Cocovine", "Parasol Flower", "Pink Lily", "Purple Dahlia", "Firefly Fern",
+        "Elephant Ears", "Bendboo", "Traveler's Fruit", "Amber Spine", "Boneboo", "Horned Dinoshroom", "Aloe Vera", "Cherry Blossom",
+        "Soul Fruit", "Pepper", "Cacao", "Grape", "Cursed Fruit", "Moon Blossom", "Candy Blossom", "Lotus", "Venus Fly Trap",
+        "Hive Fruit", "Moon Mango", "Sunflower", "Dragon Pepper", "Pitcher Plant", "Trail Fruit", "Feijoa", "Grand Volcania",
+        "Fossilight", "Sugar Apple", "Ember Lily", "Burning Bud", "Giant Pinecone", "Beanstalk", "Bone Blossom"
+    },
     Multi = true,
     Default = {},
     Callback = function(v)
@@ -833,27 +845,24 @@ local cddd = utility:AddDropdown("", {
     end
 })
 
-local function safeFire(plantaOuFruta)
-    local s, e = pcall(function()
-        if plantaOuFruta and plantaOuFruta:IsDescendantOf(workspace) then
-            game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                buffer.fromstring("\1\1\0\1"),
-                {plantaOuFruta}
-            )
-        end
-    end)
+local function sendFruit(fruta)
+    game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+        buffer.fromstring("\1\1\0\1"),
+        {fruta}
+    )
+    task.wait(0.05)
 end
 
-local function cfvv(nome)
-    for _, planta in ipairs(workspace.Farm.Farm.Important.Plants_Physical:GetChildren()) do
-        if planta.Name == nome then
-            local frutas = planta:FindFirstChild("Fruits")
-            if frutas then
-                for _, fruta in ipairs(frutas:GetChildren()) do
-                    safeFire(fruta)
+local function checkAndCollect(nome)
+    for _, p in ipairs(workspace.Farm.Farm.Important.Plants_Physical:GetChildren()) do
+        if p.Name == nome then
+            local f = p:FindFirstChild("Fruits")
+            if f and #f:GetChildren() > 0 then
+                for _, fruta in ipairs(f:GetChildren()) do
+                    sendFruit(fruta)
                 end
             else
-                safeFire(planta)
+                sendFruit(p)
             end
             break
         end
@@ -866,19 +875,18 @@ utility:AddToggle("", {
     Default = false,
     Callback = function(v)
         _G.Autocoll = v
-        if _G.Autocoll then
+        if v then
             task.spawn(function()
                 while _G.Autocoll do
                     for _, nome in ipairs(FrutasToColl) do
-                        cfvv(nome)
-                        task.wait(0.2) -- MAIS LENTO PRA NÃO CRASHAR
+                        checkAndCollect(nome)
+                        task.wait(0.1)
                     end
                 end
             end)
         end
     end
 })
-
 
 
 
