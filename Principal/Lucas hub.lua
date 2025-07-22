@@ -819,6 +819,7 @@ function fav(Status)
 	end
 end
 
+utility:AddSection("Auto collect Fruit")
 
 _G.AutoCollect = false
 local frutaSelecionada = nil
@@ -872,6 +873,70 @@ utility:AddToggle("", {
 
 
 
+utility:AddSection("Auto collect Fruit Mutation")
+
+function cpm(nomeAtributo)
+    local ByteNetReliable = game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable")
+    local pasta = workspace:WaitForChild("Farm")
+        :WaitForChild("Farm")
+        :WaitForChild("Important")
+        :WaitForChild("Plants_Physical")
+
+    for _, planta in ipairs(pasta:GetChildren()) do
+        local frutas = planta:FindFirstChild("Fruits")
+        local enviado = false
+
+        if planta:GetAttribute(nomeAtributo) == true then
+            ByteNetReliable:FireServer(buffer.fromstring("\1\1\0\1"), {planta})
+            enviado = true
+        end
+
+        if frutas and not enviado then
+            for _, fruta in ipairs(frutas:GetChildren()) do
+                if fruta:GetAttribute(nomeAtributo) == true then
+                    ByteNetReliable:FireServer(buffer.fromstring("\1\1\0\1"), {fruta})
+                    task.wait(0.05)
+                end
+            end
+        end
+    end
+end
+
+_G().cfm = false
+local mtcc
+local mtc = {"None", "Wet", "Windstruck", "Moonlit", "Chilled", "Shocked", "Frozen", "Bloodlit", "Celestial", "Zombified", "Honey Glazed", "Heavenly", "Fried", "Amber", "Clay", "Ceramic", "Sundried", "Aurora", "Alienlike", "Galactic", "Disco", "Plasma", "Tranquil"}
+
+utility:AddDropdown("", {
+    Title = "Selecione a Mutação.",
+    Description = "Auto se explica.",
+    Values = mtc,
+    Multi = false,
+    Default = nil,
+    Callback = function(v)
+        mtcc = v
+    end
+})
+
+utility:AddToggle("", {
+    Title = "Coletar frutas com a Mutação selecionada.",
+    Description = "",
+    Default = false,
+    Callback = function(v)
+        _G().cfm = v
+        if _G().cfm then
+            task.spawn(function()
+                while _G().cfm do
+                    task.wait(0.15)
+                    if mtcc == nil or mtcc == "None" then
+                        task.wait()
+                    else
+                        cpm(mtcc)
+                    end
+                end
+            end)
+        end
+    end
+})
 
 
 
