@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.59[Auto Collect[11]",
+    version = "2.8[Correções]",
     alpha = true,
 }
 if script_version.alpha then
@@ -470,6 +470,7 @@ plant:AddButton({
         Locations = {}
         pwms = nil
         dropdown:SetValues({})
+	dropdown:SetValue(nil)
     end
 })
 
