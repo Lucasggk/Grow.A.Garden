@@ -904,7 +904,7 @@ end
 
 _G.cfm = false
 local mtcc
-local mtc = {"None", "Wet", "Windstruck", "Moonlit", "Chilled", "Shocked", "Frozen", "Bloodlit", "Celestial", "Zombified", "Honey Glazed", "Heavenly", "Fried", "Amber", "Clay", "Ceramic", "Sundried", "Aurora", "Alienlike", "Galactic", "Disco", "Plasma", "Tranquil"}
+local mtc = {"None", "Wet", "Windstruck", "Moonlit", "Chilled", "Shocked", "Frozen", "Bloodlit", "Celestial", "Zombified", "Honey Glazed", "Heavenly", "Fried", "Amber", "Clay", "Ceramic", "Sundried", "Aurora", "Alienlike", "Galactic", "Disco", "Plasma", "Tranquil", "Cooked", "Burnt", "Sandy", "Pollinated", "Friendbound", "Radioactive", "Foxfire Chakra", "Twisted", "Molten", "Meteoric", "Voidtouched", "Dawnbound"}
 
 utility:AddDropdown("", {
     Title = "Selecione a Mutação.",
