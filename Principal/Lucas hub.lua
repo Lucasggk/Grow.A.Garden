@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.59[Auto Collect[5]",
+    version = "2.59[Auto Collect[6]",
     alpha = true,
 }
 if script_version.alpha then
@@ -819,78 +819,76 @@ function fav(Status)
 end
 
 
-local FrutasToColl = {}
-_G.Autocoll = false
+_G.AutoCollectAtivo = false
+local FrutasSelecionadas = {}
 
-local dropdown = utility:AddDropdown("", {
-    Title = "Selecione frutas pro auto collect.",
-    Description = "Auto se explica.",
+utility:AddDropdown("Selecionar Frutas", {
+    Title = "Frutas para Auto Collect",
+    Description = "Selecione as frutas desejadas.",
     Values = {
-        "Carrot", "Strawberry", "Chocolate Carrot", "Pink Tulip", "Blueberry", "Orange Tulip", "Lavender", "Stonebite", "Crocus",
-        "Rose", "Nightshade", "Red Lollipop", "Manuka Flower", "Blue Lollipop", "Tomato", "Corn", "Daffodil", "Glowshroom", "Mint",
-        "Cauliflower", "Bee Balm", "Peace Lily", "Horsetail", "Dandelion", "Noble Flower", "Candy Sunflower", "Pear", "Raspberry",
-        "Watermelon", "Pumpkin", "Apple", "Bamboo", "Lingonberry", "Lilac", "Nectarine", "Violet Corn", "Cantaloupe", "Starfruit",
-        "Moonflower", "Avocado", "Banana", "Durian", "Green Apple", "Lumira", "Peach", "Pineapple", "Coconut", "Cactus", "Dragon Fruit",
-        "Mango", "Eggplant", "Passionfruit", "Celestiberry", "Blood Banana", "Moonglow", "Moon Melon", "Wild Carrot", "Kiwi",
-        "Honeysuckle", "Suncoil", "Rosy Delight", "Cocovine", "Parasol Flower", "Pink Lily", "Purple Dahlia", "Firefly Fern",
-        "Elephant Ears", "Bendboo", "Traveler's Fruit", "Amber Spine", "Boneboo", "Horned Dinoshroom", "Aloe Vera", "Cherry Blossom",
-        "Soul Fruit", "Pepper", "Cacao", "Grape", "Cursed Fruit", "Moon Blossom", "Candy Blossom", "Lotus", "Venus Fly Trap",
-        "Hive Fruit", "Moon Mango", "Sunflower", "Dragon Pepper", "Pitcher Plant", "Trail Fruit", "Feijoa", "Grand Volcania",
-        "Fossilight", "Sugar Apple", "Ember Lily", "Burning Bud", "Giant Pinecone", "Beanstalk", "Bone Blossom"
+        "Carrot", "Strawberry", "Chocolate Carrot", "Pink Tulip", "Blueberry",
+        "Orange Tulip", "Lavender", "Stonebite", "Crocus", "Rose", "Nightshade",
+        "Red Lollipop", "Manuka Flower", "Blue Lollipop", "Tomato", "Corn", "Daffodil",
+        "Glowshroom", "Mint", "Cauliflower", "Bee Balm", "Peace Lily", "Horsetail",
+        "Dandelion", "Noble Flower", "Candy Sunflower", "Pear", "Raspberry", "Watermelon",
+        "Pumpkin", "Apple", "Bamboo", "Lingonberry", "Lilac", "Nectarine", "Violet Corn",
+        "Cantaloupe", "Starfruit", "Moonflower", "Avocado", "Banana", "Durian",
+        "Green Apple", "Lumira", "Peach", "Pineapple", "Coconut", "Cactus",
+        "Dragon Fruit", "Mango", "Eggplant", "Passionfruit", "Celestiberry",
+        "Blood Banana", "Moonglow", "Moon Melon", "Wild Carrot", "Kiwi",
+        "Honeysuckle", "Suncoil", "Rosy Delight", "Cocovine", "Parasol Flower",
+        "Pink Lily", "Purple Dahlia", "Firefly Fern", "Elephant Ears", "Bendboo",
+        "Traveler's Fruit", "Amber Spine", "Boneboo", "Horned Dinoshroom",
+        "Aloe Vera", "Cherry Blossom", "Soul Fruit", "Pepper", "Cacao", "Grape",
+        "Cursed Fruit", "Moon Blossom", "Candy Blossom", "Lotus", "Venus Fly Trap",
+        "Hive Fruit", "Moon Mango", "Sunflower", "Dragon Pepper", "Pitcher Plant",
+        "Trail Fruit", "Feijoa", "Grand Volcania", "Fossilight", "Sugar Apple",
+        "Ember Lily", "Burning Bud", "Giant Pinecone", "Beanstalk", "Bone Blossom"
     },
     Multi = true,
     Default = {},
-    Callback = function(selected)
-        FrutasToColl = selected
+    Callback = function(v)
+        FrutasSelecionadas = v
     end
 })
 
-local function collectFromPlant(name)
-    for _, p in ipairs(workspace.Farm.Farm.Important.Plants_Physical:GetChildren()) do
-        if p.Name == name then
-            local fruits = p:FindFirstChild("Fruits")
-            if fruits and #fruits:GetChildren() > 0 then
-                for _, fruit in ipairs(fruits:GetChildren()) do
-                    pcall(function()
-                        game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                            buffer.fromstring("\1\1\0\1"),
-                            {fruit}
-                        )
-                    end)
-                    task.wait(0.2)
-                end
-            else
-                pcall(function()
-                    game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                        buffer.fromstring("\1\1\0\1"),
-                        {p}
-                    )
-                end)
-                task.wait(0.2)
-            end
-        end
-    end
-end
-
-utility:AddToggle("", {
-    Title = "Ativar auto Collect",
-    Description = "",
+utility:AddToggle("Auto Collect", {
+    Title = "Ativar Coleta Automática",
+    Description = "Liga ou desliga o Auto Collect.",
     Default = false,
-    Callback = function(enabled)
-        _G.Autocoll = enabled
-        if enabled then
+    Callback = function(v)
+        _G.AutoCollectAtivo = v
+        if v then
             task.spawn(function()
-                while _G.Autocoll do
-                    for _, name in ipairs(FrutasToColl) do
-                        collectFromPlant(name)
+                while _G.AutoCollectAtivo do
+                    for _, nome in ipairs(FrutasSelecionadas) do
+                        for _, p in ipairs(workspace.Farm.Farm.Important.Plants_Physical:GetChildren()) do
+                            if p.Name == nome then
+                                local f = p:FindFirstChild("Fruits")
+                                if f and #f:GetChildren() > 0 then
+                                    for _, fruta in ipairs(f:GetChildren()) do
+                                        game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+                                            buffer.fromstring("\1\1\0\1"),
+                                            {fruta}
+                                        )
+                                        task.wait(0.15)
+                                    end
+                                else
+                                    game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+                                        buffer.fromstring("\1\1\0\1"),
+                                        {p}
+                                    )
+                                    task.wait(0.15)
+                                end
+                            end
+                        end
+                        task.wait(0.1)
                     end
-                    task.wait(0.1)
                 end
             end)
         end
     end
 })
-
 
 
 
