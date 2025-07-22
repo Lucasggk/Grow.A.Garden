@@ -902,7 +902,7 @@ function cpm(nomeAtributo)
     end
 end
 
-_G().cfm = false
+_G.cfm = false
 local mtcc
 local mtc = {"None", "Wet", "Windstruck", "Moonlit", "Chilled", "Shocked", "Frozen", "Bloodlit", "Celestial", "Zombified", "Honey Glazed", "Heavenly", "Fried", "Amber", "Clay", "Ceramic", "Sundried", "Aurora", "Alienlike", "Galactic", "Disco", "Plasma", "Tranquil"}
 
@@ -922,10 +922,10 @@ utility:AddToggle("", {
     Description = "",
     Default = false,
     Callback = function(v)
-        _G().cfm = v
-        if _G().cfm then
+        _G.cfm = v
+        if _G.cfm then
             task.spawn(function()
-                while _G().cfm do
+                while _G.cfm do
                     task.wait(0.15)
                     if mtcc == nil or mtcc == "None" then
                         task.wait()
