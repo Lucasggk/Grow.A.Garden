@@ -822,7 +822,7 @@ end
 local FrutasToColl = {}
 _G.Autocoll = false
 
-local cddd = Utility:AddDropdown("", {
+local cddd = utility:AddDropdown("", {
    Title = "Selecione frutas pro auto collect.",
    Description = "Auto se explica.",
    Values = {"Carrot", "Strawberry", "Chocolate Carrot", "Pink Tulip", "Blueberry", "Orange Tulip", "Lavender", "Stonebite", "Crocus", "Rose", "Nightshade", "Red Lollipop", "Manuka Flower", "Blue Lollipop", "Tomato", "Corn", "Daffodil", "Glowshroom", "Mint", "Cauliflower", "Bee Balm", "Peace Lily", "Horsetail", "Dandelion", "Noble Flower", "Candy Sunflower", "Pear", "Raspberry", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Lingonberry", "Lilac", "Nectarine", "Violet Corn", "Cantaloupe", "Starfruit", "Moonflower", "Avocado", "Banana", "Durian", "Green Apple", "Lumira", "Peach", "Pineapple", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Eggplant", "Passionfruit", "Celestiberry", "Blood Banana", "Moonglow", "Moon Melon", "Wild Carrot", "Kiwi", "Honeysuckle", "Suncoil", "Rosy Delight", "Cocovine", "Parasol Flower", "Pink Lily", "Purple Dahlia", "Firefly Fern", "Elephant Ears", "Bendboo", "Traveler's Fruit", "Amber Spine", "Boneboo", "Horned Dinoshroom", "Aloe Vera", "Cherry Blossom", "Soul Fruit", "Pepper", "Cacao", "Grape", "Cursed Fruit", "Moon Blossom", "Candy Blossom", "Lotus", "Venus Fly Trap", "Hive Fruit", "Moon Mango", "Sunflower", "Dragon Pepper", "Pitcher Plant", "Trail Fruit", "Feijoa", "Grand Volcania", "Fossilight", "Sugar Apple", "Ember Lily", "Burning Bud", "Giant Pinecone", "Beanstalk", "Bone Blossom"},
@@ -862,7 +862,7 @@ local function cfvv(nome)
     end
 end
 
-Utility:AddToggle("", {
+utility:AddToggle("", {
     Title = "Ativar auto Collect",
     Description = "",
     Default = false,
