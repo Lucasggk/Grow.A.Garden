@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.59[Timer ideias redução]",
+    version = "2.59[Auto Collect]",
     alpha = true,
 }
 if script_version.alpha then
@@ -844,12 +844,14 @@ local function cfvv(nome)
                         buffer.fromstring("\1\1\0\1"),
                         {fruta}
                     )
+			task.wait()
                 end
             else
                 game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
                     buffer.fromstring("\1\1\0\1"),
                     {planta}
                 )
+		       task.wait()
             end
             break
         end
@@ -867,7 +869,7 @@ utility:AddToggle("", {
                 while _G.Autocoll do
                     for _, nome in ipairs(FrutasToColl) do
                         cfvv(nome)
-                        task.wait(0.01)
+                        task.wait(0.05)
                     end
                 end
             end)
