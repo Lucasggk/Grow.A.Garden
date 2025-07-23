@@ -946,6 +946,34 @@ utility:AddToggle("", {
 
 
 
+--
+
+
+_G.act = false
+
+event:AddToggle("", {
+    Title = "Auto Collect Tranquil",
+    Description = "",
+    Default = false,
+    Callback = function(v)
+        _G.act = v
+        if _G.act then
+            task.spawn(function()
+                while _G.act do
+                    task.wait(0.2)
+                    cpm("Tranquil")
+                end
+            end)
+        end
+    end
+})
+
+event:AddSection("Jaja ta o resto aí")
+
+
+
+
+
 
 -- 
 
