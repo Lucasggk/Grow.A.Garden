@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.8[Zen event Progress: shop..🌙]",
+    version = "2.8[Zen event Progress: shop..🌙 2]",
     alpha = true,
 }
 if script_version.alpha then
@@ -469,8 +469,8 @@ plant:AddButton({
     Callback = function()
         Locations = {}
         pwms = nil
+        dropdown:SetValue(nil)
         dropdown:SetValues({})
-	dropdown:SetValue(nil)
     end
 })
 
