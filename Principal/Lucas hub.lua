@@ -948,6 +948,7 @@ utility:AddToggle("", {
 
 --
 
+event:AddSection("Zen Farms:")
 
 _G.act = false
 
@@ -968,8 +969,44 @@ event:AddToggle("", {
     end
 })
 
-event:AddSection("Jaja ta o resto aí")
+_G.sbazs = false
+event:AddToggle("", {
+	Title = "Auto submit all: Zen shop.",
+	Description = "Auto se explica.",
+	Default = false,
+	Callback = function(v)
+        _G.sbazs = v
+	if _G.sbazs then
+	task.spawn(function()
+	while _G.sbazs do
+	task.wait(1)
+        game:GetService("ReplicatedStorage").GameEvents.ZenAuraRemoteEvent:FireServer("SubmitAllPlants")
+	end
+	end)
+	end
+	end
+	})
 
+
+_G.sbazt = false
+event:AddToggle("", {
+	Title = "Auto submit all: Zen Tree.",
+	Description = "Auto se explica.",
+	Default = false,
+	Callback = function(v)
+        _G.sbazt = v
+	if _G.sbazt then
+	task.spawn(function()
+	while _G.sbazt do
+	task.wait(1)
+        game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitAllPlants")
+	end
+	end)
+	end
+	end
+	})
+
+event:AddSection("Zen shop: Em breve")
 
 
 
