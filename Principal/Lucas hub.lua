@@ -835,6 +835,7 @@ utility:AddDropdown("", {
     end
 })
 
+
 utility:AddToggle("", {
     Title = "Auto Collect",
     Description = "Ativa coleta automática.",
@@ -847,7 +848,7 @@ utility:AddToggle("", {
                     for _, p in ipairs(workspace.Farm.Farm.Important.Plants_Physical:GetChildren()) do
                         if p.Name == frutaSelecionada then
                             local f = p:FindFirstChild("Fruits")
-                            if f and #f:GetChildren() > 0 then
+                            if f and not f.Favorited and #f:GetChildren() > 0 then
                                 for _, fruta in ipairs(f:GetChildren()) do
                                     game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
                                         buffer.fromstring("\1\1\0\1"),
@@ -855,7 +856,7 @@ utility:AddToggle("", {
                                     )
                                     task.wait(0.04)
                                 end
-                            else
+				elseif f and f.Favorited then 
                                 game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
                                     buffer.fromstring("\1\1\0\1"),
                                     {p}
