@@ -856,7 +856,7 @@ utility:AddToggle("", {
                                     )
                                     task.wait(0.04)
                                 end
-				elseif f and f.Favorited then 
+				elseif p and not p.Favorited then 
                                 game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
                                     buffer.fromstring("\1\1\0\1"),
                                     {p}
