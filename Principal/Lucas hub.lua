@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.8[Zen event Progress: shop..🌙 5]",
+    version = "2.8[Zen event Progress: shop..🌙 6]",
     alpha = true,
 }
 if script_version.alpha then
@@ -889,14 +889,14 @@ function cpm(nomeAtributo)
         local frutas = planta:FindFirstChild("Fruits")
         local enviado = false
 
-        if planta:GetAttribute(nomeAtributo) == true then
+        if planta:GetAttribute(nomeAtributo) == true and not planta:GetAttribute("Favorited") then
             ByteNetReliable:FireServer(buffer.fromstring("\1\1\0\1"), {planta})
             enviado = true
         end
 
         if frutas and not enviado then
             for _, fruta in ipairs(frutas:GetChildren()) do
-                if fruta:GetAttribute(nomeAtributo) == true then
+                if fruta:GetAttribute(nomeAtributo) == true and not fruta:GetAttribute("Favorited") then
                     ByteNetReliable:FireServer(buffer.fromstring("\1\1\0\1"), {fruta})
                     task.wait(0.05)
                 end
