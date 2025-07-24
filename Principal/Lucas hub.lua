@@ -848,15 +848,17 @@ utility:AddToggle("", {
                     for _, p in ipairs(workspace.Farm.Farm.Important.Plants_Physical:GetChildren()) do
                         if p.Name == frutaSelecionada then
                             local f = p:FindFirstChild("Fruits")
-                            if f and not f.Favorited and #f:GetChildren() > 0 then
+                            if f and #f:GetChildren() > 0 then
                                 for _, fruta in ipairs(f:GetChildren()) do
-                                    game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                                        buffer.fromstring("\1\1\0\1"),
-                                        {fruta}
-                                    )
-                                    task.wait(0.04)
+                                    if not fruta:GetAttribute("Favorited") then
+                                        game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+                                            buffer.fromstring("\1\1\0\1"),
+                                            {fruta}
+                                        )
+                                        task.wait(0.04)
+                                    end
                                 end
-                            elseif f and not f.Favorited then
+                            elseif not p:GetAttribute("Favorited") then
                                 game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
                                     buffer.fromstring("\1\1\0\1"),
                                     {p}
