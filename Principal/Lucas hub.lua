@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.8[Zen event Progress: shop..🌙 2]",
+    version = "2.8[Zen event Progress: shop..🌙 3]",
     alpha = true,
 }
 if script_version.alpha then
