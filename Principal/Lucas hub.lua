@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.8[Zen event Progress: shop..🌙 7]",
+    version = "2.8[Zen event Progress: shop..🌙 8]",
     alpha = true,
 }
 if script_version.alpha then
@@ -983,7 +983,7 @@ event:AddToggle("", {
 	task.spawn(function()
 	while _G.sbazs do
 	task.wait(0.2)
-	local p=game.Players.LocalPlayer if p.Character:FindFirstChildOfClass("Tool") then p.Character:FindFirstChildOfClass("Tool").Parent=p.Backpack end
+	local p=game.Players.LocalPlayer if p.Character:FindFirstChildOfClass("Tool") then p.Character:FindFirstChildOfClass("Tool").Parent=p.Backpack game.StarterGui:SetCore("SendNotification", {Title="Aviso", Text="Desative o auto SubmitPlants para pegar um item na mão", Duration=3}) end
         game:GetService("ReplicatedStorage").GameEvents.ZenAuraRemoteEvent:FireServer("SubmitAllPlants")
 	end
 	end)
@@ -1003,7 +1003,7 @@ event:AddToggle("", {
 	task.spawn(function()
 	while _G.sbazt do
 	task.wait(0.2)
-	local p=game.Players.LocalPlayer if p.Character:FindFirstChildOfClass("Tool") then p.Character:FindFirstChildOfClass("Tool").Parent=p.Backpack end
+	local p=game.Players.LocalPlayer if p.Character:FindFirstChildOfClass("Tool") then p.Character:FindFirstChildOfClass("Tool").Parent=p.Backpack  game.StarterGui:SetCore("SendNotification", {Title="Aviso", Text="Desative o auto SubmitPlants para pegar um item na mão", Duration=3}) end
         game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitAllPlants")
 	end
 	end)
