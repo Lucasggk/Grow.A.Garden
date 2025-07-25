@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.8[Zen event Progress: shop..🌙 6]",
+    version = "2.8[Zen event Progress: shop..🌙 7]",
     alpha = true,
 }
 if script_version.alpha then
@@ -867,7 +867,7 @@ utility:AddToggle("", {
                             end
                         end
                     end
-                    task.wait(0.2)
+                    task.wait(0.1)
                 end
             end)
         end
@@ -929,7 +929,7 @@ utility:AddToggle("", {
         if _G.cfm then
             task.spawn(function()
                 while _G.cfm do
-                    task.wait(0.15)
+                    task.wait(0.1)
                     if mtcc == nil or mtcc == "None" then
                         task.wait()
                     else
@@ -964,7 +964,7 @@ event:AddToggle("", {
         if _G.act then
             task.spawn(function()
                 while _G.act do
-                    task.wait(0.2)
+                    task.wait(0.1)
                     cpm("Tranquil")
                 end
             end)
@@ -982,7 +982,8 @@ event:AddToggle("", {
 	if _G.sbazs then
 	task.spawn(function()
 	while _G.sbazs do
-	task.wait(1)
+	task.wait(0.2)
+	local p=game.Players.LocalPlayer if p.Character:FindFirstChildOfClass("Tool") then p.Character:FindFirstChildOfClass("Tool").Parent=p.Backpack end
         game:GetService("ReplicatedStorage").GameEvents.ZenAuraRemoteEvent:FireServer("SubmitAllPlants")
 	end
 	end)
@@ -1001,7 +1002,8 @@ event:AddToggle("", {
 	if _G.sbazt then
 	task.spawn(function()
 	while _G.sbazt do
-	task.wait(1)
+	task.wait(0.2)
+	local p=game.Players.LocalPlayer if p.Character:FindFirstChildOfClass("Tool") then p.Character:FindFirstChildOfClass("Tool").Parent=p.Backpack end
         game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitAllPlants")
 	end
 	end)
