@@ -1072,7 +1072,7 @@ task.spawn(function()
 		local req = workspace.Interaction.UpdateItems["Corrupted Zen"]["Zen Platform"].BillboardPart.BillboardGui.ShecklesAmountFrame.ShecklesAmountLabel.Text
 		local tipo = workspace.Interaction.UpdateItems["Corrupted Zen"]["Zen Platform"].BillboardPart.BillboardGui.ShecklesRequiredLabel.Text
 
-		Tab:AddParagraph({
+		event:AddParagraph({
 			Title = "Debug:",
 			Content = "Tipo: " .. tipo .. "\nNecessita: " .. req
 		})
