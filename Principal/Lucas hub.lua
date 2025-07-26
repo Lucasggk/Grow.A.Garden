@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.8[Zen event Progress: Trader 8]",
+    version = "2.8[Zen event Progress: Trader 9]",
     alpha = true,
 }
 if script_version.alpha then
@@ -1067,15 +1067,19 @@ event:AddSection("Corrupt Trader:")
 
 event:AddSection("Corrupted área:")
 
-local req = workspace.Interaction.UpdateItems["Corrupted Zen"]["Zen Platform"].BillboardPart.BillboardGui.ShecklesAmountFrame.ShecklesAmountLabel.Text
-local type = workspace.Interaction.UpdateItems["Corrupted Zen"]["Zen Platform"].BillboardPart.BillboardGui.ShecklesRequiredLabel.Text
+task.spawn(function()
+	while true do
+		local req = workspace.Interaction.UpdateItems["Corrupted Zen"]["Zen Platform"].BillboardPart.BillboardGui.ShecklesAmountFrame.ShecklesAmountLabel.Text
+		local tipo = workspace.Interaction.UpdateItems["Corrupted Zen"]["Zen Platform"].BillboardPart.BillboardGui.ShecklesRequiredLabel.Text
 
-event:AddParagraph("", {
-	Title = "Debug",
-	Content = ("Type: ".. type .." | Necessita: ".. req)
-})
+		Tab:AddParagraph({
+			Title = "Debug:",
+			Content = "Tipo: " .. tipo .. "\nNecessita: " .. req
+		})
 
-
+		task.wait(1)
+	end
+end)
 -- 
 
 
