@@ -1067,8 +1067,8 @@ event:AddSection("Corrupt Trader:")
 
 event:AddSection("Corrupted área:")
 
-local req = workspace.Interaction.UpdateItems["Corrupted Zen"]["Zen Platform"].BillboardPart.BillboardGui.ShecklesAmountFrame.ShecklesAmountLabel
-local type = workspace.Interaction.UpdateItems["Corrupted Zen"]["Zen Platform"].BillboardPart.BillboardGui.ShecklesRequiredLabel
+local req = workspace.Interaction.UpdateItems["Corrupted Zen"]["Zen Platform"].BillboardPart.BillboardGui.ShecklesAmountFrame.ShecklesAmountLabel.Text
+local type = workspace.Interaction.UpdateItems["Corrupted Zen"]["Zen Platform"].BillboardPart.BillboardGui.ShecklesRequiredLabel.Text
 
 event:AddParagraph("", {
 	Title = "Debug",
