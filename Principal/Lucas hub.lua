@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.8[Zen event Progress: Trader ]",
+    version = "2.8[Zen event Progress: Trader 1]",
     alpha = true,
 }
 if script_version.alpha then
@@ -973,7 +973,7 @@ event:AddToggle("", {
     end
 })
 
-event:AddSectio("Tranquil área:")
+event:AddSection("Tranquil área:")
 
 _G.sbazs = false
 event:AddToggle("", {
