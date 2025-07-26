@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.8[Zen event Progress: Trader 7]",
+    version = "2.8[Zen event Progress: Trader 8]",
     alpha = true,
 }
 if script_version.alpha then
@@ -1067,7 +1067,13 @@ event:AddSection("Corrupt Trader:")
 
 event:AddSection("Corrupted área:")
 
+local req = workspace.Interaction.UpdateItems["Corrupted Zen"]["Zen Platform"].BillboardPart.BillboardGui.ShecklesAmountFrame.ShecklesAmountLabel
+local type = workspace.Interaction.UpdateItems["Corrupted Zen"]["Zen Platform"].BillboardPart.BillboardGui.ShecklesRequiredLabel
 
+event:AddParagraph("", {
+	Title = "Debug",
+	Content = ("Type: ".. type .." | Necessita: ".. req)
+})
 
 
 -- 
