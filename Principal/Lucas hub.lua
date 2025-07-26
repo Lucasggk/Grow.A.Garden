@@ -1087,10 +1087,10 @@ local q
 local Toggle = Event:AddToggle("MyToggle", {
     Title = "Auto Submit/Pay", 
     Description = "Auto se explica (n funciona ainda)",
-    Default = false
+    Default = false,
     Callback = function(state)
         local tipo = workspace.Interaction.UpdateItems["Corrupted Zen"]["Zen Platform"].BillboardPart.BillboardGui.ShecklesRequiredLabel.Text
-        print(tipo)
+        setclipboard(tipo)
     end 
 })
 
