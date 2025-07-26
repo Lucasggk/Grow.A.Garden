@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.8[Zen event Progress: Trader 2]",
+    version = "2.8[Zen event Progress: Trader 3]",
     alpha = true,
 }
 if script_version.alpha then
@@ -1045,7 +1045,7 @@ event:AddToggle("", {
                 while isAutoBuyingZenShop do
                     local scrollingFrame = game:GetService("Players").LocalPlayer.PlayerGui.EventShop_UI.Frame.ScrollingFrame
                     for _, itemFrame in ipairs(scrollingFrame:GetChildren()) do
-                        if zenShopItems[itemFrame.Name] then
+                        if not itemFrame.Name:find("_Padding") and zenShopItems[itemFrame.Name] then
                             local mainFrame = itemFrame:FindFirstChild("Main_Frame")
                             local stockLabel = mainFrame and mainFrame:FindFirstChild("Stock_Text")
 
