@@ -47,6 +47,7 @@ local ignoreNames = {
     ["Sugar Apple"] = true,
     ["Burning Bud"] = true,
     ["Giant Pinecone"] = true,
+    ["Elder Strawberry"] = true,
 
     -- Gears
     ["Watering Can"] = true,
