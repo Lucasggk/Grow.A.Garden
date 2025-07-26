@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.8[Zen event Progress: Trader 6]",
+    version = "2.8[Zen event Progress: Trader 7]",
     alpha = true,
 }
 if script_version.alpha then
@@ -1014,39 +1014,51 @@ event:AddToggle("", {
 	end
 	})
 
-autobuyzen = false
+
+
 zenitens = {}
 
-event:AddDropdown("", {
+local atbzen = event:AddDropdown("", {
     Title = "Selecionar Itens para Comprar",
     Description = "Itens disponíveis na loja Zen",
     Values = { "Zen Gnome Crate", "Raiju", "Zenflare", "Hot Spring", "Zen Seed Pack", "Zen Sand", "Zen Crate", "Tranquil Radar", "Pet Shard Tranquil", "Pet Shard Corrupted", "Corrupt Radar", "Zen Egg", "Spiked Mango", "Sakura Bush", "Koi", "Soft Sunshine" },
     Multi = true,
     Default = {},
-    Callback = function(itens)
-        zenitens = itens
-    end
 })
 
-event:AddToggle("", {
-    Title = "Auto Buy Zen Shop",
-    Description = "Liga ou desliga o auto buy",
-    Default = false,
-    Callback = function(v)
-        autobuyzen = v
-        if v then
-            task.spawn(function()
-                while autobuyzen and #zenitens > 0 do
-                    for _, i in ipairs(zenitens) do
-                        game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock:FireServer(i)
-                        task.wait(0.1)
-                    end
-                    task.wait(2)
-                end
-            end)
+atbzen:OnChanged(function(Value)
+    zenitens = {}
+    for item, state in next, Value do
+        if state then
+            table.insert(zenitens, item)
         end
     end
+end)
+
+_G.Ahh = false
+
+event:AddToggle("", {
+	Title = "Ativar auto buy",
+	Description = "compra itens selecionados", 
+	Default = false,
+	Callback = function(v)
+		_G.Ahh = v
+		if _G.Ahh then
+			task.spawn(function()
+				while _G.Ahh do
+					for _, i in ipairs(zenitens) do
+						game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock:FireServer(i)
+						task.wait(0.05)
+					end
+					task.wait(1)
+				end
+			end)
+		end
+	end
 })
+
+
+
 event:AddSection("Corrupt Trader:")
 
 
