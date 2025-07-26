@@ -17,6 +17,7 @@ Values = {
   "Bee Balm",
   "Red Lollipop",
   "Blue Lollipop",
+  "Dezen",
 
   -- Rare
   "Tomato",
@@ -67,6 +68,9 @@ Values = {
   "Passionfruit",
   "Bendboo",
   "Amber Spine",
+  "Enkaku",
+  "Sakura Bush",
+  "Lucky Bamboo",
 
   -- Mythical
   "Coconut",
@@ -110,7 +114,8 @@ Values = {
   "Fossilight",
   "Blood Banana",
   "Bone Blossom",
-  "Elephant Ears"
+  "Elephant Ears",
+  "Tranquil Bloom"
 }
 
 return Values
