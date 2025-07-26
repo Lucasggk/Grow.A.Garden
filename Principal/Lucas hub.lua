@@ -951,7 +951,7 @@ utility:AddToggle("", {
 
 --
 
-event:AddSection("Zen Farms:")
+event:AddSection("Zen Collects:")
 
 _G.act = false
 
@@ -972,6 +972,8 @@ event:AddToggle("", {
         end
     end
 })
+
+event:AddSectio("Tranquil área:")
 
 _G.sbazs = false
 event:AddToggle("", {
@@ -1014,6 +1016,9 @@ event:AddToggle("", {
 
 event:AddSection("Zen shop: Em breve")
 
+event:AddSection("Corrupt Trader:")
+
+event:AddSection("Corrupted área:")
 
 
 
