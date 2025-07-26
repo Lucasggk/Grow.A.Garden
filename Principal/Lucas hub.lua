@@ -827,7 +827,7 @@ local frutaSelecionada = nil
 utility:AddDropdown("", {
     Title = "Fruta para Auto Collect",
     Description = "Escolha uma fruta para coleta.",
-    Values = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Principal/Frutas%20(auto%20collect).lua"))()
+    Values = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Principal/Frutas%20(auto%20collect).lua"))(),
     Multi = false,
     Default = nil,
     Callback = function(v)
