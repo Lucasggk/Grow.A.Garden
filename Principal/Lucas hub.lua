@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.8[Zen event Progress: Trader 4]",
+    version = "2.8[Zen event Progress: Trader 5]",
     alpha = true,
 }
 if script_version.alpha then
@@ -1014,54 +1014,44 @@ event:AddToggle("", {
 	end
 	})
 
-local selectedZenItems = {}
+local selectedItems = {}
+local autoBuyActive = false
 
 event:AddDropdown("", {
     Title = "Selecionar Itens para Comprar",
-    Description = "Itens da loja Zen para auto-compra",
-    Values = {"Zen Gnome Crate", "Raiju", "Zenflare", "Hot Spring", "Zen Seed Pack", "Zen Sand", "Zen Crate", "Tranquil Radar", "Pet Shard Tranquil", "Pet Shard Corrupted", "Corrupt Radar", "Zen Egg", "Spiked Mango", "Sakura Bush", "Koi", "Soft Sunshine"},
+    Description = "Itens disponíveis na loja Zen",
+    Values = { "Zen Gnome Crate", "Raiju", "Zenflare", "Hot Spring", "Zen Seed Pack", "Zen Sand", "Zen Crate", "Tranquil Radar", "Pet Shard Tranquil", "Pet Shard Corrupted", "Corrupt Radar", "Zen Egg", "Spiked Mango", "Sakura Bush", "Koi", "Soft Sunshine" },
     Multi = true,
     Default = {},
-    Callback = function(selectedList)
-        selectedZenItems = {}
-        for _, name in ipairs(selectedList) do
-            selectedZenItems[name] = true
+    Callback = function(selected)
+        selectedItems = {}
+        for _, item in ipairs(selected) do
+            selectedItems[item] = true
         end
     end
 })
 
-local autoBuyZenActive = false
-
 event:AddToggle("", {
-    Title = "Auto Buy Zen Shop",
-    Description = "Ativa ou desativa a compra automática",
+    Title = "Auto Buy Zen Shop (sem GUI)",
+    Description = "Compra diretamente os itens selecionados a cada 5 segundos",
     Default = false,
-    Callback = function(toggleValue)
-        autoBuyZenActive = toggleValue
-
-        if toggleValue then
+    Callback = function(value)
+        autoBuyActive = value
+        if value then
             task.spawn(function()
-                while autoBuyZenActive do
-                    local scrollingFrame = game:GetService("Players").LocalPlayer.PlayerGui.EventShop_UI.Frame.ScrollingFrame
-                    for _, itemFrame in ipairs(scrollingFrame:GetChildren()) do
-                        if not itemFrame.Name:find("_Padding") and selectedZenItems[itemFrame.Name] then
-                            local mainFrame = itemFrame:FindFirstChild("Main_Frame")
-                            local stockLabel = mainFrame and mainFrame:FindFirstChild("Stock_Text")
-
-                            if stockLabel and not stockLabel.Text:find("X0") then
-                                print("Comprando: " .. itemFrame.Name)
-                                game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock:FireServer(itemFrame.Name)
-                                task.wait(0.1)
-                            end
+                while autoBuyActive do
+                    for itemName, ativo in pairs(selectedItems) do
+                        if ativo then
+                            game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock:FireServer(itemName)
+                            task.wait(0.1)
                         end
                     end
-                    task.wait(1)
+                    task.wait(5)
                 end
             end)
         end
     end
 })
-
 
 event:AddSection("Corrupt Trader:")
 
