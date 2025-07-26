@@ -1014,9 +1014,63 @@ event:AddToggle("", {
 	end
 	})
 
-event:AddSection("Zen shop: Em breve")
+local zenShopItems = {}
+
+event:AddDropdown("", {
+    Title = "Selecione Itens",
+    Description = "Ative ou desative itens para comprar",
+    Values = {"Zen Gnome Crate", "Raiju", "Zenflare", "Hot Spring", "Zen Seed Pack", "Zen Sand", "Zen Crate", "Tranquil Radar", "Pet Shard Tranquil", "Pet Shard Corrupted", "Corrupt Radar", "Zen Egg", "Spiked Mango", "Sakura Bush", "Koi", "Soft Sunshine"},
+    Multi = true,
+    Default = {},
+    Callback = function(selectedList)
+        zenShopItems = {}
+        for _, name in ipairs(selectedList) do
+            zenShopItems[name] = true
+        end
+    end
+})
+
+local isAutoBuyingZenShop = false
+
+event:AddToggle("", {
+    Title = "Auto Comprar Zen Shop",
+    Description = "Ativa ou desativa o loop automático de compra",
+    Default = false,
+    Callback = function(toggleValue)
+        isAutoBuyingZenShop = toggleValue
+
+        if toggleValue then
+            task.spawn(function()
+                while isAutoBuyingZenShop do
+                    local scrollingFrame = game:GetService("Players").LocalPlayer.PlayerGui.EventShop_UI.Frame.ScrollingFrame
+                    for _, item in ipairs(scrollingFrame:GetChildren()) do
+                        if zenShopItems[item.Name] then
+                            local mainFrame = item:FindFirstChild("Main_Frame")
+                            local stockLabel = mainFrame and mainFrame:FindFirstChild("Stock_Text")
+
+                            if stockLabel and not stockLabel.Text:find("X0") then
+                                local args = {
+                                    [1] = item
+                                }
+                                game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock:FireServer(unpack(args))
+                                task.wait(0.1)
+                            end
+                        end
+                    end
+                    task.wait(1)
+                end
+            end)
+        end
+    end
+})
+
+
 
 event:AddSection("Corrupt Trader:")
+
+
+
+
 
 event:AddSection("Corrupted área:")
 
