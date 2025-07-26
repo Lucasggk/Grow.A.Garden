@@ -1014,8 +1014,8 @@ event:AddToggle("", {
 	end
 	})
 
-local selectedItems = {}
-local autoBuyActive = false
+autobuyzen = false
+zenitens = {}
 
 event:AddDropdown("", {
     Title = "Selecionar Itens para Comprar",
@@ -1023,36 +1023,30 @@ event:AddDropdown("", {
     Values = { "Zen Gnome Crate", "Raiju", "Zenflare", "Hot Spring", "Zen Seed Pack", "Zen Sand", "Zen Crate", "Tranquil Radar", "Pet Shard Tranquil", "Pet Shard Corrupted", "Corrupt Radar", "Zen Egg", "Spiked Mango", "Sakura Bush", "Koi", "Soft Sunshine" },
     Multi = true,
     Default = {},
-    Callback = function(selected)
-        selectedItems = {}
-        for _, item in ipairs(selected) do
-            selectedItems[item] = true
-        end
+    Callback = function(itens)
+        zenitens = itens
     end
 })
 
 event:AddToggle("", {
-    Title = "Auto Buy Zen Shop (sem GUI)",
-    Description = "Compra diretamente os itens selecionados a cada 5 segundos",
+    Title = "Auto Buy Zen Shop",
+    Description = "Liga ou desliga o auto buy",
     Default = false,
-    Callback = function(value)
-        autoBuyActive = value
-        if value then
+    Callback = function(v)
+        autobuyzen = v
+        if v then
             task.spawn(function()
-                while autoBuyActive do
-                    for itemName, ativo in pairs(selectedItems) do
-                        if ativo then
-                            game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock:FireServer(itemName)
-                            task.wait(0.1)
-                        end
+                while autobuyzen and #zenitens > 0 do
+                    for _, i in ipairs(zenitens) do
+                        game:GetService("ReplicatedStorage").GameEvents.BuyEventShopStock:FireServer(i)
+                        task.wait(0.1)
                     end
-                    task.wait(5)
+                    task.wait(2)
                 end
             end)
         end
     end
 })
-
 event:AddSection("Corrupt Trader:")
 
 
