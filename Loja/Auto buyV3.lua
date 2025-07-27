@@ -74,7 +74,6 @@ task.spawn(function()
                 if ignoreNames[item.Name] then
                     local stock = item:FindFirstChild("Main_Frame") and item.Main_Frame:FindFirstChild("Stock_Text")
                     if stock and stock:IsA("TextLabel") and stock.Text ~= "X0 Stock" then
-                        task.wait(1.5) -- espera 1.5 segundos antes de comprar
                         rs.GameEvents.BuySeedStock:FireServer(item.Name)
                         task.wait(0.1)
                     end
@@ -84,7 +83,6 @@ task.spawn(function()
                 if string.find(item.Name, "_P") and ignoreNames[baseName] then
                     local stock = item:FindFirstChild("Main_Frame") and item.Main_Frame:FindFirstChild("Stock_Text")
                     if stock and stock:IsA("TextLabel") and stock.Text ~= "X0 Stock" then
-                        task.wait(1.5) -- espera 1.5 segundos antes de comprar
                         rs.GameEvents.BuySeedStock:FireServer(item.Name)
                         task.wait(0.1)
                     end
@@ -104,7 +102,6 @@ task.spawn(function()
                 if ignoreNames[item.Name] and not string.find(item.Name, "_P") then
                     local stock = item:FindFirstChild("Main_Frame") and item.Main_Frame:FindFirstChild("Stock_Text")
                     if stock and stock:IsA("TextLabel") and stock.Text ~= "X0 Stock" then
-                        task.wait(1.5) -- espera 1.5 segundos antes de comprar
                         rs.GameEvents.BuyGearStock:FireServer(item.Name)
                         task.wait(0.1)
                     end
@@ -130,7 +127,6 @@ task.spawn(function()
 
         for i = 1, 3 do
             for _, name in ipairs(petNames) do
-                task.wait(1.5) -- espera 1.5 segundos antes de comprar
                 buyPet:FireServer(name)
             end
             task.wait(0.1)
