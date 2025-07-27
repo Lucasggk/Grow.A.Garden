@@ -1065,26 +1065,6 @@ event:AddSection("Corrupt Trader:")
 
 
 
-event:AddSection("Corrupted área:")
-
-task.spawn(function()
-    local a = event:AddParagraph({
-        Title = "Status Atualizado",
-        Content = ""
-    })
-
-    while true do
-        local req = workspace.Interaction.UpdateItems["Corrupted Zen"]["Zen Platform"].BillboardPart.BillboardGui.ShecklesAmountFrame.ShecklesAmountLabel.Text
-        local tipo = workspace.Interaction.UpdateItems["Corrupted Zen"]["Zen Platform"].BillboardPart.BillboardGui.ShecklesRequiredLabel.Text
-        
-        a:SetDesc("Tipo: " .. tipo:gsub(":", "") .. "\nNecessita: " .. req)
-
-        task.wait(0.1)
-    end
-end)
-
-
-
 
 
 -- 
