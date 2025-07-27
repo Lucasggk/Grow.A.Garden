@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.8[Zen event Progress: Trader 11]",
+    version = "2.8[Zen event Progress: Trader 12]",
     alpha = true,
 }
 if script_version.alpha then
@@ -964,8 +964,9 @@ event:AddToggle("", {
         if _G.act then
             task.spawn(function()
                 while _G.act do
-                    task.wait(0.1)
+                    task.wait(0.05)
                     cpm("Tranquil")
+		    task.wait(0.05)
 		    cmp("Corrupt")
                 end
             end)
