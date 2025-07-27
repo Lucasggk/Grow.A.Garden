@@ -907,7 +907,7 @@ end
 
 _G.cfm = false
 local mtcc
-local mtc = {"None", "Wet", "Windstruck", "Moonlit", "Chilled", "Shocked", "Frozen", "Bloodlit", "Celestial", "Zombified", "HoneyGlazed", "Heavenly", "Fried", "Amber", "Clay", "Ceramic", "Sundried", "Aurora", "Alienlike", "Galactic", "Disco", "Plasma", "Tranquil", "Jackpot", "Corrupted", "Subzero", "Enlightened", "Equinox", "Cooked", "Burnt", "Sandy", "Pollinated", "Friendbound", "Radioactive", "Foxfire Chakra", "Twisted", "Molten", "Meteoric", "Voidtouched", "Dawnbound"}
+local mtc = {"None", "Wet", "Windstruck", "Moonlit", "Chilled", "Shocked", "Frozen", "Bloodlit", "Celestial", "Zombified", "HoneyGlazed", "Heavenly", "Fried", "Amber", "Clay", "Ceramic", "Sundried", "Aurora", "Alienlike", "Galactic", "Disco", "Plasma", "Tranquil", "Jackpot", "Corrupt", "Subzero", "Enlightened", "Equinox", "Cooked", "Burnt", "Sandy", "Pollinated", "Friendbound", "Radioactive", "Foxfire Chakra", "Twisted", "Molten", "Meteoric", "Voidtouched", "Dawnbound"}
 
 utility:AddDropdown("", {
     Title = "Selecione a Mutação.",
@@ -966,7 +966,7 @@ event:AddToggle("", {
                 while _G.act do
                     task.wait(0.1)
                     cpm("Tranquil")
-		    cmp("Corrupted")
+		    cmp("Corrupt")
                 end
             end)
         end
