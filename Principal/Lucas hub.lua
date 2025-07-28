@@ -964,9 +964,8 @@ event:AddToggle("", {
         if _G.act then
             task.spawn(function()
                 while _G.act do
-                    task.wait(0.05)
+                    task.wait(0.1)
                     cpm("Tranquil")
-		    task.wait(0.05)
 		    cpm("Corrupt")
                 end
             end)
