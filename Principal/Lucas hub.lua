@@ -556,27 +556,29 @@ sell:AddSlider("SellDelaySlider", {
     Title = "Delay do Auto Sell (segundos)",
     Description = "Define o intervalo entre cada venda automática.",
     Default = tmpps,
-    Min = 20,
-    Max = 60,
+    Min = 10,
+    Max = 100,
     Rounding = 1,
     Callback = function(value)
         tmpps = value
     end
 })
 
-getgenv().Atsell = false
+_G.Atsell = false
 sell:AddToggle("", {
     Title = "Vender Colheitas automaticamente",
     Description = "Ativa a venda automática com base no delay definido.",
     Default = false,
     Callback = function(enabled)
-        getgenv().Atsell = enabled 
+        _G.Atsell = enabled 
+			if _G.Atsell then 
         task.spawn(function()
-            while getgenv().Atsell do
+            while _G.Atsell do
                 tsf()
                 task.wait(tmpps)
             end
         end)
+			end
     end
 })
         
