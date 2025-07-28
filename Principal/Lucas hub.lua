@@ -967,7 +967,7 @@ event:AddToggle("", {
                     task.wait(0.05)
                     cpm("Tranquil")
 		    task.wait(0.05)
-		    cmp("Corrupt")
+		    cpm("Corrupt")
                 end
             end)
         end
