@@ -835,7 +835,6 @@ utility:AddDropdown("", {
     end
 })
 
-
 utility:AddToggle("", {
     Title = "Auto Collect",
     Description = "Ativa coleta automática.",
@@ -844,27 +843,37 @@ utility:AddToggle("", {
         _G.AutoCollect = v
         if v then
             task.spawn(function()
-                while _G.AutoCollect and (frutaSelecionada ~= "None") do
-                    for _, p in ipairs(workspace.Farm.Farm.Important.Plants_Physical:GetChildren()) do
-                        if p.Name == frutaSelecionada then
-                            local f = p:FindFirstChild("Fruits")
-                            if f and #f:GetChildren() > 0 then
-                                for _, fruta in ipairs(f:GetChildren()) do
-                                    if not fruta:GetAttribute("Favorited") then
-                                        game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                                            buffer.fromstring("\1\1\0\1"),
-                                            {fruta}
-                                        )
-                                        task.wait(0.04)
+                while _G.AutoCollect and frutaSelecionada ~= "None" do
+                    for _, fz in ipairs(workspace.Farm:GetChildren()) do
+                        local farmRoot = fz:FindFirstChild("Farm")
+                        local sing = farmRoot and farmRoot:FindFirstChild("Sing")
+                        if sing and string.find(sing:GetAttribute("_Owner") or "", game.Players.LocalPlayer.Name) then
+                            local plantas = farmRoot:FindFirstChild("Important") and farmRoot.Important:FindFirstChild("Plants_Physical")
+                            if plantas then
+                                for _, p in ipairs(plantas:GetChildren()) do
+                                    if p.Name == frutaSelecionada then
+                                        local f = p:FindFirstChild("Fruits")
+                                        if f and #f:GetChildren() > 0 then
+                                            for _, fruta in ipairs(f:GetChildren()) do
+                                                if not fruta:GetAttribute("Favorited") then
+                                                    game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+                                                        buffer.fromstring("\1\1\0\1"),
+                                                        {fruta}
+                                                    )
+                                                    task.wait(0.04)
+                                                end
+                                            end
+                                        elseif not p:GetAttribute("Favorited") then
+                                            game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+                                                buffer.fromstring("\1\1\0\1"),
+                                                {p}
+                                            )
+                                            task.wait(0.04)
+                                        end
                                     end
                                 end
-                            elseif not p:GetAttribute("Favorited") then
-                                game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                                    buffer.fromstring("\1\1\0\1"),
-                                    {p}
-                                )
-                                task.wait(0.04)
                             end
+                            break
                         end
                     end
                     task.wait(0.1)
@@ -873,6 +882,7 @@ utility:AddToggle("", {
         end
     end
 })
+
 
 
 
