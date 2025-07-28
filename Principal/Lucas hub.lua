@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.8[Zen event Progress: Trader 14]",
+    version = "2.8[Zen event Progress: Trader 15]",
     alpha = true,
 }
 if script_version.alpha then
@@ -1061,6 +1061,8 @@ event:AddToggle("", {
 
 event:AddSection("Corrupt Trader:")
 
+
+
 function gtk()
     local mdp = workspace.Interaction.UpdateItems["Corrupted Zen"]:GetChildren()[10].Model
     local c = 0
@@ -1072,7 +1074,7 @@ function gtk()
             end
         end
     end
-    return tonumber(c)
+    return c
 end
 
 function gck()
@@ -1086,7 +1088,7 @@ function gck()
             end
         end
     end
-    return tonumber(c)
+    return c
 end
 
 function gpik(nomeParcial)
@@ -1103,10 +1105,10 @@ function gpik(nomeParcial)
     end
 end
 
-function gik(nome)
+function gik(nomeParcial)
     local backpack = game.Players.LocalPlayer:WaitForChild("Backpack")
     for _, item in ipairs(backpack:GetChildren()) do
-        if item:IsA("Tool") and item.Name == nome then
+        if item:IsA("Tool") and string.find(item.Name, nomeParcial) then
             local d = item:GetAttribute("d")
             local hasWeightMulti = item:GetAttribute("WeightMulti") ~= nil
             if d == false and hasWeightMulti then
@@ -1117,7 +1119,7 @@ function gik(nome)
     return false
 end
 
-_G.astk = false
+-- Toggle: Tranquil
 event:AddToggle("", {
     Title = "Auto submit Tranquil to kitsune",
     Description = "",
@@ -1128,7 +1130,7 @@ event:AddToggle("", {
             task.spawn(function()
                 while _G.astk do
                     if not gik("Tranquil") then
-                        print("[Tranquil] Item não existe no inventário")
+                        print("[Tranquil] Item não existe no inventário ou não pode ser equipado")
                     elseif gtk() == 5 then
                         print("[Tranquil] Já há 5 plantas Tranquil na kitsune")
                     else
@@ -1144,7 +1146,7 @@ event:AddToggle("", {
     end
 })
 
-_G.asck = false
+-- Toggle: Corrupt
 event:AddToggle("", {
     Title = "Auto submit Corrupt to kitsune",
     Description = "",
@@ -1155,7 +1157,7 @@ event:AddToggle("", {
             task.spawn(function()
                 while _G.asck do
                     if not gik("Corrupt") then
-                        print("[Corrupt] Item não existe no inventário")
+                        print("[Corrupt] Item não existe no inventário ou não pode ser equipado")
                     elseif gck() == 5 then
                         print("[Corrupt] Já há 5 plantas Corrupt na kitsune")
                     else
@@ -1170,7 +1172,6 @@ event:AddToggle("", {
         end
     end
 })
-
 
 
 
