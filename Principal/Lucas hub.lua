@@ -895,10 +895,21 @@ utility:AddSection("Auto collect Fruit Mutation")
 
 function cpm(nomeAtributo)
     local ByteNetReliable = game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable")
-    local pasta = workspace:WaitForChild("Farm")
-        :WaitForChild("Farm")
-        :WaitForChild("Important")
-        :WaitForChild("Plants_Physical")
+    local farmPlayer = nil
+
+    for _, farm in ipairs(workspace.Farm:GetChildren()) do
+        local success, owner = pcall(function()
+            return farm.Important.Data.Owner.Value
+        end)
+        if success and owner == game.Players.LocalPlayer.Name then
+            farmPlayer = farm
+            break
+        end
+    end
+
+    if not farmPlayer then return end
+
+    local pasta = farmPlayer:WaitForChild("Important"):WaitForChild("Plants_Physical")
 
     for _, planta in ipairs(pasta:GetChildren()) do
         local frutas = planta:FindFirstChild("Fruits")
