@@ -104,11 +104,6 @@ local ui = Window:AddTab({
     Icon = "rbxassetid://133691553274983"
 })
 
-local ideias = Window:AddTab({
-    Title = "ideias",
-    Icon = ""
-})
-
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 InterfaceManager:SetLibrary(Fluent)
 InterfaceManager:SetFolder("GrowAGarden")
@@ -1207,110 +1202,6 @@ event:AddToggle("", {
 
 
 
-
-
-
-
--- 
-
-
-
-local txt, tabss
-
-local validTabs = {"Jogador", "Loja", "Mascotes", "plant/water", "Vender", "Eventos", "Vulnerabilidade", "utility", "Settings", "Interface"}
-
-if _G.ultimoEnvio == nil then
-    _G.ultimoEnvio = 0
-end
-if _G.podeEnviar == nil then
-    _G.podeEnviar = true
-end
-
-local ultimoEnvio = _G.ultimoEnvio
-local podeEnviar = _G.podeEnviar
-
-ideias:AddDropdown("Dropdown", {
-    Title = "Selecione a tab da ideia.\n",
-    Description = "",
-    Values = validTabs,
-    Multi = false,
-    Default = "",
-    Callback = function(v)
-        tabss = v
-    end
-})
-
-ideias:AddInput("Input", {
-    Title = "De ideias de que por aqui\n",
-    Description = "Agora tenho tempo para arrumar\nTudo e por adições\n",
-    Default = nil,
-    Placeholder = ":) Seja criativo",
-    Numeric = false,
-    Finished = false, 
-    Callback = function(Value)
-        txt = tostring(Value)
-    end
-})
-
-local function tabssValida(valor)
-    for _, v in ipairs(validTabs) do
-        if v == valor then
-            return true
-        end
-    end
-    return false
-end
-
-local envweb = ideias:AddButton({
-    Title = "Enviar ideias",
-    Description = "Envia por webhook (meu discord)",
-    Callback = function()
-        if podeEnviar then
-            local camposVazios = {}
-
-            if txt == nil then
-                table.insert(camposVazios, "'txt'")
-            end
-            if not tabssValida(tabss) then
-                table.insert(camposVazios, "'tabs'")
-            end
-
-            if #camposVazios > 0 then
-                Fluent:Notify({
-                    Title = "Erro",
-                    Content = "Campo(s) vazio(s): " .. table.concat(camposVazios, ", "),
-                    SubContent = "Preencha antes de enviar.",
-                    Duration = 5
-                })
-                return
-            end
-
-            ultimoEnvio = os.time()
-            _G.ultimoEnvio = ultimoEnvio
-            podeEnviar = false
-            _G.podeEnviar = false
-            enviarweb(txt, tabss)
-        end
-    end
-})
-
-task.spawn(function()
-    while true do
-        if not podeEnviar then
-            local tempoRestante = 150 - (os.time() - ultimoEnvio)
-            if tempoRestante <= 0 then
-                podeEnviar = true
-                _G.podeEnviar = true
-                envweb:SetDesc("Envia por webhook (meu discord)")
-            else
-                local m = math.floor(tempoRestante / 60)
-                local s = tempoRestante % 60
-                envweb:SetDesc("Aguarde: " .. string.format("%02d:%02d", m, s) .." Para enviar outra ideia")
-            end
-        end
-        task.wait(1)
-    end
-end)
 
 --
 
