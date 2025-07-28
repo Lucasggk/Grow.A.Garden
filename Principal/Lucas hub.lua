@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.8[Zen event Progress: Trader 15]",
+    version = "2.8[Zen event Progress: Trader 16 (finalizado)]",
     alpha = true,
 }
 if script_version.alpha then
@@ -1119,7 +1119,6 @@ function gik(nomeParcial)
     return false
 end
 
--- Toggle: Tranquil
 event:AddToggle("", {
     Title = "Auto submit Tranquil to kitsune",
     Description = "",
@@ -1129,15 +1128,11 @@ event:AddToggle("", {
         if _G.astk then
             task.spawn(function()
                 while _G.astk do
-                    if not gik("Tranquil") then
-                        print("[Tranquil] Item não existe no inventário ou não pode ser equipado")
-                    elseif gtk() == 5 then
-                        print("[Tranquil] Já há 5 plantas Tranquil na kitsune")
-                    else
+                    if gik("Tranquil") and gtk() ~= 5 then
+                        task.wait(0.2)
                         gpik("Tranquil")
                         task.wait(0.1)
                         game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
-                        print("Falta por: ".. gtk() .." Tranquil plants")
                     end
                     task.wait(0.25)
                 end
@@ -1146,7 +1141,6 @@ event:AddToggle("", {
     end
 })
 
--- Toggle: Corrupt
 event:AddToggle("", {
     Title = "Auto submit Corrupt to kitsune",
     Description = "",
@@ -1156,15 +1150,11 @@ event:AddToggle("", {
         if _G.asck then
             task.spawn(function()
                 while _G.asck do
-                    if not gik("Corrupt") then
-                        print("[Corrupt] Item não existe no inventário ou não pode ser equipado")
-                    elseif gck() == 5 then
-                        print("[Corrupt] Já há 5 plantas Corrupt na kitsune")
-                    else
+                    if gik("Corrupt") and gck() ~= 5 then
+                        task.wait(0.2)
                         gpik("Corrupt")
                         task.wait(0.1)
                         game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
-                        print("Falta por: ".. gck() .." Corrupt plants")
                     end
                     task.wait(0.25)
                 end
