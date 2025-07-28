@@ -1082,8 +1082,6 @@ event:AddToggle("", {
 
 event:AddSection("Corrupt Trader:")
 
-
-
 function gtk()
     local mdp = workspace.Interaction.UpdateItems["Corrupted Zen"]:GetChildren()[10].Model
     local c = 0
@@ -1140,26 +1138,27 @@ function gik(nomeParcial)
     return false
 end
 
+function give()
+    task.spawn(function()
+        for i = 1, 10 do
+            game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
+        end
+    end)
+end
+
 event:AddToggle("", {
     Title = "Auto submit Tranquil to kitsune",
     Description = "",
     Default = false,
-    Callback = function(v)  
+    Callback = function(v)
         _G.astk = v
         if _G.astk then
             task.spawn(function()
                 while _G.astk do
                     if gik("Tranquil") and gtk() ~= 5 then
                         gpik("Tranquil")
-                        task.wait(0.2)
-                        
-                        local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-                        local equipped = humanoid and humanoid:FindFirstChildOfClass("Tool")
-                        
-                        if equipped and string.find(equipped.Name, "Tranquil") then
-                            game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
-                            task.wait(0.2)
-                        end
+                        task.wait(0.4)
+                        game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
                     end
                     task.wait(0.3)
                 end
@@ -1172,22 +1171,15 @@ event:AddToggle("", {
     Title = "Auto submit Corrupt to kitsune",
     Description = "",
     Default = false,
-    Callback = function(v)  
+    Callback = function(v)
         _G.asck = v
         if _G.asck then
             task.spawn(function()
                 while _G.asck do
                     if gik("Corrupt") and gck() ~= 5 then
                         gpik("Corrupt")
-                        task.wait(0.2)
-                        
-                        local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-                        local equipped = humanoid and humanoid:FindFirstChildOfClass("Tool")
-                        
-                        if equipped and string.find(equipped.Name, "Corrupt") then
-                            game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
-                            task.wait(0.2)
-                        end
+                        task.wait(0.4)
+                        game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
                     end
                     task.wait(0.3)
                 end
@@ -1195,6 +1187,9 @@ event:AddToggle("", {
         end
     end
 })
+
+
+
 
 
 
