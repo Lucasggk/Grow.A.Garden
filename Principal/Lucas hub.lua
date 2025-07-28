@@ -1061,6 +1061,114 @@ event:AddToggle("", {
 
 event:AddSection("Corrupt Trader:")
 
+function gtk()
+    local mdp = workspace.Interaction.UpdateItems["Corrupted Zen"]:GetChildren()[10].Model
+    local c = 0
+    for _, i in ipairs(mdp:GetChildren()) do
+        if i.Name == "Model" and #i:GetChildren() > 0 then
+            local part = i:GetChildren()[1]
+            if part:IsA("BasePart") and not (part.BrickColor == BrickColor.new("Earth blue")) then
+                c = c + 1
+            end
+        end
+    end
+    return tonumber(c)
+end
+
+function gck()
+    local mdp = workspace.Interaction.UpdateItems["Corrupted Zen"]:GetChildren()[9].Model
+    local c = 0
+    for _, i in ipairs(mdp:GetChildren()) do
+        if i.Name == "Model" and #i:GetChildren() > 0 then
+            local part = i:GetChildren()[1]
+            if part:IsA("BasePart") and not (part.BrickColor == BrickColor.new("Cocoa")) then
+                c = c + 1
+            end
+        end
+    end
+    return tonumber(c)
+end
+
+function gpik(nomeParcial)
+    local backpack = game.Players.LocalPlayer:WaitForChild("Backpack")
+    for _, item in ipairs(backpack:GetChildren()) do
+        if item:IsA("Tool") and string.find(item.Name, nomeParcial) then
+            local d = item:GetAttribute("d")
+            local hasWeightMulti = item:GetAttribute("WeightMulti") ~= nil
+            if d == false and hasWeightMulti then
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(item)
+                break
+            end
+        end
+    end
+end
+
+function gik(nome)
+    local backpack = game.Players.LocalPlayer:WaitForChild("Backpack")
+    for _, item in ipairs(backpack:GetChildren()) do
+        if item:IsA("Tool") and item.Name == nome then
+            local d = item:GetAttribute("d")
+            local hasWeightMulti = item:GetAttribute("WeightMulti") ~= nil
+            if d == false and hasWeightMulti then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+_G.astk = false
+event:AddToggle("", {
+    Title = "Auto submit Tranquil to kitsune",
+    Description = "",
+    Default = false,
+    Callback = function(v)  
+        _G.astk = v
+        if _G.astk then
+            task.spawn(function()
+                while _G.astk do
+                    if gik("Tranquil") and gtk() ~= 5 then
+                        gpik("Tranquil")
+                        task.wait(0.1)
+			game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
+			print("Falta por: ".. gtk() .." Tranquil plants")
+                    end
+                    task.wait(0.25)
+                end
+            end)
+        end
+    end
+})	
+
+_G.asck = false
+event:AddToggle("", {
+    Title = "Auto submit Corrupt to kitsune",
+    Description = "",
+    Default = false,
+    Callback = function(v)  
+        _G.asck = v
+        if _G.asck then
+            task.spawn(function()
+                while _G.asck do
+                    if gik("Corrupt") and gck() ~= 5 then
+                        gpik("Corrupt")
+                        task.wait(0.1)
+                        game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
+                        print("Falta por: ".. gck() .." Corrupt plants")
+                    end
+                    task.wait(0.25)
+                end
+            end)
+        end
+    end
+})
+
+
+
+
+
+
+
 
 
 
