@@ -1127,18 +1127,22 @@ event:AddToggle("", {
         if _G.astk then
             task.spawn(function()
                 while _G.astk do
-                    if gik("Tranquil") and gtk() ~= 5 then
+                    if not gik("Tranquil") then
+                        print("[Tranquil] Item não existe no inventário")
+                    elseif gtk() == 5 then
+                        print("[Tranquil] Já há 5 plantas Tranquil na kitsune")
+                    else
                         gpik("Tranquil")
                         task.wait(0.1)
-			game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
-			print("Falta por: ".. gtk() .." Tranquil plants")
+                        game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
+                        print("Falta por: ".. gtk() .." Tranquil plants")
                     end
                     task.wait(0.25)
                 end
             end)
         end
     end
-})	
+})
 
 _G.asck = false
 event:AddToggle("", {
@@ -1150,7 +1154,11 @@ event:AddToggle("", {
         if _G.asck then
             task.spawn(function()
                 while _G.asck do
-                    if gik("Corrupt") and gck() ~= 5 then
+                    if not gik("Corrupt") then
+                        print("[Corrupt] Item não existe no inventário")
+                    elseif gck() == 5 then
+                        print("[Corrupt] Já há 5 plantas Corrupt na kitsune")
+                    else
                         gpik("Corrupt")
                         task.wait(0.1)
                         game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
