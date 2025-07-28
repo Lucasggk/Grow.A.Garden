@@ -817,16 +817,60 @@ end
 utility:AddSection("Auto collect Fruit")
 
 _G.AutoCollect = false
-local frutaSelecionada = nil
+local frutasSelecionadas = {}
+
+local function AutoCollectFruits(frutas)
+    local delayBase = 0.056
+    while _G.AutoCollect do
+        local minhaFarm = nil
+        for _, farm in ipairs(workspace.Farm:GetChildren()) do
+            local data = farm:FindFirstChild("Important") and farm.Important:FindFirstChild("Data")
+            if data and data:FindFirstChild("Owner") and data.Owner.Value == game.Players.LocalPlayer.Name then
+                minhaFarm = farm
+                break
+            end
+        end
+        if minhaFarm then
+            local plantas = minhaFarm.Important:FindFirstChild("Plants_Physical")
+            if plantas then
+                for _, frutaSelecionada in ipairs(frutas) do
+                    for _, p in ipairs(plantas:GetChildren()) do
+                        if p.Name == frutaSelecionada then
+                            local f = p:FindFirstChild("Fruits")
+                            if f and #f:GetChildren() > 0 then
+                                for _, fruta in ipairs(f:GetChildren()) do
+                                    if not fruta:GetAttribute("Favorited") then
+                                        game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+                                            buffer.fromstring("\1\1\0\1"),
+                                            {fruta}
+                                        )
+                                        task.wait(delayBase)
+                                    end
+                                end
+                            elseif not p:GetAttribute("Favorited") then
+                                game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+                                    buffer.fromstring("\1\1\0\1"),
+                                    {p}
+                                )
+                                task.wait(delayBase)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+        task.wait(0.1)
+    end
+end
 
 utility:AddDropdown("", {
-    Title = "Fruta para Auto Collect",
-    Description = "Escolha uma fruta para coleta.",
+    Title = "Frutas para Auto Collect",
+    Description = "Escolha uma ou mais frutas para coleta.",
     Values = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Principal/Frutas%20(auto%20collect).lua"))(),
-    Multi = false,
-    Default = nil,
+    Multi = true,
+    Default = {},
     Callback = function(v)
-        frutaSelecionada = v
+        frutasSelecionadas = v
     end
 })
 
@@ -838,50 +882,12 @@ utility:AddToggle("", {
         _G.AutoCollect = v
         if v then
             task.spawn(function()
-                while _G.AutoCollect and frutaSelecionada ~= "None" do
-                    local minhaFarm = nil
-                    for _, farm in ipairs(workspace.Farm:GetChildren()) do
-                        local data = farm:FindFirstChild("Important") and farm.Important:FindFirstChild("Data")
-                        if data and data:FindFirstChild("Owner") and data.Owner.Value == game.Players.LocalPlayer.Name then
-                            minhaFarm = farm
-                            break
-                        end
-                    end
-
-                    if minhaFarm then
-                        local plantas = minhaFarm.Important:FindFirstChild("Plants_Physical")
-                        if plantas then
-                            for _, p in ipairs(plantas:GetChildren()) do
-                                if p.Name == frutaSelecionada then
-                                    local f = p:FindFirstChild("Fruits")
-                                    if f and #f:GetChildren() > 0 then
-                                        for _, fruta in ipairs(f:GetChildren()) do
-                                            if not fruta:GetAttribute("Favorited") then
-                                                game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                                                    buffer.fromstring("\1\1\0\1"),
-                                                    {fruta}
-                                                )
-                                                task.wait(0.04)
-                                            end
-                                        end
-                                    elseif not p:GetAttribute("Favorited") then
-                                        game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                                            buffer.fromstring("\1\1\0\1"),
-                                            {p}
-                                        )
-                                        task.wait(0.04)
-                                    end
-                                end
-                            end
-                        end
-                    end
-
-                    task.wait(0.1)
-                end
+                AutoCollectFruits(frutasSelecionadas)
             end)
         end
     end
 })
+
 
 
 
@@ -1157,10 +1163,10 @@ event:AddToggle("", {
                 while _G.astk do
                     if gik("Tranquil") and gtk() ~= 5 then
                         gpik("Tranquil")
-                        task.wait(0.4)
+                        task.wait(0.5)
                         game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
                     end
-                    task.wait(0.3)
+                    task.wait(0.5)
                 end
             end)
         end
@@ -1178,10 +1184,10 @@ event:AddToggle("", {
                 while _G.asck do
                     if gik("Corrupt") and gck() ~= 5 then
                         gpik("Corrupt")
-                        task.wait(0.4)
+                        task.wait(0.5)
                         game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
                     end
-                    task.wait(0.3)
+                    task.wait(0.5)
                 end
             end)
         end
