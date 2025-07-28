@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "2.8[Zen event Progress: Trader 16 (finalizado)]",
+    version = "3.0",
     alpha = true,
 }
 if script_version.alpha then
@@ -1129,12 +1129,18 @@ event:AddToggle("", {
             task.spawn(function()
                 while _G.astk do
                     if gik("Tranquil") and gtk() ~= 5 then
-                        task.wait(0.2)
                         gpik("Tranquil")
-                        task.wait(0.1)
-                        game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
+                        task.wait(0.2)
+                        
+                        local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                        local equipped = humanoid and humanoid:FindFirstChildOfClass("Tool")
+                        
+                        if equipped and string.find(equipped.Name, "Tranquil") then
+                            game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
+                            task.wait(0.2)
+                        end
                     end
-                    task.wait(0.25)
+                    task.wait(0.3)
                 end
             end)
         end
@@ -1151,18 +1157,23 @@ event:AddToggle("", {
             task.spawn(function()
                 while _G.asck do
                     if gik("Corrupt") and gck() ~= 5 then
-                        task.wait(0.2)
                         gpik("Corrupt")
-                        task.wait(0.1)
-                        game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
+                        task.wait(0.2)
+                        
+                        local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                        local equipped = humanoid and humanoid:FindFirstChildOfClass("Tool")
+                        
+                        if equipped and string.find(equipped.Name, "Corrupt") then
+                            game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
+                            task.wait(0.2)
+                        end
                     end
-                    task.wait(0.25)
+                    task.wait(0.3)
                 end
             end)
         end
     end
 })
-
 
 
 
