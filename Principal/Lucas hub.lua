@@ -861,7 +861,7 @@ utility:AddToggle("", {
                                                     buffer.fromstring("\1\1\0\1"),
                                                     {fruta}
                                                 )
-                                                task.wait(0.05)
+                                                task.wait(0.03)
                                             end
                                         end
                                     elseif not p:GetAttribute("Favorited") then
@@ -869,14 +869,14 @@ utility:AddToggle("", {
                                             buffer.fromstring("\1\1\0\1"),
                                             {p}
                                         )
-                                        task.wait(0.05)
+                                        task.wait(0.03)
                                     end
                                 end
                             end
                         end
                     end
 
-                    task.wait(0.15)
+                    task.wait(0.1)
                 end
             end)
         end
