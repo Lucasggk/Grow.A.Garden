@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 
 local script_version = {
     -- version
-    version = "3.5",
+    version = "3.5[1]",
     alpha = true,
 }
 if script_version.alpha then
@@ -819,47 +819,41 @@ utility:AddSection("Auto collect Fruit")
 _G.AutoCollect = false
 local frutasSelecionadas = {}
 
-local function AutoCollectFruits(frutas)
-    local delayBase = 0.056
-    while _G.AutoCollect do
-        local minhaFarm = nil
-        for _, farm in ipairs(workspace.Farm:GetChildren()) do
-            local data = farm:FindFirstChild("Important") and farm.Important:FindFirstChild("Data")
-            if data and data:FindFirstChild("Owner") and data.Owner.Value == game.Players.LocalPlayer.Name then
-                minhaFarm = farm
-                break
-            end
+local function ColetarFruta(frutaSelecionada)
+    local minhaFarm = nil
+    for _, farm in ipairs(workspace.Farm:GetChildren()) do
+        local data = farm:FindFirstChild("Important") and farm.Important:FindFirstChild("Data")
+        if data and data:FindFirstChild("Owner") and data.Owner.Value == game.Players.LocalPlayer.Name then
+            minhaFarm = farm
+            break
         end
-        if minhaFarm then
-            local plantas = minhaFarm.Important:FindFirstChild("Plants_Physical")
-            if plantas then
-                for _, frutaSelecionada in ipairs(frutas) do
-                    for _, p in ipairs(plantas:GetChildren()) do
-                        if p.Name == frutaSelecionada then
-                            local f = p:FindFirstChild("Fruits")
-                            if f and #f:GetChildren() > 0 then
-                                for _, fruta in ipairs(f:GetChildren()) do
-                                    if not fruta:GetAttribute("Favorited") then
-                                        game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                                            buffer.fromstring("\1\1\0\1"),
-                                            {fruta}
-                                        )
-                                        task.wait(delayBase)
-                                    end
-                                end
-                            elseif not p:GetAttribute("Favorited") then
-                                game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                                    buffer.fromstring("\1\1\0\1"),
-                                    {p}
-                                )
-                                task.wait(delayBase)
-                            end
-                        end
+    end
+    if not minhaFarm then return end
+
+    local plantas = minhaFarm.Important:FindFirstChild("Plants_Physical")
+    if not plantas then return end
+
+    for _, p in ipairs(plantas:GetChildren()) do
+        if p.Name == frutaSelecionada then
+            local f = p:FindFirstChild("Fruits")
+            if f and #f:GetChildren() > 0 then
+                for _, fruta in ipairs(f:GetChildren()) do
+                    if not fruta:GetAttribute("Favorited") then
+                        game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+                            buffer.fromstring("\1\1\0\1"),
+                            {fruta}
+                        )
+                        task.wait(0.056)
                     end
                 end
+            elseif not p:GetAttribute("Favorited") then
+                game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+                    buffer.fromstring("\1\1\0\1"),
+                    {p}
+                )
+                task.wait(0.056)
             end
         end
-        task.wait(0.1)
     end
 end
 
@@ -882,7 +876,12 @@ utility:AddToggle("", {
         _G.AutoCollect = v
         if v then
             task.spawn(function()
-                AutoCollectFruits(frutasSelecionadas)
+                while _G.AutoCollect do
+                    for _, fruta in ipairs(frutasSelecionadas) do
+                        ColetarFruta(fruta)
+                    end
+                    task.wait(0.1)
+                end
             end)
         end
     end
