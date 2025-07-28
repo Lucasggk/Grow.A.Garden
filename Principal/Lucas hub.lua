@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 
 local script_version = {
     -- version
-    version = "3.5[1]",
+    version = "3.5[2]",
     alpha = true,
 }
 if script_version.alpha then
@@ -817,54 +817,16 @@ end
 utility:AddSection("Auto collect Fruit")
 
 _G.AutoCollect = false
-local frutasSelecionadas = {}
-
-local function ColetarFruta(frutaSelecionada)
-    local minhaFarm = nil
-    for _, farm in ipairs(workspace.Farm:GetChildren()) do
-        local data = farm:FindFirstChild("Important") and farm.Important:FindFirstChild("Data")
-        if data and data:FindFirstChild("Owner") and data.Owner.Value == game.Players.LocalPlayer.Name then
-            minhaFarm = farm
-            break
-        end
-    end
-    if not minhaFarm then return end
-
-    local plantas = minhaFarm.Important:FindFirstChild("Plants_Physical")
-    if not plantas then return end
-
-    for _, p in ipairs(plantas:GetChildren()) do
-        if p.Name == frutaSelecionada then
-            local f = p:FindFirstChild("Fruits")
-            if f and #f:GetChildren() > 0 then
-                for _, fruta in ipairs(f:GetChildren()) do
-                    if not fruta:GetAttribute("Favorited") then
-                        game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                            buffer.fromstring("\1\1\0\1"),
-                            {fruta}
-                        )
-                        task.wait(0.056)
-                    end
-                end
-            elseif not p:GetAttribute("Favorited") then
-                game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                    buffer.fromstring("\1\1\0\1"),
-                    {p}
-                )
-                task.wait(0.056)
-            end
-        end
-    end
-end
+local frutaSelecionada = nil
 
 utility:AddDropdown("", {
-    Title = "Frutas para Auto Collect",
-    Description = "Escolha uma ou mais frutas para coleta.",
+    Title = "Fruta para Auto Collect",
+    Description = "Escolha uma fruta para coleta.",
     Values = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/main/Principal/Frutas%20(auto%20collect).lua"))(),
-    Multi = true,
-    Default = {},
+    Multi = false,
+    Default = nil,
     Callback = function(v)
-        frutasSelecionadas = v
+        frutaSelecionada = v
     end
 })
 
@@ -876,17 +838,50 @@ utility:AddToggle("", {
         _G.AutoCollect = v
         if v then
             task.spawn(function()
-                while _G.AutoCollect do
-                    for _, fruta in ipairs(frutasSelecionadas) do
-                        ColetarFruta(fruta)
+                while _G.AutoCollect and frutaSelecionada ~= "None" do
+                    local minhaFarm = nil
+                    for _, farm in ipairs(workspace.Farm:GetChildren()) do
+                        local data = farm:FindFirstChild("Important") and farm.Important:FindFirstChild("Data")
+                        if data and data:FindFirstChild("Owner") and data.Owner.Value == game.Players.LocalPlayer.Name then
+                            minhaFarm = farm
+                            break
+                        end
                     end
-                    task.wait(0.1)
+
+                    if minhaFarm then
+                        local plantas = minhaFarm.Important:FindFirstChild("Plants_Physical")
+                        if plantas then
+                            for _, p in ipairs(plantas:GetChildren()) do
+                                if p.Name == frutaSelecionada then
+                                    local f = p:FindFirstChild("Fruits")
+                                    if f and #f:GetChildren() > 0 then
+                                        for _, fruta in ipairs(f:GetChildren()) do
+                                            if not fruta:GetAttribute("Favorited") then
+                                                game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+                                                    buffer.fromstring("\1\1\0\1"),
+                                                    {fruta}
+                                                )
+                                                task.wait(0.05)
+                                            end
+                                        end
+                                    elseif not p:GetAttribute("Favorited") then
+                                        game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+                                            buffer.fromstring("\1\1\0\1"),
+                                            {p}
+                                        )
+                                        task.wait(0.05)
+                                    end
+                                end
+                            end
+                        end
+                    end
+
+                    task.wait(0.15)
                 end
             end)
         end
     end
 })
-
 
 
 
