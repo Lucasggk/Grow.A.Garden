@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Webhook%20De%20ideias.lua"))()
 local script_version = {
     -- version
-    version = "3.1",
+    version = "3.2",
     alpha = true,
 }
 if script_version.alpha then
@@ -844,38 +844,43 @@ utility:AddToggle("", {
         if v then
             task.spawn(function()
                 while _G.AutoCollect and frutaSelecionada ~= "None" do
-                    for _, fz in ipairs(workspace.Farm:GetChildren()) do
-                        local farmRoot = fz:FindFirstChild("Farm")
-                        local sing = farmRoot and farmRoot:FindFirstChild("Sing")
-                        if sing and string.find(sing:GetAttribute("_Owner") or "", game.Players.LocalPlayer.Name) then
-                            local plantas = farmRoot:FindFirstChild("Important") and farmRoot.Important:FindFirstChild("Plants_Physical")
-                            if plantas then
-                                for _, p in ipairs(plantas:GetChildren()) do
-                                    if p.Name == frutaSelecionada then
-                                        local f = p:FindFirstChild("Fruits")
-                                        if f and #f:GetChildren() > 0 then
-                                            for _, fruta in ipairs(f:GetChildren()) do
-                                                if not fruta:GetAttribute("Favorited") then
-                                                    game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                                                        buffer.fromstring("\1\1\0\1"),
-                                                        {fruta}
-                                                    )
-                                                    task.wait(0.04)
-                                                end
-                                            end
-                                        elseif not p:GetAttribute("Favorited") then
-                                            game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                                                buffer.fromstring("\1\1\0\1"),
-                                                {p}
-                                            )
-                                            task.wait(0.04)
-                                        end
-                                    end
-                                end
-                            end
+                    local minhaFarm = nil
+                    for _, farm in ipairs(workspace.Farm:GetChildren()) do
+                        local data = farm:FindFirstChild("Important") and farm.Important:FindFirstChild("Data")
+                        if data and data:FindFirstChild("Owner") and data.Owner.Value == game.Players.LocalPlayer.Name then
+                            minhaFarm = farm
                             break
                         end
                     end
+
+                    if minhaFarm then
+                        local plantas = minhaFarm.Important:FindFirstChild("Plants_Physical")
+                        if plantas then
+                            for _, p in ipairs(plantas:GetChildren()) do
+                                if p.Name == frutaSelecionada then
+                                    local f = p:FindFirstChild("Fruits")
+                                    if f and #f:GetChildren() > 0 then
+                                        for _, fruta in ipairs(f:GetChildren()) do
+                                            if not fruta:GetAttribute("Favorited") then
+                                                game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+                                                    buffer.fromstring("\1\1\0\1"),
+                                                    {fruta}
+                                                )
+                                                task.wait(0.04)
+                                            end
+                                        end
+                                    elseif not p:GetAttribute("Favorited") then
+                                        game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
+                                            buffer.fromstring("\1\1\0\1"),
+                                            {p}
+                                        )
+                                        task.wait(0.04)
+                                    end
+                                end
+                            end
+                        end
+                    end
+
                     task.wait(0.1)
                 end
             end)
