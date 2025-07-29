@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 
 local script_version = {
     -- version
-    version = "3.52",
+    version = "3.52{Teste}",
     alpha = true,
 }
 if script_version.alpha then
