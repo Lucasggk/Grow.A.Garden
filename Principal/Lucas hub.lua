@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/ref
 
 local script_version = {
     -- version
-    version = "3.5",
+    version = "3.52",
     alpha = true,
 }
 if script_version.alpha then
@@ -1161,10 +1161,10 @@ event:AddToggle("", {
                 while _G.astk do
                     if gik("Tranquil") and gtk() ~= 5 then
                         gpik("Tranquil")
-                        task.wait(0.5)
+                        task.wait(0.4)
                         game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
                     end
-                    task.wait(0.5)
+                    task.wait(0.4)
                 end
             end)
         end
@@ -1182,10 +1182,10 @@ event:AddToggle("", {
                 while _G.asck do
                     if gik("Corrupt") and gck() ~= 5 then
                         gpik("Corrupt")
-                        task.wait(0.5)
+                        task.wait(0.4)
                         game:GetService("ReplicatedStorage").GameEvents.ZenQuestRemoteEvent:FireServer("SubmitToFox")
                     end
-                    task.wait(0.5)
+                    task.wait(0.4)
                 end
             end)
         end
