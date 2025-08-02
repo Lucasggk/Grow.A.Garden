@@ -47,6 +47,7 @@ local ignoreNames = {
 
     -- Gears
     ["Watering Can"] = true,
+    ["Trade Ticket"] = true,
     ["Trowel"] = true,
     ["Recall Wrench"] = true,
     ["Basic Sprinkler"] = true,
