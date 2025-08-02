@@ -18,7 +18,9 @@ Values = {
   "Red Lollipop",  
   "Blue Lollipop",  
   "Dezen",  
-  "Monoblooma",      
+  "Monoblooma",  
+  "Artichoke",  
+  "Onion",      
   
   -- Rare  
   "Tomato",  
@@ -78,6 +80,9 @@ Values = {
   "Enkaku",  
   "Sakura Bush",  
   "Lucky Bamboo",  
+  "Tall Asparagus",  
+  "Veinpetal",  
+  "Twisted Tangle",  
   
   -- Mythical  
   "Coconut",  
@@ -96,7 +101,8 @@ Values = {
   "Pink Lily",  
   "Parasol Flower",  
   "Honeysuckle",  
-  "Hinomai",          
+  "Hinomai",  
+  "Sugarglaze",          
   
   -- Divine  
   "Pepper",  
@@ -112,6 +118,7 @@ Values = {
   "Dragon Pepper",  
   "Pitcher Plant",  
   "Sunflower",  
+  "Grand Tomato",  
   
   -- Prismatic  
   "Beanstalk",  
@@ -123,7 +130,8 @@ Values = {
   "Tranquil Bloom",  
   "Elder Strawberry",  
   "Ember Lily",  
-  "Burning Bud"  
+  "Burning Bud",  
+  "Taco Fern"  
 }  
   
 return Values
