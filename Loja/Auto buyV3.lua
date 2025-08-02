@@ -60,6 +60,7 @@ local ignoreNames = {
     ["Favorite Tool"] = false,
     ["Harvest Tool"] = false,
     ["Friendship Pot"] = false,
+    ["Grandmaster Sprinkler"] = true,
     ["Levelup Lollipop"] = true,
 }
 
