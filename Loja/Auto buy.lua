@@ -10,7 +10,7 @@ local buyPet = ReplicatedStorage.GameEvents.BuyPetEgg
 local seed = {"Carrot", "Strawberry", "Blueberry", "Orange Tulip", "Tomato", "Corn", "Daffodil", "Watermelon", "Pumpkin", "Apple", "Bamboo", "Coconut", "Cactus", "Dragon Fruit", "Mango", "Grape", "Mushroom", "Pepper", "Cacao", "Beanstalk", "Ember Lily", "Sugar Apple", "Burning Bud", "Giant Pinecone", "Elder Strawberry"}
 
 local gear = {
-    "Watering Can", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Medium Toy", "Medium Treat", "Grandmaster Sprinkler", "Levelup Lollipop",
+    "Watering Can", "Trade Ticket", "Trowel", "Recall Wrench", "Basic Sprinkler", "Advanced Sprinkler", "Medium Toy", "Medium Treat", "Grandmaster Sprinkler", "Levelup Lollipop",
     "Godly Sprinkler", "Lightning Rod", "Master Sprinkler", "Tanning Mirror"
 }
 
