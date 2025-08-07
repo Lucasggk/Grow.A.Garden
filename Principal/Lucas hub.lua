@@ -1,5 +1,3 @@
-
-
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
 
 local script_version = {
