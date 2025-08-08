@@ -1,8 +1,8 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/BlueLock/refs/heads/main/Fix.name.ui.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garden/refs/heads/main/Principal/Fix%20ui.lua"))()
 
 local script_version = {
     -- version
-    version = "3.52{Teste-1/9Delay}",
+    version = "3.52 {Espere até a próxima upd}",
     alpha = true,
 }
 if script_version.alpha then
