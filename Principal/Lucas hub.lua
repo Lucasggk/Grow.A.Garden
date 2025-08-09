@@ -735,6 +735,7 @@ end
 utility:AddSection("Auto collect Fruit")
 
 
+
 _G.AutoCollect = false
 local frutaSelecionada = nil
 
@@ -775,18 +776,16 @@ utility:AddToggle("", {
                                     if f and #f:GetChildren() > 0 then
                                         for _, fruta in ipairs(f:GetChildren()) do
                                             if not fruta:GetAttribute("Favorited") then
-                                                game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                                                    buffer.fromstring("\1\1\0\1"),
-                                                    {fruta}
-                                                )
+                                                game:GetService("ReplicatedStorage").GameEvents.Crops.Collect:FireServer({
+                                                    [1] = { fruta }
+                                                })
                                                 task.wait(0.04)
                                             end
                                         end
                                     elseif not p:GetAttribute("Favorited") then
-                                        game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable"):FireServer(
-                                            buffer.fromstring("\1\1\0\1"),
-                                            {p}
-                                        )
+                                        game:GetService("ReplicatedStorage").GameEvents.Crops.Collect:FireServer({
+                                            [1] = { p }
+                                        })
                                         task.wait(0.04)
                                     end
                                 end
@@ -800,15 +799,9 @@ utility:AddToggle("", {
     end
 })
 
-
-
-
-
-
 utility:AddSection("Auto collect Fruit Mutation")
 
 function cpm(nomeAtributo)
-    local ByteNetReliable = game:GetService("ReplicatedStorage"):WaitForChild("ByteNetReliable")
     local farmPlayer = nil
 
     for _, farm in ipairs(workspace.Farm:GetChildren()) do
@@ -830,14 +823,18 @@ function cpm(nomeAtributo)
         local enviado = false
 
         if planta:GetAttribute(nomeAtributo) == true and not planta:GetAttribute("Favorited") then
-            ByteNetReliable:FireServer(buffer.fromstring("\1\1\0\1"), {planta})
+            game:GetService("ReplicatedStorage").GameEvents.Crops.Collect:FireServer({
+                [1] = { planta }
+            })
             enviado = true
         end
 
         if frutas and not enviado then
             for _, fruta in ipairs(frutas:GetChildren()) do
                 if fruta:GetAttribute(nomeAtributo) == true and not fruta:GetAttribute("Favorited") then
-                    ByteNetReliable:FireServer(buffer.fromstring("\1\1\0\1"), {fruta})
+                    game:GetService("ReplicatedStorage").GameEvents.Crops.Collect:FireServer({
+                        [1] = { fruta }
+                    })
                     task.wait(0.05)
                 end
             end
