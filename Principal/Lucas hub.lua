@@ -27,7 +27,6 @@ local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local hrp = character:WaitForChild("HumanoidRootPart")
 local humanoid = character:WaitForChild("Humanoid")
-local scrollingFrame = game:GetService("Players").LocalPlayer.PlayerGui.ActivePetUI.Frame.Main.ScrollingFrame
 local feedsc = game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ActivePetService")
 
 -- event local
@@ -612,91 +611,10 @@ player:AddSlider("", {
 
 --
 
-function prefsh()
-    PetsId = {}
-    for _, child in ipairs(scrollingFrame:GetChildren()) do
-        if child.Name ~= "PetTemplate" and child:FindFirstChild("PetStats") then
-            table.insert(PetsId, child.Name)
-        end
-    end
-    print("Pets atualizados:")
-    --[[for _, id in ipairs(PetsId) do
-        print(id)
-    end]]
-    return PetsId
-end
-
-local pDropdown = pet:AddDropdown("Dropdown", {
-    Title = "Escolha o pet para feed\n",
-    Description = "auto se explica\n",
-    Values = {},
-    Multi = false,
-    Default = nil,
-})
-
-local function updatePetDropdown()
-    local pets = prefsh()
-    pDropdown:SetValues(pets)
-    if #pets > 0 then
-        pDropdown:SetValue(pets[1])
-    end
-end
-
-pet:AddButton({
-    Title = "atualizar pet",
-    Description = "Atualiza pets",
-    Callback = function()
-        updatePetDropdown()
-    end
-})
-
-local pfeed
-
-pDropdown:OnChanged(function(Value)
-    pfeed = Value
-    print("Pet selecionado:", pfeed)
-end)
-
-updatePetDropdown()
-
-
-local autoFeed = false
-
-local tpfeed = pet:AddToggle("AutoFeedToggle", {
-    Title = "Alimentação Automática\n",
-    Description = "Alimenta o pet selecionado automaticamente\nPorem pegue a comida na mão!\n",
-    Default = false,
-    Callback = function(Value)
-        autoFeed = Value
-        if Value then
-            spawn(function()
-                while autoFeed do
-                    if pfeed then
-                        feedsc:FireServer("Feed", pfeed)
-                        print("Pet alimentado:", pfeed)
-                    else
-                        print("Nenhum pet selecionado para alimentar")
-                    end
-                    wait(0.3) 
-                end
-            end)
-        end
-    end
-})
-
-pet:AddButton({
-    Title = "Alimentar pet selecionado",
-    Description = "Segure comida na mão!",
-    Callback = function()
-        if pfeed then
-            feedsc:FireServer("Feed", pfeed)
-            print("Pet alimentado:", pfeed)
-        else
-            print("Nenhum pet selecionado")
-        end
-    end
-})
-
+pet:AddParagraph({
+		Title = "O jogo corrigiu tudo relacionado a isto!",
+		Content = "Em breve eu adiciono novas coisas!"
+	})
 --
 
 ui:AddSection("Controle de UIs")
