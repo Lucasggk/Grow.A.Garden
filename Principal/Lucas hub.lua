@@ -2,7 +2,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasggk/Grow.A.Garde
 
 local script_version = {
     -- version
-    version = "3.52 {Espere até a próxima upd}",
+    version = "3.53 {Espere até a próxima upd}",
     alpha = true,
 }
 if script_version.alpha then
@@ -735,7 +735,6 @@ end
 utility:AddSection("Auto collect Fruit")
 
 
-
 _G.AutoCollect = false
 local frutaSelecionada = nil
 
@@ -776,16 +775,12 @@ utility:AddToggle("", {
                                     if f and #f:GetChildren() > 0 then
                                         for _, fruta in ipairs(f:GetChildren()) do
                                             if not fruta:GetAttribute("Favorited") then
-                                                game:GetService("ReplicatedStorage").GameEvents.Crops.Collect:FireServer({
-                                                    [1] = { fruta }
-                                                })
+                                                game:GetService("ReplicatedStorage").GameEvents.Crops.Collect:FireServer({ fruta })
                                                 task.wait(0.04)
                                             end
                                         end
                                     elseif not p:GetAttribute("Favorited") then
-                                        game:GetService("ReplicatedStorage").GameEvents.Crops.Collect:FireServer({
-                                            [1] = { p }
-                                        })
+                                        game:GetService("ReplicatedStorage").GameEvents.Crops.Collect:FireServer({ p })
                                         task.wait(0.04)
                                     end
                                 end
@@ -823,18 +818,14 @@ function cpm(nomeAtributo)
         local enviado = false
 
         if planta:GetAttribute(nomeAtributo) == true and not planta:GetAttribute("Favorited") then
-            game:GetService("ReplicatedStorage").GameEvents.Crops.Collect:FireServer({
-                [1] = { planta }
-            })
+            game:GetService("ReplicatedStorage").GameEvents.Crops.Collect:FireServer({ planta })
             enviado = true
         end
 
         if frutas and not enviado then
             for _, fruta in ipairs(frutas:GetChildren()) do
                 if fruta:GetAttribute(nomeAtributo) == true and not fruta:GetAttribute("Favorited") then
-                    game:GetService("ReplicatedStorage").GameEvents.Crops.Collect:FireServer({
-                        [1] = { fruta }
-                    })
+                    game:GetService("ReplicatedStorage").GameEvents.Crops.Collect:FireServer({ fruta })
                     task.wait(0.05)
                 end
             end
@@ -877,7 +868,6 @@ utility:AddToggle("", {
         end
     end
 })
-
 
 
 
