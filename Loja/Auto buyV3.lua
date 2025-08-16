@@ -44,6 +44,7 @@ local ignoreNames = {
     ["Burning Bud"] = true,
     ["Giant Pinecone"] = true,
     ["Elder Strawberry"] = true,
+    ["Romanesco"] = true,
 
     -- Gears
     ["Watering Can"] = true,
@@ -57,9 +58,9 @@ local ignoreNames = {
     ["Godly Sprinkler"] = true,
     ["Lightning Rod"] = true,
     ["Master Sprinkler"] = true,
-    ["Cleaning Spray"] = false,
+    ["Cleaning Spray"] = true,
     ["Favorite Tool"] = true,
-    ["Harvest Tool"] = false,
+    ["Harvest Tool"] = true,
     ["Friendship Pot"] = true,
     ["Grandmaster Sprinkler"] = true,
     ["Levelup Lollipop"] = true,
