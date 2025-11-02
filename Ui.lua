@@ -551,10 +551,18 @@ function Creator.OverrideTag(Object, Properties)
     Creator.UpdateTheme()
 end
 function Creator.GetThemeProperty(Property)
-    if Themes[Library.Theme][Property] then
-        return Themes[Library.Theme][Property]
+    local themeName = Creator.Theme or "Dark"
+    local themeTable = Creator.Themes[themeName]
+    if themeTable and themeTable[Property] ~= nil then
+        return themeTable[Property]
     end
-    return Themes["Dark"][Property]
+    if Creator.Themes and Creator.Themes.Dark and Creator.Themes.Dark[Property] ~= nil then
+        return Creator.Themes.Dark[Property]
+    end
+    if Themes and Themes.Dark and Themes.Dark[Property] ~= nil then
+        return Themes.Dark[Property]
+    end
+    return nil
 end
 function Creator.New(Name, Properties, Children)
     local Object = Instance.new(Name)
